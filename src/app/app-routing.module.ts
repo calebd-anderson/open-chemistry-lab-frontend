@@ -7,13 +7,11 @@ import { QuizComponent } from './quiz/quiz.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { AuthorizationGuard } from './guard/authorization.guard';
 import { ProfileComponent } from './profile/profile.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: 'main/periodictable', component: PeriodicTableComponent },
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'profile', component: ProfileComponent },
-  { path: 'editprofile', component: EditProfileComponent },
   { path: 'quiz', component: QuizComponent, canActivate: [AuthenticationGuard] },
   { path: 'flashcard', component: FlashcardComponent, canActivate: [AuthenticationGuard] },
   { path: '', redirectTo: '/main/periodictable', pathMatch: 'full' }

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { NotificationType } from './enum/notification-type.enum';
 import { User } from './model/user';
 import { AuthenticationService } from './service/authentication.service';
@@ -12,9 +13,11 @@ import { NotificationService } from './service/notification.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'Chem Lab'
-  public user: User;
-  public isLoggedIn: boolean;
+  title = 'Chem Lab';
+  @Input() public user: User;
+  @Input() public isLoggedIn: boolean;
+
+  private emitChangeSource = new Subject<any>();
 
   constructor(private authenticationService: AuthenticationService, private authorizationService: AuthorizationService,
      private router: Router, private notificationService: NotificationService) {}
@@ -39,13 +42,14 @@ export class AppComponent implements OnInit {
 
   public onClickLogout(): void {
     this.authenticationService.logOut();
+    // changeEmitted$ = this.emitChangeSource.asObservable();
     this.sendNotification(NotificationType.SUCCESS, "You've been successfully logged out.");
     this.isLoggedIn = false;
     this.user = null;
     document.getElementById("navDrawr").click();
     this.router.navigate(['/main/periodictable']);
   }
-
+  
   public get isAdmin(): boolean {
     if(this.isLoggedIn)
       return this.authorizationService.isAdmin;
