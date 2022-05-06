@@ -22,8 +22,6 @@ export class ProfileComponent implements OnInit {
   public fileStatus = new FileUploadStatus();
   public edit: boolean = false;
 
-  // @Output() newItemEvent = new EventEmitter<User>();
-
   constructor(private router: Router, private authenticationService: AuthenticationService,
     private userService: UserService, private notificationService: NotificationService) {}
 
@@ -45,9 +43,7 @@ export class ProfileComponent implements OnInit {
       this.userService.updateUser(formData).subscribe({
         next: (response: User) => {
         	this.authenticationService.addUserToLocalCache(response);
-          this.fileName = null;
-          this.profileImg = null;
-          // this.newItemEvent.emit(response);
+          this.authenticationService.updateUser(response);
           this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} updated successfully.`);
           this.router.navigateByUrl('/main/periodictable');
         },

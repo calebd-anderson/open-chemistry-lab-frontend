@@ -125,6 +125,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.getUsers(false);
           this.fileName = null;
           this.profileImg = null;
+          this.authenticationService.updateUser(response);
           this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} updated successfully.`);
         },
         error: (errorResponse: HttpErrorResponse) => {

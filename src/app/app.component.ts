@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { NotificationType } from './enum/notification-type.enum';
 import { User } from './model/user';
 import { AuthenticationService } from './service/authentication.service';
@@ -14,17 +13,15 @@ import { NotificationService } from './service/notification.service';
 })
 export class AppComponent implements OnInit {
   title = 'Chem Lab';
-  @Input() public user: User;
-  @Input() public isLoggedIn: boolean;
-
-  private emitChangeSource = new Subject<any>();
+  public user: User;
+  public isLoggedIn: boolean;
 
   constructor(private authenticationService: AuthenticationService, private authorizationService: AuthorizationService,
      private router: Router, private notificationService: NotificationService) {}
 
   ngOnInit(): void {
     if (this.authenticationService.isUserLoggedIn()) {
-      this.user = this.authenticationService.getUserFromLocalCache();
+      this.authenticationService.currentUser.subscribe(user => this.user = user);
       this.isLoggedIn = true;
     } else {
       this.isLoggedIn = false;
@@ -42,7 +39,6 @@ export class AppComponent implements OnInit {
 
   public onClickLogout(): void {
     this.authenticationService.logOut();
-    // changeEmitted$ = this.emitChangeSource.asObservable();
     this.sendNotification(NotificationType.SUCCESS, "You've been successfully logged out.");
     this.isLoggedIn = false;
     this.user = null;

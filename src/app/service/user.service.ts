@@ -83,7 +83,6 @@ export class UserService {
     formData.append('profileImg', profileImage);
     formData.append('isActive', JSON.stringify(user.active));
     formData.append('isNonLocked', JSON.stringify(user.notLocked));
-    // console.log(formData);
     return formData;
   }
 

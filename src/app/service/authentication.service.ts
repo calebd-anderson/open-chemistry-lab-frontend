@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/user';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
@@ -13,6 +13,9 @@ export class AuthenticationService {
 	private token: string;
 	private loggedInUsername: string;
 	private jwtHelper = new JwtHelperService();
+
+	private user = new BehaviorSubject<User>(this.getUserFromLocalCache());
+	currentUser = this.user.asObservable();
   	
   	constructor(private http: HttpClient) { }
 
@@ -39,7 +42,6 @@ export class AuthenticationService {
 
   	// add user to cache
 	public addUserToLocalCache(user: User): void {
-		console.log("new imgurl: " + user.profileImgUrl);
 		localStorage.setItem('user', JSON.stringify(user));
 	}
 
@@ -55,6 +57,11 @@ export class AuthenticationService {
 
 	public getToken(): string {
 		return this.token;
+	}
+
+	// update user accross components
+	public updateUser(user: User) {
+		this.user.next(user);
 	}
 
 	public isUserLoggedIn(): boolean {
