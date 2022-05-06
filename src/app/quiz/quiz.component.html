@@ -1,5 +1,5 @@
-<div class= "container p-5">
-	<div *ngIf="quizzes.length > 0; else noQuizzes">
+<div class= "container p-5" *ngIf="quizzes.length > 0; else noQuizzes">
+	<div>
 		<form class= "col-sm-8 offset-2" (ngSubmit)="onSubmit(quizForm)" #quizForm="ngForm">
 				<h1 class="text-center"> {{currentQuiz + 1}} of {{quizzes.length}}</h1>
 				<h2>{{quizzes[random]?.question}}</h2>
@@ -21,9 +21,7 @@
 			Correct Answers: <span class="correctAnswer">{{correctAnswers}}</span> | Incorrect Answers: <span class="incorrectAnswer">{{incorrectAnswers}}</span>
 		</div>
 	</div>
-	<ng-template #noQuizzes>
-		<h1>
-		  First Discover elements or compounds to play quiz.
-		</h1>
-	</ng-template>
 </div>
+<ng-template #noQuizzes>
+	<h1 class="text-center">First discover elements or compounds to play quiz.</h1>
+</ng-template>
