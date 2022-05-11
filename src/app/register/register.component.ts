@@ -24,17 +24,17 @@ export class RegisterComponent implements OnDestroy {
     console.log(user);
     this.showLoading = true;
     this.subscriptions.push(
-      this.authenticationService.register(user).subscribe(
-        (response: User) => {
+      this.authenticationService.register(user).subscribe({
+        next: (response: User) => {
           this.showLoading = false;
-        	this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.firstName}. Please check your email for a password to login.`);
+        	this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.firstName}.`);
         },
-        (errorResponse: HttpErrorResponse) => {
+        error: (errorResponse: HttpErrorResponse) => {
         	console.log(errorResponse);
         	this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
         	this.showLoading = false;
         }
-      )
+      })
     );
   }
 

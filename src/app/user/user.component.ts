@@ -30,8 +30,6 @@ export class UserComponent implements OnInit, OnDestroy {
   public profileImg: File;
   public editUser = new User();
   public fileStatus = new FileUploadStatus();
-
-  // @Output() loggedInUser = new EventEmitter<User>();
   
   constructor(private router: Router, private authenticationService: AuthenticationService,
     private userService: UserService, private notificationService: NotificationService) {}
