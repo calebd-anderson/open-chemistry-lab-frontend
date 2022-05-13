@@ -43,7 +43,7 @@ export class AppComponent implements OnInit {
     this.isLoggedIn = false;
     this.user = null;
     document.getElementById("navDrawr").click();
-    this.router.navigate(['/main/periodictable']);
+    this.router.navigate(['sandbox']);
   }
   
   public get isAdmin(): boolean {

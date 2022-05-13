@@ -21,7 +21,7 @@ export class TabsComponent implements OnInit {
   public getTabLinks(): Array<itablink> {
     return [
       {
-        path: 'main/periodictable',
+        path: 'sandbox',
         label: 'Sandbox'
       },
       {

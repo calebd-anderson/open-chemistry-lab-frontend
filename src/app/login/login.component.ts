@@ -44,7 +44,7 @@ export class LoginComponent implements OnDestroy {
           this.loggedIn(this.authenticationService.getUserFromLocalCache());
           document.getElementById("close-login-modal").click();
           document.getElementById("navDrawr").click();
-          this.router.navigateByUrl('/main/periodictable');
+          this.router.navigateByUrl('sandbox');
           this.showLoading = false;
           userForm.reset();
           this.sendNotification(NotificationType.SUCCESS, "You've been successfully logged in.");

@@ -1,5 +1,5 @@
 import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -181,7 +181,7 @@ export class UserComponent implements OnInit, OnDestroy {
     this.authenticationService.logOut();
     // this.loggedInUser.emit(null);
     this.sendNotification(NotificationType.SUCCESS, "You've been successfully logged out.");
-    this.router.navigate(['/main/periodictable']);
+    this.router.navigate(['sandbox']);
   }
 
   public searchUsers(searchTerm: string): void {

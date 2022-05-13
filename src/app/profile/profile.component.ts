@@ -45,7 +45,7 @@ export class ProfileComponent implements OnInit {
         	this.authenticationService.addUserToLocalCache(response);
           this.authenticationService.updateUser(response);
           this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} updated successfully.`);
-          this.router.navigateByUrl('/main/periodictable');
+          this.router.navigateByUrl('sandbox');
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);

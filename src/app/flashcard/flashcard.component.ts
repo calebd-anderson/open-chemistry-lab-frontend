@@ -18,7 +18,7 @@ export class FlashcardComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.authenticationService.isUserLoggedIn())
-      this.router.navigateByUrl('/main/periodictable');
+      this.router.navigateByUrl('sandbox');
     else
       this.getAllFlashcardsByUserId(this.authenticationService.getUserFromLocalCache().userId);
   }
