@@ -50,7 +50,7 @@ export class LoginComponent implements OnDestroy {
           this.sendNotification(NotificationType.SUCCESS, "You've been successfully logged in.");
         },
         error: (errorResponse: HttpErrorResponse) => {
-        	console.log(errorResponse);
+        	// console.log(errorResponse);
         	this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
         	this.showLoading = false;
         }

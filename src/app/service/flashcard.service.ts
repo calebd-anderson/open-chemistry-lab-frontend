@@ -13,7 +13,7 @@ export class FlashCardService {
   constructor(private http: HttpClient) { }
 
   public createFlashcard(item: any): Observable<any> {
-    console.log(item);
+    // console.log(item);
     return this.http.post<any>(`${this.host}/flashcards/add`, item);
   }
 

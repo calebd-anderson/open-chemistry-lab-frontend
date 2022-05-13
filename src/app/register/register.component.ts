@@ -30,7 +30,7 @@ export class RegisterComponent implements OnDestroy {
         	this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.firstName}.`);
         },
         error: (errorResponse: HttpErrorResponse) => {
-        	console.log(errorResponse);
+        	// console.log(errorResponse);
         	this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
         	this.showLoading = false;
         }

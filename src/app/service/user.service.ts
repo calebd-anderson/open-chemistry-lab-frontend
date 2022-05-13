@@ -73,7 +73,7 @@ export class UserService {
 
   public createEditUserFormData(selectedUserId: string, user: User, profileImage: File): FormData {
     const formData = new FormData();
-    console.log(selectedUserId);
+    // console.log(selectedUserId);
     formData.append('userId', selectedUserId);
     formData.append('firstName', user.firstName);
     formData.append('lastName', user.lastName);
