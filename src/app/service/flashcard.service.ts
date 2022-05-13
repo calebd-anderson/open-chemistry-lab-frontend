@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotifierService } from 'angular-notifier';
 import { Observable } from 'rxjs';
-import { NotificationType } from '../enum/notification-type.enum';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
@@ -24,7 +22,6 @@ export class FlashCardService {
   }
 
   public getFlashcardsByUserId(userId: string): Observable<any> {
-    console.log("getting flashcards for userId:", userId);
     return this.http.get<any>(`${this.host}/flashcards/userflashcards/${userId}`);
   }
 

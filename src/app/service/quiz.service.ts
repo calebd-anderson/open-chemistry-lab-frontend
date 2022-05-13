@@ -20,7 +20,6 @@ import { Quiz } from '../model/quiz';
 	  }
 
 	  public getQuizByUserId(userId: string): Observable<Quiz[]> {
-		console.log("getting quizes for userId:", userId);
 		return this.http.get<Quiz[]>(`${this.apiServerUrl}/quiz/getbyuserid/${userId}`);
 	  }
 
