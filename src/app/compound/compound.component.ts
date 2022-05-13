@@ -98,18 +98,16 @@ export class CompoundComponent implements OnInit {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
       disableClose: false
     });
-    this.dialogRef.componentInstance.wasSuccessful = "Success!"
-    this.dialogRef.componentInstance.confirmMessage = "You've discovered: " + response.body.title;
+    this.dialogRef.componentInstance.wasSuccessful = "Congratulations!";
+    this.dialogRef.componentInstance.confirmMessage = "You discovered " + response.body.title + ".";
 
     if (!isLoggedIn) {
-      this.dialogRef.componentInstance.isLoggedIn = "Log in/register to save these results for a quiz!"
+      this.dialogRef.componentInstance.isLoggedIn = "Log in/register to save these results for a quiz!";
     }
   }
 
   public validateCompound() {
     this.progressBar = true;
-    // window.alert("Number of elements in compound: " + this.elementsInCompound.length + "\nValidating compound...")
-    // console.log(this.elementsInCompound);
     let data = [];
 
     // build list of elements
