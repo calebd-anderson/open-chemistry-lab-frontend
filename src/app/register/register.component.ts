@@ -21,11 +21,11 @@ export class RegisterComponent implements OnDestroy {
 
 
   public onRegister(user: User): void {
-    console.log(user);
     this.showLoading = true;
     this.subscriptions.push(
       this.authenticationService.register(user).subscribe({
         next: (response: User) => {
+          document.getElementById("close-login-modal").click();
           this.showLoading = false;
         	this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.firstName}.`);
         },
