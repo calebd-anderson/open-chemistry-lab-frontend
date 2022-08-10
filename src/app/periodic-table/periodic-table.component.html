@@ -1,6 +1,12 @@
 <app-compound [interactedElement]="interactedElement" [events]="sendElementMessage.asObservable()"></app-compound>
 
-<div class="wrapper">
+
+<div *ngIf="progressSpinner">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    Please wait, backend is booting/loading ...
+</div>
+
+<div *ngIf="!progressSpinner" class="wrapper">
     <input *ngFor="let item of [].constructor(this.categories.length); let i = index" class="category-toggle" type="radio" name="categories" id={{categories[i]}}>
     <input *ngFor="let item of [].constructor(this.categories.length)" class="category-cancel" type="radio" name="categories" id="cancel">
     <div class="periodic-table">

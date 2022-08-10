@@ -33,7 +33,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { ValidationModalComponent } from './compound/validation-modal/validation-modal.component';
 import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
+import { AboutComponent } from './about/about.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     UserComponent,
     FlashcardComponent,
     ProfileComponent,
-    ValidationModalComponent
+    ValidationModalComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatIconModule,
     MatSidenavModule,
     MatSnackBarModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [NotificationService, AuthenticationGuard, AuthenticationService, ElementService, UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

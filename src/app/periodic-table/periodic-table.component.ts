@@ -21,6 +21,7 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
   eventsSubject: Subject<Element> = new Subject<Element>();
   added: number = 0;
   categories: string[] = ['alkali-metals','alkaline-earth-metals','lanthanoids','actinoids','transition-metals','post-transition-metals','metalloids','other-nonmetals','noble-gasses','unknown'];
+  public progressSpinner: boolean = false;
 
   @Output() sendElementMessage = new EventEmitter<Element>();
   
@@ -43,10 +44,12 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
   }
 
   async getElements() {
+    this.progressSpinner = true;
     this.subs.add(
       this.elementService.getElements().subscribe({
         next: (response: Element[]) => {
           this.elements = this.sortElements(response);
+          this.progressSpinner = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
           this._snackBar.open("failed to load periodic table data", "close");
