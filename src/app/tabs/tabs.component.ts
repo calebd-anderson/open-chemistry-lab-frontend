@@ -21,6 +21,10 @@ export class TabsComponent implements OnInit {
   public getTabLinks(): Array<itablink> {
     return [
       {
+        path: 'about',
+        label: 'About'
+      },
+      {
         path: 'sandbox',
         label: 'Sandbox'
       },
