@@ -12,7 +12,8 @@ export class CompoundService {
   subject = new Subject<void>();
   constructor(private http: HttpClient) { }
 
-  public validate(payload): Observable<HttpResponse<Compound>> {
+  public validate(payload: { data: any[]; userId: any; }): Observable<HttpResponse<Compound>> {
+    console.log(payload.userId)
     return this.http.post<Compound>(`${this.host}/compound/validate`, payload, {observe: "response"});
   }
 }
