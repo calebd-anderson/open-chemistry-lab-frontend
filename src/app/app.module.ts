@@ -26,7 +26,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ElementService } from './service/element.service';
 import { CompoundComponent } from './compound/compound.component';
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
 import { TabsComponent } from './tabs/tabs.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -68,9 +67,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     // FlexLayoutModule,
     MatIconModule,
     MatSidenavModule,
-    MatSnackBarModule,
-    MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressBarModule
   ],
   providers: [MatSnackBar, NotificationService, AuthenticationGuard, AuthenticationService, ElementService, UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
