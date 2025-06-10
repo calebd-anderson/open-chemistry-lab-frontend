@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Quiz } from '../model/quiz';
 import { QuizService } from '../service/quiz.service';
 import {HttpErrorResponse} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatLegacySnackBar as MatSnackBar} from "@angular/material/legacy-snack-bar";
 import { AuthenticationService } from '../service/authentication.service';
 import { NgForm } from '@angular/forms';
 

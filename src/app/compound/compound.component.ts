@@ -5,9 +5,9 @@ import {CompoundService} from "../service/compound.service";
 import { AuthenticationService } from '../service/authentication.service';
 import {Compound} from "../model/compound";
 import { HttpErrorResponse, HttpEvent, HttpResponse, HttpEventType } from "@angular/common/http";
-import { MatDialog, MatDialogRef } from "@angular/material/dialog";
+import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from "@angular/material/legacy-dialog";
 import { ValidationModalComponent } from "./validation-modal/validation-modal.component";
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 
 @Component({
   selector: 'app-compound',

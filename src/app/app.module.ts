@@ -14,10 +14,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { FormsModule } from '@angular/forms';
-import { MatCardModule } from "@angular/material/card";
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatLegacyCardModule as MatCardModule } from "@angular/material/legacy-card";
+import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatButtonModule } from "@angular/material/button";
+import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
 // import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PeriodicTableComponent } from './periodic-table/periodic-table.component';
@@ -26,15 +26,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ElementService } from './service/element.service';
 import { CompoundComponent } from './compound/compound.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
 import { TabsComponent } from './tabs/tabs.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ValidationModalComponent } from './compound/validation-modal/validation-modal.component';
-import {MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { AboutComponent } from './about/about.component';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatLegacyDialogModule as MatDialogModule, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
+import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
+
 
 @NgModule({
   declarations: [

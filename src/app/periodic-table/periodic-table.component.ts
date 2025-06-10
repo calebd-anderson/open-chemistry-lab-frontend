@@ -3,7 +3,7 @@ import { Element } from '../model/element.model';
 import { ElementService } from '../service/element.service';
 
 import { SubSink } from 'subsink';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from "rxjs";
 
