@@ -1,19 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {itablink} from '../itablink';
+import { itablink } from '../itablink';
 
 @Component({
-    selector: 'app-tabs',
-    templateUrl: './tabs.component.html',
-    styleUrls: ['./tabs.component.scss'],
-    standalone: false
+  selector: 'app-tabs',
+  templateUrl: './tabs.component.html',
+  styleUrls: ['./tabs.component.scss'],
+  standalone: false,
 })
 export class TabsComponent implements OnInit {
-
   @Input() isLoggedIn: boolean;
 
-  public tabLinks:Array<itablink>;
+  public tabLinks: Array<itablink>;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.tabLinks = this.getTabLinks();
@@ -23,21 +22,20 @@ export class TabsComponent implements OnInit {
     return [
       {
         path: 'about',
-        label: 'About'
+        label: 'About',
       },
       {
         path: 'sandbox',
-        label: 'Sandbox'
+        label: 'Sandbox',
       },
       {
         path: 'quiz',
-        label: 'Quiz'
+        label: 'Quiz',
       },
       {
         path: 'flashcard',
-        label: 'Flashcards'
-      }
-    ]    
+        label: 'Flashcards',
+      },
+    ];
   }
-
 }

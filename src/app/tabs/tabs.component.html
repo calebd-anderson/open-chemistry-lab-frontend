@@ -1,22 +1,36 @@
 @if (isLoggedIn) {
-  <nav mat-tab-nav-bar class="navbar">
-    @for (link of tabLinks; track link) {
-      <a mat-tab-link
-        [routerLink]="link.path"
-        routerLinkActive #rla="routerLinkActive"
-        [active]="rla.isActive">
-        {{link.label}}
-      </a>
-    }
-  </nav>
-}
-@if (!isLoggedIn) {
-  <nav mat-tab-nav-bar class="navbar">
-    <a mat-tab-link
-      [routerLink]="tabLinks[0].path"
-      routerLinkActive #rla="routerLinkActive"
-      [active]="rla.isActive">
-      {{tabLinks[0].label}}
-    </a>
-  </nav>
+<nav mat-tab-nav-bar class="navbar">
+  @for (link of tabLinks; track link) {
+  <a
+    mat-tab-link
+    [routerLink]="link.path"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [active]="rla.isActive"
+  >
+    {{ link.label }}
+  </a>
+  }
+</nav>
+} @if (!isLoggedIn) {
+<nav mat-tab-nav-bar class="navbar">
+  <a
+    mat-tab-link
+    [routerLink]="tabLinks[0].path"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [active]="rla.isActive"
+  >
+    {{ tabLinks[0].label }}
+  </a>
+  <a
+    mat-tab-link
+    [routerLink]="tabLinks[1].path"
+    routerLinkActive
+    #rla1="routerLinkActive"
+    [active]="rla1.isActive"
+  >
+    {{ tabLinks[1].label }}
+  </a>
+</nav>
 }
