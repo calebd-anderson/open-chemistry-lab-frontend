@@ -13,10 +13,10 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { FormsModule } from '@angular/forms';
-import { MatLegacyCardModule as MatCardModule } from "@angular/material/legacy-card";
-import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
+import { MatCardModule } from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
 import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
+import {MatButtonModule} from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PeriodicTableComponent } from './periodic-table/periodic-table.component';
 import { QuizComponent } from './quiz/quiz.component';
@@ -28,10 +28,9 @@ import { TabsComponent } from './tabs/tabs.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ValidationModalComponent } from './compound/validation-modal/validation-modal.component';
-import {MatLegacyDialogModule as MatDialogModule, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [

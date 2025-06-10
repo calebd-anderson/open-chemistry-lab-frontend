@@ -5,7 +5,7 @@ import {CompoundService} from "../service/compound.service";
 import { AuthenticationService } from '../service/authentication.service';
 import {Compound} from "../model/compound";
 import { HttpErrorResponse, HttpEvent, HttpResponse, HttpEventType } from "@angular/common/http";
-import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from "@angular/material/legacy-dialog";
+import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ValidationModalComponent } from "./validation-modal/validation-modal.component";
 import { NotificationService } from '../service/notification.service';
 import { NotificationType } from '../enum/notification-type.enum';
