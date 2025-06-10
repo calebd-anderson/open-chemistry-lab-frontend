@@ -1,15 +1,35 @@
 import { Injectable } from '@angular/core';
-// import { NotifierService } from 'angular-notifier';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
 import { NotificationType } from '../enum/notification-type.enum';
 
+/**
+ * @title Snack-bar with configurable position
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  // constructor(private notifier: NotifierService) { }
+  horizontalPosition: MatSnackBarHorizontalPosition = 'start';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-  // public notify(type: NotificationType, message: string) {
-  //   this.notifier.notify(type, message);
-  // }
+  constructor(private _snackBar: MatSnackBar) {}
+
+  notify(type: NotificationType, message: string) {
+    this._snackBar.open(message, 'Splash', {
+      horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition,
+      panelClass: [type || NotificationType.DEFAULT]
+    });
+  }
+
+  public showServiceFailureMessage(serviceName: string, error: ErrorEvent) {
+    const errorMessage = error.message ? error.message : error.error.message;
+    const errorLabel = `${serviceName} service has failed: ${errorMessage}`;
+    this.notify(NotificationType.ERROR, errorLabel);
+  }
 }

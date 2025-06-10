@@ -1,7 +1,7 @@
 export enum NotificationType {
-    DEFAULT = "default",
-    SUCCESS = "success",
-    ERROR = "error",
+    DEFAULT = 'default-snackbar',
+    SUCCESS = 'green-success-snackbar',
+    ERROR = 'red-error-snackbar',
     INFO = "info",
-    WARNING = "warning"
+    WARNING = 'orange-warning-snackbar'
   }

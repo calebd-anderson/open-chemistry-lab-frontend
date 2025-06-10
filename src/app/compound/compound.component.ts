@@ -7,7 +7,8 @@ import {Compound} from "../model/compound";
 import { HttpErrorResponse, HttpEvent, HttpResponse, HttpEventType } from "@angular/common/http";
 import { MatLegacyDialog as MatDialog, MatLegacyDialogRef as MatDialogRef } from "@angular/material/legacy-dialog";
 import { ValidationModalComponent } from "./validation-modal/validation-modal.component";
-import { MatLegacySnackBar as MatSnackBar } from '@angular/material/legacy-snack-bar';
+import { NotificationService } from '../service/notification.service';
+import { NotificationType } from '../enum/notification-type.enum';
 
 @Component({
   selector: 'app-compound',
@@ -26,7 +27,7 @@ export class CompoundComponent implements OnInit {
   public progressBar: boolean = false;
 
   constructor(private compoundService: CompoundService, private authenticationService: AuthenticationService, 
-    public dialog: MatDialog, private _snackBar: MatSnackBar) { }
+    public dialog: MatDialog, private _snackBar: NotificationService) { }
 
   ngOnInit(): void {
     this.eventsSubscription = this.events.subscribe((element) => this.addInteractedElements(element));
@@ -65,14 +66,10 @@ export class CompoundComponent implements OnInit {
     this.elementsInCompound.splice(index, 1);
     if (tempAtoms == 1) {
       this.atomsInCompound.delete(element.symbol);
-      this._snackBar.open(element.name +  " removed from experiment.", "close", {
-        duration: 3000
-      });
+      this._snackBar.notify(NotificationType.DEFAULT, element.name + " removed from experiment.");
     } else {
       this.atomsInCompound.set(element.symbol, tempAtoms - 1);
-      this._snackBar.open(element.name +  " removed from experiment.", "close", {
-        duration: 3000
-      });
+      this._snackBar.notify(NotificationType.DEFAULT, element.name + " removed from experiment.");
     }
   }
 

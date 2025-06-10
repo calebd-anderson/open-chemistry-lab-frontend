@@ -33,6 +33,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { ValidationModalComponent } from './compound/validation-modal/validation-modal.component';
 import {MatLegacyDialogModule as MatDialogModule, MatLegacyDialogRef as MatDialogRef} from "@angular/material/legacy-dialog";
 import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -71,7 +72,7 @@ import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/mat
     MatProgressBarModule,
     MatProgressSpinnerModule
   ],
-  providers: [NotificationService, AuthenticationGuard, AuthenticationService, ElementService, UserService,
+  providers: [MatSnackBar, NotificationService, AuthenticationGuard, AuthenticationService, ElementService, UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

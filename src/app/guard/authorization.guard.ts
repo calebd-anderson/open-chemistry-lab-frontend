@@ -21,7 +21,7 @@ export class AuthorizationGuard implements CanActivate {
       return true;
     }
     this.router.navigate(['/main/periodictable']);
-		// this.notificationService.notify(NotificationType.ERROR, "You are not authorizaed to access this page.".toUpperCase());
+		this.notificationService.notify(NotificationType.ERROR, "You are not authorizaed to access this page.".toUpperCase());
     return false;
   }
   
