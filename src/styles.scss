@@ -40,22 +40,22 @@ td {
 // custom snackbar styles
 .green-success-snackbar {
   background-color: #2bbe68 !important;
-  --mdc-snackbar-container-color: #2bbe68 !important;
+  --mat-snackbar-container-color: #2bbe68 !important;
   color: #fff ;
   font-weight: 500;
 }
 
 .red-error-snackbar {
   background-color: #ff3737 !important;
-  --mdc-snackbar-container-color: #ff3737 !important;
+  --mat-snackbar-container-color: #ff3737 !important;
   color: #fff ;
   font-weight: 500;
 }
 
 .orange-warning-snackbar {
-  --mdc-snackbar-container-color: #ff6f00 !important;
+  --mat-snackbar-container-color: #ff6f00 !important;
 //   --mat-mdc-snack-bar-button-color: 
-//   --mdc-snackbar-supporting-text-color: 
+//   --mat-snackbar-supporting-text-color: 
   background-color:  #ff6f00 !important;
   color: #fff ;
   font-weight: 500;
