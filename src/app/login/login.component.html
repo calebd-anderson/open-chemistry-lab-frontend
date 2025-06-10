@@ -15,32 +15,42 @@
             <input type="text" class="form-control" name="username" placeholder="Username" ngModel
               #usernameInput="ngModel" required>
           </div>
-          <span class="help-block" style="color:red;" *ngIf="usernameInput.invalid && usernameInput.touched">Please
+          @if (usernameInput.invalid && usernameInput.touched) {
+            <span class="help-block" style="color:red;">Please
             enter a username</span>
-          <div class="input-group mt-3">
+          }
+          <div class="input-group mb-2">
             <div class="input-group-append">
               <span class="input-group-text"><i class="fa fa-key"></i></span>
             </div>
             <input type="password" class="form-control" name="password" placeholder="Password" ngModel
               #passwordInput="ngModel" required>
           </div>
-          <span class="help-block" style="color:red;" *ngIf="passwordInput.invalid && passwordInput.touched">Please
+          @if (passwordInput.invalid && passwordInput.touched) {
+            <span class="help-block" style="color:red;">Please
             enter a password.</span>
+          }
           <div class="d-flex justify-content-center mt-3 login_container">
             <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn login_btn">
-              <i *ngIf="showLoading" class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;
-              <span *ngIf="showLoading">Loading...</span>
-              <span *ngIf="!showLoading">Login</span>
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="mt-4 modal-footer">
-        <div class="d-flex justify-content-center links">
-          Don't have an account? <a data-toggle="modal" data-target="#registerModal" (click)="onClickRegister()" class="ml-2">Sign Up</a>
+              @if (showLoading) {
+                <i class="fa fa-spinner fa-spin"></i>
+                }&nbsp;&nbsp;
+                @if (showLoading) {
+                  <span>Loading...</span>
+                }
+                @if (!showLoading) {
+                  <span>Login</span>
+                }
+              </button>
+            </div>
+          </form>
         </div>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-login-modal">Close</button>
+        <div class="mt-4 modal-footer">
+          <div class="d-flex justify-content-center links">
+            Don't have an account? <a data-toggle="modal" data-target="#registerModal" (click)="onClickRegister()" class="ml-2">Sign Up</a>
+          </div>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-login-modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
-</div>

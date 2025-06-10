@@ -1,26 +1,22 @@
-<!-- if logged in display all tabs -->
-<nav *ngIf="isLoggedIn" mat-tab-nav-bar class="navbar">
-    <a mat-tab-link
-        *ngFor="let link of tabLinks"
+@if (isLoggedIn) {
+  <nav mat-tab-nav-bar class="navbar">
+    @for (link of tabLinks; track link) {
+      <a mat-tab-link
         [routerLink]="link.path"
         routerLinkActive #rla="routerLinkActive"
-        [active]="rla.isActive"> 
+        [active]="rla.isActive">
         {{link.label}}
-    </a>
-</nav>
-
-<!-- else only display first two tabs -->
-<nav *ngIf="!isLoggedIn" mat-tab-nav-bar class="navbar">
+      </a>
+    }
+  </nav>
+}
+@if (!isLoggedIn) {
+  <nav mat-tab-nav-bar class="navbar">
     <a mat-tab-link
-        [routerLink]="tabLinks[0].path"
-        routerLinkActive #rla0="routerLinkActive"
-        [active]="rla0.isActive"> 
-        {{tabLinks[0].label}}
+      [routerLink]="tabLinks[0].path"
+      routerLinkActive #rla="routerLinkActive"
+      [active]="rla.isActive">
+      {{tabLinks[0].label}}
     </a>
-    <a mat-tab-link
-        [routerLink]="tabLinks[1].path"
-        routerLinkActive #rla1="routerLinkActive"
-        [active]="rla1.isActive"> 
-        {{tabLinks[1].label}}
-    </a>
-</nav>
+  </nav>
+}
