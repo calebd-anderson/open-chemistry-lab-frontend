@@ -60,9 +60,9 @@ export class LoginComponent implements OnDestroy {
   
   private sendNotification(notificationType: NotificationType, message: string): void {
     if (message) {
-    	this.notificationService.notify(notificationType, message);
+    	// this.notificationService.notify(notificationType, message);
     } else {
-		  this.notificationService.notify(notificationType, "An error occured. Please try again.");
+		  // this.notificationService.notify(notificationType, "An error occured. Please try again.");
     }
   }
 

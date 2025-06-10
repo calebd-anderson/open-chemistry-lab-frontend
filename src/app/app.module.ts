@@ -8,7 +8,7 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AuthenticationService } from './service/authentication.service';
 import { UserService } from './service/user.service';
 import { AuthenticationGuard } from './guard/authentication.guard';
-import { NotificationModule } from './notification.module';
+// import { NotificationModule } from './notification.module';
 import { NotificationService } from './service/notification.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -56,7 +56,7 @@ import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/mat
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NotificationModule,
+    // NotificationModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,

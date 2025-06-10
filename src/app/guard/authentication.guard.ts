@@ -17,8 +17,8 @@ export class AuthenticationGuard implements CanActivate {
 		if (this.authenticationService.isUserLoggedIn()) {
 			return true;
 		}
-		this.router.navigate(['sandbox']);
-		this.notificationService.notify(NotificationType.ERROR, "You need to login to access this page.".toUpperCase());
+		this.router.navigate(['/main/periodictable']);
+		// this.notificationService.notify(NotificationType.ERROR, "You need to login to access this page.".toUpperCase());
 		return false;
 	}
   
