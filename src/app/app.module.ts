@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,40 +32,33 @@ import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    PeriodicTableComponent,
-    RegisterComponent,
-    UserComponent,
-    QuizComponent,
-    CompoundComponent,
-    TabsComponent,
-    UserComponent,
-    FlashcardComponent,
-    ProfileComponent,
-    ValidationModalComponent,
-    AboutComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatTabsModule,
-    MatDialogModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSidenavModule,
-    MatProgressBarModule
-  ],
-  providers: [MatSnackBar, NotificationService, AuthenticationGuard, AuthenticationService, ElementService, UserService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        LoginComponent,
+        PeriodicTableComponent,
+        RegisterComponent,
+        UserComponent,
+        QuizComponent,
+        CompoundComponent,
+        TabsComponent,
+        UserComponent,
+        FlashcardComponent,
+        ProfileComponent,
+        EditProfileComponent,
+        ValidationModalComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatTabsModule,
+        MatDialogModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatProgressBarModule], providers: [MatSnackBar, NotificationService, AuthenticationGuard, AuthenticationService, ElementService, UserService,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
