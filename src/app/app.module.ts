@@ -14,9 +14,9 @@ import { RegisterComponent } from './register/register.component';
 import { UserComponent } from './user/user.component';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from "@angular/material/toolbar";
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PeriodicTableComponent } from './periodic-table/periodic-table.component';
 import { QuizComponent } from './quiz/quiz.component';
@@ -50,7 +50,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
-        HttpClientModule,
         BrowserAnimationsModule,
         MatCardModule,
         MatTabsModule,
