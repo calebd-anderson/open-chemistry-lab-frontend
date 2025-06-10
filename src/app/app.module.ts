@@ -18,7 +18,7 @@ import { MatCardModule } from "@angular/material/card";
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
-import { FlexLayoutModule } from "@angular/flex-layout";
+// import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PeriodicTableComponent } from './periodic-table/periodic-table.component';
 import { QuizComponent } from './quiz/quiz.component';
@@ -65,7 +65,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatDialogModule,
     MatToolbarModule,
     MatButtonModule,
-    FlexLayoutModule,
+    // FlexLayoutModule,
     MatIconModule,
     MatSidenavModule,
     MatSnackBarModule,
