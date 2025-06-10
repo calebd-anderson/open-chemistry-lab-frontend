@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-validation-modal',
-  templateUrl: './validation-modal.component.html'
+    selector: 'app-validation-modal',
+    templateUrl: './validation-modal.component.html',
+    standalone: false
 })
 export class ValidationModalComponent {
 

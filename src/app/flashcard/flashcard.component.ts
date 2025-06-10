@@ -5,9 +5,10 @@ import { AuthenticationService } from 'src/app/service/authentication.service';
 import { FlashCardService } from 'src/app/service/flashcard.service';
 
 @Component({
-  selector: 'app-flashcard',
-  templateUrl: './flashcard.component.html',
-  styleUrls: ['./flashcard.component.scss']
+    selector: 'app-flashcard',
+    templateUrl: './flashcard.component.html',
+    styleUrls: ['./flashcard.component.scss'],
+    standalone: false
 })
 export class FlashcardComponent implements OnInit {
   flashcards: any[] = [];

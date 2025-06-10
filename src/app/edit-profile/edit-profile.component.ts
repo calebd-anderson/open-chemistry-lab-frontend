@@ -10,9 +10,10 @@ import { FileUploadStatus } from '../model/file-upload-status';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+    selector: 'app-edit-profile',
+    templateUrl: './edit-profile.component.html',
+    styleUrls: ['./edit-profile.component.scss'],
+    standalone: false
 })
 export class EditProfileComponent implements OnInit {
   public user: User;

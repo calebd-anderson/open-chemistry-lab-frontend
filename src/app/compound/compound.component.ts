@@ -11,9 +11,10 @@ import { NotificationService } from '../service/notification.service';
 import { NotificationType } from '../enum/notification-type.enum';
 
 @Component({
-  selector: 'app-compound',
-  templateUrl: './compound.component.html',
-  styleUrls: ['./compound.component.scss']
+    selector: 'app-compound',
+    templateUrl: './compound.component.html',
+    styleUrls: ['./compound.component.scss'],
+    standalone: false
 })
 
 export class CompoundComponent implements OnInit {

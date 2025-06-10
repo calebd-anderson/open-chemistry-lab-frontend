@@ -8,8 +8,9 @@ import { AuthenticationService } from '../service/authentication.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  templateUrl: './quiz.component.html',
-  styleUrls: ['./quiz.component.scss']
+    templateUrl: './quiz.component.html',
+    styleUrls: ['./quiz.component.scss'],
+    standalone: false
 })
 export class QuizComponent implements OnInit {
 

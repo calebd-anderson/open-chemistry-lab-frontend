@@ -8,9 +8,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from "rxjs";
 
 @Component({
-  selector: 'periodic-table',
-  templateUrl: './periodic-table.component.html',
-  styleUrls: ['./periodic-table.component.sass']
+    selector: 'periodic-table',
+    templateUrl: './periodic-table.component.html',
+    styleUrls: ['./periodic-table.component.sass'],
+    standalone: false
 })
 export class PeriodicTableComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
