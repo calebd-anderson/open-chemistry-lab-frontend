@@ -8,7 +8,6 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AuthenticationService } from './service/authentication.service';
 import { UserService } from './service/user.service';
 import { AuthenticationGuard } from './guard/authentication.guard';
-// import { NotificationModule } from './notification.module';
 import { NotificationService } from './service/notification.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -18,7 +17,6 @@ import { MatLegacyCardModule as MatCardModule } from "@angular/material/legacy-c
 import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatLegacyButtonModule as MatButtonModule } from "@angular/material/legacy-button";
-// import { FlexLayoutModule } from "@angular/flex-layout";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PeriodicTableComponent } from './periodic-table/periodic-table.component';
 import { QuizComponent } from './quiz/quiz.component';
@@ -56,7 +54,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // NotificationModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
@@ -64,7 +61,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     MatDialogModule,
     MatToolbarModule,
     MatButtonModule,
-    // FlexLayoutModule,
     MatIconModule,
     MatSidenavModule,
     MatProgressBarModule
