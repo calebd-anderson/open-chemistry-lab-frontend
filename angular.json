@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ics-499-front-end:build:production"
+              "buildTarget": "ics-499-front-end:build:production"
             },
             "development": {
-              "browserTarget": "ics-499-front-end:build:development"
+              "buildTarget": "ics-499-front-end:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ics-499-front-end:build"
+            "buildTarget": "ics-499-front-end:build"
           }
         },
         "test": {
