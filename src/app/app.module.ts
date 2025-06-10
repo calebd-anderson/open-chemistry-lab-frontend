@@ -44,7 +44,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         UserComponent,
         FlashcardComponent,
         ProfileComponent,
-        EditProfileComponent,
         ValidationModalComponent
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
