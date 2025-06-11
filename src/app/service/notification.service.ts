@@ -20,7 +20,7 @@ export class NotificationService {
   constructor(private _snackBar: MatSnackBar) {}
 
   notify(type: NotificationType, message: string) {
-    this._snackBar.open(message, 'Splash', {
+    this._snackBar.open(message, 'close', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       panelClass: [type || NotificationType.DEFAULT]

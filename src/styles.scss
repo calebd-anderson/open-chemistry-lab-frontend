@@ -1,6 +1,16 @@
+@use '@angular/material' as mat;
+
 /* You can add global styles to this file, and also import other style files */
 @import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
-// @import "../node_modules/angular-notifier/styles";
+
+html {
+  color-scheme: light dark;
+  @include mat.theme((
+    color: mat.$violet-palette,
+    typography: Roboto,
+    density: 0
+  ));
+}
 
 td {
     cursor: pointer;
@@ -39,26 +49,25 @@ td {
 
 // custom snackbar styles
 .green-success-snackbar {
-  background-color: #2bbe68 !important;
-  --mat-snackbar-container-color: #2bbe68 !important;
-  color: #fff ;
-  font-weight: 500;
+  @include mat.snack-bar-overrides((
+    container-color: #2bbe68,
+    supporting-text-color: #fff,
+  ));
 }
 
 .red-error-snackbar {
-  background-color: #ff3737 !important;
-  --mat-snackbar-container-color: #ff3737 !important;
-  color: #fff ;
-  font-weight: 500;
+  @include mat.snack-bar-overrides((
+    container-color: #ff3737,
+    supporting-text-color: #fff,
+  ));
 }
 
 .orange-warning-snackbar {
-  --mat-snackbar-container-color: #ff6f00 !important;
-//   --mat-mdc-snack-bar-button-color: 
-//   --mat-snackbar-supporting-text-color: 
-  background-color:  #ff6f00 !important;
-  color: #fff ;
-  font-weight: 500;
+  @include mat.snack-bar-overrides((
+    container-color: #ff6f00,
+    supporting-text-color: #fff,
+  ));
+  // font-weight: 500;
 }
 
 .default-snackbar{
