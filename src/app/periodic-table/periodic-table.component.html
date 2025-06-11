@@ -1,10 +1,10 @@
 <app-compound [interactedElement]="interactedElement" [events]="sendElementMessage.asObservable()"></app-compound>
 
 <div class="wrapper">
-  @for (item of [].constructor(this.categories.length); track item; let i = $index) {
+  @for (item of [].constructor(this.categories.length); track $index; let i = $index) {
     <input class="category-toggle" type="radio" name="categories" id={{categories[i]}}>
   }
-  @for (item of [].constructor(this.categories.length); track item) {
+  @for (item of [].constructor(this.categories.length); track $index) {
     <input class="category-cancel" type="radio" name="categories" id="cancel">
   }
   <div class="periodic-table">
