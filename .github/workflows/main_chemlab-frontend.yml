@@ -1,74 +1,74 @@
-# # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# # More GitHub Actions for Azure: https://github.com/Azure/actions
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
 
-# name: Build and deploy Node.js app to Azure Web App - chemlab-frontend
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
 
-# on:
-#   push:
-#     branches:
-#       - main
-#   workflow_dispatch:
+name: Build and deploy Node.js app to Azure Web App - chemlab-frontend
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-#     permissions:
-#       contents: read #This is required for actions/checkout
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
-#     steps:
-#       - uses: actions/checkout@v4
+env:
+  AZURE_WEBAPP_NAME: chemlab-frontend                           # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: 'dist/ics-499-front-end/browser'   # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '22.x'                                          # set this to the node version to use
 
-#       - name: Set up Node.js version
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: '22.x'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read #This is required for actions/checkout
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
 
-#       - name: npm install, build, and test
-#         run: |
-#           npm install
-#           npm run build --if-present
-#           # npm run test --if-present
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build --if-present
+        # npm run test --if-present
+    
+    - name: Zip artifact for deployment
+      run: zip release.zip ./* -r
 
-#       - name: Zip artifact for deployment
-#         run: zip release.zip ./* -r
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v4
+      with:
+        name: node-app
+        path: release.zip
 
-#       - name: Upload artifact for deployment job
-#         uses: actions/upload-artifact@v4
-#         with:
-#           name: node-app
-#           path: release.zip
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: 'production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
-#   deploy:
-#     runs-on: ubuntu-latest
-#     needs: build
-#     environment:
-#       name: 'Production'
-#       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-#     permissions:
-#       id-token: write #This is required for requesting the JWT
-#       contents: read #This is required for actions/checkout
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v4
+      with:
+        name: node-app
 
-#     steps:
-#       - name: Download artifact from build job
-#         uses: actions/download-artifact@v4
-#         with:
-#           name: node-app
+    - name: Unzip artifact for deployment
+      run: unzip release.zip
 
-#       - name: Unzip artifact for deployment
-#         run: unzip release.zip
-      
-#       - name: Login to Azure
-#         uses: azure/login@v2
-#         with:
-#           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_86D014D7B4C04E65B7B09AD05138B23F }}
-#           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_51B308BA821C44DA820D9DD32E82E057 }}
-#           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_6C615387987F418992BFDCCC7523B593 }}
-
-#       - name: 'Deploy to Azure Web App'
-#         id: deploy-to-webapp
-#         uses: azure/webapps-deploy@v3
-#         with:
-#           app-name: 'chemlab-frontend'
-#           slot-name: 'Production'
-#           package: .
-          
+    - name: 'Deploy to Azure WebApp'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        slot-name: 'Production'
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
