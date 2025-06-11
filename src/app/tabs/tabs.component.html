@@ -1,5 +1,5 @@
 @if (isLoggedIn) {
-<nav mat-tab-nav-bar class="navbar">
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
   @for (link of tabLinks; track link) {
   <a
     mat-tab-link
@@ -12,8 +12,9 @@
   </a>
   }
 </nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 } @if (!isLoggedIn) {
-<nav mat-tab-nav-bar class="navbar">
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
   <a
     mat-tab-link
     [routerLink]="tabLinks[0].path"
@@ -33,4 +34,5 @@
     {{ tabLinks[1].label }}
   </a>
 </nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 }
