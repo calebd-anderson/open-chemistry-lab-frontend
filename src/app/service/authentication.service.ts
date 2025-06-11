@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/user';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { UserRegisterDto } from '../model/user-register-dto';
 
 @Injectable({
 	providedIn: 'root'
@@ -23,7 +24,7 @@ export class AuthenticationService {
 		return this.http.post<User>(`${this.host}/user/login`, user, {observe: 'response'});
 	}
 
-	public register(user: User): Observable<User> {
+	public register(user: UserRegisterDto): Observable<User> {
 		return this.http.post<User>(`${this.host}/user/register`, user);
 	}
 

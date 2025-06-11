@@ -5,6 +5,7 @@ import { NotificationType } from '../enum/notification-type.enum';
 import { User } from '../model/user';
 import { AuthenticationService } from '../service/authentication.service';
 import { NotificationService } from '../service/notification.service';
+import { UserRegisterDto } from '../model/user-register-dto';
 
 @Component({
     selector: 'app-register',
@@ -21,17 +22,17 @@ export class RegisterComponent implements OnDestroy {
     private notificationService: NotificationService) { }
 
 
-  public onRegister(user: User): void {
+  public onRegister(user: UserRegisterDto): void {
     this.showLoading = true;
     this.subscriptions.push(
       this.authenticationService.register(user).subscribe({
         next: (response: User) => {
-          document.getElementById("close-login-modal").click();
+          document.getElementById("close-register-modal").click();
           this.showLoading = false;
-        	this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.firstName}.`);
+        	this.sendNotification(NotificationType.SUCCESS, `A new account was created for ${response.username}.`);
         },
         error: (errorResponse: HttpErrorResponse) => {
-        	// console.log(errorResponse);
+        	console.log(errorResponse);
         	this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
         	this.showLoading = false;
         }

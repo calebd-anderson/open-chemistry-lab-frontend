@@ -3,9 +3,8 @@
     <div class="user_card">
       <div class="d-flex justify-content-center">
         <div style="margin-top: 10px;margin-bottom:-90px;">
-          <h3>User Management Portal</h3>
+          <h3>ChemLab Portal</h3>
         </div>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-register-modal">Close</button>
       </div>
       <div class="d-flex justify-content-center form_container">
         <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
@@ -36,15 +35,27 @@
           @if (usernameInput.invalid && usernameInput.touched) {
             <span class="help-block" style="color:red;">Please enter a username</span>
           }
+          <!-- email -->
           <div class="input-group mb-2">
             <div class="input-group-append">
               <span class="input-group-text"><i class="fa fa-envelope"></i></span>
             </div>
-            <input type="text" class="form-control" name="email" placeholder="Email" required ngModel #emailInput="ngModel">
+            <input type="email" class="form-control" name="email" placeholder="Email" required ngModel #emailInput="ngModel">
           </div>
           @if (emailInput.invalid && emailInput.touched) {
             <span class="help-block" style="color:red;">Please enter an email.</span>
           }
+          <!-- password -->
+          <div class="input-group mb-2">
+            <div class="input-group-append">
+              <span class="input-group-text"><i class="fa fa-key"></i></span>
+            </div>
+            <input type="password" class="form-control" name="password" placeholder="Password" required ngModel #passwordInput="ngModel">
+          </div>
+          @if (emailInput.invalid && emailInput.touched) {
+            <span class="help-block" style="color:red;">Please enter a password.</span>
+          }
+          <!-- register buttons -->
           <div class="d-flex justify-content-center mt-3 login_container">
             <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button" class="btn login_btn">
               @if (showLoading) {
