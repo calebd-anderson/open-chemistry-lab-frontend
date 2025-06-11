@@ -106,17 +106,17 @@ export class CompoundComponent implements OnInit {
 
   public validateCompound() {
     this.progressBar = true;
-    let data = [];
+    let elements = [];
 
     // build list of elements
     for(let [key, value] of this.atomsInCompound.entries()) {
-      data.push({"element": key, "numberOfAtoms": value});
+      elements.push({"symbol": key, "numberOfAtoms": value});
     }
 
     // to do: the subscribe method should call back an HTTP error that sends a front-end notification
     if(this.authenticationService.isUserLoggedIn()) {
       let payload = {
-        data,
+        elements,
         userId: this.authenticationService.getUserFromLocalCache().userId
       }
       // careful of memory leak
@@ -135,7 +135,7 @@ export class CompoundComponent implements OnInit {
     } else {
       console.warn("Unable to save findings, no user is logged in.");
       let payload = {
-        data,
+        elements,
         userId: null
       }
       // careful of memory leak
