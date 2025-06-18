@@ -29,8 +29,8 @@ export class QuizComponent implements OnInit {
   ngOnInit(): void {
     this.quizService.getQuizByUserId(this.authenticationService.getUserFromLocalCache().userId).subscribe(data => {
       this.quizzes = data;
+      this.random = Math.floor(Math.random()*this.quizzes[0].questionAnswerList.length);
     });
-    this.random = Math.floor(Math.random()*this.quizzes.length);
   }
 
   onSubmit(form: NgForm) {
@@ -38,7 +38,7 @@ export class QuizComponent implements OnInit {
 
     setTimeout(() => {
       this.currentQuiz++;
-      this.random = Math.floor(Math.random() *this.quizzes.length);
+      this.random = Math.floor(Math.random()*this.quizzes[0].questionAnswerList.length);
       this.answerSelected = false;
       // unselect radio buttons
       for(let i = 0; i < document.getElementsByName("answers").length; i++) {
@@ -47,7 +47,7 @@ export class QuizComponent implements OnInit {
       }
     }, 6000);
 
-    if (form.value.answers == this.quizzes[this.random].answer) {
+    if (form.value.answers == this.quizzes[this.random]?.questionAnswerList[this.random].answer) {
       this.correctAnswers++;
       return true;
     } else {
