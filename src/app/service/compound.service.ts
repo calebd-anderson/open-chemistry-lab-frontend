@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {observable, Observable, Subject} from "rxjs";
 import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Compound } from "../model/compound";
+import { Reaction, UserReaction } from "../model/compound";
 import {environment} from "../../environments/environment";
 
 @Injectable({
@@ -12,8 +12,15 @@ export class CompoundService {
   subject = new Subject<void>();
   constructor(private http: HttpClient) { }
 
-  public validate(payload: { elements: any[]; userId: any; }): Observable<HttpResponse<Compound>> {
+  public validate(payload: { elements: any[]; userId: any; }): Observable<HttpResponse<Reaction>> {
     console.log(payload.userId)
-    return this.http.post<Compound>(`${this.host}/compound/validate`, payload, {observe: "response"});
+    return this.http.post<Reaction>(`${this.host}/compound/validate`, payload, {observe: "response"});
+  }
+
+  public getUserDiscoveries(userId: string): Observable<UserReaction[]> {
+    console.log(userId)
+    return this.http.get<UserReaction[]>(`${this.host}/compound/getByUserId`, {
+      params: {userId: userId},
+    });
   }
 }

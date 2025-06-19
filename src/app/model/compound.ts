@@ -1,6 +1,16 @@
-export interface Compound {
-  elements: Map<String, number>;
-  formula: String;
-  title: String;
-  userId: String;
+export interface Reaction {
+  elements: Map<string, number>;
+  formula: string;
+  title: string;
+  discoveredWhen: string
+  discoveredBy: string
+  lastDiscoveredWhen: string
+  lastDiscoveredBy: string
+  discoveryCount: number
+}
+
+export interface UserReaction {
+  reaction: Reaction;
+  firstDiscovered: string
+  lastDiscovered: string
 }

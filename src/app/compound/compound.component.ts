@@ -3,7 +3,7 @@ import { Element } from '../model/element.model';
 import {Observable, Subscription} from "rxjs";
 import {CompoundService} from "../service/compound.service";
 import { AuthenticationService } from '../service/authentication.service';
-import {Compound} from "../model/compound";
+import {Reaction} from "../model/compound";
 import { HttpErrorResponse, HttpEvent, HttpResponse, HttpEventType } from "@angular/common/http";
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ValidationModalComponent } from "./validation-modal/validation-modal.component";
@@ -94,7 +94,7 @@ export class CompoundComponent implements OnInit {
     }
   }
 
-  public openConfirmationDialogSuccess(response: HttpResponse<Compound>, isLoggedIn: boolean) {
+  public openConfirmationDialogSuccess(response: HttpResponse<Reaction>, isLoggedIn: boolean) {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
       disableClose: false
     });
@@ -125,7 +125,7 @@ export class CompoundComponent implements OnInit {
       this.compoundService
         .validate(payload)
           .subscribe({
-            next: (response: HttpResponse<Compound>,) => {
+            next: (response: HttpResponse<Reaction>,) => {
               this.openConfirmationDialogSuccess(response, true);
               this.progressBar = false;
             },
@@ -144,7 +144,7 @@ export class CompoundComponent implements OnInit {
       this.compoundService
         .validate(payload)
         .subscribe({
-          next: (response: HttpResponse<Compound>) => {
+          next: (response: HttpResponse<Reaction>) => {
             this.openConfirmationDialogSuccess(response, false);
             this.progressBar = false;
           },
