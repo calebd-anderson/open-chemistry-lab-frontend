@@ -5,6 +5,8 @@ import { User } from './model/user';
 import { AuthenticationService } from './service/authentication.service';
 import { AuthorizationService } from './service/authorization.service';
 import { NotificationService } from './service/notification.service';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +25,8 @@ export class AppComponent implements OnInit {
   private authorizationService: AuthorizationService = inject(AuthorizationService)
   private notificationService: NotificationService = inject(NotificationService)
 
+  readonly dialog = inject(MatDialog);
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
@@ -32,6 +36,11 @@ export class AppComponent implements OnInit {
     } else {
       this.isLoggedIn = false;
     }
+    this.dialog.open(WelcomeComponent);
+  }
+
+  openDialog() {
+    this.dialog.open(WelcomeComponent);
   }
 
   getLoggedIn(newItem: User) {

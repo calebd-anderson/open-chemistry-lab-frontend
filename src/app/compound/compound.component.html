@@ -6,8 +6,9 @@
   @if (elementsInCompound.length > 0) {
   <div class="compound">
     @for (element of elementsInCompound; track element; let i = $index) {
+      <!-- "{'background-color': '#' + element?.cPKHexColor}" -->
     <div class="element-in-compound" (click)="removeElementFromCompound(i, element)"
-      [ngStyle]="{'background-color': '#' + element?.cPKHexColor}">
+      [ngStyle]="{'background-image': 'linear-gradient(30deg, grey 10%, #' + element?.cPKHexColor + ')'}">
       {{element?.symbol}}
     </div>
     }
@@ -18,6 +19,6 @@
     <button mat-raised-button (click)="clearExperiment()">Clear Experiment</button>
   </div>
   } @else {
-  <h2 id="experiment-tip">Add elements to the the experiment by selecting them from the periodic table.</h2>
+  <h2>The experiment is empty.</h2>
   }
 </section>

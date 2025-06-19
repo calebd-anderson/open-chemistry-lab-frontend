@@ -32,19 +32,24 @@ button {
   margin: 10px;
 }
 
-.active {
+#compound-test.active {
   height: 250px;
 }
 
 #compound-test {
+  height: 140px;
   background-image: url("../../assets/images/SEF4bG.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   padding: 10px 0px 20px;
+  // transition
+  transition-property: height;
+  transition-duration: .125s;
+  transition-timing-function: linear;
 }
 
 h2 {
-  margin: 0px auto 0px 25%;
+  margin: 0px auto 0px 5%;
   background-image: linear-gradient(grey, black);
   display: inline-block;
   color: white;

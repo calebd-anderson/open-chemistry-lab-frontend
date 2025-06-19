@@ -25,28 +25,6 @@ td {
     left: 0;
 }
 
-.btn-file {
-    position: relative;
-    overflow: hidden;
-}
-.btn-file input[type=file] {
-    position: absolute;
-    top: 0;
-    right: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-size: 100px;
-    text-align: right;
-    filter: alpha(opacity=0);
-    opacity: 0;
-    outline: none;
-    background: white;
-    cursor: inherit;
-    display: block;
-}
-// html, body { height: 100%; }
-// body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 // custom snackbar styles
 .green-success-snackbar {
   @include mat.snack-bar-overrides((
@@ -70,6 +48,6 @@ td {
   // font-weight: 500;
 }
 
-.default-snackbar{
+.default-snackbar {
   font-weight: 500;
 }

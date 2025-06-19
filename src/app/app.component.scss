@@ -9,7 +9,6 @@ nav button {
 
 .profileInfo {
   margin: 10px;
-  position: absolute; 
   right: 10px;
 }
 
@@ -45,4 +44,9 @@ nav button {
 #navDrawr {
   background-image: linear-gradient(grey, black);
   padding: 10px 10px 10px 10px;
+}
+
+#welcome-button {
+  background-image: linear-gradient(grey, black);
+  color: white;
 }
