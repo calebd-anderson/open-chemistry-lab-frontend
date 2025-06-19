@@ -25,6 +25,10 @@ export class TabsComponent implements OnInit {
         label: 'About',
       },
       {
+        path: 'discoveries',
+        label: 'Discoveries',
+      },
+      {
         path: 'sandbox',
         label: 'Sandbox',
       },

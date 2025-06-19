@@ -8,10 +8,12 @@ import { FlashcardComponent } from './flashcard/flashcard.component';
 import { AuthorizationGuard } from './guard/authorization.guard';
 import { ProfileComponent } from './profile/profile.component';
 import { AboutComponent } from './about/about.component';
+import { DiscoveriesComponent } from './discoveries/discoveries.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'sandbox', component: PeriodicTableComponent },
+  { path: 'discoveries', component: DiscoveriesComponent, canActivate: [AuthenticationGuard] },
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
   { path: 'quiz', component: QuizComponent, canActivate: [AuthenticationGuard] },
