@@ -23,7 +23,8 @@ export class NotificationService {
     this._snackBar.open(message, 'close', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
-      panelClass: [type || NotificationType.DEFAULT]
+      panelClass: [type || NotificationType.DEFAULT],
+      duration: 4000
     });
   }
 

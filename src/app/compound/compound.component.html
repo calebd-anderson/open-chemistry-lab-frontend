@@ -13,16 +13,15 @@
           </div>
         }
       </div>
-    } @else {
-      <h2>
-        Add elements to the the experiment by clicking on elements in the periodic table.
-      </h2>
-    }
-    @if (elementsInCompound.length > 0) {
+      <!-- run experiment buttons -->
       <div id="validate-btn">
         <button mat-raised-button color="primary" (click)="validateCompound()">Run Experiment</button>
         <button mat-raised-button (click)="clearExperiment()">Clear Experiment</button>
       </div>
+    } @else {
+      <h2>
+        Add elements to the the experiment by clicking on elements in the periodic table.
+      </h2>
     }
   </div>
 </div>
