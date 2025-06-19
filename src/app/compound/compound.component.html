@@ -1,27 +1,23 @@
 @if (progressBar) {
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 }
-<div id="compound-test">
+<section id="compound-test" [class.active]="elementsInCompound.length > 0">
   <h1 id="title">Experiment</h1>
-  <div>
-    @if (elementsInCompound.length > 0) {
-      <div class="compound">
-        @for (element of elementsInCompound; track element; let i = $index) {
-          <div class="element-in-compound" (click)="removeElementFromCompound(i, element)"
-            [ngStyle]="{'background-color': '#' + element?.cPKHexColor}">
-            {{element?.symbol}}
-          </div>
-        }
-      </div>
-      <!-- run experiment buttons -->
-      <div id="validate-btn">
-        <button mat-raised-button color="primary" (click)="validateCompound()">Run Experiment</button>
-        <button mat-raised-button (click)="clearExperiment()">Clear Experiment</button>
-      </div>
-    } @else {
-      <h2>
-        Add elements to the the experiment by clicking on elements in the periodic table.
-      </h2>
+  @if (elementsInCompound.length > 0) {
+  <div class="compound">
+    @for (element of elementsInCompound; track element; let i = $index) {
+    <div class="element-in-compound" (click)="removeElementFromCompound(i, element)"
+      [ngStyle]="{'background-color': '#' + element?.cPKHexColor}">
+      {{element?.symbol}}
+    </div>
     }
   </div>
-</div>
+  <!-- run experiment buttons -->
+  <div id="validate-btn">
+    <button mat-raised-button color="primary" (click)="validateCompound()">Run Experiment</button>
+    <button mat-raised-button (click)="clearExperiment()">Clear Experiment</button>
+  </div>
+  } @else {
+  <h2 id="experiment-tip">Add elements to the the experiment by selecting them from the periodic table.</h2>
+  }
+</section>

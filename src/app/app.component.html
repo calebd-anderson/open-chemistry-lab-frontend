@@ -29,6 +29,11 @@
     <app-tabs [isLoggedIn]="isLoggedIn"></app-tabs>
 </mat-drawer-container>
 
+<!-- <app-welcome /> -->
+
+<!-- dynamic routs -->
+<router-outlet></router-outlet>
+
 <!-- login modal -->
 <div class="modal fade" id="loginModal" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -51,6 +56,3 @@
         </div>
     </div>
 </div>
-
-<!-- router/dynamic content -->
-<router-outlet></router-outlet>
