@@ -27,6 +27,7 @@ nav button {
 .login-btn {
   background-color: teal;
   color: white;
+  border-radius: 0px;
 }
 
 .logout-btn {
@@ -39,4 +40,9 @@ nav button {
   padding: 5px 15px;
   margin: 0px auto 0px 40%;
   border-radius: 5px;
+}
+
+#navDrawr {
+  background-image: linear-gradient(grey, black);
+  padding: 10px 10px 10px 10px;
 }
