@@ -7,7 +7,6 @@ import { NotificationType } from '../enum/notification-type.enum';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserReaction } from '../model/compound';
 
-
 @Component({
   selector: 'app-discoveries',
   imports: [],
@@ -20,7 +19,7 @@ export class DiscoveriesComponent implements OnInit {
   readonly authenticationService = inject(AuthenticationService)
   readonly _snackBar = inject(NotificationService)
 
-  private userReactions: UserReaction[]
+  public userReactions: UserReaction[] = []
 
   private subs = new SubSink();
 
@@ -30,8 +29,6 @@ export class DiscoveriesComponent implements OnInit {
       this.compoundService.getUserDiscoveries(userId).subscribe({
         next: (response: UserReaction[]) => {
           this.userReactions = response
-          console.log(this.userReactions)
-          // this.progressSpinner = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
           this._snackBar.notify(NotificationType.ERROR, "Failed to get user discoveries.");

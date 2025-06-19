@@ -13,12 +13,10 @@ export class CompoundService {
   constructor(private http: HttpClient) { }
 
   public validate(payload: { elements: any[]; userId: any; }): Observable<HttpResponse<Reaction>> {
-    console.log(payload.userId)
     return this.http.post<Reaction>(`${this.host}/compound/validate`, payload, {observe: "response"});
   }
 
   public getUserDiscoveries(userId: string): Observable<UserReaction[]> {
-    console.log(userId)
     return this.http.get<UserReaction[]>(`${this.host}/compound/getByUserId`, {
       params: {userId: userId},
     });

@@ -10,7 +10,7 @@ export interface Reaction {
 }
 
 export interface UserReaction {
-  reaction: Reaction;
+  userDiscoveredReaction: Reaction;
   firstDiscovered: string
   lastDiscovered: string
 }

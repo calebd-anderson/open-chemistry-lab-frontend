@@ -1,1 +1,12 @@
-<p>discoveries works!</p>
+<h1>My Discoveries: {{userReactions?.length}}</h1>
+@if (userReactions?.length > 0) {
+<ul>
+@for (discovery of userReactions; track discovery?.userDiscoveredReaction.formula; let i = $index) {
+    <li>
+        {{discovery?.userDiscoveredReaction.title}} | {{discovery?.userDiscoveredReaction.formula}}
+    </li>
+}
+</ul>
+} @else {
+<p>Looking up your discoveries ...</p>
+}
