@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationType } from './enum/notification-type.enum';
 import { User } from './model/user';
@@ -15,7 +15,7 @@ import { NotificationService } from './service/notification.service';
 export class AppComponent implements OnInit {
   
   title = 'Chem Lab';
-  
+
   public user: User;
   public isLoggedIn: boolean;
 
@@ -65,5 +65,4 @@ export class AppComponent implements OnInit {
       this.notificationService.notify(notificationType, "An error occured. Please try again.");
     }
   }
-
 }

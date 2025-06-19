@@ -31,6 +31,7 @@ import { ValidationModalComponent } from './compound/validation-modal/validation
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -58,7 +59,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         MatButtonModule,
         MatIconModule,
         MatSidenavModule,
-        MatProgressBarModule],
+        MatProgressBarModule,
+        WelcomeComponent],
         providers: [MatSnackBar, 
             NotificationService,
             AuthenticationGuard,
