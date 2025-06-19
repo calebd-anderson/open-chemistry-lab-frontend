@@ -46,7 +46,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         ProfileComponent,
         ValidationModalComponent
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent],
+    imports: [BrowserModule,
         AppRoutingModule,
         FormsModule,
         BrowserAnimationsModule,
@@ -57,6 +58,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         MatButtonModule,
         MatIconModule,
         MatSidenavModule,
-        MatProgressBarModule], providers: [MatSnackBar, NotificationService, AuthenticationGuard, AuthenticationService, ElementService, UserService,
-        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, provideHttpClient(withInterceptorsFromDi())] })
+        MatProgressBarModule],
+        providers: [MatSnackBar, 
+            NotificationService,
+            AuthenticationGuard,
+            AuthenticationService,
+            ElementService,
+            UserService,
+            { provide: HTTP_INTERCEPTORS, 
+                useClass: AuthInterceptor,
+                multi: true },
+            provideHttpClient(withInterceptorsFromDi())
+    ]})
 export class AppModule { }
