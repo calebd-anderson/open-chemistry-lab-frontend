@@ -1,17 +1,18 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { Element } from '../model/element.model';
 import { ElementService } from '../service/element.service';
 
 import { SubSink } from 'subsink';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from "rxjs";
+import { NotificationService } from '../service/notification.service';
+import { NotificationType } from '../enum/notification-type.enum';
 
 @Component({
-    selector: 'periodic-table',
-    templateUrl: './periodic-table.component.html',
-    styleUrls: ['./periodic-table.component.sass'],
-    standalone: false
+  selector: 'periodic-table',
+  templateUrl: './periodic-table.component.html',
+  styleUrls: ['./periodic-table.component.sass'],
+  standalone: false
 })
 export class PeriodicTableComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
@@ -25,8 +26,10 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
   public progressSpinner: boolean = false;
 
   @Output() sendElementMessage = new EventEmitter<Element>();
+
+  private _snackBar: NotificationService = inject(NotificationService);
   
-  constructor(private elementService: ElementService, private _snackBar: MatSnackBar) { }
+  constructor(private elementService: ElementService) { }
 
   ngOnInit(): void {
     this.getElements();
@@ -38,9 +41,7 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
     this.interactedElement = this.elements[elmIndex];
     if(this.interactedElement) {
       this.sendElementMessage.emit(this.interactedElement);
-      this._snackBar.open(this.interactedElement.name + " added to experiment.", "close", {
-        duration: 3000
-      });
+      this._snackBar.notify(NotificationType.DEFAULT, this.interactedElement.name + " added to experiment.");
     }
   }
 
@@ -53,7 +54,7 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
           this.progressSpinner = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this._snackBar.open("failed to load periodic table data", "close");
+          this._snackBar.notify(NotificationType.ERROR, "Failed to load periodic table data.");
         }
       })
     );

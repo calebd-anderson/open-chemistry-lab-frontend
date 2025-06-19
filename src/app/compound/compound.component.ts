@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, inject, Input, OnInit} from '@angular/core';
 import { Element } from '../model/element.model';
 import {Observable, Subscription} from "rxjs";
 import {CompoundService} from "../service/compound.service";
@@ -27,8 +27,10 @@ export class CompoundComponent implements OnInit {
   @Input() events: Observable<Element>;
   public progressBar: boolean = false;
 
+  private _snackBar: NotificationService = inject(NotificationService);
+
   constructor(private compoundService: CompoundService, private authenticationService: AuthenticationService, 
-    public dialog: MatDialog, private _snackBar: NotificationService) { }
+    public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.eventsSubscription = this.events.subscribe((element) => this.addInteractedElements(element));
