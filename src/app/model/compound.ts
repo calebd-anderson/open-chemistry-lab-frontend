@@ -2,8 +2,8 @@ export interface Reaction {
   elements: Map<string, number>;
   formula: string;
   title: string;
-  discoveredWhen: string
-  discoveredBy: string
+  firstDiscoveredWhen: string
+  firstDiscoveredBy: string
   lastDiscoveredWhen: string
   lastDiscoveredBy: string
   discoveryCount: number
@@ -11,6 +11,7 @@ export interface Reaction {
 
 export interface UserReaction {
   userDiscoveredReaction: Reaction;
-  firstDiscovered: string
-  lastDiscovered: string
+  userDiscoveredWhen: string
+  userLastDiscoveredWhen: string
+  userDiscoveryCount: number
 }

@@ -1,12 +1,31 @@
-<h1>My Discoveries: {{userReactions?.length}}</h1>
-@if (userReactions?.length > 0) {
-<ul>
-@for (discovery of userReactions; track discovery?.userDiscoveredReaction.formula; let i = $index) {
-    <li>
-        {{discovery?.userDiscoveredReaction.title}} | {{discovery?.userDiscoveredReaction.formula}}
-    </li>
-}
-</ul>
-} @else {
-<p>Looking up your discoveries ...</p>
-}
+<section>
+    <h1>My Discoveries: {{userReactions?.length}}</h1>
+    @if (userReactions?.length > 0) {
+    <table>
+        <tr>
+            <th>Formula</th>
+            <th>Name</th>
+            <th>When I discovered</th>
+            <th>Number of times I discovered</th>
+            <th>When first discovered</th>
+            <th>Who first discovered</th>
+            <th>Who last discovered</th>
+            <th>Total number of times discovered</th>
+        </tr>
+    @for (discovery of userReactions; track discovery?.userDiscoveredReaction.formula; let i = $index) {
+        <tr>
+            <td>{{discovery?.userDiscoveredReaction.formula}}</td>
+            <td>{{discovery?.userDiscoveredReaction.title}}</td>
+            <td>{{discovery?.userDiscoveredWhen}}</td>
+            <td>{{discovery?.userDiscoveryCount}}</td>
+            <td>{{discovery?.userDiscoveredReaction.firstDiscoveredWhen}}</td>
+            <td>{{discovery?.userDiscoveredReaction.firstDiscoveredBy}}</td>
+            <td>{{discovery?.userDiscoveredReaction.lastDiscoveredBy}}</td>
+            <td>{{discovery?.userDiscoveredReaction.discoveryCount}}</td>
+        </tr>
+    }
+    </table>
+    } @else {
+    <p>Looking up your discoveries ...</p>
+    }
+</section>
