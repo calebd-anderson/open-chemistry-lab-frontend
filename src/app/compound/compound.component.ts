@@ -88,9 +88,9 @@ export class CompoundComponent implements OnInit {
 
     this.dialogRef.componentInstance.wasSuccessful = "Uh oh!"
     if (response.status == 404) {
-      this.dialogRef.componentInstance.confirmMessage = "It doesn't look like that is a valid compound, please try again!"
+      this.dialogRef.componentInstance.confirmMessage = "It doesn't look like that is a valid compound, please try again!";
     } else {
-      this.dialogRef.componentInstance.confirmMessage = "We're having trouble validating...Please try again."
+      this.dialogRef.componentInstance.confirmMessage = "We're having trouble validating. Please try again.";
     }
   }
 
@@ -98,11 +98,12 @@ export class CompoundComponent implements OnInit {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
       disableClose: false
     });
+    this.dialogRef.componentInstance.discovery = response.body.title;
     this.dialogRef.componentInstance.wasSuccessful = "Congratulations!";
-    this.dialogRef.componentInstance.confirmMessage = "You discovered " + response.body.title + ".";
+    this.dialogRef.componentInstance.confirmMessage = "You discovered: ";
 
     if (!isLoggedIn) {
-      this.dialogRef.componentInstance.isLoggedIn = "Log in/register to save these results for a quiz!";
+      this.dialogRef.componentInstance.isLoggedIn = "Create an account to save your discovery!";
     }
   }
 

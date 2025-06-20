@@ -1,6 +1,8 @@
-<h1 md-dialog-title>{{wasSuccessful}}</h1>
-<div md-dialog-content>{{confirmMessage}}</div>
-<div md-dialog-content>{{isLoggedIn}}</div>
-<div md-dialog-actions>
-  <button md-button style="color: #fff;background-color: #153961" (click)="dialogRef.close(true)">Ok</button>
-</div>
+<section>
+  <h1 mat-dialog-title>{{wasSuccessful}}</h1>
+  <mat-dialog-content class="mat-typography element-name">{{confirmMessage}}<span id="discovery">{{discovery}}.</span></mat-dialog-content>
+  <mat-dialog-content class="mat-typography">{{isLoggedIn}}</mat-dialog-content>
+  <mat-dialog-actions>
+    <button matButton mat-dialog-close>Ok</button>
+  </mat-dialog-actions>
+</section>
