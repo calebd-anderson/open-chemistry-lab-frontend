@@ -10,7 +10,7 @@ import { UserService } from './service/user.service';
 import { AuthenticationGuard } from './guard/authentication.guard';
 import { NotificationService } from './service/notification.service';
 import { LoginComponent } from './user_manager/login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './user_manager/register/register.component';
 import { UserComponent } from './user_manager/user/user.component';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
