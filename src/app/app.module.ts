@@ -18,7 +18,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PeriodicTableComponent } from './periodic-table/periodic-table.component';
+import { PeriodicTableComponent } from './chemistry/periodic-table/periodic-table.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
