@@ -1,14 +1,14 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
-import { Element } from '../model/element.model';
+import { Element } from '../../model/element.model';
 import {Observable, Subscription} from "rxjs";
-import {CompoundService} from "../service/compound.service";
-import { AuthenticationService } from '../service/authentication.service';
-import {Reaction} from "../model/compound";
+import {CompoundService} from "../../service/compound.service";
+import { AuthenticationService } from '../../service/authentication.service';
+import {Reaction} from "../../model/compound";
 import { HttpErrorResponse, HttpEvent, HttpResponse, HttpEventType } from "@angular/common/http";
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ValidationModalComponent } from "./validation-modal/validation-modal.component";
-import { NotificationService } from '../service/notification.service';
-import { NotificationType } from '../enum/notification-type.enum';
+import { NotificationService } from '../../service/notification.service';
+import { NotificationType } from '../../enum/notification-type.enum';
 
 @Component({
     selector: 'app-compound',
