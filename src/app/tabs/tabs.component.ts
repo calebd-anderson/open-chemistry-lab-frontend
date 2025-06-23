@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { itablink } from '../itablink';
+import { itablink } from '../model/itablink';
 
 @Component({
   selector: 'app-tabs',
