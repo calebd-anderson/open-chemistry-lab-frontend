@@ -11,7 +11,7 @@ import { AuthenticationGuard } from './guard/authentication.guard';
 import { NotificationService } from './service/notification.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { UserComponent } from './user/user.component';
+import { UserComponent } from './user_manager/user/user.component';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
