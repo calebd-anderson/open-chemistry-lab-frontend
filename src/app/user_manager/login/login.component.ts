@@ -3,11 +3,11 @@ import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/cor
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { HeaderType } from '../enum/header-type.enum';
-import { NotificationType } from '../enum/notification-type.enum';
-import { User } from '../model/user';
-import { AuthenticationService } from '../service/authentication.service';
-import { NotificationService } from '../service/notification.service';
+import { HeaderType } from '../../enum/header-type.enum';
+import { NotificationType } from '../../enum/notification-type.enum';
+import { User } from '../../model/user';
+import { AuthenticationService } from '../../service/authentication.service';
+import { NotificationService } from '../../service/notification.service';
 
 @Component({
     selector: 'app-login',
