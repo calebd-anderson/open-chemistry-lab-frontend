@@ -6,7 +6,7 @@ import { UserComponent } from './user_manager/user/user.component';
 import { QuizComponent } from './quiz/quiz.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { AuthorizationGuard } from './guard/authorization.guard';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './user_manager/profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { DiscoveriesComponent } from './discoveries/discoveries.component';
 

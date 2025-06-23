@@ -26,7 +26,7 @@ import { ElementService } from './service/element.service';
 import { CompoundComponent } from './chemistry/compound/compound.component';
 import { TabsComponent } from './tabs/tabs.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './user_manager/profile/profile.component';
 import { ValidationModalComponent } from './chemistry/compound/validation-modal/validation-modal.component';
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
