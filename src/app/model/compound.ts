@@ -6,12 +6,12 @@ export interface Reaction {
   firstDiscoveredBy: string
   lastDiscoveredWhen: string
   lastDiscoveredBy: string
-  discoveryCount: number
+  discoveredCount: number
 }
 
 export interface UserReaction {
   userDiscoveredReaction: Reaction;
   userDiscoveredWhen: string
   userLastDiscoveredWhen: string
-  userDiscoveryCount: number
+  userDiscoveredCount: number
 }

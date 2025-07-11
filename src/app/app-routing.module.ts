@@ -9,10 +9,12 @@ import { AuthorizationGuard } from './guard/authorization.guard';
 import { ProfileComponent } from './user_manager/profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { DiscoveriesComponent } from './discoveries/discoveries.component';
+import { GlobalDiscoveriesComponent } from './global-discoveries/global-discoveries.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'sandbox', component: PeriodicTableComponent },
+  { path: 'globaldiscoveries', component: GlobalDiscoveriesComponent },
   { path: 'discoveries', component: DiscoveriesComponent, canActivate: [AuthenticationGuard] },
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },

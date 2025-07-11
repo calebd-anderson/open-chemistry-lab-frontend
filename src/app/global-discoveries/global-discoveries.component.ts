@@ -5,33 +5,37 @@ import { AuthenticationService } from '../service/authentication.service';
 import { NotificationService } from '../service/notification.service';
 import { NotificationType } from '../enum/notification-type.enum';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserReaction } from '../model/compound';
+import { Reaction } from '../model/compound';
 
 @Component({
-  selector: 'app-discoveries',
+  selector: 'app-global-discoveries',
   imports: [],
-  templateUrl: './discoveries.component.html',
-  styleUrl: './discoveries.component.scss'
+  templateUrl: './global-discoveries.component.html',
+  styleUrl: './global-discoveries.component.scss'
 })
-export class DiscoveriesComponent implements OnInit {
+export class GlobalDiscoveriesComponent {
 
   readonly compoundService = inject(CompoundService)
   readonly authenticationService = inject(AuthenticationService)
   readonly _snackBar = inject(NotificationService)
 
-  public userReactions: UserReaction[] = []
+  public discoveries: Reaction[] = []
+  public loading: boolean = false;
 
   private subs = new SubSink();
 
   ngOnInit(): void {
-    let userId: string = this.authenticationService.getUserFromLocalCache().userId
+    this.loading = true;
     this.subs.add(
-      this.compoundService.getUserDiscoveries(userId).subscribe({
-        next: (response: UserReaction[]) => {
-          this.userReactions = response
+      this.compoundService.getAllDiscoveries().subscribe({
+        next: (response: Reaction[]) => {
+          this.discoveries = response
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this._snackBar.notify(NotificationType.ERROR, "Failed to get user discoveries.");
+          this._snackBar.notify(NotificationType.ERROR, "Failed to get global discoveries.");
+        },
+        complete:() => {
+          this.loading = false;
         }
       })
     );

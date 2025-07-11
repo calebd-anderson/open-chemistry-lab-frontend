@@ -1,0 +1,29 @@
+<section>
+    <h1>Global Discoveries: {{discoveries?.length}}</h1>
+    @if (!loading) {
+    <table>
+        <tr>
+            <th>Formula</th>
+            <th>Name</th>
+            <th>When first discovered</th>
+            <th>When last discovered</th>
+            <th>Who first discovered</th>
+            <th>Who last discovered</th>
+            <th>Total number of times discovered</th>
+        </tr>
+    @for (discovery of discoveries; track discovery?.formula; let i = $index) {
+        <tr>
+            <td>{{discovery?.formula}}</td>
+            <td>{{discovery?.title}}</td>
+            <td>{{discovery?.firstDiscoveredWhen}}</td>
+            <td>{{discovery?.lastDiscoveredWhen}}</td>
+            <td>{{discovery?.firstDiscoveredBy}}</td>
+            <td>{{discovery?.lastDiscoveredBy}}</td>
+            <td>{{discovery?.discoveredCount}}</td>
+        </tr>
+    }
+    </table>
+    } @else {
+    <p>Loading global discoveries ...</p>
+    }
+</section>

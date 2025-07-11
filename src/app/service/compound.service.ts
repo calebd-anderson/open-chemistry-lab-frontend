@@ -16,6 +16,10 @@ export class CompoundService {
     return this.http.post<Reaction>(`${this.host}/compound/validate`, payload, {observe: "response"});
   }
 
+  public getAllDiscoveries(): Observable<Reaction[]> {
+    return this.http.get<Reaction[]>(`${this.host}/compound/getAllDiscoveries`);
+  }
+
   public getUserDiscoveries(userId: string): Observable<UserReaction[]> {
     return this.http.get<UserReaction[]>(`${this.host}/compound/getByUserId`, {
       params: {userId: userId},

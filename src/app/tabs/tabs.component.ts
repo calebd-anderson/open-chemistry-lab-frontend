@@ -25,8 +25,12 @@ export class TabsComponent implements OnInit {
         label: 'Sandbox',
       },
       {
+        path: 'globaldiscoveries',
+        label: 'Global Discoveries',
+      },
+      {
         path: 'discoveries',
-        label: 'Discoveries',
+        label: 'My Discoveries',
       },
       {
         path: 'flashcard',
