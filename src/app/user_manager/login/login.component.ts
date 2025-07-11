@@ -48,10 +48,12 @@ export class LoginComponent implements OnDestroy {
           this.router.navigateByUrl('sandbox');
           this.showLoading = false;
           userForm.reset();
+          this.authenticationService._isLoggedIn.next(true)
           this.sendNotification(NotificationType.SUCCESS, "You've been successfully logged in.");
         },
         error: (errorResponse: HttpErrorResponse) => {
         	// console.log(errorResponse);
+          this.authenticationService._isLoggedIn.next(false)
         	this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
         	this.showLoading = false;
         }

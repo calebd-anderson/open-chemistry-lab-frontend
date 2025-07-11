@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationType } from './enum/notification-type.enum';
 import { User } from './model/user';
@@ -7,6 +7,7 @@ import { AuthorizationService } from './service/authorization.service';
 import { NotificationService } from './service/notification.service';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +16,9 @@ import { MatDialog } from '@angular/material/dialog';
   standalone: false,
 })
 export class AppComponent implements OnInit {
-  
   title = 'Chem Lab';
-
+  private authSubscription!: Subscription;
+  
   public user: User;
   public isLoggedIn: boolean;
 
@@ -30,12 +31,9 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    if (this.authenticationService.isUserLoggedIn()) {
-      this.authenticationService.currentUser.subscribe(user => this.user = user);
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
-    }
+    this.authSubscription = this.authenticationService.isLoggedIn$.subscribe(loggedIn => {
+        this.isLoggedIn = loggedIn;
+    });
     this.dialog.open(WelcomeComponent);
   }
 
@@ -72,6 +70,12 @@ export class AppComponent implements OnInit {
       this.notificationService.notify(notificationType, message);
     } else {
       this.notificationService.notify(notificationType, "An error occured. Please try again.");
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.authSubscription) {
+      this.authSubscription.unsubscribe(); // Prevent memory leaks
     }
   }
 }

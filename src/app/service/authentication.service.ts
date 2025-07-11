@@ -17,8 +17,15 @@ export class AuthenticationService {
 
 	private user = new BehaviorSubject<User>(this.getUserFromLocalCache());
 	currentUser = this.user.asObservable();
+
+	public _isLoggedIn = new BehaviorSubject<boolean>(false); // Initial state
+	// Expose as an Observable for components to subscribe
+	isLoggedIn$: Observable<boolean> = this._isLoggedIn.asObservable();
   	
-  	constructor(private http: HttpClient) { }
+  	constructor(private http: HttpClient) {
+		const loginStatus = this.isUserLoggedIn();
+		this._isLoggedIn.next(loginStatus);
+	}
 
 	public login(user: User): Observable<HttpResponse<User>> {
 		return this.http.post<User>(`${this.host}/user/login`, user, {observe: 'response'});
@@ -34,6 +41,7 @@ export class AuthenticationService {
 		localStorage.removeItem('user');
 		localStorage.removeItem('token');
 		localStorage.removeItem('users');
+		this._isLoggedIn.next(false);
 	}
 
 	public saveToken(token: string): void {
@@ -75,8 +83,7 @@ export class AuthenticationService {
 				}
 			}
 		}
-		this.logOut();
 		return false;
 	}
-
 }
+ 

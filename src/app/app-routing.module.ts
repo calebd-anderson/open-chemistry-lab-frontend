@@ -14,7 +14,7 @@ import { GlobalDiscoveriesComponent } from './global-discoveries/global-discover
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'sandbox', component: PeriodicTableComponent },
-  { path: 'globaldiscoveries', component: GlobalDiscoveriesComponent },
+  { path: 'globaldiscoveries', component: GlobalDiscoveriesComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'discoveries', component: DiscoveriesComponent, canActivate: [AuthenticationGuard] },
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
