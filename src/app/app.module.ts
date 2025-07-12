@@ -24,7 +24,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ElementService } from './service/element.service';
 import { CompoundComponent } from './component/chemistry/compound/compound.component';
-import { TabsComponent } from './tabs/tabs.component';
+import { TabsComponent } from './component/tabs/tabs.component';
 import { FlashcardComponent } from './component/game/flashcard/flashcard.component';
 import { ProfileComponent } from './component/user_manager/profile/profile.component';
 import { ValidationModalComponent } from './component/chemistry/compound/validation-modal/validation-modal.component';
