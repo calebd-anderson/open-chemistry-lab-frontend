@@ -4,14 +4,14 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { SubSink } from 'subsink';
-import { NotificationType } from '../../model/enum/notification-type.enum';
-import { Role } from '../../model/enum/role.enum';
-import { CustomHttpResponse } from '../../model/custom-http-response';
-import { FileUploadStatus } from '../../model/file-upload-status';
-import { User } from '../../model/user';
-import { AuthenticationService } from '../../service/authentication.service';
-import { NotificationService } from '../../service/notification.service';
-import { UserService } from '../../service/user.service';
+import { NotificationType } from '../../../model/enum/notification-type.enum';
+import { Role } from '../../../model/enum/role.enum';
+import { CustomHttpResponse } from '../../../model/custom-http-response';
+import { FileUploadStatus } from '../../../model/file-upload-status';
+import { User } from '../../../model/user';
+import { AuthenticationService } from '../../../service/authentication.service';
+import { NotificationService } from '../../../service/notification.service';
+import { UserService } from '../../../service/user.service';
 
 @Component({
     selector: 'app-user',
