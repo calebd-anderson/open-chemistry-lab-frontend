@@ -31,7 +31,7 @@ import { ValidationModalComponent } from './component/chemistry/compound/validat
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
 
 @NgModule({ declarations: [
         AppComponent,

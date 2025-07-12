@@ -5,7 +5,7 @@ import { User } from './model/user';
 import { AuthenticationService } from './service/authentication.service';
 import { AuthorizationService } from './service/authorization.service';
 import { NotificationService } from './service/notification.service';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeComponent } from './component/welcome/welcome.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 
