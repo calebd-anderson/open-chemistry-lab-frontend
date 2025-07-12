@@ -3,7 +3,7 @@ import { CompoundService } from '../service/compound.service';
 import { SubSink } from 'subsink';
 import { AuthenticationService } from '../service/authentication.service';
 import { NotificationService } from '../service/notification.service';
-import { NotificationType } from '../enum/notification-type.enum';
+import { NotificationType } from '../model/enum/notification-type.enum';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Reaction } from '../model/compound';
 import { AuthorizationService } from '../service/authorization.service';

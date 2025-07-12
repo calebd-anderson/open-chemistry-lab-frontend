@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Role } from '../enum/role.enum';
+import { Role } from '../model/enum/role.enum';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({

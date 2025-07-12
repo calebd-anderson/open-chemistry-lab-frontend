@@ -6,7 +6,7 @@ import { SubSink } from 'subsink';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from "rxjs";
 import { NotificationService } from '../../service/notification.service';
-import { NotificationType } from '../../enum/notification-type.enum';
+import { NotificationType } from '../../model/enum/notification-type.enum';
 
 @Component({
   selector: 'periodic-table',

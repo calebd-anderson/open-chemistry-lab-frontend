@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { NotificationType } from '../../enum/notification-type.enum';
+import { NotificationType } from '../../model/enum/notification-type.enum';
 import { User } from '../../model/user';
 import { AuthenticationService } from '../../service/authentication.service';
 import { NotificationService } from '../../service/notification.service';

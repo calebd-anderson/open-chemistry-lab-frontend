@@ -4,7 +4,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
-import { NotificationType } from '../enum/notification-type.enum';
+import { NotificationType } from '../model/enum/notification-type.enum';
 
 /**
  * @title Snack-bar with configurable position

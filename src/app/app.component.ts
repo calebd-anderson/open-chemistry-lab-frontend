@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { NotificationType } from './enum/notification-type.enum';
+import { NotificationType } from './model/enum/notification-type.enum';
 import { User } from './model/user';
 import { AuthenticationService } from './service/authentication.service';
 import { AuthorizationService } from './service/authorization.service';

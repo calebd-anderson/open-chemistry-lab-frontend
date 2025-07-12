@@ -8,7 +8,7 @@ import { HttpErrorResponse, HttpEvent, HttpResponse, HttpEventType } from "@angu
 import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ValidationModalComponent } from "./validation-modal/validation-modal.component";
 import { NotificationService } from '../../service/notification.service';
-import { NotificationType } from '../../enum/notification-type.enum';
+import { NotificationType } from '../../model/enum/notification-type.enum';
 
 @Component({
     selector: 'app-compound',
