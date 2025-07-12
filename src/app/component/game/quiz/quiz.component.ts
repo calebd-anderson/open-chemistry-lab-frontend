@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Quiz } from '../model/quiz';
-import { QuizService } from '../service/quiz.service';
-import { HttpErrorResponse } from "@angular/common/http";
+import { Quiz } from '../../../model/quiz';
+import { QuizService } from '../../../service/quiz.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthenticationService } from '../service/authentication.service';
+import { AuthenticationService } from '../../../service/authentication.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
