@@ -9,7 +9,7 @@ import { AuthorizationGuard } from './service/security/guard/authorization.guard
 import { ProfileComponent } from './component/user_manager/profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { DiscoveriesComponent } from './component/discoveries/discoveries.component';
-import { GlobalDiscoveriesComponent } from './global-discoveries/global-discoveries.component';
+import { GlobalDiscoveriesComponent } from './component/global-discoveries/global-discoveries.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
