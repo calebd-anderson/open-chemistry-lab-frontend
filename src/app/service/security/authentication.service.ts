@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../model/user';
+import { User } from '../../model/user';
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { UserRegisterDto } from '../model/user-register-dto';
+import { UserRegisterDto } from '../../model/user-register-dto';
 
 @Injectable({
 	providedIn: 'root'

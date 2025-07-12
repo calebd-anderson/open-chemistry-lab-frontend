@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../../model/user';
 import { Router } from '@angular/router';
 import { UserService } from '../../../service/user.service';
-import { AuthenticationService } from '../../../service/authentication.service';
+import { AuthenticationService } from '../../../service/security/authentication.service';
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';

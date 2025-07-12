@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { itablink } from '../model/itablink';
-import { AuthenticationService } from '../service/authentication.service';
-import { AuthorizationService } from '../service/authorization.service';
+import { AuthenticationService } from '../service/security/authentication.service';
+import { AuthorizationService } from '../service/security/authorization.service';
 import { Subscription } from 'rxjs';
 
 @Component({

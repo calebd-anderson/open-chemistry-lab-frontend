@@ -4,10 +4,10 @@ import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@a
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthInterceptor } from './security/interceptor/auth.interceptor';
-import { AuthenticationService } from './service/authentication.service';
+import { AuthInterceptor } from './service/security/interceptor/auth.interceptor';
+import { AuthenticationService } from './service/security/authentication.service';
 import { UserService } from './service/user.service';
-import { AuthenticationGuard } from './security/guard/authentication.guard';
+import { AuthenticationGuard } from './service/security/guard/authentication.guard';
 import { NotificationService } from './service/notification.service';
 import { LoginComponent } from './component/user_manager/login/login.component';
 import { RegisterComponent } from './component/user_manager/register/register.component';

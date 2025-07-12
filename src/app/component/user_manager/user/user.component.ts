@@ -9,7 +9,7 @@ import { Role } from '../../../model/enum/role.enum';
 import { CustomHttpResponse } from '../../../model/custom-http-response';
 import { FileUploadStatus } from '../../../model/file-upload-status';
 import { User } from '../../../model/user';
-import { AuthenticationService } from '../../../service/authentication.service';
+import { AuthenticationService } from '../../../service/security/authentication.service';
 import { NotificationService } from '../../../service/notification.service';
 import { UserService } from '../../../service/user.service';
 

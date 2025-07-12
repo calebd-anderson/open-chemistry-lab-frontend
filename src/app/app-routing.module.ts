@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthenticationGuard } from './security/guard/authentication.guard';
+import { AuthenticationGuard } from './service/security/guard/authentication.guard';
 import { PeriodicTableComponent } from './component/chemistry/periodic-table/periodic-table.component';
 import { UserComponent } from './component/user_manager/user/user.component';
 import { QuizComponent } from './component/game/quiz/quiz.component';
 import { FlashcardComponent } from './component/game/flashcard/flashcard.component';
-import { AuthorizationGuard } from './security/guard/authorization.guard';
+import { AuthorizationGuard } from './service/security/guard/authorization.guard';
 import { ProfileComponent } from './component/user_manager/profile/profile.component';
 import { AboutComponent } from './about/about.component';
 import { DiscoveriesComponent } from './component/discoveries/discoveries.component';

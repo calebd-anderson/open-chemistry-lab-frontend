@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { HeaderType } from '../../../model/enum/header-type.enum';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { User } from '../../../model/user';
-import { AuthenticationService } from '../../../service/authentication.service';
+import { AuthenticationService } from '../../../service/security/authentication.service';
 import { NotificationService } from '../../../service/notification.service';
 
 @Component({

@@ -1,12 +1,12 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CompoundService } from '../service/compound.service';
 import { SubSink } from 'subsink';
-import { AuthenticationService } from '../service/authentication.service';
+import { AuthenticationService } from '../service/security/authentication.service';
 import { NotificationService } from '../service/notification.service';
 import { NotificationType } from '../model/enum/notification-type.enum';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Reaction } from '../model/compound';
-import { AuthorizationService } from '../service/authorization.service';
+import { AuthorizationService } from '../service/security/authorization.service';
 
 @Component({
   selector: 'app-global-discoveries',
