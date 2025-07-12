@@ -1,12 +1,12 @@
 import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
-import { Element } from '../../model/element.model';
-import { ElementService } from '../../service/element.service';
+import { Element } from '../../../model/element.model';
+import { ElementService } from '../../../service/element.service';
 
 import { SubSink } from 'subsink';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from "rxjs";
-import { NotificationService } from '../../service/notification.service';
-import { NotificationType } from '../../model/enum/notification-type.enum';
+import { NotificationService } from '../../../service/notification.service';
+import { NotificationType } from '../../../model/enum/notification-type.enum';
 
 @Component({
   selector: 'periodic-table',
