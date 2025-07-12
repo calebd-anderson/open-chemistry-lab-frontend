@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CompoundService } from '../service/compound.service';
+import { CompoundService } from '../../service/compound.service';
 import { SubSink } from 'subsink';
-import { AuthenticationService } from '../service/authentication.service';
-import { NotificationService } from '../service/notification.service';
-import { NotificationType } from '../model/enum/notification-type.enum';
+import { AuthenticationService } from '../../service/authentication.service';
+import { NotificationService } from '../../service/notification.service';
+import { NotificationType } from '../../model/enum/notification-type.enum';
 import { HttpErrorResponse } from '@angular/common/http';
-import { UserReaction } from '../model/compound';
+import { UserReaction } from '../../model/compound';
 
 @Component({
   selector: 'app-discoveries',
