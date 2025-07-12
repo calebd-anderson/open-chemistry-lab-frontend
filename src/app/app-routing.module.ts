@@ -7,7 +7,7 @@ import { QuizComponent } from './component/game/quiz/quiz.component';
 import { FlashcardComponent } from './component/game/flashcard/flashcard.component';
 import { AuthorizationGuard } from './service/security/guard/authorization.guard';
 import { ProfileComponent } from './component/user_manager/profile/profile.component';
-import { AboutComponent } from './about/about.component';
+import { AboutComponent } from './component/about/about.component';
 import { DiscoveriesComponent } from './component/discoveries/discoveries.component';
 import { GlobalDiscoveriesComponent } from './component/global-discoveries/global-discoveries.component';
 
