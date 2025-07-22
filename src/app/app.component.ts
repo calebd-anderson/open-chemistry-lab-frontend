@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   public user: User;
   public isLoggedIn: boolean;
 
-  private authenticationService: AuthenticationService = inject(AuthenticationService)
+  public authenticationService: AuthenticationService = inject(AuthenticationService)
   private authorizationService: AuthorizationService = inject(AuthorizationService)
   private notificationService: NotificationService = inject(NotificationService)
 
@@ -31,9 +31,10 @@ export class AppComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.authSubscription = this.authenticationService.isLoggedIn$.subscribe(loggedIn => {
-        this.isLoggedIn = loggedIn;
-    });
+    const loginStatus = this.authenticationService.getIsLoggedIn();
+    if(loginStatus) {
+        this.isLoggedIn = true;
+    };
     this.dialog.open(WelcomeComponent);
   }
 

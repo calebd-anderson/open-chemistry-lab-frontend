@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -15,16 +15,25 @@ export class AuthenticationService {
 	private loggedInUsername: string;
 	private jwtHelper = new JwtHelperService();
 
+	private isLoggedIn = signal(false);
+
+	private userSubject = new BehaviorSubject<User | null>(null);
+  	user$ = this.userSubject.asObservable();
+
 	private user = new BehaviorSubject<User>(this.getUserFromLocalCache());
 	currentUser = this.user.asObservable();
-
-	public _isLoggedIn = new BehaviorSubject<boolean>(false); // Initial state
-	// Expose as an Observable for components to subscribe
-	isLoggedIn$: Observable<boolean> = this._isLoggedIn.asObservable();
   	
   	constructor(private http: HttpClient) {
 		const loginStatus = this.isUserLoggedIn();
-		this._isLoggedIn.next(loginStatus);
+		this.isLoggedIn.update(() => loginStatus);
+	}
+
+	getIsLoggedIn() {
+		return this.isLoggedIn();
+	}
+
+	setIsLoggedIn(loginStatus: boolean) {
+		this.isLoggedIn.update(() => loginStatus);
 	}
 
 	public login(user: User): Observable<HttpResponse<User>> {
@@ -41,7 +50,7 @@ export class AuthenticationService {
 		localStorage.removeItem('user');
 		localStorage.removeItem('token');
 		localStorage.removeItem('users');
-		this._isLoggedIn.next(false);
+		this.isLoggedIn.update(() => false);
 	}
 
 	public saveToken(token: string): void {
@@ -80,6 +89,9 @@ export class AuthenticationService {
 				if (!this.jwtHelper.isTokenExpired(this.token)) {
 					this.loggedInUsername = this.jwtHelper.decodeToken(this.token).sub;
 					return true;
+				} else {
+					// remove token if expired
+					this.logOut();
 				}
 			}
 		}
