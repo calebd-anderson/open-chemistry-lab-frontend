@@ -15,11 +15,11 @@ export class FlaskComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      if (this.experimentService.getIsActive())
-        this.animateBubbles()
-      else {
-        this.tl.restart()
-        this.tl.pause()
+      if (this.experimentService.getIsActive()) {
+        this.animateBubbles();
+        this.tl.resume();
+      } else {
+        this.tl.restart().pause()
       }
     });
   }
