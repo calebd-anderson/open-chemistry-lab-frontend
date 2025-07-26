@@ -1,5 +1,9 @@
 svg {
   width: auto;
-  height: 250px;
-  margin-left: 80%;
+  height: 300px;
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+}
+
+.bubble {
+  filter: drop-shadow(3px 5px 2px rgb(0, 68, 255));
 }
