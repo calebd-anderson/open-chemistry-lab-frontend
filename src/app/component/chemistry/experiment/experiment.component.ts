@@ -4,18 +4,20 @@ import {Observable, Subscription} from "rxjs";
 import {CompoundService} from "../../../service/compound.service";
 import { AuthenticationService } from '../../../service/security/authentication.service';
 import {Reaction} from "../../../model/compound";
-import { HttpErrorResponse, HttpEvent, HttpResponse, HttpEventType } from "@angular/common/http";
-import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { HttpErrorResponse, HttpResponse } from "@angular/common/http";
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ValidationModalComponent } from "./validation-modal/validation-modal.component";
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
-import { FlaskComponent } from '../flask/flask.component';
+import { FlaskComponent } from './flask/flask.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
+import { ExperimentService } from 'src/app/service/experiment.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'app-experiment',
-    imports: [FlaskComponent, MatProgressBarModule, CommonModule],
+    imports: [FlaskComponent, MatProgressBarModule, CommonModule, MatButtonModule],
     templateUrl: './experiment.component.html',
     styleUrls: ['./compound.component.scss'],
 })
@@ -28,9 +30,10 @@ export class ExperimentComponent implements OnInit {
   atomsInCompound: Map<String, number> = new Map();
   @Input() interactedElement: Element;
   @Input() events: Observable<Element>;
-  public progressBar: boolean = false;
 
   private _snackBar: NotificationService = inject(NotificationService);
+  public experimentService: ExperimentService = inject(ExperimentService)
+  
 
   constructor(private compoundService: CompoundService, private authenticationService: AuthenticationService, 
     public dialog: MatDialog) { }
@@ -111,7 +114,8 @@ export class ExperimentComponent implements OnInit {
   }
 
   public validateCompound() {
-    this.progressBar = true;
+    this.experimentService.setIsActive(true);
+
     let elements = [];
 
     // build list of elements
@@ -131,11 +135,12 @@ export class ExperimentComponent implements OnInit {
           .subscribe({
             next: (response: HttpResponse<Reaction>,) => {
               this.openConfirmationDialogSuccess(response, true);
-              this.progressBar = false;
+              this.experimentService.setIsActive(false);
+
             },
             error: (errorResponse: HttpErrorResponse) => {
               this.openConfirmationDialogFail(errorResponse);
-              this.progressBar = false;
+              this.experimentService.setIsActive(false);
             }
           });
     } else {
@@ -150,11 +155,11 @@ export class ExperimentComponent implements OnInit {
         .subscribe({
           next: (response: HttpResponse<Reaction>) => {
             this.openConfirmationDialogSuccess(response, false);
-            this.progressBar = false;
+            this.experimentService.setIsActive(false);
           },
           error: (errorResponse: HttpErrorResponse) => {
             this.openConfirmationDialogFail(errorResponse);
-            this.progressBar = false;
+            this.experimentService.setIsActive(false);
           }
         });
     }
