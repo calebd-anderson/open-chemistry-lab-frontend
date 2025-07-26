@@ -1,4 +1,4 @@
-<app-compound [interactedElement]="interactedElement" [events]="sendElementMessage.asObservable()"></app-compound>
+<app-experiment [interactedElement]="interactedElement" [events]="sendElementMessage.asObservable()"></app-experiment>
 
 <div class="wrapper">
   @for (item of [].constructor(this.categories.length); track $index; let i = $index) {

@@ -25,7 +25,7 @@ import { ElementService } from './service/element.service';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { FlashcardComponent } from './component/game/flashcard/flashcard.component';
 import { ProfileComponent } from './component/user_manager/profile/profile.component';
-import { ValidationModalComponent } from './component/chemistry/compound/validation-modal/validation-modal.component';
+import { ValidationModalComponent } from './component/chemistry/experiment/validation-modal/validation-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';

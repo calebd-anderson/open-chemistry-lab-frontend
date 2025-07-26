@@ -1,7 +1,7 @@
 import {Component, inject, Input, OnInit} from '@angular/core';
 import { Element } from '../../../model/element.model';
 import {Observable, Subscription} from "rxjs";
-import {CompoundService} from "../..//../service/compound.service";
+import {CompoundService} from "../../../service/compound.service";
 import { AuthenticationService } from '../../../service/security/authentication.service';
 import {Reaction} from "../../../model/compound";
 import { HttpErrorResponse, HttpEvent, HttpResponse, HttpEventType } from "@angular/common/http";
@@ -14,13 +14,13 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-compound',
+    selector: 'app-experiment',
     imports: [FlaskComponent, MatProgressBarModule, CommonModule],
-    templateUrl: './compound.component.html',
+    templateUrl: './experiment.component.html',
     styleUrls: ['./compound.component.scss'],
 })
 
-export class CompoundComponent implements OnInit {
+export class ExperimentComponent implements OnInit {
   private interacted: Boolean = false;
   private eventsSubscription: Subscription;
   elementsInCompound: Element[] = [];
