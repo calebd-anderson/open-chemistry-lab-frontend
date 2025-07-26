@@ -7,12 +7,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Subject } from "rxjs";
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
+import { CompoundComponent } from '../compound/compound.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'periodic-table',
+  imports:[CompoundComponent, CommonModule],
   templateUrl: './periodic-table.component.html',
-  styleUrls: ['./periodic-table.component.sass'],
-  standalone: false
+  styleUrls: ['./periodic-table.component.sass']
 })
 export class PeriodicTableComponent implements OnInit, OnDestroy {
   private subs = new SubSink();

@@ -9,12 +9,15 @@ import { MatDialog, MatDialogRef, MatDialogModule } from '@angular/material/dial
 import { ValidationModalComponent } from "./validation-modal/validation-modal.component";
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
+import { FlaskComponent } from '../flask/flask.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-compound',
+    imports: [FlaskComponent, MatProgressBarModule, CommonModule],
     templateUrl: './compound.component.html',
     styleUrls: ['./compound.component.scss'],
-    standalone: false
 })
 
 export class CompoundComponent implements OnInit {

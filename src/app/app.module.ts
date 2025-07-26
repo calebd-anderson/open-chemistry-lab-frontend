@@ -18,12 +18,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PeriodicTableComponent } from './component/chemistry/periodic-table/periodic-table.component';
 import { QuizComponent } from './component/game/quiz/quiz.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ElementService } from './service/element.service';
-import { CompoundComponent } from './component/chemistry/compound/compound.component';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { FlashcardComponent } from './component/game/flashcard/flashcard.component';
 import { ProfileComponent } from './component/user_manager/profile/profile.component';
@@ -36,11 +34,9 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
 @NgModule({ declarations: [
         AppComponent,
         LoginComponent,
-        PeriodicTableComponent,
         RegisterComponent,
         UserComponent,
         QuizComponent,
-        CompoundComponent,
         TabsComponent,
         UserComponent,
         FlashcardComponent,

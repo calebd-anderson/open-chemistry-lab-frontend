@@ -3,6 +3,7 @@
 }
 <section id="compound-test" [class.active]="elementsInCompound.length > 0">
   <h1 id="title">Experiment</h1>
+  <app-flask></app-flask>
   @if (elementsInCompound.length > 0) {
   <div class="compound">
     @for (element of elementsInCompound; track element; let i = $index) {
