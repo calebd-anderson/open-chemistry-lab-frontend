@@ -19,19 +19,24 @@ export class DiscoveriesComponent implements OnInit {
   readonly authenticationService = inject(AuthenticationService)
   readonly _snackBar = inject(NotificationService)
 
+  public loading: boolean;
+
   public userReactions: UserReaction[] = []
 
   private subs = new SubSink();
 
   ngOnInit(): void {
+    this.loading = true;
     let userId: string = this.authenticationService.getUserFromLocalCache().userId
     this.subs.add(
       this.compoundService.getUserDiscoveries(userId).subscribe({
         next: (response: UserReaction[]) => {
-          this.userReactions = response
+          this.userReactions = response;
+          this.loading = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
           this._snackBar.notify(NotificationType.ERROR, "Failed to get user discoveries.");
+          this.loading = false;
         }
       })
     );

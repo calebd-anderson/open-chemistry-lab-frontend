@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, effect, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationType } from './model/enum/notification-type.enum';
 import { User } from './model/user';
@@ -7,7 +7,6 @@ import { AuthorizationService } from './service/security/authorization.service';
 import { NotificationService } from './service/notification.service';
 import { WelcomeComponent } from './component/welcome/welcome.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +16,6 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit {
   title = 'Chem Lab';
-  private authSubscription!: Subscription;
   
   public user: User;
   public isLoggedIn: boolean;
@@ -28,7 +26,13 @@ export class AppComponent implements OnInit {
 
   readonly dialog = inject(MatDialog);
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    effect(() => {
+      console.log(`The current login status is: ${this.authenticationService.getIsLoggedIn()}`);
+      let user: User = this.authenticationService.getUserFromLocalCache();
+      this.user = user;
+    });
+  }
 
   ngOnInit(): void {
     const loginStatus = this.authenticationService.getIsLoggedIn();
@@ -71,12 +75,6 @@ export class AppComponent implements OnInit {
       this.notificationService.notify(notificationType, message);
     } else {
       this.notificationService.notify(notificationType, "An error occured. Please try again.");
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.authSubscription) {
-      this.authSubscription.unsubscribe(); // Prevent memory leaks
     }
   }
 }

@@ -25,7 +25,9 @@
         </tr>
     }
     </table>
-    } @else {
+    } @else if(loading) {
     <p>Looking up your discoveries ...</p>
+    } @else {
+        <p>No discoveries yet.</p>
     }
 </section>

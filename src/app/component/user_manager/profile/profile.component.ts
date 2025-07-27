@@ -27,7 +27,8 @@ export class ProfileComponent implements OnInit {
     private userService: UserService, private notificationService: NotificationService) {}
 
   ngOnInit(): void {
-    this.user = this.authenticationService.getUserFromLocalCache();
+    let user: User = this.authenticationService.getUserFromLocalCache();
+    this.user = user;
   }
 
   public onClickEdit(): void {
@@ -35,7 +36,8 @@ export class ProfileComponent implements OnInit {
   }
 
   public get currentUsername(): string {
-  	return this.authenticationService.getUserFromLocalCache().username;
+    let username: string = this.authenticationService.getUserFromLocalCache().username;
+  	return username;
   }
 
   public onUpdateCurrentUser(user: User): void {

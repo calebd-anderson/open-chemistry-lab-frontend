@@ -65,7 +65,8 @@ export class AuthenticationService {
 
 	// get user from local cache
 	public getUserFromLocalCache(): User {
-		return JSON.parse(localStorage.getItem('user'));
+		let user: User = JSON.parse(localStorage.getItem('user'));
+		return user;
 	}
 
 	// get token from local cache
