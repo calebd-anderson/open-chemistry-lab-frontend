@@ -29,6 +29,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 # Credits
 - Periodic Table CSS
   - https://codepen.io/mikegolus/pen/OwrPgB
-## Other Periodic Tables on the internet
--  https://github.com/tamalchowdhury/periodic-table
+- Animations with [GSAP](https://gsap.com/)
+
+## Other cool periodic tables on the internet
+- https://github.com/tamalchowdhury/periodic-table
 - https://github.com/FlorianFe/Elements
+- https://pubchem.ncbi.nlm.nih.gov/periodic-table
