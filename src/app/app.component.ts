@@ -15,6 +15,8 @@ import { MatDrawer } from '@angular/material/sidenav';
 // import { AppRoutingModule } from './app-routing.module';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { LoginComponent } from './component/user_manager/login/login.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-root',
@@ -22,14 +24,14 @@ import { LoginComponent } from './component/user_manager/login/login.component';
   styleUrls: ['./app.component.scss'],
   imports: [
     RegisterComponent,
+    MatButtonModule,
     MatDrawerContainer,
     MatToolbar,
-    // f,
     MatDrawer,
-    // AppRoutingModule,
     TabsComponent,
     LoginComponent,
-    RouterOutlet
+    RouterOutlet,
+    MatIconModule,
   ],
 })
 export class AppComponent implements OnInit {
