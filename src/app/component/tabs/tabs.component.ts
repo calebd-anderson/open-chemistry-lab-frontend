@@ -2,12 +2,14 @@ import { Component, effect, inject, OnInit } from '@angular/core';
 import { itablink } from '../../model/itablink';
 import { AuthenticationService } from '../../service/security/authentication.service';
 import { AuthorizationService } from '../../service/security/authorization.service';
+import { MatTabNavPanel, MatTabsModule } from '@angular/material/tabs';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   styleUrls: ['./tabs.component.scss'],
-  standalone: false,
+  imports: [MatTabNavPanel, MatTabsModule, RouterModule],
 })
 export class TabsComponent implements OnInit {
   readonly authenticationService = inject(AuthenticationService);

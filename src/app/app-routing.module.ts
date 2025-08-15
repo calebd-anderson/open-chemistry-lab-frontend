@@ -11,7 +11,7 @@ import { AboutComponent } from './component/about/about.component';
 import { DiscoveriesComponent } from './component/discoveries/discoveries.component';
 import { GlobalDiscoveriesComponent } from './component/global-discoveries/global-discoveries.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'lab', component: PeriodicTableComponent },
   { path: 'globaldiscoveries', component: GlobalDiscoveriesComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
@@ -23,8 +23,8 @@ const routes: Routes = [
   { path: '', redirectTo: 'lab', pathMatch: 'full' }
 ]
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule { }
