@@ -1,5 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { AuthenticationGuard } from './service/security/guard/authentication.guard';
 import { PeriodicTableComponent } from './component/chemistry/periodic-table/periodic-table.component';
 import { UserComponent } from './component/user_manager/user/user.component';
@@ -22,9 +21,3 @@ export const routes: Routes = [
   { path: 'flashcard', component: FlashcardComponent, canActivate: [AuthenticationGuard] },
   { path: '', redirectTo: 'lab', pathMatch: 'full' }
 ]
-
-// @NgModule({
-//   imports: [RouterModule.forRoot(routes)],
-//   exports: [RouterModule]
-// })
-// export class AppRoutingModule { }

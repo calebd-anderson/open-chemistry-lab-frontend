@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { PeriodicTableComponent } from '../periodic-table/periodic-table.component';
+import { ExperimentComponent } from '../experiment/experiment.component';
 
 @Component({
   selector: 'app-lab',
-  imports: [],
+  imports: [PeriodicTableComponent, ExperimentComponent],
   templateUrl: './lab.component.html',
   styleUrl: './lab.component.scss'
 })

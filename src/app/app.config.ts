@@ -5,8 +5,7 @@ import {
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-// import { routes } from './app.routes';
-import { routes } from './app-routing.module';
+import { routes } from './app-routes';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService } from './service/notification.service';
 import { AuthenticationGuard } from './service/security/guard/authentication.guard';
