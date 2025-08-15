@@ -13,14 +13,14 @@ import { GlobalDiscoveriesComponent } from './component/global-discoveries/globa
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
-  { path: 'sandbox', component: PeriodicTableComponent },
+  { path: 'lab', component: PeriodicTableComponent },
   { path: 'globaldiscoveries', component: GlobalDiscoveriesComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'discoveries', component: DiscoveriesComponent, canActivate: [AuthenticationGuard] },
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
   { path: 'quiz', component: QuizComponent, canActivate: [AuthenticationGuard] },
   { path: 'flashcard', component: FlashcardComponent, canActivate: [AuthenticationGuard] },
-  { path: '', redirectTo: 'sandbox', pathMatch: 'full' }
+  { path: '', redirectTo: 'lab', pathMatch: 'full' }
 ]
 
 @NgModule({

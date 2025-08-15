@@ -20,7 +20,7 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
   showFiller = false;
   elements: Element[] = [];
-  pageTitle: string = 'Sandbox'
+  pageTitle: string = 'Lab'
   interactedElement: Element;
   eventsSubject: Subject<Element> = new Subject<Element>();
   added: number = 0;

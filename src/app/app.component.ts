@@ -61,7 +61,7 @@ export class AppComponent implements OnInit {
     this.isLoggedIn = false;
     this.user = null;
     document.getElementById("navDrawr").click();
-    this.router.navigate(['sandbox']);
+    this.router.navigate(['lab']);
   }
   
   public get isAdmin(): boolean {

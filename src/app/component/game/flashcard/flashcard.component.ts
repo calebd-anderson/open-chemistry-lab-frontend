@@ -19,7 +19,7 @@ export class FlashcardComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.authenticationService.isUserLoggedIn())
-      this.router.navigateByUrl('sandbox');
+      this.router.navigateByUrl('lab');
     else
       this.getAllFlashcardsByUserId(this.authenticationService.getUserFromLocalCache().userId);
   }

@@ -10,12 +10,11 @@ import { AuthorizationService } from '../../service/security/authorization.servi
   standalone: false,
 })
 export class TabsComponent implements OnInit {
-
-  readonly authenticationService = inject(AuthenticationService)
-  readonly authorizationService = inject(AuthorizationService)
+  readonly authenticationService = inject(AuthenticationService);
+  readonly authorizationService = inject(AuthorizationService);
 
   public get isAdmin(): boolean {
-    if(this.authenticationService.getIsLoggedIn())
+    if (this.authenticationService.getIsLoggedIn())
       return this.authorizationService.isAdmin;
     else return false;
   }
@@ -24,25 +23,30 @@ export class TabsComponent implements OnInit {
 
   constructor() {
     effect(() => {
-      this.populateTabs()
+      this.populateTabs();
     });
   }
 
   ngOnInit(): void {
-    this.populateTabs()
+    this.populateTabs();
   }
 
   private populateTabs(): void {
-    if(!this.authenticationService.getIsLoggedIn()) {
+    if (!this.authenticationService.getIsLoggedIn()) {
       // not logged in
-      let excludeTabs = ["globaldiscoveries", "discoveries", "flashcard", "quiz"]
+      let excludeTabs = [
+        'globaldiscoveries',
+        'discoveries',
+        'flashcard',
+        'quiz',
+      ];
       let tabLinks = this.getTabLinks().filter((tab) => {
         return !excludeTabs.includes(tab.path);
       });
       this.tabLinks = tabLinks;
-    } else if(!this.isAdmin) {
+    } else if (!this.isAdmin) {
       // logged in yet not admin
-      let excludeTabs = ["globaldiscoveries"]
+      let excludeTabs = ['globaldiscoveries'];
       this.tabLinks = this.getTabLinks().filter((tab) => {
         let stuff = excludeTabs.includes(tab.path);
         return !excludeTabs.includes(tab.path);
@@ -56,8 +60,8 @@ export class TabsComponent implements OnInit {
   private getTabLinks(): Array<itablink> {
     return [
       {
-        path: 'sandbox',
-        label: 'Sandbox',
+        path: 'lab',
+        label: 'Lab',
       },
       {
         path: 'globaldiscoveries',
@@ -78,7 +82,7 @@ export class TabsComponent implements OnInit {
       {
         path: 'about',
         label: 'About',
-      }
+      },
     ];
   }
 }

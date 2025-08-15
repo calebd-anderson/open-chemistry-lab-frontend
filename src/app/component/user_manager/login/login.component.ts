@@ -45,7 +45,7 @@ export class LoginComponent implements OnDestroy {
           this.loggedIn(this.authenticationService.getUserFromLocalCache());
           document.getElementById("close-login-modal").click();
           document.getElementById("navDrawr").click();
-          this.router.navigateByUrl('sandbox');
+          this.router.navigateByUrl('lab');
           this.showLoading = false;
           userForm.reset();
           this.authenticationService.setIsLoggedIn(true)
