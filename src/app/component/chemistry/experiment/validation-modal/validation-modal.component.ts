@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
-    selector: 'app-validation-modal',
-    templateUrl: './validation-modal.component.html',
-    standalone: false,
-    styleUrl: './validation-modal.scss'
+  selector: 'app-validation-modal',
+  templateUrl: './validation-modal.component.html',
+  styleUrl: './validation-modal.scss',
+  imports: [MatButtonModule, MatDialogModule],
 })
 export class ValidationModalComponent {
-
-  constructor(public dialogRef: MatDialogRef<ValidationModalComponent>) { }
+  constructor(public dialogRef: MatDialogRef<ValidationModalComponent>) {}
 
   public discovery: string;
   public confirmMessage: string;
