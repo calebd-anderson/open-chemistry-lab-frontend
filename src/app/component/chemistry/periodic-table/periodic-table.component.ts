@@ -4,7 +4,6 @@ import { ElementService } from '../../../service/element.service';
 
 import { SubSink } from 'subsink';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subject } from 'rxjs';
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { CommonModule } from '@angular/common';
@@ -15,13 +14,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './periodic-table.component.html',
   styleUrls: ['./periodic-table.component.sass'],
 })
-export class PeriodicTableComponent implements OnInit, OnDestroy {
+export class PeriodicTableComponent implements OnInit {
   private subs = new SubSink();
-  showFiller = false;
   elements: Element[] = [];
   pageTitle: string = 'Lab';
-  interactedElement: Element;
-  eventsSubject: Subject<Element> = new Subject<Element>();
   added: number = 0;
   categories: string[] = [
     'alkali-metals',
@@ -50,12 +46,12 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
   // select element event
   public selectElement(event: { target: any }) {
     let elmIndex = event.target.attributes.id?.value - 1;
-    this.interactedElement = this.elements[elmIndex];
-    if (this.interactedElement) {
-      this.sendElementMessage.emit(this.interactedElement);
+    const interactedElement = this.elements[elmIndex];
+    if (interactedElement) {
+      this.sendElementMessage.emit(interactedElement);
       this._snackBar.notify(
         NotificationType.DEFAULT,
-        this.interactedElement.name + ' added to experiment.'
+        interactedElement.name + ' added to experiment.'
       );
     }
   }
@@ -80,9 +76,5 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
 
   private sortElements(input: Element[]): Element[] {
     return input.sort((a, b) => a.atomicNumber - b.atomicNumber);
-  }
-
-  ngOnDestroy(): void {
-    this.subs.unsubscribe();
   }
 }

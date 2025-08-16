@@ -1,4 +1,4 @@
-import { Component, OnInit, effect, inject } from '@angular/core';
+import { Component, OnInit, effect, inject, output } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NotificationType } from './model/enum/notification-type.enum';
 import { User } from './model/user';
@@ -17,6 +17,7 @@ import { TabsComponent } from './component/tabs/tabs.component';
 import { LoginComponent } from './component/user_manager/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { Element } from './model/element.model';
 
 @Component({
   selector: 'app-root',
