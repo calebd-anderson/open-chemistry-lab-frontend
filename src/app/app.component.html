@@ -7,29 +7,33 @@
 
   <div id="user-controls">
     <div id="user-buttons">
-        <button
-          class="login-btn"
-          data-toggle="modal"
-          data-target="#loginModal"
-          [hidden]="authenticationService.getIsLoggedIn()"
-        >
-          Login
-        </button>
-        <button
-          class="logout-btn"
-          [hidden]="!authenticationService.getIsLoggedIn()"
-          (click)="onClickLogout()"
-        >
-          Logout
-        </button>
-        <button [hidden]="!isAdmin" routerLink="/user/management" color="accent">
-          User Managment
-        </button>
+      <button [hidden]="!isAdmin" routerLink="/user/management" color="accent">
+        User Managment
+      </button>
+      <button
+        class="login-btn"
+        data-toggle="modal"
+        data-target="#loginModal"
+        [hidden]="authenticationService.getIsLoggedIn()"
+      >
+        Login
+      </button>
+      <button
+        class="logout-btn"
+        [hidden]="!authenticationService.getIsLoggedIn()"
+        (click)="onClickLogout()"
+      >
+        Logout
+      </button>
     </div>
 
-    <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()" (click)="onClickProfile()">
+    <div
+      class="profileInfo"
+      [hidden]="!authenticationService.getIsLoggedIn()"
+      (click)="onClickProfile()"
+    >
       <span class="name">{{ user?.firstName }}</span>
-      <button >
+      <button>
         <img
           height="40"
           width="40"

@@ -46,11 +46,10 @@ button {
 
 h2 {
   margin: 2rem;
-  background-image: linear-gradient(grey, black);
+  background-image: radial-gradient(#86bbd8, #33658a);
   display: inline-block;
-  color: white;
   padding: 5px 10px 5px;
-  border-radius: 3px;
+  border-radius: 10px;
 }
 
 #flask {

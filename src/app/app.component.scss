@@ -23,29 +23,27 @@ header#main-header {
   }
 }
 #main-header > #user-controls {
-  // border: red 5px solid;
   display: grid;
-  width: fit-content;
-  text-align: end;
+  align-content: end;
+  // border: red 5px solid;
   background-image: radial-gradient(#86bbd8, #33658a);
   padding: 1rem;
   margin: 1rem;
   border-radius: 10px;
   grid-column: -1;
 }
-@media screen and (min-width: 995px) {
-  #user-buttons button {
-    margin: 0px 0.5rem;
-  }
-}
-
-.name {
-  margin: 0px 10px;
+#user-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .profileInfo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
   margin: 10px 0px 0px 0px;
   cursor: pointer;
+  padding: 0px;
 }
 
 .login-btn {
