@@ -1,5 +1,5 @@
 import { Component, OnInit, effect, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NotificationType } from './model/enum/notification-type.enum';
 import { User } from './model/user';
 import { AuthenticationService } from './service/security/authentication.service';
@@ -12,7 +12,7 @@ import { TabsComponent } from './component/tabs/tabs.component';
 import { LoginComponent } from './component/user_manager/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import {MatSidenavModule} from '@angular/material/sidenav';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +25,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     TabsComponent,
     LoginComponent,
     RouterOutlet,
+    RouterLink,
     MatIconModule,
   ],
 })
