@@ -1,3 +1,22 @@
+header#main-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  // background-color: rgba(112, 112, 185, 0.384);
+  // width: max-content;
+  background-image: url("../assets/images/banner.jpg");
+}
+#main-header > h1 {
+  // border: blue 5px solid;
+  background-color: antiquewhite;
+  padding: 0px 15px;
+  width: fit-content;
+  margin: 1rem 10px;
+}
+#main-header > #user-controls {
+  // border: red 5px solid;
+  text-align: end;
+}
+
 .name {
   margin: 10px;
 }
@@ -12,38 +31,14 @@ nav button {
   right: 10px;
 }
 
-// toolbar
-.mat-toolbar {
-  background-image: url("../assets/images/banner.jpg");
-  color: #fff;
-}
-
-.mat-drawer {
-  background: lightgrey;
-  color: #fff;
-}
-
 .login-btn {
   background-color: teal;
   color: white;
-  border-radius: 0px;
 }
 
 .logout-btn {
   background-color: teal;
   color: white;
-}
-
-#title {
-  background-image: linear-gradient(grey, black);
-  padding: 5px 15px;
-  margin: 0px auto 0px 40%;
-  border-radius: 5px;
-}
-
-#navDrawr {
-  background-image: linear-gradient(grey, black);
-  padding: 10px 10px 10px 10px;
 }
 
 #welcome-button {

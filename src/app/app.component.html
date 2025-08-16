@@ -1,59 +1,71 @@
-<!-- nav -->
-<mat-drawer-container autosize>
-    <mat-toolbar>
-        
-        <button mat-icon-button (click)="drawer.toggle()" id="navDrawr" aria-label="icon-button with menu icon">
-            <mat-icon fontIcon="menu"></mat-icon>
-        </button>
-        
-        <span id="title">The Open Chemistry Lab</span>
+<header id="main-header">
+  <h1>The Open Chemistry Lab</h1>
 
-        <button id="welcome-button" matButton (click)="openDialog()">Show welcome dialog.</button>
+  <!-- <button id="welcome-button" matButton (click)="openDialog()">
+    Show Welcome Dialog
+  </button> -->
 
-        <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()">
-            <span class="name">{{user?.firstName}}</span>
-            <button (click)="onClickProfile()"><img height="40" width="40" src="{{user?.profileImgUrl}}" class="rounded-circle img-fluid img-thumbnail" alt="" /></button>
-        </div>
-    </mat-toolbar>
-    <mat-drawer #drawer mode="side">
-        <nav>
-            <button class="login-btn" data-toggle="modal" data-target="#loginModal" [hidden]="authenticationService.getIsLoggedIn()" mat-raised-button>
-                Login
-            </button>
-            <button class="logout-btn" [hidden]="!authenticationService.getIsLoggedIn()" (click)="onClickLogout()" mat-raised-button>
-                Logout
-            </button>
-            <button [hidden]="!isAdmin" routerLink="/user/management" mat-raised-button color="accent">
-                User Managment
-            </button>
-        </nav>
-    </mat-drawer>
-    <!-- tabs -->
-    <app-tabs></app-tabs>
-</mat-drawer-container>
+  <div id="user-controls">
+    <button
+      class="login-btn"
+      data-toggle="modal"
+      data-target="#loginModal"
+      [hidden]="authenticationService.getIsLoggedIn()"
+    >
+      Login
+    </button>
+    <button
+      class="logout-btn"
+      [hidden]="!authenticationService.getIsLoggedIn()"
+      (click)="onClickLogout()"
+    >
+      Logout
+    </button>
+    <button [hidden]="!isAdmin" routerLink="/user/management" color="accent">
+      User Managment
+    </button>
+
+    <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()">
+      <span class="name">{{ user?.firstName }}</span>
+      <button (click)="onClickProfile()">
+        <img
+          height="40"
+          width="40"
+          src="{{ user?.profileImgUrl }}"
+          class="rounded-circle img-fluid img-thumbnail"
+          alt="profile image"
+        />
+      </button>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <app-tabs />
+</nav>
 
 <!-- dynamic routs -->
 <router-outlet></router-outlet>
 
 <!-- login modal -->
 <div class="modal fade" id="loginModal" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <!-- the child newItemEvent of login sends $event to parent getLoggedIn of app-component -->
-                <app-login (newItemEvent)="getLoggedIn($event)"></app-login>
-            </div>
-        </div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <!-- the child newItemEvent of login sends $event to parent getLoggedIn of app-component -->
+        <app-login (newItemEvent)="getLoggedIn($event)"></app-login>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- register modal -->
 <div class="modal fade" id="registerModal" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <app-register></app-register>
-            </div>
-        </div>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <app-register></app-register>
+      </div>
     </div>
+  </div>
 </div>

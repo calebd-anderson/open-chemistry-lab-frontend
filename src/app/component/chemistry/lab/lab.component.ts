@@ -15,7 +15,6 @@ import { Reaction } from 'src/app/model/compound';
 @Component({
   selector: 'app-lab',
   imports: [PeriodicTableComponent, ExperimentComponent],
-  // imports: [PeriodicTableComponent],
   templateUrl: './lab.component.html',
   styleUrl: './lab.component.scss',
 })

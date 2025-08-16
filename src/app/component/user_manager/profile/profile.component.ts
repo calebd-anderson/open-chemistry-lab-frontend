@@ -8,12 +8,13 @@ import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { SubSink } from 'subsink';
 import { FileUploadStatus } from '../../../model/file-upload-status';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
     styleUrls: ['./profile.component.scss'],
-    standalone: false
+    imports: [FormsModule]
 })
 export class ProfileComponent implements OnInit {
   public user: User;

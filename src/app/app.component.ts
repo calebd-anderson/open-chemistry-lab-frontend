@@ -1,4 +1,4 @@
-import { Component, OnInit, effect, inject, output } from '@angular/core';
+import { Component, OnInit, effect, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { NotificationType } from './model/enum/notification-type.enum';
 import { User } from './model/user';
@@ -8,16 +8,11 @@ import { NotificationService } from './service/notification.service';
 import { WelcomeComponent } from './component/welcome/welcome.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from './component/user_manager/register/register.component';
-import { MatDrawerContainer } from '@angular/material/sidenav';
-import { MatToolbar } from '@angular/material/toolbar';
-// import { f } from '@angular/material';
-import { MatDrawer } from '@angular/material/sidenav';
-// import { AppRoutingModule } from './app-routing.module';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { LoginComponent } from './component/user_manager/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { Element } from './model/element.model';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -26,9 +21,7 @@ import { Element } from './model/element.model';
   imports: [
     RegisterComponent,
     MatButtonModule,
-    MatDrawerContainer,
-    MatToolbar,
-    MatDrawer,
+    MatSidenavModule,
     TabsComponent,
     LoginComponent,
     RouterOutlet,
@@ -90,7 +83,7 @@ export class AppComponent implements OnInit {
     );
     this.isLoggedIn = false;
     this.user = null;
-    document.getElementById('navDrawr').click();
+    // document.getElementById('navDrawr').click();
     this.router.navigate(['lab']);
   }
 

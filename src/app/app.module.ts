@@ -11,7 +11,6 @@ import { QuizComponent } from './component/game/quiz/quiz.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FlashcardComponent } from './component/game/flashcard/flashcard.component';
-import { ProfileComponent } from './component/user_manager/profile/profile.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { WelcomeComponent } from './component/welcome/welcome.component';
@@ -22,7 +21,6 @@ import { WelcomeComponent } from './component/welcome/welcome.component';
     QuizComponent,
     UserComponent,
     FlashcardComponent,
-    ProfileComponent,
   ],
   imports: [
     BrowserModule,
