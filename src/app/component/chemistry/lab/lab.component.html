@@ -1,7 +1,12 @@
 <article>
   <section>
     <!-- <app-experiment [interactedElement]="interactedElement" /> -->
-    <app-experiment [elementsInCompound]="elementsInCompound()" (removeElement)="removeElementFromCompound($event.index, $event.element)" />
+    <app-experiment
+      [elementsInCompound]="elementsInCompound()"
+      (removeElement)="removeElementFromCompound($event.index, $event.element)"
+      (runExperiment)="validateCompound()"
+      (clearExperiment)="clearExperiment()"
+    />
   </section>
   <section>
     <periodic-table (sendElementMessage)="addInteractedElements($event)" />

@@ -21,12 +21,12 @@
     </div>
     <!-- run experiment buttons -->
     <div id="validate-btn">
-      <!-- <button matButton="elevated" color="primary" (click)="validateCompound()">
+      <button matButton="elevated" color="primary" (click)="runExperiment.emit()">
         Run Experiment
       </button>
-      <button matButton="elevated" (click)="clearExperiment()">
+      <button matButton="elevated" (click)="clearExperiment.emit()">
         Clear Experiment
-      </button> -->
+      </button>
     </div>
     } @else {
     <h2>The experiment is empty.</h2>
