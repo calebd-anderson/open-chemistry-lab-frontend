@@ -1,42 +1,70 @@
-<app-experiment [interactedElement]="interactedElement" [events]="sendElementMessage.asObservable()"></app-experiment>
+<app-experiment
+  [interactedElement]="interactedElement"
+  [events]="sendElementMessage.asObservable()"
+/>
 
 <div class="wrapper">
-  @for (item of [].constructor(this.categories.length); track $index; let i = $index) {
-    <input class="category-toggle" type="radio" name="categories" id={{categories[i]}}>
-  }
-  @for (item of [].constructor(this.categories.length); track $index) {
-    <input class="category-cancel" type="radio" name="categories" id="cancel">
+  @for (item of [].constructor(this.categories.length); track $index; let i =
+  $index) {
+  <input
+    class="category-toggle"
+    type="radio"
+    name="categories"
+    id="{{ categories[i] }}"
+  />
+  } @for (item of [].constructor(this.categories.length); track $index) {
+  <input class="category-cancel" type="radio" name="categories" id="cancel" />
   }
   <div class="periodic-table">
     @for (element of elements; track element) {
-      <div [ngClass]="['element', element.tablePosition, element.groupBlock]" (click)="selectElement($event)">
-        <input [attr.id]="element.atomicNumber" class="activate" type="radio" name="elements">
-        <div class="overlay"></div>
-        <div class="square">
-          <div class="model"></div>
-          <div class="atomic-number">{{element.atomicNumber}}</div>
-          <div class="label">
-            <div class="symbol">{{element.symbol}}</div>
-            <div class="name">{{element.name}}</div>
-          </div>
-          <div class="atomic-mass">{{element.atomicMass}}</div>
-          <div class="atomic-weight">{{added}}</div>
+    <div
+      [ngClass]="['element', element.tablePosition, element.groupBlock]"
+      (click)="selectElement($event)"
+    >
+      <input
+        [attr.id]="element.atomicNumber"
+        class="activate"
+        type="radio"
+        name="elements"
+      />
+      <div class="overlay"></div>
+      <div class="square">
+        <div class="model"></div>
+        <div class="atomic-number">{{ element.atomicNumber }}</div>
+        <div class="label">
+          <div class="symbol">{{ element.symbol }}</div>
+          <div class="name">{{ element.name }}</div>
         </div>
+        <div class="atomic-mass">{{ element.atomicMass }}</div>
+        <div class="atomic-weight">{{ added }}</div>
       </div>
+    </div>
     }
-    <div class="placeholder lanthanoid c3 r6"><div class="square">57-71</div></div>
-    <div class="placeholder actinoid c3 r7"><div class="square">89-103</div></div>
+    <div class="placeholder lanthanoid c3 r6">
+      <div class="square">57-71</div>
+    </div>
+    <div class="placeholder actinoid c3 r7">
+      <div class="square">89-103</div>
+    </div>
     <div class="gap c3 r8"></div>
     <div class="key">
       <div class="row">
         <label class="alkali-metal" for="alkali-metals">Alkali Metals</label>
-        <label class="alkaline-earth-metal" for="alkaline-earth-metals">Alkaline Earth Metals</label>
+        <label class="alkaline-earth-metal" for="alkaline-earth-metals"
+          >Alkaline Earth Metals</label
+        >
         <label class="lanthanoid" for="lanthanoids">Lanthanoids</label>
         <label class="actinoid" for="actinoids">Aktinoids</label>
-        <label class="transition-metal" for="transition-metals">Transition Metals</label>
-        <label class="post-transition-metal" for="post-transition-metals">Post-Transition Metals</label>
+        <label class="transition-metal" for="transition-metals"
+          >Transition Metals</label
+        >
+        <label class="post-transition-metal" for="post-transition-metals"
+          >Post-Transition Metals</label
+        >
         <label class="metalloid" for="metalloids">Metalloids</label>
-        <label class="other-nonmetal" for="other-nonmetals">Other Nonmetals</label>
+        <label class="other-nonmetal" for="other-nonmetals"
+          >Other Nonmetals</label
+        >
         <label class="noble-gas" for="noble-gasses">Noble Gasses</label>
         <label class="unknown" for="unknown">Unknown</label>
       </div>

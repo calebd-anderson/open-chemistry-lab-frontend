@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, input, Input, OnInit } from '@angular/core';
 import { Element } from '../../../model/element.model';
 import { Observable, Subscription } from 'rxjs';
 import { CompoundService } from '../../../service/compound.service';
@@ -24,7 +24,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
   ],
   templateUrl: './experiment.component.html',
-  styleUrls: ['./experiment.component.scss']
+  styleUrls: ['./experiment.component.scss'],
 })
 export class ExperimentComponent implements OnInit {
   private interacted: Boolean = false;
@@ -32,8 +32,8 @@ export class ExperimentComponent implements OnInit {
   elementsInCompound: Element[] = [];
   dialogRef: MatDialogRef<ValidationModalComponent>;
   atomsInCompound: Map<String, number> = new Map();
-  @Input() interactedElement: Element;
-  @Input() events: Observable<Element>;
+  readonly interactedElement = input<Element>();
+  readonly events = input<Observable<Element>>();
 
   private _snackBar: NotificationService = inject(NotificationService);
   public experimentService: ExperimentService = inject(ExperimentService);
@@ -45,7 +45,7 @@ export class ExperimentComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.eventsSubscription = this.events.subscribe((element) =>
+    this.eventsSubscription = this.events().subscribe((element) =>
       this.addInteractedElements(element)
     );
   }
@@ -59,7 +59,7 @@ export class ExperimentComponent implements OnInit {
   }
 
   public getInteractedElement(): Element {
-    return this.interactedElement;
+    return this.interactedElement();
   }
 
   public getElementsInCompound(): Element[] {
