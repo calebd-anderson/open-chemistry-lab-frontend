@@ -4,10 +4,9 @@ import { ExperimentComponent } from '../experiment/experiment.component';
 
 @Component({
   selector: 'app-lab',
-  imports: [PeriodicTableComponent, ExperimentComponent],
+  // imports: [PeriodicTableComponent, ExperimentComponent],
+  imports: [PeriodicTableComponent],
   templateUrl: './lab.component.html',
-  styleUrl: './lab.component.scss'
+  styleUrl: './lab.component.scss',
 })
-export class LabComponent {
-
-}
+export class LabComponent {}

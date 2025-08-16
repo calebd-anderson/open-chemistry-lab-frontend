@@ -9,10 +9,11 @@ import { ProfileComponent } from './component/user_manager/profile/profile.compo
 import { AboutComponent } from './component/about/about.component';
 import { DiscoveriesComponent } from './component/discoveries/discoveries.component';
 import { GlobalDiscoveriesComponent } from './component/global-discoveries/global-discoveries.component';
+import { LabComponent } from './component/chemistry/lab/lab.component';
 
 export const routes: Routes = [
   { path: 'about', component: AboutComponent },
-  { path: 'lab', component: PeriodicTableComponent },
+  { path: 'lab', component: LabComponent },
   { path: 'globaldiscoveries', component: GlobalDiscoveriesComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'discoveries', component: DiscoveriesComponent, canActivate: [AuthenticationGuard] },
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
