@@ -1,34 +1,35 @@
 <header id="main-header">
-  <h1>The Open Chemistry Lab</h1>
+  <h1 routerLink="/lab">The Open Chemistry Lab</h1>
 
   <!-- <button id="welcome-button" matButton (click)="openDialog()">
     Show Welcome Dialog
   </button> -->
 
   <div id="user-controls">
-    <button
-      class="login-btn"
-      data-toggle="modal"
-      data-target="#loginModal"
-      [hidden]="authenticationService.getIsLoggedIn()"
-    >
-      Login
-    </button>
-    <button
-      class="logout-btn"
-      [hidden]="!authenticationService.getIsLoggedIn()"
-      (click)="onClickLogout()"
-    >
-      Logout
-    </button>
+    <div id="user-buttons">
+        <button
+          class="login-btn"
+          data-toggle="modal"
+          data-target="#loginModal"
+          [hidden]="authenticationService.getIsLoggedIn()"
+        >
+          Login
+        </button>
+        <button
+          class="logout-btn"
+          [hidden]="!authenticationService.getIsLoggedIn()"
+          (click)="onClickLogout()"
+        >
+          Logout
+        </button>
+        <button [hidden]="!isAdmin" routerLink="/user/management" color="accent">
+          User Managment
+        </button>
+    </div>
 
-    <button [hidden]="!isAdmin" routerLink="/user/management" color="accent">
-      User Managment
-    </button>
-
-    <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()">
+    <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()" (click)="onClickProfile()">
       <span class="name">{{ user?.firstName }}</span>
-      <button (click)="onClickProfile()">
+      <button >
         <img
           height="40"
           width="40"

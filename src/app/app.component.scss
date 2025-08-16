@@ -7,28 +7,45 @@ header#main-header {
 }
 #main-header > h1 {
   // border: blue 5px solid;
-  background-color: antiquewhite;
-  padding: 0px 15px;
+  background-image: radial-gradient(#86bbd8, #33658a);
+  padding: 0px 1rem;
   width: fit-content;
   margin: 1rem 10px;
+  border-radius: 10px;
+  align-content: center;
+  height: fit-content;
+  cursor: pointer;
+  font-size: 1.25rem;
+}
+@media screen and (min-width: 995px) {
+  #main-header > h1 {
+    font-size: 1.5rem;
+  }
 }
 #main-header > #user-controls {
   // border: red 5px solid;
+  display: grid;
+  width: fit-content;
   text-align: end;
+  background-image: radial-gradient(#86bbd8, #33658a);
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 10px;
+  grid-column: -1;
+}
+@media screen and (min-width: 995px) {
+  #user-buttons button {
+    margin: 0px 0.5rem;
+  }
 }
 
 .name {
-  margin: 10px;
-}
-
-nav button {
-  display: block;
-  width: 200px;
+  margin: 0px 10px;
 }
 
 .profileInfo {
-  margin: 10px;
-  right: 10px;
+  margin: 10px 0px 0px 0px;
+  cursor: pointer;
 }
 
 .login-btn {
