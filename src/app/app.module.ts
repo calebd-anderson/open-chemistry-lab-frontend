@@ -7,7 +7,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { QuizComponent } from './component/game/quiz/quiz.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -15,7 +14,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { WelcomeComponent } from './component/welcome/welcome.component';
 
 @NgModule({
-  declarations: [QuizComponent, UserComponent],
+  declarations: [UserComponent],
   imports: [
     BrowserModule,
     FormsModule,
