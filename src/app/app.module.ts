@@ -10,18 +10,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QuizComponent } from './component/game/quiz/quiz.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FlashcardComponent } from './component/game/flashcard/flashcard.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { WelcomeComponent } from './component/welcome/welcome.component';
 
 @NgModule({
-  declarations: [
-    UserComponent,
-    QuizComponent,
-    UserComponent,
-    FlashcardComponent,
-  ],
+  declarations: [QuizComponent, UserComponent],
   imports: [
     BrowserModule,
     FormsModule,

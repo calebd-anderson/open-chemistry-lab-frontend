@@ -2,49 +2,70 @@
 <div class="flashcards">
   <h1 class="text-center">Create Flashcards</h1>
   <div class="d-flex justify-content-center form_container">
-    <form #flascardForm="ngForm" (ngSubmit)="createFlashcard(flascardForm.value)">
+    <form
+      #flascardForm="ngForm"
+      (ngSubmit)="createFlashcard(flascardForm.value)"
+    >
       <div class="input-group">
-        <input type="text" class="form-control" name="question" placeholder="Enter a question" ngModel
-          #questionInput="ngModel" required>
+        <input
+          type="text"
+          class="form-control"
+          name="question"
+          placeholder="Enter a question"
+          ngModel
+          #questionInput="ngModel"
+          required
+        />
       </div>
       @if (questionInput.invalid && questionInput.touched) {
-        <div class="help-block">
-          Please enter a question.
-        </div>
+      <div class="help-block">Please enter a question.</div>
       }
       <div class="input-group mt-3">
-        <input type="text" class="form-control" name="answer" placeholder="Enter the corret answer" ngModel
-          #answerInput="ngModel" required>
+        <input
+          type="text"
+          class="form-control"
+          name="answer"
+          placeholder="Enter the corret answer"
+          ngModel
+          #answerInput="ngModel"
+          required
+        />
       </div>
       @if (answerInput.invalid && answerInput.touched) {
-        <div class="help-block">
-          Please enter a answer.
-        </div>
+      <div class="help-block">Please enter a answer.</div>
       }
       <div class="d-flex justify-content-center mt-3 login_container">
-        <button type="submit" [disabled]="flascardForm.invalid" name="button" class="btn btn-primary">
+        <button
+          type="submit"
+          [disabled]="flascardForm.invalid"
+          name="button"
+          class="btn btn-primary"
+        >
           <span>Submit</span>
         </button>
       </div>
     </form>
   </div>
-  <div class="mt-4" *ngIf="flashcards.length > 0">
+  @if(flashcards.length > 0) {
+  <div class="mt-4">
     <div class="d-flex justify-content-center links">
-      <a (click)="displayCards()" class="ml-2 toggle-cards">Hide/See My Flash Card(s)</a>
+      <a (click)="displayCards()" class="ml-2 toggle-cards"
+        >Hide/See My Flash Card(s)</a
+      >
     </div>
   </div>
-
+  }
   <!-- list -->
   @if (allCards) {
-    <div class="flashcard-container">
-      <div class="card-grid">
-        @for (displayCard of flashcards; track displayCard; let i = $index) {
-          <div class="card" id={{i}} (click)="flipCard(i)">
-            <div class="front">{{displayCard.question}}</div>
-            <div class="back">{{displayCard.answer}}</div>
-          </div>
-        }
+  <div class="flashcard-container">
+    <div class="card-grid">
+      @for (displayCard of flashcards; track displayCard; let i = $index) {
+      <div class="card" id="{{ i }}" (click)="flipCard(i)">
+        <div class="front">{{ displayCard.question }}</div>
+        <div class="back">{{ displayCard.answer }}</div>
       </div>
+      }
     </div>
+  </div>
   }
 </div>

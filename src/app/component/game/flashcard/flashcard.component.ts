@@ -3,12 +3,13 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/service/security/authentication.service';
 import { FlashCardService } from 'src/app/service/flashcard.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-flashcard',
     templateUrl: './flashcard.component.html',
     styleUrls: ['./flashcard.component.scss'],
-    standalone: false
+    imports: [FormsModule]
 })
 export class FlashcardComponent implements OnInit {
   flashcards: any[] = [];
