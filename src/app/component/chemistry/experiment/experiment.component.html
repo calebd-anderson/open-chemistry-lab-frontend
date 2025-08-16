@@ -1,22 +1,32 @@
 @if (experimentService.getIsActive()) {
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar mode="indeterminate"></mat-progress-bar>
 }
 <div id="experiment-box">
-  <section id="compound-test" [class.active]="elementsInCompound.length > 0">
-    @if (elementsInCompound.length > 0) {
+  <section id="compound-test" [class.active]="elementsInCompound().length > 0">
+    @if (elementsInCompound().length > 0) {
     <div class="compound">
-      @for (element of elementsInCompound; track element; let i = $index) {
-        <!-- "{'background-color': '#' + element?.cPKHexColor}" -->
-      <div class="element-in-compound" (click)="removeElementFromCompound(i, element)"
-        [ngStyle]="{'background-image': 'linear-gradient(30deg, grey 10%, #' + element?.cPKHexColor + ')'}">
-        {{element?.symbol}}
+      @for (element of elementsInCompound(); track element; let i = $index) {
+      <!-- "{'background-color': '#' + element?.cPKHexColor}" -->
+      <div
+        class="element-in-compound"
+        (click)="removeElementFromCompound(i, element)"
+        [ngStyle]="{
+          'background-image':
+            'linear-gradient(30deg, grey 10%, #' + element?.cPKHexColor + ')'
+        }"
+      >
+        {{ element?.symbol }}
       </div>
       }
     </div>
     <!-- run experiment buttons -->
     <div id="validate-btn">
-      <button matButton="elevated" color="primary" (click)="validateCompound()">Run Experiment</button>
-      <button matButton="elevated" (click)="clearExperiment()">Clear Experiment</button>
+      <button matButton="elevated" color="primary" (click)="validateCompound()">
+        Run Experiment
+      </button>
+      <button matButton="elevated" (click)="clearExperiment()">
+        Clear Experiment
+      </button>
     </div>
     } @else {
     <h2>The experiment is empty.</h2>

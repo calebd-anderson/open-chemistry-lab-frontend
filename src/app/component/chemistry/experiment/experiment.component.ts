@@ -1,4 +1,4 @@
-import { Component, inject, input, Input, OnInit } from '@angular/core';
+import { Component, inject, input, Input, OnInit, signal } from '@angular/core';
 import { Element } from '../../../model/element.model';
 import { Observable, Subscription } from 'rxjs';
 import { CompoundService } from '../../../service/compound.service';
@@ -29,7 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 export class ExperimentComponent implements OnInit {
   private interacted: Boolean = false;
   private eventsSubscription: Subscription;
-  elementsInCompound: Element[] = [];
+  elementsInCompound = signal<Element[]>([]);
   dialogRef: MatDialogRef<ValidationModalComponent>;
   atomsInCompound: Map<String, number> = new Map();
   readonly interactedElement = input<Element>();
@@ -63,14 +63,14 @@ export class ExperimentComponent implements OnInit {
   }
 
   public getElementsInCompound(): Element[] {
-    return this.elementsInCompound;
+    return this.elementsInCompound();
   }
 
   public addInteractedElements(element: Element) {
     if (this.elementsInCompound.length == 0)
       window.scrollTo({ top: 0, behavior: 'smooth' });
     let tempAtoms = this.atomsInCompound.get(element.symbol);
-    this.elementsInCompound.push(element);
+    this.elementsInCompound.update((e) => [...e, element]);
     if (tempAtoms == null) {
       this.atomsInCompound.set(element.symbol, 1);
     } else {
@@ -80,7 +80,7 @@ export class ExperimentComponent implements OnInit {
 
   public removeElementFromCompound(index: number, element: Element) {
     let tempAtoms = this.atomsInCompound.get(element.symbol);
-    this.elementsInCompound.splice(index, 1);
+    this.elementsInCompound().splice(index, 1);
     if (tempAtoms == 1) {
       this.atomsInCompound.delete(element.symbol);
       this._snackBar.notify(
@@ -97,7 +97,7 @@ export class ExperimentComponent implements OnInit {
   }
 
   public clearExperiment() {
-    this.elementsInCompound = [];
+    this.elementsInCompound.set([]);
     this.atomsInCompound.clear();
   }
 
