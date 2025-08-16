@@ -8,7 +8,7 @@
     id="{{ categories[i] }}"
   />
   } @for (item of [].constructor(this.categories.length); track $index) {
-  <input class="category-cancel" type="radio" name="categories" id="cancel" />
+  <input class="category-cancel" type="radio" name="categories" id={{`cancel-${$index}`}} />
   }
   <div class="periodic-table">
     @for (element of elements; track element) {

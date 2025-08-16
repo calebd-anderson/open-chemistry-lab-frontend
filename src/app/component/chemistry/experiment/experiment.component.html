@@ -21,7 +21,11 @@
     </div>
     <!-- run experiment buttons -->
     <div id="validate-btn">
-      <button matButton="elevated" color="primary" (click)="runExperiment.emit()">
+      <button
+        matButton="elevated"
+        color="primary"
+        (click)="runExperiment.emit()"
+      >
         Run Experiment
       </button>
       <button matButton="elevated" (click)="clearExperiment.emit()">
