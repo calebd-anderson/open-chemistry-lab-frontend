@@ -7,9 +7,9 @@
     <div class="compound">
       @for (element of elementsInCompound(); track element; let i = $index) {
       <!-- "{'background-color': '#' + element?.cPKHexColor}" -->
+      <!-- (click)="removeElementFromCompound(i, element)" -->
       <div
         class="element-in-compound"
-        (click)="removeElementFromCompound(i, element)"
         [ngStyle]="{
           'background-image':
             'linear-gradient(30deg, grey 10%, #' + element?.cPKHexColor + ')'
@@ -21,12 +21,12 @@
     </div>
     <!-- run experiment buttons -->
     <div id="validate-btn">
-      <button matButton="elevated" color="primary" (click)="validateCompound()">
+      <!-- <button matButton="elevated" color="primary" (click)="validateCompound()">
         Run Experiment
-      </button>
-      <button matButton="elevated" (click)="clearExperiment()">
+      </button> -->
+      <!-- <button matButton="elevated" (click)="clearExperiment()">
         Clear Experiment
-      </button>
+      </button> -->
     </div>
     } @else {
     <h2>The experiment is empty.</h2>

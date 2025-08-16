@@ -1,12 +1,9 @@
 <article>
   <section>
-    <!-- <app-experiment></app-experiment> -->
-    <!-- <app-experiment
-      [interactedElement]="interactedElement"
-      [events]="sendElementMessage.asObservable()"
-    ></app-experiment> -->
+    <!-- <app-experiment [interactedElement]="interactedElement" /> -->
+    <app-experiment [elementsInCompound]="elementsInCompound()" />
   </section>
   <section>
-    <periodic-table></periodic-table>
+    <periodic-table (sendElementMessage)="addInteractedElements($event)" />
   </section>
 </article>

@@ -1,49 +1,62 @@
-import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, output } from '@angular/core';
 import { Element } from '../../../model/element.model';
 import { ElementService } from '../../../service/element.service';
 
 import { SubSink } from 'subsink';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
-import { ExperimentComponent } from '../experiment/experiment.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'periodic-table',
-  imports:[ExperimentComponent, CommonModule],
+  imports: [CommonModule],
   templateUrl: './periodic-table.component.html',
-  styleUrls: ['./periodic-table.component.sass']
+  styleUrls: ['./periodic-table.component.sass'],
 })
 export class PeriodicTableComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
   showFiller = false;
   elements: Element[] = [];
-  pageTitle: string = 'Lab'
+  pageTitle: string = 'Lab';
   interactedElement: Element;
   eventsSubject: Subject<Element> = new Subject<Element>();
   added: number = 0;
-  categories: string[] = ['alkali-metals','alkaline-earth-metals','lanthanoids','actinoids','transition-metals','post-transition-metals','metalloids','other-nonmetals','noble-gasses','unknown'];
+  categories: string[] = [
+    'alkali-metals',
+    'alkaline-earth-metals',
+    'lanthanoids',
+    'actinoids',
+    'transition-metals',
+    'post-transition-metals',
+    'metalloids',
+    'other-nonmetals',
+    'noble-gasses',
+    'unknown',
+  ];
   public progressSpinner: boolean = false;
 
-  @Output() sendElementMessage = new EventEmitter<Element>();
+  sendElementMessage = output<Element>();
 
   private _snackBar: NotificationService = inject(NotificationService);
-  
-  constructor(private elementService: ElementService) { }
+
+  constructor(private elementService: ElementService) {}
 
   ngOnInit(): void {
     this.getElements();
   }
 
   // select element event
-  public selectElement(event: { target: any; }) {
+  public selectElement(event: { target: any }) {
     let elmIndex = event.target.attributes.id?.value - 1;
     this.interactedElement = this.elements[elmIndex];
-    if(this.interactedElement) {
+    if (this.interactedElement) {
       this.sendElementMessage.emit(this.interactedElement);
-      this._snackBar.notify(NotificationType.DEFAULT, this.interactedElement.name + " added to experiment.");
+      this._snackBar.notify(
+        NotificationType.DEFAULT,
+        this.interactedElement.name + ' added to experiment.'
+      );
     }
   }
 
@@ -56,14 +69,17 @@ export class PeriodicTableComponent implements OnInit, OnDestroy {
           this.progressSpinner = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this._snackBar.notify(NotificationType.ERROR, "Failed to load periodic table data.");
-        }
+          this._snackBar.notify(
+            NotificationType.ERROR,
+            'Failed to load periodic table data.'
+          );
+        },
       })
     );
   }
 
   private sortElements(input: Element[]): Element[] {
-    return input.sort((a,b) => a.atomicNumber - b.atomicNumber);
+    return input.sort((a, b) => a.atomicNumber - b.atomicNumber);
   }
 
   ngOnDestroy(): void {
