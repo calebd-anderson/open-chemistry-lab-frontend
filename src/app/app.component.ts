@@ -16,7 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ChemLogo as ChemLogo } from './logo.component';
 import { CloseIcon } from './close.component.svg';
 import { LogoutIcon } from './logout.component.svg';
-import { AdminIcon } from "./admin.component.svg";
+import { AdminIcon } from './admin.component.svg';
 
 @Component({
   selector: 'app-root',
@@ -34,8 +34,8 @@ import { AdminIcon } from "./admin.component.svg";
     ChemLogo,
     CloseIcon,
     LogoutIcon,
-    AdminIcon
-],
+    AdminIcon,
+  ],
 })
 export class AppComponent implements OnInit {
   title = 'Chem Lab';
@@ -82,18 +82,19 @@ export class AppComponent implements OnInit {
 
   public onClickProfile(): void {
     this.router.navigate(['/profile']);
+    this.openMenu();
   }
 
   public onClickLogout(): void {
     this.authenticationService.logOut();
+    this.isLoggedIn = false;
+    this.user = null;
+    this.router.navigate(['lab']);
+    this.openMenu();
     this.sendNotification(
       NotificationType.SUCCESS,
       "You've been successfully logged out."
     );
-    this.isLoggedIn = false;
-    this.user = null;
-    // document.getElementById('navDrawr').click();
-    this.router.navigate(['lab']);
   }
 
   public get isAdmin(): boolean {
@@ -116,7 +117,7 @@ export class AppComponent implements OnInit {
   }
 
   public openMenu() {
-    const menu = document.getElementById("user-nav-menu");
+    const menu = document.getElementById('user-nav-menu');
     menu.classList.toggle('active');
   }
 }
