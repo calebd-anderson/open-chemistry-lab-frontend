@@ -6,6 +6,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { ExperimentService } from 'src/app/service/experiment.service';
 import { MatButtonModule } from '@angular/material/button';
+import { InfoIcon } from 'src/app/info-icon.component.svg';
 
 interface RemoveElement {
   index: number;
@@ -18,6 +19,7 @@ interface RemoveElement {
     MatProgressBarModule,
     CommonModule,
     MatButtonModule,
+    InfoIcon
   ],
   templateUrl: './experiment.component.html',
   styleUrls: ['./experiment.component.scss'],

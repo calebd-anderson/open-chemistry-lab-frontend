@@ -34,7 +34,7 @@ import { AdminIcon } from './admin.component.svg';
     ChemLogo,
     CloseIcon,
     LogoutIcon,
-    AdminIcon,
+    AdminIcon
   ],
 })
 export class AppComponent implements OnInit {
