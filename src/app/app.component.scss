@@ -3,22 +3,31 @@ $nav-background: #29524a;
 
 header#main-header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  background-color: $background-color;
+  grid-template-columns: 0.2fr 1fr 1fr;
+  background-image: radial-gradient(
+    circle,
+    rgba(48, 197, 255, 1) 0%,
+    rgba(42, 45, 52, 1) 100%
+  );
+
+  svg {
+    margin: 0.5rem;
+    height: 4rem;
+    width: 4rem;
+    background-image: radial-gradient(#74a4bc, #b6d6cc);
+    padding: 0.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+  }
 }
-#logo-icon {
-  margin: 0.5rem;
-  height: 4rem;
-  width: 4rem;
-  background-image: radial-gradient(#74a4bc, #b6d6cc);
-  padding: 0.5rem;
-  border-radius: 10px;
-  cursor: pointer;
-}
+
 #main-header h1 {
   align-self: center;
-  justify-self: center;
+  text-align: center;
+  grid-column: 2/4;
+  margin: 0px;
 }
+
 button {
   all: unset;
   border: #f1fec6 3px solid;
@@ -42,10 +51,10 @@ button {
 }
 
 #user-nav-menu {
+  display: flex;
+  position: fixed;
   top: 0;
   background-color: $nav-background;
-  position: fixed;
-  display: flex;
   flex-direction: column;
   z-index: 999;
   right: 0px;
@@ -64,7 +73,7 @@ button {
   align-items: center;
 }
 #nav-item1 + hr {
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
 #close-menu-button {
   padding: 5px 10px;
