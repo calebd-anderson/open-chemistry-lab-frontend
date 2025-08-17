@@ -15,6 +15,10 @@ header#main-header {
   border-radius: 10px;
   cursor: pointer;
 }
+#main-header h1 {
+  align-self: center;
+  justify-self: center;
+}
 button {
   all: unset;
   border: #f1fec6 3px solid;
