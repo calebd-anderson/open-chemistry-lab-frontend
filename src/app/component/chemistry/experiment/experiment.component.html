@@ -5,7 +5,7 @@
   <section id="compound-test" [class.active]="elementsInCompound().length > 0">
     @if (elementsInCompound().length > 0) {
     <div class="compound">
-      @for (element of elementsInCompound(); track element; let i = $index) {
+      @for (element of elementsInCompound(); track `element_${$index}`; let i = $index) {
       <!-- "{'background-color': '#' + element?.cPKHexColor}" -->
       <div
         class="element-in-compound"
