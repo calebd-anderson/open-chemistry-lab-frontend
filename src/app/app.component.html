@@ -1,15 +1,8 @@
 <header id="main-header">
-  <h1 routerLink="/lab">The Open Chemistry Lab</h1>
-
-  <!-- <button id="welcome-button" matButton (click)="openDialog()">
-    Show Welcome Dialog
-  </button> -->
+  <svg id="logo-icon" logo-icon (click)="openDialog()"></svg>
 
   <div id="user-controls">
-    <div id="user-buttons">
-      <button [hidden]="!isAdmin" routerLink="/user/management" color="accent">
-        User Managment
-      </button>
+    <div id="user-controls">
       <button
         class="login-btn"
         data-toggle="modal"
@@ -18,22 +11,10 @@
       >
         Login
       </button>
-      <button
-        class="logout-btn"
-        [hidden]="!authenticationService.getIsLoggedIn()"
-        (click)="onClickLogout()"
-      >
-        Logout
-      </button>
     </div>
 
-    <div
-      class="profileInfo"
-      [hidden]="!authenticationService.getIsLoggedIn()"
-      (click)="onClickProfile()"
-    >
-      <span class="name">{{ user?.firstName }}</span>
-      <button>
+    <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()">
+      <button (click)="openMenu()">
         <img
           height="40"
           width="40"
@@ -46,7 +27,27 @@
   </div>
 </header>
 
-<nav>
+<nav id="user-nav-menu">
+  <span>{{ user?.firstName }}</span>
+  <hr>
+  <button (click)="onClickProfile()">Profile</button>
+  <div [hidden]="!isAdmin" >
+    <hr>
+    <button routerLink="/user/management">
+      User Managment
+    </button>
+  </div>
+  <hr>
+  <button
+    class="logout-btn"
+    [hidden]="!authenticationService.getIsLoggedIn()"
+    (click)="onClickLogout()"
+  >
+    Logout
+  </button>
+</nav>
+
+<nav id="main-nav">
   <app-tabs />
 </nav>
 

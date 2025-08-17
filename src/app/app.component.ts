@@ -13,6 +13,7 @@ import { LoginComponent } from './component/user_manager/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { ChemLogo as ChemLogo } from './logo.component';
 
 @Component({
   selector: 'app-root',
@@ -27,6 +28,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     RouterOutlet,
     RouterLink,
     MatIconModule,
+    ChemLogo
   ],
 })
 export class AppComponent implements OnInit {
@@ -105,5 +107,10 @@ export class AppComponent implements OnInit {
         'An error occured. Please try again.'
       );
     }
+  }
+
+  public openMenu() {
+    const menu = document.getElementById("user-nav-menu");
+    menu.classList.toggle('active');
   }
 }
