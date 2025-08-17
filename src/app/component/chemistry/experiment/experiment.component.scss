@@ -31,17 +31,18 @@
 button {
   margin: 10px;
 }
-
-#compound-test.active {
-  height: 250px;
+#compound-test {
+  grid-column: 1/3;
 }
 
 #experiment-box {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   background-image: url("../../../../assets/images/SEF4bG.jpg");
   background-size: cover;
   // border: 5px solid;
+  height: 19rem;
 }
 
 h2 {
@@ -53,7 +54,10 @@ h2 {
 }
 
 #flask {
+  position: absolute;
   text-align: end;
+  top: 0;
+  right: 0;
 }
 
 [info-icon] {
