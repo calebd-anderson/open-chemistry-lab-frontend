@@ -38,7 +38,9 @@
   <button (click)="onClickProfile()">Profile</button>
   <div [hidden]="!isAdmin" id="admin-menu">
     <hr />
-    <button routerLink="/user/management">User Managment</button>
+    <button id="admin-menu-button" routerLink="/user/management">
+      <svg admin-icon></svg>
+      User Managment</button>
   </div>
   <hr />
   <button

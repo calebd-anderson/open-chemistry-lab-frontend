@@ -16,6 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { ChemLogo as ChemLogo } from './logo.component';
 import { CloseIcon } from './close.component.svg';
 import { LogoutIcon } from './logout.component.svg';
+import { AdminIcon } from "./admin.component.svg";
 
 @Component({
   selector: 'app-root',
@@ -32,8 +33,9 @@ import { LogoutIcon } from './logout.component.svg';
     MatIconModule,
     ChemLogo,
     CloseIcon,
-    LogoutIcon
-  ],
+    LogoutIcon,
+    AdminIcon
+],
 })
 export class AppComponent implements OnInit {
   title = 'Chem Lab';
