@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { ChemLogo as ChemLogo } from './logo.component';
 import { CloseIcon } from './close.component.svg';
+import { LogoutIcon } from './logout.component.svg';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,8 @@ import { CloseIcon } from './close.component.svg';
     RouterLink,
     MatIconModule,
     ChemLogo,
-    CloseIcon
+    CloseIcon,
+    LogoutIcon
   ],
 })
 export class AppComponent implements OnInit {

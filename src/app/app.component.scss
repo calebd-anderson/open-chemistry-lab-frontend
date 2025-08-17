@@ -1,5 +1,5 @@
 $background-color: #86bbd8;
-$nav-background: #29524A;
+$nav-background: #29524a;
 
 header#main-header {
   display: grid;
@@ -65,6 +65,11 @@ button {
 #close-menu-button svg {
   height: 15px;
   width: 15px;
+}
+#logout-menu-button svg {
+  height: 20px;
+  width: 20px;
+  margin: 0px 10px;
 }
 
 #user-nav-menu button {

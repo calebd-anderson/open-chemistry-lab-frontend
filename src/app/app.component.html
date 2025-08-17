@@ -42,10 +42,11 @@
   </div>
   <hr />
   <button
-    class="logout-btn"
+    id="logout-menu-button"
     [hidden]="!authenticationService.getIsLoggedIn()"
     (click)="onClickLogout()"
   >
+  <svg logout-icon></svg>
     Logout
   </button>
 </nav>
