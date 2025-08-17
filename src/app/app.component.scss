@@ -1,7 +1,10 @@
+$background-color: #86bbd8;
+$nav-background: #29524A;
+
 header#main-header {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  background-color: #74a4bc;
+  background-color: $background-color;
 }
 #logo-icon {
   margin: 0.5rem;
@@ -25,8 +28,8 @@ button {
   align-content: end;
   // border: red 5px solid;
   background-image: radial-gradient(#86bbd8, #33658a);
-  padding: 1rem;
-  // margin: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
   border-radius: 10px;
   width: fit-content;
   height: fit-content;
@@ -35,16 +38,33 @@ button {
 }
 
 #user-nav-menu {
-  background-color: #86bbd8;
-  position: absolute;
+  top: 0;
+  background-color: $nav-background;
+  position: fixed;
+  display: flex;
   flex-direction: column;
   z-index: 999;
   right: 0px;
-  height: 100%;
-  display: none;
+  height: 100vh;
+  overflow-x: hidden;
+  width: 0em;
+  transition: width 0.5s;
+  color: white;
 }
 #user-nav-menu.active {
+  width: 16em;
+}
+#nav-item1 {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#close-menu-button {
+  padding: 5px 10px;
+}
+#close-menu-button svg {
+  height: 15px;
+  width: 15px;
 }
 
 #user-nav-menu button {
@@ -52,11 +72,15 @@ button {
   margin: 5px;
 }
 
-#user-nav-menu > span {
-  margin: 5px;
+#user-nav-menu span {
+  margin: 10px;
 }
 
-#user-nav-menu > hr {
+#admin-menu {
+  display: contents;
+}
+
+#user-nav-menu hr {
   align-self: center;
   width: 85%;
 }

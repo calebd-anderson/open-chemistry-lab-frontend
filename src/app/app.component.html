@@ -28,16 +28,19 @@
 </header>
 
 <nav id="user-nav-menu">
-  <span>{{ user?.firstName }}</span>
-  <hr>
-  <button (click)="onClickProfile()">Profile</button>
-  <div [hidden]="!isAdmin" >
-    <hr>
-    <button routerLink="/user/management">
-      User Managment
+  <div id="nav-item1">
+    <span>{{ user?.firstName }}</span>
+    <button id="close-menu-button" (click)="openMenu()">
+      <svg close-icon></svg>
     </button>
   </div>
-  <hr>
+  <hr />
+  <button (click)="onClickProfile()">Profile</button>
+  <div [hidden]="!isAdmin" id="admin-menu">
+    <hr />
+    <button routerLink="/user/management">User Managment</button>
+  </div>
+  <hr />
   <button
     class="logout-btn"
     [hidden]="!authenticationService.getIsLoggedIn()"
