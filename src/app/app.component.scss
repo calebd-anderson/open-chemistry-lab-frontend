@@ -59,6 +59,9 @@ button {
   justify-content: space-between;
   align-items: center;
 }
+#nav-item1 + hr {
+  margin-top: .25rem;
+}
 #close-menu-button {
   padding: 5px 10px;
 }

@@ -40,7 +40,8 @@
     <hr />
     <button id="admin-menu-button" routerLink="/user/management">
       <svg admin-icon></svg>
-      User Managment</button>
+      User Managment
+    </button>
   </div>
   <hr />
   <button
@@ -48,7 +49,7 @@
     [hidden]="!authenticationService.getIsLoggedIn()"
     (click)="onClickLogout()"
   >
-  <svg logout-icon></svg>
+    <svg logout-icon></svg>
     Logout
   </button>
 </nav>
