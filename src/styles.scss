@@ -1,5 +1,5 @@
 @use "@angular/material" as mat;
-
+// @import '@angular/material/prebuilt-themes/indigo-pink.css';
 /* You can add global styles to this file, and also import other style files */
 @import "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css";
 
@@ -12,6 +12,10 @@ html {
       density: 0,
     )
   );
+}
+
+body {
+  background: linear-gradient(to left bottom, #2D3142, #4F5D75);
 }
 
 td {
