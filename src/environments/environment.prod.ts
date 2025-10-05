@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://chemlab-backend.azurewebsites.net'
+  apiUrl: 'https://chemlabapi.calebdanderson.dev'
 };
