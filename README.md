@@ -19,8 +19,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
+# Styling and Layout
 ## [Bootstrap](https://getbootstrap.com/)
-Bootstrap (v. 5.3.8) is used throughout.
+Bootstrap (v. 5.3.8) is used.
 - [BS Modals](https://getbootstrap.com/docs/5.3/components/modal/)
   - The root `app` component login button
   - The `user_mamanger` system
@@ -28,12 +29,15 @@ Bootstrap (v. 5.3.8) is used throughout.
     - register
     - user
 
+## [Angular Material](https://material.angular.dev/)
+- [Theming](https://material.angular.dev/guide/theming)
+
 # Credits
 - Periodic Table CSS
   - https://codepen.io/mikegolus/pen/OwrPgB
 - Animations with [GSAP](https://gsap.com/)
 
-## Other cool periodic tables on the internet
+## Other notable periodic tables on the internet
 - https://github.com/tamalchowdhury/periodic-table
 - https://github.com/FlorianFe/Elements
 - https://pubchem.ncbi.nlm.nih.gov/periodic-table

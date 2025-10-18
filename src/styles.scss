@@ -1,26 +1,36 @@
-@use "@angular/material" as mat;
-// @import '@angular/material/prebuilt-themes/indigo-pink.css';
 /* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
 @import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css";
 
-html {
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+:root {
+  --light-text-color: #fff;
   color-scheme: light dark;
   @include mat.theme(
     (
       color: mat.$blue-palette,
       typography: Roboto,
       density: 0,
-    )
+    ),
+    // $overrides: (primary-container: orange)
   );
 }
 
 body {
-  background: linear-gradient(to left bottom, #2D3142, #4F5D75);
+  background: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+}
+
+.mat-typography h3 {
+  font-size: large;
+  font-weight: 700;
 }
 
 td {
   cursor: pointer;
 }
+
 .move-right {
   position: absolute;
   right: 0;
@@ -36,7 +46,7 @@ td {
   @include mat.snack-bar-overrides(
     (
       container-color: #2bbe68,
-      supporting-text-color: #fff,
+      supporting-text-color: var(--light-text-color),
     )
   );
 }
@@ -44,8 +54,8 @@ td {
 .red-error-snackbar {
   @include mat.snack-bar-overrides(
     (
-      container-color: #ff3737,
-      supporting-text-color: #fff,
+      container-color: var(--mat-sys-error),
+      supporting-text-color: var(--light-text-color),
     )
   );
 }
@@ -54,10 +64,9 @@ td {
   @include mat.snack-bar-overrides(
     (
       container-color: #ff6f00,
-      supporting-text-color: #fff,
+      supporting-text-color: var(--light-text-color),
     )
   );
-  // font-weight: 500;
 }
 
 .default-snackbar {
