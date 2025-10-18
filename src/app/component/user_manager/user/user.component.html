@@ -16,16 +16,16 @@
   <nav class="navbar navbar-expand-md breadcrumb">
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <div class="nav nav-pills">
-        <a class="nav-item nav-link active ml-1" (click)="changeTitle('Users')" data-toggle="tab" href="#users">
+        <a class="nav-item nav-link active ml-1" (click)="changeTitle('Users')" data-bs-toggle="tab" href="#users">
           <i class="fa fa-users"></i>
           Users
         </a>
         <a [hidden]="!isManager" class="nav-item nav-link ml-3" (click)="changeTitle('Settings')"
-          data-toggle="tab" href="#reset-password">
+          data-bs-toggle="tab" href="#reset-password">
           <i class="fa fa-cogs"></i>
           Settings
         </a>
-        <a class="nav-item nav-link move-right mr-3" (click)="changeTitle('Profile')" data-toggle="tab"
+        <a class="nav-item nav-link move-right mr-3" (click)="changeTitle('Profile')" data-bs-toggle="tab"
           href="#profile">
           Welcome, {{user?.firstName}}
           <i class="fa fa-user"></i>
@@ -45,8 +45,8 @@
               (ngModelChange)="searchUsers(searchInput.value)" type="search"
               placeholder="Search users...">
           </form>
-          <button [hidden]="!isManager" type="button" class="btn btn-info" data-toggle="modal"
-            data-target="#addUserModal">
+          <button [hidden]="!isManager" type="button" class="btn btn-info" data-bs-toggle="modal"
+            data-bs-target="#addUserModal">
             <i class="fa fa-plus"></i> New User
           </button>
         </div>
@@ -107,9 +107,9 @@
         </table>
       </div>
 
-      <button [hidden]="true" type="button" id="openUserInfo" data-toggle="modal" data-target="#viewUserModal">
+      <button [hidden]="true" type="button" id="openUserInfo" data-bs-toggle="modal" data-bs-target="#viewUserModal">
       </button>
-      <button [hidden]="true" type="button" id="openUserEdit" data-toggle="modal" data-target="#editUserModal">
+      <button [hidden]="true" type="button" id="openUserEdit" data-bs-toggle="modal" data-bs-target="#editUserModal">
       </button>
 
       <!-- change password  -->
@@ -344,7 +344,7 @@
                 <h5 class="modal-title text-center" id="exampleModalLongTitle">{{selectedUser?.firstName}}
                   {{selectedUser?.lastName}}
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -412,7 +412,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
@@ -425,7 +425,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title text-center">New User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -500,7 +500,7 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal"
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
               id="new-user-close">Close</button>
               <button type="button" (click)="saveNewUser()" [disabled]="newUserForm.invalid"
               class="btn btn-primary">Save changes</button>
@@ -518,7 +518,7 @@
               <h5 class="modal-title text-center">Edit {{editUser?.firstName}}
                 {{editUser?.lastName}} <small [hidden]="isManager">(read only)</small>
               </h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -590,7 +590,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
             id="closeEditUserModalButton">Close</button>
             <button type="button" (click)="onUpdateUser()"
               [disabled]="!isManager || editUserForm.invalid" class="btn btn-primary">Save Changes

@@ -4,12 +4,13 @@
   <h1>The Open Chemistry Lab</h1>
 
   <div id="user-controls">
-    <div id="user-controls">
+    <div>
       <button
         class="login-btn"
-        data-toggle="modal"
-        data-target="#loginModal"
+        data-bs-toggle="modal"
+        data-bs-target="#loginModal"
         [hidden]="authenticationService.getIsLoggedIn()"
+        type="button"
       >
         Login
       </button>
