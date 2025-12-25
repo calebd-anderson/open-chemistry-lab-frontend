@@ -1,22 +1,25 @@
-import { Component, inject, OnDestroy, OnInit, output } from '@angular/core';
+import { Component, inject, output, Signal } from '@angular/core';
 import { Element } from '../../../model/element.model';
 import { ElementService } from '../../../service/element.service';
-
-import { SubSink } from 'subsink';
-import { HttpErrorResponse } from '@angular/common/http';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { CommonModule } from '@angular/common';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'periodic-table',
-  imports: [CommonModule],
+  imports: [CommonModule, MatProgressSpinnerModule],
   templateUrl: './periodic-table.component.html',
-  styleUrls: ['./periodic-table.component.sass'],
+  styleUrls: ['./periodic-table.component.sass', './periodic-table.css'],
 })
-export class PeriodicTableComponent implements OnInit {
-  private subs = new SubSink();
-  elements: Element[] = [];
+export class PeriodicTableComponent {
+  elementService = inject(ElementService);
+
+  elements: Signal<Element[]> = toSignal(this.elementService.getElements(), {
+    initialValue: [],
+  });
+
   pageTitle: string = 'Lab';
   added: number = 0;
   categories: string[] = [
@@ -37,16 +40,11 @@ export class PeriodicTableComponent implements OnInit {
 
   private _snackBar: NotificationService = inject(NotificationService);
 
-  constructor(private elementService: ElementService) {}
+  public selectElement(event: MouseEvent) {
+    const element = event.target as HTMLElement;
+    let elmIndex = parseInt(element.id) - 1;
 
-  ngOnInit(): void {
-    this.getElements();
-  }
-
-  // select element event
-  public selectElement(event: { target: any }) {
-    let elmIndex = event.target.attributes.id?.value - 1;
-    const interactedElement = this.elements[elmIndex];
+    const interactedElement = this.elements()[elmIndex];
     if (interactedElement) {
       this.sendElementMessage.emit(interactedElement);
       this._snackBar.notify(
@@ -56,25 +54,7 @@ export class PeriodicTableComponent implements OnInit {
     }
   }
 
-  async getElements() {
-    this.progressSpinner = true;
-    this.subs.add(
-      this.elementService.getElements().subscribe({
-        next: (response: Element[]) => {
-          this.elements = this.sortElements(response);
-          this.progressSpinner = false;
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          this._snackBar.notify(
-            NotificationType.ERROR,
-            'Failed to load periodic table data.'
-          );
-        },
-      })
-    );
-  }
-
-  private sortElements(input: Element[]): Element[] {
+  public sortElements(input: Element[]): Element[] {
     return input.sort((a, b) => a.atomicNumber - b.atomicNumber);
   }
 }

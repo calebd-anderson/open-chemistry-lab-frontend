@@ -15,7 +15,11 @@
   />
   }
   <div class="periodic-table">
-    @for (element of elements; track element) {
+    @if(!(elements().length > 0)) {
+    <div class="loading">Loading...</div>
+    <mat-spinner></mat-spinner>
+    } @else {
+    @for (element of this.sortElements(elements()); track element) {
     <div
       [ngClass]="['element', element.tablePosition, element.groupBlock]"
       (click)="selectElement($event)"
@@ -68,5 +72,6 @@
         <label class="unknown" for="unknown">Unknown</label>
       </div>
     </div>
+    }
   </div>
 </div>
