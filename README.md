@@ -24,7 +24,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Bootstrap (v. 5.3.8) is used.
 - [BS Modals](https://getbootstrap.com/docs/5.3/components/modal/)
   - The root `app` component login button
-  - The `user_mamanger` system
+  - The `user_mananger` system
     - login
     - register
     - user
