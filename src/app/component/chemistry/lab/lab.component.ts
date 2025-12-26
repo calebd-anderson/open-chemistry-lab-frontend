@@ -31,7 +31,7 @@ export class LabComponent {
   public dialog: MatDialog = inject(MatDialog);
 
   public addInteractedElements(element: Element) {
-    if (this.elementsInCompound.length == 0)
+    if (this.elementsInCompound().length == 0)
       window.scrollTo({ top: 0, behavior: 'smooth' });
     let tempAtoms = this.atomsInCompound.get(element.symbol);
     this.elementsInCompound.update((e) => [...e, element]);

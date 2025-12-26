@@ -1,5 +1,10 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -10,10 +15,10 @@ import { AuthenticationService } from '../../../service/security/authentication.
 import { NotificationService } from '../../../service/notification.service';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
-    imports: [FormsModule]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  imports: [FormsModule],
 })
 export class LoginComponent implements OnDestroy {
   public showLoading: boolean;
@@ -22,15 +27,18 @@ export class LoginComponent implements OnDestroy {
 
   @Output() newItemEvent = new EventEmitter<User>();
 
-  constructor(private router: Router, private authenticationService: AuthenticationService, 
-    private notificationService: NotificationService) { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private notificationService: NotificationService
+  ) {}
 
   private loggedIn(value: User) {
     this.newItemEvent.emit(value);
   }
 
   public onClickRegister(): void {
-    document.getElementById("close-login-modal").click();
+    document.getElementById('close-login-modal').click();
   }
 
   public onLogin(userForm: NgForm): void {
@@ -43,35 +51,46 @@ export class LoginComponent implements OnDestroy {
           this.authenticationService.saveToken(token);
           this.authenticationService.addUserToLocalCache(response.body);
           this.loggedIn(this.authenticationService.getUserFromLocalCache());
-          document.getElementById("close-login-modal").click();
+          document.getElementById('close-login-modal').click();
           // document.getElementById("navDrawr").click();
           this.router.navigateByUrl('lab');
           this.showLoading = false;
           userForm.reset();
-          this.authenticationService.setIsLoggedIn(true)
-          this.sendNotification(NotificationType.SUCCESS, "You've been successfully logged in.");
+          this.authenticationService.setIsLoggedIn(true);
+          this.sendNotification(
+            NotificationType.SUCCESS,
+            "You've been successfully logged in."
+          );
         },
         error: (errorResponse: HttpErrorResponse) => {
-        	// console.log(errorResponse);
-          this.authenticationService.setIsLoggedIn(false)
-        	this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
-        	this.showLoading = false;
-        }
+          // console.log(errorResponse);
+          this.authenticationService.setIsLoggedIn(false);
+          this.sendNotification(
+            NotificationType.ERROR,
+            errorResponse.error.message
+          );
+          this.showLoading = false;
+        },
       })
     );
   }
-  
-  private sendNotification(notificationType: NotificationType, message: string): void {
+
+  private sendNotification(
+    notificationType: NotificationType,
+    message: string
+  ): void {
     if (message) {
-    	this.notificationService.notify(notificationType, message);
+      this.notificationService.notify(notificationType, message);
     } else {
-		  this.notificationService.notify(notificationType, "An error occured. Please try again.");
+      this.notificationService.notify(
+        notificationType,
+        'An error occured. Please try again.'
+      );
     }
   }
 
-  // prevent memory leak 
+  // prevent memory leak
   ngOnDestroy(): void {
-  	this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
-
 }

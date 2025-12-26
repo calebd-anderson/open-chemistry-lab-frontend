@@ -1,4 +1,4 @@
-import { Component, OnInit, effect, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NotificationType } from './model/enum/notification-type.enum';
 import { User } from './model/user';
@@ -34,7 +34,7 @@ import { AdminIcon } from './admin.component.svg';
     ChemLogo,
     CloseIcon,
     LogoutIcon,
-    AdminIcon
+    AdminIcon,
   ],
 })
 export class AppComponent implements OnInit {
@@ -52,21 +52,14 @@ export class AppComponent implements OnInit {
     inject(NotificationService);
 
   readonly dialog = inject(MatDialog);
-
-  constructor(private router: Router) {
-    effect(() => {
-      console.log(
-        `The current login status is: ${this.authenticationService.getIsLoggedIn()}`
-      );
-      let user: User = this.authenticationService.getUserFromLocalCache();
-      this.user = user;
-    });
-  }
+  private readonly router = inject(Router);
 
   ngOnInit(): void {
     const loginStatus = this.authenticationService.getIsLoggedIn();
     if (loginStatus) {
       this.isLoggedIn = true;
+      let user: User = this.authenticationService.getUserFromLocalCache();
+      this.user = user;
     }
     this.dialog.open(WelcomeComponent);
   }

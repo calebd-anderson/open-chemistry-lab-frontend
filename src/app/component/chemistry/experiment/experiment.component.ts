@@ -19,15 +19,12 @@ interface RemoveElement {
     MatProgressBarModule,
     CommonModule,
     MatButtonModule,
-    InfoIcon
+    InfoIcon,
   ],
   templateUrl: './experiment.component.html',
   styleUrls: ['./experiment.component.scss'],
 })
 export class ExperimentComponent {
-  private interacted: Boolean = false;
-  readonly interactedElement = input<Element>();
-
   elementsInCompound = input.required<Element[]>();
 
   removeElement = output<RemoveElement>();
@@ -35,14 +32,6 @@ export class ExperimentComponent {
   clearExperiment = output<void>();
 
   public experimentService: ExperimentService = inject(ExperimentService);
-
-  public getInteracted(): Boolean {
-    return this.interacted;
-  }
-
-  public getInteractedElement(): Element {
-    return this.interactedElement();
-  }
 
   public removeElementFromCompound(i: number, element: Element) {
     this.removeElement.emit({ index: i, element: element });

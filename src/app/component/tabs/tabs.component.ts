@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, Signal } from '@angular/core';
 import { itablink } from '../../model/itablink';
 import { AuthenticationService } from '../../service/security/authentication.service';
 import { AuthorizationService } from '../../service/security/authorization.service';
@@ -11,29 +11,19 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./tabs.component.scss'],
   imports: [MatTabNavPanel, MatTabsModule, RouterModule],
 })
-export class TabsComponent implements OnInit {
+export class TabsComponent {
   readonly authenticationService = inject(AuthenticationService);
   readonly authorizationService = inject(AuthorizationService);
 
-  public get isAdmin(): boolean {
+  tabLinks: Signal<itablink[]> = computed(() => this.populateTabs());
+
+  private get isAdmin(): boolean {
     if (this.authenticationService.getIsLoggedIn())
       return this.authorizationService.isAdmin;
     else return false;
   }
 
-  public tabLinks: Array<itablink>;
-
-  constructor() {
-    effect(() => {
-      this.populateTabs();
-    });
-  }
-
-  ngOnInit(): void {
-    this.populateTabs();
-  }
-
-  private populateTabs(): void {
+  private populateTabs(): itablink[] {
     if (!this.authenticationService.getIsLoggedIn()) {
       // not logged in
       let excludeTabs = [
@@ -45,17 +35,17 @@ export class TabsComponent implements OnInit {
       let tabLinks = this.getTabLinks().filter((tab) => {
         return !excludeTabs.includes(tab.path);
       });
-      this.tabLinks = tabLinks;
+      return tabLinks;
     } else if (!this.isAdmin) {
       // logged in yet not admin
       let excludeTabs = ['globaldiscoveries'];
-      this.tabLinks = this.getTabLinks().filter((tab) => {
+      return this.getTabLinks().filter((tab) => {
         let stuff = excludeTabs.includes(tab.path);
         return !excludeTabs.includes(tab.path);
       });
     } else {
       // logged in as admin
-      this.tabLinks = this.getTabLinks();
+      return this.getTabLinks();
     }
   }
 

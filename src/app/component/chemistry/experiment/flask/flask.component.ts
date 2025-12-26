@@ -1,4 +1,4 @@
-import { Component, effect, inject, OnInit } from '@angular/core';
+import { Component, effect, inject, linkedSignal, OnInit } from '@angular/core';
 import gsap from 'gsap';
 import { ExperimentService } from 'src/app/service/experiment.service';
 
@@ -6,12 +6,13 @@ import { ExperimentService } from 'src/app/service/experiment.service';
   selector: 'app-flask',
   imports: [],
   templateUrl: './flask.component.html',
-  styleUrl: './flask.component.scss'
+  styleUrl: './flask.component.scss',
 })
 export class FlaskComponent implements OnInit {
+  public experimentService = inject(ExperimentService);
+  private tl = gsap.timeline({ repeat: -1, repeatRefresh: true });
 
-  public experimentService: ExperimentService = inject(ExperimentService)
-  private tl = gsap.timeline({repeat: -1, repeatRefresh: true})
+  expirmentIsActive = linkedSignal(() => this.experimentService.getIsActive());
 
   constructor() {
     effect(() => {
@@ -19,7 +20,7 @@ export class FlaskComponent implements OnInit {
         this.animateBubbles();
         this.tl.resume();
       } else {
-        this.tl.restart().pause()
+        this.tl.restart().pause();
       }
     });
   }
@@ -30,22 +31,27 @@ export class FlaskComponent implements OnInit {
     const numBubbles = 25;
 
     // create numBubbles + 1 bubbles
-    for(let i = 0; i < numBubbles; i++) {
+    for (let i = 0; i < numBubbles; i++) {
       let clone = bubble0.cloneNode() as HTMLElement;
-      clone.id = `bubble${i+1}`
+      clone.id = `bubble${i + 1}`;
       svg.appendChild(clone);
     }
 
-    this.tl.fromTo('.bubble', { opacity: 0, attr: {r: 5} }, {
-      y: -210,
-      duration: "random(3,8)",
-      ease: "sine.inOut",
-      stagger: {each: .1, repeat: -1},
-      opacity: .8,
-      attr: {r: 20},
-      repeat: -1,
-      x: "random(-60, 60, 10)"
-    }, "random(-.2, .6, .2)")
+    this.tl.fromTo(
+      '.bubble',
+      { opacity: 0, attr: { r: 5 } },
+      {
+        y: -210,
+        duration: 'random(3,8)',
+        ease: 'sine.inOut',
+        stagger: { each: 0.1, repeat: -1 },
+        opacity: 0.8,
+        attr: { r: 20 },
+        repeat: -1,
+        x: 'random(-60, 60, 10)',
+      },
+      'random(-.2, .6, .2)'
+    );
   }
 
   ngOnInit(): void {
