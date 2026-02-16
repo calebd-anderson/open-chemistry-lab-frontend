@@ -57,9 +57,7 @@
   </button>
 </nav>
 
-<nav id="main-nav">
-  <app-tabs />
-</nav>
+<app-tabs />
 
 <!-- dynamic routs -->
 <router-outlet></router-outlet>
@@ -69,12 +67,4 @@
 <app-login (newItemEvent)="getLoggedIn($event)"></app-login>
 
 <!-- register modal -->
-<div class="modal fade" id="registerModal" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <app-register></app-register>
-      </div>
-    </div>
-  </div>
-</div>
+<app-register></app-register>
