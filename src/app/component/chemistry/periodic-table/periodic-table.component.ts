@@ -1,7 +1,7 @@
 import { Component, inject, output, Signal } from '@angular/core';
 import { Element } from '../../../model/element.model';
 import { ElementService } from '../../../service/element.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { CommonModule } from '@angular/common';
@@ -49,7 +49,7 @@ export class PeriodicTableComponent {
       this.sendElementMessage.emit(interactedElement);
       this._snackBar.notify(
         NotificationType.DEFAULT,
-        interactedElement.name + ' added to experiment.'
+        interactedElement.name + ' added to experiment.',
       );
     }
   }

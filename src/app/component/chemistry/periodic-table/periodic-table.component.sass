@@ -14,7 +14,7 @@ $otherNonmetalColor: #52ee61
 $nobleGasColor: #759fff
 $unknownColor: #cccccc
 
-.wrapper
+.periodic-table-container
   background: $bgColor
   text-shadow: 0 0 0.4vw currentColor
   position: relative
@@ -36,8 +36,6 @@ $unknownColor: #cccccc
   display: grid
   grid-gap: $gridGap
   grid-template-columns: repeat(18, 1fr)
-
-
 
 // --------------------------------------
 // ELEMENT
@@ -194,7 +192,6 @@ $unknownColor: #cccccc
       &:checked ~ .square
         z-index: 1
 
-
 // --------------------------------------
 // PLACEHOLDER
 .placeholder
@@ -220,7 +217,6 @@ $unknownColor: #cccccc
     align-items: center
     opacity: 0.5
 
-
 // --------------------------------------
 // GAP
 .gap
@@ -240,8 +236,6 @@ $unknownColor: #cccccc
     margin-left: -1px
     color: #fff
     opacity: 0.2
-
-
 
 // --------------------------------------
 // COLORS
@@ -275,8 +269,6 @@ $unknownColor: #cccccc
 .unknown
   color: $unknownColor
 
-
-
 // --------------------------------------
 // ROWS & COLUMNS
 @for $i from 1 through 10
@@ -286,8 +278,6 @@ $unknownColor: #cccccc
 @for $i from 1 through 18
   .c#{$i}
     grid-column: $i
-
-
 
 // --------------------------------------
 // SHIFT EDGE ELEMENTS ON ZOOM
@@ -302,8 +292,6 @@ $unknownColor: #cccccc
 //
 //.c18 input[type="radio"].activate:checked ~ .square
 //  left: -100%
-
-
 
 // --------------------------------------
 // ANIMATIONS
@@ -341,8 +329,6 @@ $unknownColor: #cccccc
   90%
     background-position: -10% 10%
 
-
-
 // --------------------------------------
 // KEY
 .key
@@ -373,7 +359,6 @@ $unknownColor: #cccccc
 
       &:hover
         opacity: 1 !important
-
 
 // --------------------------------------
 // CATEGORY TOGGLES

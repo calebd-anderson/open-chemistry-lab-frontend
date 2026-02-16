@@ -27,7 +27,6 @@
         />
       </button>
     </div>
-
   </div>
 </header>
 
@@ -66,16 +65,8 @@
 <router-outlet></router-outlet>
 
 <!-- login modal -->
-<div class="modal fade" id="loginModal" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <!-- the child newItemEvent of login sends $event to parent getLoggedIn of app-component -->
-        <app-login (newItemEvent)="getLoggedIn($event)"></app-login>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- the child newItemEvent of login sends $event to parent getLoggedIn of app-component -->
+<app-login (newItemEvent)="getLoggedIn($event)"></app-login>
 
 <!-- register modal -->
 <div class="modal fade" id="registerModal" role="dialog" aria-hidden="true">
