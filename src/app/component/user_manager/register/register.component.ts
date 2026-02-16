@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
@@ -7,20 +7,28 @@ import { AuthenticationService } from '../../../service/security/authentication.
 import { NotificationService } from '../../../service/notification.service';
 import { UserRegisterDto } from '../../../model/user-register-dto';
 import { FormsModule } from '@angular/forms';
+import {
+  MatDialog,
+  MatDialogContent,
+  MatDialogModule,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  imports: [FormsModule],
+  imports: [FormsModule, MatDialogContent, MatButtonModule, MatDialogModule],
 })
 export class RegisterComponent implements OnDestroy {
   public showLoading: boolean;
   private subscriptions: Subscription[] = [];
+  readonly dialog = inject(MatDialog);
 
   constructor(
     private authenticationService: AuthenticationService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   public onRegister(user: UserRegisterDto): void {
@@ -28,39 +36,40 @@ export class RegisterComponent implements OnDestroy {
     this.subscriptions.push(
       this.authenticationService.register(user).subscribe({
         next: (response: User) => {
-          document.getElementById('close-register-modal').click();
+          this.dialog.closeAll();
           this.showLoading = false;
           this.sendNotification(
             NotificationType.SUCCESS,
-            `A new account was created for ${response.username}.`
+            `A new account was created for ${response.username}.`,
           );
         },
         error: (errorResponse: HttpErrorResponse) => {
           console.log(errorResponse);
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message
+            errorResponse.error.message,
           );
           this.showLoading = false;
         },
-      })
+      }),
     );
   }
 
   public onClickLogin(): void {
-    document.getElementById('close-register-modal').click();
+    this.dialog.closeAll();
+    this.dialog.open(LoginComponent);
   }
 
   private sendNotification(
     notificationType: NotificationType,
-    message: string
+    message: string,
   ): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
     } else {
       this.notificationService.notify(
         notificationType,
-        'An error occured. Please try again.'
+        'An error occured. Please try again.',
       );
     }
   }

@@ -22,6 +22,7 @@ import {
   MatDialog,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
@@ -56,6 +57,8 @@ export class LoginComponent implements OnDestroy {
 
   public onClickRegister(): void {
     this.dialog.closeAll();
+    this.dialog.afterAllClosed
+    this.dialog.open(RegisterComponent);
   }
 
   public onLogin(userForm: NgForm): void {
