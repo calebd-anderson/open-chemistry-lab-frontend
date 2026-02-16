@@ -4,6 +4,8 @@ import {
   OnDestroy,
   Output,
   EventEmitter,
+  ChangeDetectionStrategy,
+  inject,
 } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -13,24 +15,39 @@ import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { User } from '../../../model/user';
 import { AuthenticationService } from '../../../service/security/authentication.service';
 import { NotificationService } from '../../../service/notification.service';
+import {
+  MatDialogContent,
+  MatDialogActions,
+  MatDialogModule,
+  MatDialog,
+} from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [FormsModule],
+  imports: [
+    FormsModule,
+    MatDialogContent,
+    MatDialogActions,
+    MatButtonModule,
+    MatDialogModule,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnDestroy {
   public showLoading: boolean;
   private subscriptions: Subscription[] = [];
   public isLoggedIn: boolean;
+  readonly dialog = inject(MatDialog);
 
   @Output() newItemEvent = new EventEmitter<User>();
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   private loggedIn(value: User) {
@@ -38,7 +55,7 @@ export class LoginComponent implements OnDestroy {
   }
 
   public onClickRegister(): void {
-    document.getElementById('close-login-modal').click();
+    this.dialog.closeAll();
   }
 
   public onLogin(userForm: NgForm): void {
@@ -51,15 +68,14 @@ export class LoginComponent implements OnDestroy {
           this.authenticationService.saveToken(token);
           this.authenticationService.addUserToLocalCache(response.body);
           this.loggedIn(this.authenticationService.getUserFromLocalCache());
-          document.getElementById('close-login-modal').click();
-          // document.getElementById("navDrawr").click();
+          this.dialog.closeAll();
           this.router.navigateByUrl('lab');
           this.showLoading = false;
           userForm.reset();
           this.authenticationService.setIsLoggedIn(true);
           this.sendNotification(
             NotificationType.SUCCESS,
-            "You've been successfully logged in."
+            "You've been successfully logged in.",
           );
         },
         error: (errorResponse: HttpErrorResponse) => {
@@ -67,24 +83,24 @@ export class LoginComponent implements OnDestroy {
           this.authenticationService.setIsLoggedIn(false);
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message
+            errorResponse.error.message,
           );
           this.showLoading = false;
         },
-      })
+      }),
     );
   }
 
   private sendNotification(
     notificationType: NotificationType,
-    message: string
+    message: string,
   ): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
     } else {
       this.notificationService.notify(
         notificationType,
-        'An error occured. Please try again.'
+        'An error occured. Please try again.',
       );
     }
   }

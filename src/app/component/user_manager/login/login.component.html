@@ -1,106 +1,77 @@
-<div class="modal fade" id="loginModal" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="container">
-          <div class="d-flex justify-content-center h-50">
-            <div class="user_card">
-              <div class="d-flex justify-content-center">
-                <div style="margin-top: 10px; margin-bottom: -90px">
-                  <h3>ChemLab Login Portal</h3>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center form_container">
-                <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
-                  <div class="input-group">
-                    <div class="input-group-append">
-                      <span class="input-group-text"
-                        ><i class="fa fa-user"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="text"
-                      class="form-control"
-                      name="username"
-                      placeholder="Username"
-                      ngModel
-                      #usernameInput="ngModel"
-                      required
-                    />
-                  </div>
-                  @if (usernameInput.invalid && usernameInput.touched) {
-                    <span class="help-block" style="color: red"
-                      >Please enter a username</span
-                    >
-                  }
-                  <div class="input-group mb-2">
-                    <div class="input-group-append">
-                      <span class="input-group-text"
-                        ><i class="fa fa-key"></i
-                      ></span>
-                    </div>
-                    <input
-                      type="password"
-                      class="form-control"
-                      name="password"
-                      placeholder="Password"
-                      ngModel
-                      #passwordInput="ngModel"
-                      required
-                    />
-                  </div>
-                  @if (passwordInput.invalid && passwordInput.touched) {
-                    <span class="help-block" style="color: red"
-                      >Please enter a password.</span
-                    >
-                  }
-                  <div
-                    class="d-flex justify-content-center mt-3 login_container"
-                  >
-                    <button
-                      type="submit"
-                      [disabled]="loginForm.invalid || showLoading"
-                      name="button"
-                      class="btn login_btn"
-                    >
-                      @if (showLoading) {
-                        <i class="fa fa-spinner fa-spin"></i>
-                      }
-                      &nbsp;&nbsp;
-                      @if (showLoading) {
-                        <span>Loading...</span>
-                      }
-                      @if (!showLoading) {
-                        <span>Login</span>
-                      }
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div class="mt-4 modal-footer">
-                <div class="d-flex justify-content-center links">
-                  Don't have an account?
-                  <a
-                    data-bs-toggle="modal"
-                    data-bs-target="#registerModal"
-                    (click)="onClickRegister()"
-                    class="ml-2"
-                    >Sign Up</a
-                  >
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                  id="close-login-modal"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
+<section>
+  <h3 mat-dialog-title>ChemLab Login Portal</h3>
+  <mat-dialog-content class="mat-typography">
+    <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+      <div class="input-group">
+        <div class="input-group-append">
+          <span class="input-group-text"><i class="fa fa-user"></i></span>
         </div>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          placeholder="Username"
+          ngModel
+          #usernameInput="ngModel"
+          required
+        />
       </div>
+      @if (usernameInput.invalid && usernameInput.touched) {
+        <span class="help-block" style="color: red"
+          >Please enter a username</span
+        >
+      }
+      <div class="input-group mb-2">
+        <div class="input-group-append">
+          <span class="input-group-text"><i class="fa fa-key"></i></span>
+        </div>
+        <input
+          type="password"
+          class="form-control"
+          name="password"
+          placeholder="Password"
+          ngModel
+          #passwordInput="ngModel"
+          required
+        />
+      </div>
+      @if (passwordInput.invalid && passwordInput.touched) {
+        <span class="help-block" style="color: red"
+          >Please enter a password.</span
+        >
+      }
+      <div class="d-flex justify-content-center mt-3 login_container">
+        <button
+          type="submit"
+          [disabled]="loginForm.invalid || showLoading"
+          name="button"
+          class="btn login_btn"
+        >
+          @if (showLoading) {
+            <i class="fa fa-spinner fa-spin"></i>
+          }
+          &nbsp;&nbsp;
+          @if (showLoading) {
+            <span>Loading...</span>
+          }
+          @if (!showLoading) {
+            <span>Login</span>
+          }
+        </button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="d-flex justify-content-center links">
+      Don't have an account?
+      <a
+        data-bs-toggle="modal"
+        data-bs-target="#registerModal"
+        (click)="onClickRegister()"
+        class="ml-2"
+        >Sign Up</a
+      >
     </div>
-  </div>
-</div>
+    <button matButton mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</section>

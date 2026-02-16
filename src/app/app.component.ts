@@ -64,6 +64,10 @@ export class AppComponent implements OnInit {
     this.dialog.open(WelcomeComponent);
   }
 
+  openLogin() {
+    this.dialog.open(LoginComponent);
+  }
+
   openDialog() {
     this.dialog.open(WelcomeComponent);
   }

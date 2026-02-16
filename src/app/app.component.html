@@ -6,9 +6,8 @@
   <div id="user-controls">
     <div>
       <button
+        (click)="openLogin()"
         class="login-btn"
-        data-bs-toggle="modal"
-        data-bs-target="#loginModal"
         [hidden]="authenticationService.getIsLoggedIn()"
         type="button"
       >
@@ -61,10 +60,6 @@
 
 <!-- dynamic routs -->
 <router-outlet></router-outlet>
-
-<!-- login modal -->
-<!-- the child newItemEvent of login sends $event to parent getLoggedIn of app-component -->
-<app-login (newItemEvent)="getLoggedIn($event)"></app-login>
 
 <!-- register modal -->
 <app-register></app-register>
