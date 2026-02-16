@@ -7,7 +7,6 @@ import { AuthorizationService } from './service/security/authorization.service';
 import { NotificationService } from './service/notification.service';
 import { WelcomeComponent } from './component/welcome/welcome.component';
 import { MatDialog } from '@angular/material/dialog';
-import { RegisterComponent } from './component/user_manager/register/register.component';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { LoginComponent } from './component/user_manager/login/login.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -23,11 +22,9 @@ import { AdminIcon } from './admin.component.svg';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   imports: [
-    RegisterComponent,
     MatButtonModule,
     MatSidenavModule,
     TabsComponent,
-    LoginComponent,
     RouterOutlet,
     RouterLink,
     MatIconModule,
