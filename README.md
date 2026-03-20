@@ -1,7 +1,19 @@
 # Open Chemistry Lab
 The frontend for the [open-chemistry-lab-backend](https://github.com/calebd-anderson/open-chemistry-lab-backend).
-## Angular
+
+## Environment Setup
+[Node](https://nodejs.org/en/download) v. 22  
+- `nvm`
+  - Mac/Linux
+https://github.com/nvm-sh/nvm
+  - Windows
+https://github.com/coreybutler/nvm-windows
+- The JS package manager is [npm](https://www.npmjs.com/)
+
+## Angular 20
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5 and has been upgraded to [Angular 20](https://v20.angular.dev/overview).
+
+- [Angular CLI installation](https://v20.angular.dev/installation)
 
 ### Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -35,11 +47,10 @@ Bootstrap (v. 5.3.8) is used.
 - [Theming](https://material.angular.dev/guide/theming)
 
 ## Credits
-- Periodic Table CSS
-  - https://codepen.io/mikegolus/pen/OwrPgB
+- [Periodic Table CSS](https://codepen.io/mikegolus/pen/OwrPgB)
 - Animations with [GSAP](https://gsap.com/)
 
-## Other notable periodic tables on the internet
+## Other periodic table projects
 - https://github.com/tamalchowdhury/periodic-table
 - https://github.com/FlorianFe/Elements
 - https://pubchem.ncbi.nlm.nih.gov/periodic-table
