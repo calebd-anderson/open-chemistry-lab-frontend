@@ -3,8 +3,14 @@
   "compileOnSave": false,
   "compilerOptions": {
     "resolveJsonModule": true,
-    "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    // "baseUrl": "./",
+    // "outDir": "./dist/out-tsc",
+    "paths": {
+      "*": ["./*"],
+      // Every other path now has an explicit common prefix:
+      // "@app/*": ["./src/app/*"],
+      // "@lib/*": ["./src/lib/*"],
+    },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
