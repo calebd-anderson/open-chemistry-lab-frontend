@@ -4,3 +4,11 @@
   margin-top: 2rem;
   color: var(--loading-color, #666);
 }
+
+.loading div {
+  margin: 0 0 1.5em 0;
+}
+
+mat-spinner {
+  display: inline-block;
+}
