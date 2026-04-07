@@ -1,15 +1,11 @@
-<div>
-  <div>
-    <div>
-      <h3 mat-dialog-title>Create Account</h3>
-    </div>
-  </div>
+<section>
+  <h3 mat-dialog-title>Create Account</h3>
   <mat-dialog-content class="mat-typography">
     <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm.value)">
-      <div class="input-group mb-3">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
-        </div>
+      <div class="input-group mb-2">
+        <mat-label class="input-group-text">
+          <i class="fa fa-user"></i>
+        </mat-label>
         <input
           type="text"
           class="form-control"
@@ -25,10 +21,11 @@
           >Please enter a first name</span
         >
       }
+
       <div class="input-group mb-3">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
-        </div>
+        <mat-label class="input-group-text"
+          ><i class="fa fa-user"></i>
+        </mat-label>
         <input
           type="text"
           class="form-control"
@@ -44,10 +41,11 @@
           >Please enter a last name</span
         >
       }
-      <div class="input-group mb-3">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-id-card"></i></span>
-        </div>
+
+      <div class="input-group mb-2">
+        <mat-label class="input-group-text"
+          ><i class="fa fa-id-card"></i
+        ></mat-label>
         <input
           type="text"
           class="form-control"
@@ -63,11 +61,12 @@
           >Please enter a username</span
         >
       }
+
       <!-- email -->
       <div class="input-group mb-2">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-        </div>
+        <mat-label class="input-group-text"
+          ><i class="fa fa-envelope"></i
+        ></mat-label>
         <input
           type="email"
           class="form-control"
@@ -85,9 +84,9 @@
       }
       <!-- password -->
       <div class="input-group mb-2">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-key"></i></span>
-        </div>
+        <mat-label class="input-group-text"
+          ><i class="fa fa-key"></i
+        ></mat-label>
         <input
           type="password"
           class="form-control"
@@ -126,10 +125,7 @@
     </form>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <div class="d-flex justify-content-center links">
       Already have an account?
-      <a (click)="onClickLogin()">Log In</a>
-    </div>
-    <button matButton mat-dialog-close>Close</button>
+      <button matButton (click)="onClickLogin()">Log In</button>
   </mat-dialog-actions>
-</div>
+</section>

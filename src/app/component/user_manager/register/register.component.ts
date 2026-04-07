@@ -14,12 +14,20 @@ import {
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginComponent } from '../login/login.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-  imports: [FormsModule, MatDialogContent, MatButtonModule, MatDialogModule],
+  imports: [
+    FormsModule,
+    MatDialogContent,
+    MatButtonModule,
+    MatDialogModule,
+    // MatDialogActions,
+    MatFormFieldModule
+  ],
 })
 export class RegisterComponent implements OnDestroy {
   public showLoading: boolean;
