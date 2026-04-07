@@ -1,4 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  WritableSignal,
+  inject,
+  signal,
+} from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NotificationType } from './model/enum/notification-type.enum';
 import { User } from './model/user';
@@ -37,11 +43,12 @@ import { AdminIcon } from './admin.component.svg';
 export class AppComponent implements OnInit {
   title = 'Chem Lab';
 
-  public user: User;
+  readonly user: WritableSignal<User> = signal<User>(new User());
+
   public isLoggedIn: boolean;
 
   public authenticationService: AuthenticationService = inject(
-    AuthenticationService
+    AuthenticationService,
   );
   private authorizationService: AuthorizationService =
     inject(AuthorizationService);
@@ -56,13 +63,24 @@ export class AppComponent implements OnInit {
     if (loginStatus) {
       this.isLoggedIn = true;
       let user: User = this.authenticationService.getUserFromLocalCache();
-      this.user = user;
+      this.user.set(user);
     }
     this.dialog.open(WelcomeComponent);
   }
 
   openLogin() {
-    this.dialog.open(LoginComponent);
+    const dialogRef = this.dialog.open(LoginComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        this.isLoggedIn = true;
+        this.user.set(result);
+        this.sendNotification(
+          NotificationType.SUCCESS,
+          "You've been successfully logged in.",
+        );
+      }
+    });
   }
 
   openDialog() {
@@ -70,7 +88,7 @@ export class AppComponent implements OnInit {
   }
 
   getLoggedIn(newItem: User) {
-    this.user = newItem;
+    this.user.set(newItem);
     this.isLoggedIn = true;
   }
 
@@ -82,12 +100,12 @@ export class AppComponent implements OnInit {
   public onClickLogout(): void {
     this.authenticationService.logOut();
     this.isLoggedIn = false;
-    this.user = null;
+    this.user.set(null);
     this.router.navigate(['lab']);
     this.openMenu();
     this.sendNotification(
       NotificationType.SUCCESS,
-      "You've been successfully logged out."
+      "You've been successfully logged out.",
     );
   }
 
@@ -98,14 +116,14 @@ export class AppComponent implements OnInit {
 
   private sendNotification(
     notificationType: NotificationType,
-    message: string
+    message: string,
   ): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
     } else {
       this.notificationService.notify(
         notificationType,
-        'An error occured. Please try again.'
+        'An error occured. Please try again.',
       );
     }
   }

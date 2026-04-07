@@ -1,11 +1,12 @@
 <section>
   <h3 mat-dialog-title>ChemLab Login Portal</h3>
-  <mat-dialog-content class="mat-typography">
+  <mat-dialog-content class="mat-typography login_container">
     <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
       <div class="input-group">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-user"></i></span>
-        </div>
+        <!-- <mat-form-field> -->
+        <mat-label class="input-group-text"
+          ><i class="fa fa-user"></i
+        ></mat-label>
         <input
           type="text"
           class="form-control"
@@ -14,17 +15,17 @@
           ngModel
           #usernameInput="ngModel"
           required
+          matInput
         />
-      </div>
-      @if (usernameInput.invalid && usernameInput.touched) {
-        <span class="help-block" style="color: red"
-          >Please enter a username</span
-        >
-      }
-      <div class="input-group mb-2">
-        <div class="input-group-append">
-          <span class="input-group-text"><i class="fa fa-key"></i></span>
-        </div>
+        <!-- </mat-form-field> -->
+        @if (usernameInput.invalid && usernameInput.touched) {
+          <span class="help-block" style="color: red"
+            >Please enter a username</span
+          >
+        }
+        <mat-label class="input-group-text"
+          ><i class="fa fa-key"></i
+        ></mat-label>
         <input
           type="password"
           class="form-control"
@@ -34,13 +35,14 @@
           #passwordInput="ngModel"
           required
         />
+        @if (passwordInput.invalid && passwordInput.touched) {
+          <span class="help-block" style="color: red"
+            >Please enter a password.</span
+          >
+        }
       </div>
-      @if (passwordInput.invalid && passwordInput.touched) {
-        <span class="help-block" style="color: red"
-          >Please enter a password.</span
-        >
-      }
-      <div class="d-flex justify-content-center mt-3 login_container">
+
+      <div class="d-flex justify-content-center mt-3">
         <button
           type="submit"
           [disabled]="loginForm.invalid || showLoading"
@@ -64,10 +66,7 @@
   <mat-dialog-actions>
     <div class="d-flex justify-content-center links">
       Don't have an account?
-      <a
-        (click)="onClickRegister()"
-        >Sign Up</a
-      >
+      <a (click)="onClickRegister()">Sign Up</a>
     </div>
     <button matButton mat-dialog-close>Close</button>
   </mat-dialog-actions>

@@ -4,13 +4,8 @@
   <h1>The Open Chemistry Lab</h1>
 
   <div id="user-controls">
-    <div>
-      <button
-        (click)="openLogin()"
-        class="login-btn"
-        [hidden]="authenticationService.getIsLoggedIn()"
-        type="button"
-      >
+    <div [hidden]="authenticationService.getIsLoggedIn()">
+      <button (click)="openLogin()" class="login-btn" type="button">
         Login
       </button>
     </div>
@@ -20,7 +15,7 @@
         <img
           height="40"
           width="40"
-          src="{{ user?.profileImgUrl }}"
+          src="{{ user()?.profileImgUrl }}"
           class="rounded-circle img-fluid img-thumbnail"
           alt="profile image"
         />
@@ -31,7 +26,7 @@
 
 <nav id="user-nav-menu">
   <div id="nav-item1">
-    <span>{{ user?.firstName }}</span>
+    <span>{{ user()?.firstName }}</span>
     <button id="close-menu-button" (click)="openMenu()">
       <svg close-icon></svg>
     </button>

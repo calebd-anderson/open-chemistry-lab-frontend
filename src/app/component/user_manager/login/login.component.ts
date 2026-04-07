@@ -2,9 +2,6 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import {
   Component,
   OnDestroy,
-  Output,
-  EventEmitter,
-  ChangeDetectionStrategy,
   inject,
 } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
@@ -20,30 +17,37 @@ import {
   MatDialogActions,
   MatDialogModule,
   MatDialog,
+  MatDialogRef,
+  MatDialogClose,
 } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { RegisterComponent } from '../register/register.component';
+
+export interface DialogData {
+  user: User;
+}
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   imports: [
+    MatFormFieldModule,
     FormsModule,
     MatDialogContent,
     MatDialogActions,
     MatButtonModule,
     MatDialogModule,
+    MatDialogClose,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent implements OnDestroy {
   public showLoading: boolean;
   private subscriptions: Subscription[] = [];
   public isLoggedIn: boolean;
   readonly dialog = inject(MatDialog);
-
-  @Output() newItemEvent = new EventEmitter<User>();
+  readonly dialogRef = inject(MatDialogRef<LoginComponent>);
 
   constructor(
     private router: Router,
@@ -51,13 +55,9 @@ export class LoginComponent implements OnDestroy {
     private notificationService: NotificationService,
   ) {}
 
-  private loggedIn(value: User) {
-    this.newItemEvent.emit(value);
-  }
-
   public onClickRegister(): void {
     this.dialog.closeAll();
-    this.dialog.afterAllClosed
+    this.dialog.afterAllClosed;
     this.dialog.open(RegisterComponent);
   }
 
@@ -66,23 +66,17 @@ export class LoginComponent implements OnDestroy {
     this.subscriptions.push(
       this.authenticationService.login(userForm.value).subscribe({
         next: (response: HttpResponse<User>) => {
-          // token
           const token = response.headers.get(HeaderType.JWT_TOKEN);
+          const user: User = response.body;
           this.authenticationService.saveToken(token);
-          this.authenticationService.addUserToLocalCache(response.body);
-          this.loggedIn(this.authenticationService.getUserFromLocalCache());
-          this.dialog.closeAll();
+          this.authenticationService.addUserToLocalCache(user);
+          this.dialogRef.close(user);
           this.router.navigateByUrl('lab');
           this.showLoading = false;
           userForm.reset();
           this.authenticationService.setIsLoggedIn(true);
-          this.sendNotification(
-            NotificationType.SUCCESS,
-            "You've been successfully logged in.",
-          );
         },
         error: (errorResponse: HttpErrorResponse) => {
-          // console.log(errorResponse);
           this.authenticationService.setIsLoggedIn(false);
           this.sendNotification(
             NotificationType.ERROR,
