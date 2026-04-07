@@ -17,11 +17,6 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
-import { RegisterComponent } from '../register/register.component';
-
-export interface DialogData {
-  user: User;
-}
 
 @Component({
   selector: 'app-login',
@@ -50,9 +45,7 @@ export class LoginComponent implements OnDestroy {
   ) {}
 
   public onClickRegister(): void {
-    this.dialog.closeAll();
-    this.dialog.afterAllClosed;
-    this.dialog.open(RegisterComponent);
+    this.dialogRef.close('register');
   }
 
   public onLogin(userForm: NgForm): void {

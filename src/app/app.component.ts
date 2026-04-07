@@ -22,6 +22,7 @@ import { ChemLogo as ChemLogo } from './logo.component';
 import { CloseIcon } from './close.component.svg';
 import { LogoutIcon } from './logout.component.svg';
 import { AdminIcon } from './admin.component.svg';
+import { RegisterComponent } from './component/user_manager/register/register.component';
 
 @Component({
   selector: 'app-root',
@@ -70,11 +71,21 @@ export class AppComponent implements OnInit {
 
   openLogin() {
     const dialogRef = this.dialog.open(LoginComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined) {
+      if (typeof result == 'object') {
         this.isLoggedIn = true;
         this.user.set(result);
+      } else if (result === 'register') {
+        this.openRegister();
+      } 
+    });
+  }
+
+  openRegister() {
+    const dialogRef = this.dialog.open(RegisterComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result !== undefined) {
+        this.openLogin();
       }
     });
   }

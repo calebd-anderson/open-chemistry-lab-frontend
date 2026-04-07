@@ -11,6 +11,7 @@ import {
   MatDialog,
   MatDialogContent,
   MatDialogModule,
+  MatDialogRef,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginComponent } from '../login/login.component';
@@ -25,14 +26,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogContent,
     MatButtonModule,
     MatDialogModule,
-    // MatDialogActions,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
 })
 export class RegisterComponent implements OnDestroy {
   public showLoading: boolean;
   private subscriptions: Subscription[] = [];
   readonly dialog = inject(MatDialog);
+  readonly dialogRef = inject(MatDialogRef<RegisterComponent>);
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -44,12 +45,12 @@ export class RegisterComponent implements OnDestroy {
     this.subscriptions.push(
       this.authenticationService.register(user).subscribe({
         next: (response: User) => {
-          this.dialog.closeAll();
-          this.showLoading = false;
           this.sendNotification(
             NotificationType.SUCCESS,
-            `A new account was created for ${response.username}.`,
+            `A new account was created for ${response.username}. Please login to continue.`,
           );
+          this.dialogRef.close(response);
+          this.showLoading = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
           console.log(errorResponse);
@@ -64,8 +65,7 @@ export class RegisterComponent implements OnDestroy {
   }
 
   public onClickLogin(): void {
-    this.dialog.closeAll();
-    this.dialog.open(LoginComponent);
+    this.dialogRef.close('login');
   }
 
   private sendNotification(
