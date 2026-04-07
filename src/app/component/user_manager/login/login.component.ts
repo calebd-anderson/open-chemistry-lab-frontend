@@ -1,9 +1,5 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import {
-  Component,
-  OnDestroy,
-  inject,
-} from '@angular/core';
+import { Component, OnDestroy, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -68,11 +64,15 @@ export class LoginComponent implements OnDestroy {
           const user: User = response.body;
           this.authenticationService.saveToken(token);
           this.authenticationService.addUserToLocalCache(user);
-          this.dialogRef.close(user);
           this.router.navigateByUrl('lab');
-          this.showLoading = false;
           userForm.reset();
           this.authenticationService.setIsLoggedIn(true);
+          this.sendNotification(
+            NotificationType.SUCCESS,
+            "You've been successfully logged in.",
+          );
+          this.dialogRef.close(user);
+          this.showLoading = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.authenticationService.setIsLoggedIn(false);

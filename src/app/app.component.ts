@@ -75,10 +75,6 @@ export class AppComponent implements OnInit {
       if (result !== undefined) {
         this.isLoggedIn = true;
         this.user.set(result);
-        this.sendNotification(
-          NotificationType.SUCCESS,
-          "You've been successfully logged in.",
-        );
       }
     });
   }
