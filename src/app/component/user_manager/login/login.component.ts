@@ -18,7 +18,6 @@ import {
   MatDialogModule,
   MatDialog,
   MatDialogRef,
-  MatDialogClose,
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -39,7 +38,6 @@ export interface DialogData {
     MatDialogActions,
     MatButtonModule,
     MatDialogModule,
-    MatDialogClose,
   ],
 })
 export class LoginComponent implements OnDestroy {
