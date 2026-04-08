@@ -7,7 +7,7 @@
 :root {
   @include mat.theme(
     (color: mat.$blue-palette, typography: Roboto, density: 0),
-    $overrides: (surface: #091324, on-surface: #fff)
+    // $overrides: (surface: #091324, on-surface: #fff)
   );
 }
 
