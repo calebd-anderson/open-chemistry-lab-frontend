@@ -1,4 +1,4 @@
-import { Component, inject, output, signal, Signal } from '@angular/core';
+import { Component, inject, output, signal, Signal, WritableSignal } from '@angular/core';
 import { Element } from '../../../model/element.model';
 import { ElementService } from '../../../service/element.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -16,7 +16,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class PeriodicTableComponent {
   elementService = inject(ElementService);
 
-  elements: Signal<Element[]> = signal(this.elementService.getElements());
+  elements = signal<Element[]>([]);
 
   pageTitle: string = 'Lab';
   added: number = 0;
@@ -37,6 +37,10 @@ export class PeriodicTableComponent {
   sendElementMessage = output<Element>();
 
   private _snackBar: NotificationService = inject(NotificationService);
+
+  async ngOnInit() {
+    this.elements.set(await this.elementService.getElements());
+  }
 
   public selectElement(event: MouseEvent) {
     const element = event.target as HTMLElement;
