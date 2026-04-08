@@ -10,7 +10,7 @@ https://github.com/nvm-sh/nvm
 https://github.com/coreybutler/nvm-windows
 - The JS package manager is [npm](https://www.npmjs.com/)
 
-## Angular 20
+## Angular 21
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5 and has been upgraded to [Angular 21](https://v21.angular.dev/overview).
 
 - [Angular CLI installation](https://v20.angular.dev/installation)
