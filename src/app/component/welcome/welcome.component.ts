@@ -1,12 +1,32 @@
-import {ChangeDetectionStrategy, Component } from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDialogModule} from '@angular/material/dialog';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-welcome',
   imports: [MatButtonModule, MatDialogModule],
-  templateUrl: './welcome.component.html',
-  styleUrl: './welcome.component.scss',
+  template: `
+    <section id="welcom-dialog">
+      <h2 mat-dialog-title>Welcome to the Open Chemistry Lab</h2>
+      <mat-dialog-content class="mat-typography">
+        <h3>What is the Open Chemistry Lab?</h3>
+        <p>
+          This is an educational application that allows anyone to interactively
+          experiment with the periodic table of elements.
+        </p>
+
+        <h3>Creating an account:</h3>
+        <p>With an account your experiemts are saved with you.</p>
+        <p>
+          To create an account, click login in the top right, then click sign
+          up.
+        </p>
+      </mat-dialog-content>
+      <mat-dialog-actions>
+        <button matButton mat-dialog-close>Close</button>
+      </mat-dialog-actions>
+    </section>
+  `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WelcomeComponent {}
