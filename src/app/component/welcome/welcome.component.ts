@@ -11,8 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog';
       <mat-dialog-content class="mat-typography">
         <h3>What is the Open Chemistry Lab?</h3>
         <p>
-          This is an educational application that allows anyone to interactively
-          experiment with the periodic table of elements.
+          This is an educational application that allows anyone to experiment
+          with an interactive periodic table of elements.
         </p>
 
         <h3>Creating an account:</h3>
