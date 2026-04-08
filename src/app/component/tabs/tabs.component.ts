@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.scss'],
   imports: [MatTabNavPanel, MatTabsModule, RouterModule],
 })
 export class TabsComponent {
@@ -40,7 +39,6 @@ export class TabsComponent {
       // logged in yet not admin
       let excludeTabs = ['globaldiscoveries'];
       return this.getTabLinks().filter((tab) => {
-        let stuff = excludeTabs.includes(tab.path);
         return !excludeTabs.includes(tab.path);
       });
     } else {
@@ -53,7 +51,7 @@ export class TabsComponent {
     return [
       {
         path: 'lab',
-        label: 'Lab',
+        label: 'Interactive Periodic Table',
       },
       {
         path: 'globaldiscoveries',

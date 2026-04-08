@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { AuthenticationGuard } from './service/security/guard/authentication.guard';
-import { PeriodicTableComponent } from './component/chemistry/periodic-table/periodic-table.component';
 import { UserComponent } from './component/user_manager/user/user.component';
 import { QuizComponent } from './component/game/quiz/quiz.component';
 import { FlashcardComponent } from './component/game/flashcard/flashcard.component';
@@ -20,5 +19,5 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
   { path: 'quiz', component: QuizComponent, canActivate: [AuthenticationGuard] },
   { path: 'flashcard', component: FlashcardComponent, canActivate: [AuthenticationGuard] },
-  { path: '', redirectTo: 'lab', pathMatch: 'full' }
+  { path: '', redirectTo: 'about', pathMatch: 'full' }
 ]

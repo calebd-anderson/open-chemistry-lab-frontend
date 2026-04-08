@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(
     httpRequest: HttpRequest<any>,
-    HttpHandler: HttpHandler
+    HttpHandler: HttpHandler,
   ): Observable<HttpEvent<any>> {
     if (
       httpRequest.url.includes(`${this.authenticationService.host}/user/login`)
@@ -23,7 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
     if (
       httpRequest.url.includes(
-        `${this.authenticationService.host}/user/register`
+        `${this.authenticationService.host}/user/register`,
       )
     ) {
       return HttpHandler.handle(httpRequest);
@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = this.authenticationService.getToken();
     if (token)
       return HttpHandler.handle(
-        httpRequest.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+        httpRequest.clone({ setHeaders: { Authorization: `Bearer ${token}` } }),
       );
     return HttpHandler.handle(httpRequest.clone());
   }

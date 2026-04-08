@@ -28,10 +28,10 @@ export class AuthorizationGuard {
     if (this.authorizationService.isAdmin) {
       return true;
     }
-    this.router.navigate(['/main/periodictable']);
+    this.router.navigate(['/lab']);
     this.notificationService.notify(
       NotificationType.ERROR,
-      'You are not authorizaed to access this page.'.toUpperCase()
+      'You are not authorizaed to access that page.'.toUpperCase()
     );
     return false;
   }

@@ -42,7 +42,6 @@ import { RegisterComponent } from './component/user_manager/register/register.co
   ],
 })
 export class AppComponent implements OnInit {
-  title = 'Chem Lab';
 
   readonly user: WritableSignal<User> = signal<User>(new User());
 

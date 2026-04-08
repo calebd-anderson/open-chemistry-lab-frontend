@@ -28,10 +28,10 @@ export class AuthenticationGuard {
     if (this.authenticationService.isUserLoggedIn()) {
       return true;
     }
-    this.router.navigate(['/main/periodictable']);
+    this.router.navigate(['/lab']);
     this.notificationService.notify(
       NotificationType.ERROR,
-      'You need to login to access this page.'.toUpperCase()
+      'You need to login to access that page.'.toUpperCase()
     );
     return false;
   }
