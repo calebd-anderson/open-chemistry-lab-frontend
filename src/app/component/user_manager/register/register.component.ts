@@ -14,13 +14,12 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import { LoginComponent } from '../login/login.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  styleUrls: ['../login_modal.component.scss'],
   imports: [
     FormsModule,
     MatDialogContent,
