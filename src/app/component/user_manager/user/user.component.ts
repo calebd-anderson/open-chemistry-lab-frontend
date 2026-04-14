@@ -21,7 +21,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
   imports: [CommonModule, FormsModule],
 })
 export class UserComponent implements OnInit, OnDestroy {
@@ -41,7 +40,7 @@ export class UserComponent implements OnInit, OnDestroy {
     private router: Router,
     private authenticationService: AuthenticationService,
     private userService: UserService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {
@@ -64,17 +63,17 @@ export class UserComponent implements OnInit, OnDestroy {
           if (showNotification) {
             this.sendNotification(
               NotificationType.SUCCESS,
-              `${response.length} user(s) loaded successfully.`
+              `${response.length} user(s) loaded successfully.`,
             );
           }
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message
+            errorResponse.error.message,
           );
         },
-      })
+      }),
     );
   }
 
@@ -96,7 +95,7 @@ export class UserComponent implements OnInit, OnDestroy {
     const formData = this.userService.createUserFormData(
       null,
       userForm.value,
-      this.profileImg
+      this.profileImg,
     );
     this.subs.add(
       this.userService.addUser(formData).subscribe({
@@ -108,16 +107,16 @@ export class UserComponent implements OnInit, OnDestroy {
           userForm.reset();
           this.sendNotification(
             NotificationType.SUCCESS,
-            `${response.firstName} ${response.lastName} added successfully.`
+            `${response.firstName} ${response.lastName} added successfully.`,
           );
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message
+            errorResponse.error.message,
           );
         },
-      })
+      }),
     );
   }
 
@@ -125,7 +124,7 @@ export class UserComponent implements OnInit, OnDestroy {
     const formData = this.userService.createEditUserFormData(
       this.editUser.userId,
       this.editUser,
-      this.profileImg
+      this.profileImg,
     );
     this.subs.add(
       this.userService.editUser(formData).subscribe({
@@ -136,16 +135,16 @@ export class UserComponent implements OnInit, OnDestroy {
           this.profileImg = null;
           this.sendNotification(
             NotificationType.SUCCESS,
-            `${response.firstName} ${response.lastName} updated successfully.`
+            `${response.firstName} ${response.lastName} updated successfully.`,
           );
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message
+            errorResponse.error.message,
           );
         },
-      })
+      }),
     );
   }
 
@@ -154,7 +153,7 @@ export class UserComponent implements OnInit, OnDestroy {
     const formData = this.userService.createUserFormData(
       this.currentUsername,
       user,
-      this.profileImg
+      this.profileImg,
     );
     this.subs.add(
       this.userService.updateUser(formData).subscribe({
@@ -166,18 +165,18 @@ export class UserComponent implements OnInit, OnDestroy {
           this.authenticationService.updateUser(response);
           this.sendNotification(
             NotificationType.SUCCESS,
-            `${response.firstName} ${response.lastName} updated successfully.`
+            `${response.firstName} ${response.lastName} updated successfully.`,
           );
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message
+            errorResponse.error.message,
           );
           this.refreshing = true;
           this.profileImg = null;
         },
-      })
+      }),
     );
   }
 
@@ -193,11 +192,11 @@ export class UserComponent implements OnInit, OnDestroy {
         error: (errorResponse: HttpErrorResponse) => {
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message
+            errorResponse.error.message,
           );
           this.fileStatus.status = 'done';
         },
-      })
+      }),
     );
   }
 
@@ -205,7 +204,7 @@ export class UserComponent implements OnInit, OnDestroy {
     switch (event.type) {
       case HttpEventType.UploadProgress:
         this.fileStatus.percentage = Math.round(
-          (100 * event.loaded) / event.total
+          (100 * event.loaded) / event.total,
         );
         this.fileStatus.status = 'progress';
         break;
@@ -216,14 +215,14 @@ export class UserComponent implements OnInit, OnDestroy {
           }?time=${new Date().getTime()}`;
           this.sendNotification(
             NotificationType.SUCCESS,
-            `${event.body.firstName}\'s profile image updated successfully.`
+            `${event.body.firstName}\'s profile image updated successfully.`,
           );
           this.fileStatus.status = 'done';
           break;
         } else {
           this.sendNotification(
             NotificationType.ERROR,
-            'Unable to upload image. Please try again.'
+            'Unable to upload image. Please try again.',
           );
           break;
         }
@@ -241,7 +240,7 @@ export class UserComponent implements OnInit, OnDestroy {
     // this.loggedInUser.emit(null);
     this.sendNotification(
       NotificationType.SUCCESS,
-      "You've been successfully logged out."
+      "You've been successfully logged out.",
     );
     this.router.navigate(['lab']);
   }
@@ -279,10 +278,10 @@ export class UserComponent implements OnInit, OnDestroy {
         error: (errorResponse: HttpErrorResponse) => {
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message
+            errorResponse.error.message,
           );
         },
-      })
+      }),
     );
   }
 
@@ -300,7 +299,7 @@ export class UserComponent implements OnInit, OnDestroy {
           this.refreshing = false;
         },
         complete: () => emailForm.reset(),
-      })
+      }),
     );
   }
 
@@ -325,14 +324,14 @@ export class UserComponent implements OnInit, OnDestroy {
 
   private sendNotification(
     notificationType: NotificationType,
-    message: string
+    message: string,
   ): void {
     if (message) {
       this.notificationService.notify(notificationType, message);
     } else {
       this.notificationService.notify(
         notificationType,
-        'An error occured. Please try again.'
+        'An error occured. Please try again.',
       );
     }
   }
