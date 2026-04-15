@@ -18,7 +18,7 @@ import { NotificationService } from '../../../service/notification.service';
 import { UserService } from '../../../service/user.service';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from '../users/users.component';
-import { AuthorizationService } from 'src/app/service/security/authorization.service';
+import { AuthorizationService } from '@app/service/security/authorization.service';
 
 @Component({
   selector: 'app-user',
@@ -32,9 +32,8 @@ export class UserComponent implements OnInit, OnDestroy {
   public titleAction$ = this.titleSubject.asObservable();
   public user: User;
   public selectedUser: User;
-  public fileName: string;
   public profileImg: File;
-  public editUser = new User();
+
   public fileStatus = new FileUploadStatus();
   public isAdmin = this.authorizationService.isAdmin;
   public isManager = this.authorizationService.isManager;
@@ -55,16 +54,6 @@ export class UserComponent implements OnInit, OnDestroy {
     this.titleSubject.next(title);
   }
 
-  public onSelectUser(selectedUser: User): void {
-    this.selectedUser = selectedUser;
-    this.clickButton('openUserInfo');
-  }
-
-  public onProfileImageChange(fileName: string, profileImag: File): void {
-    this.fileName = fileName;
-    this.profileImg = profileImag;
-  }
-
   public saveNewUser(): void {
     this.clickButton('new-user-save');
   }
@@ -80,40 +69,12 @@ export class UserComponent implements OnInit, OnDestroy {
         next: (response: User) => {
           this.clickButton('new-user-close');
           // this.getUsers(false);
-          this.fileName = null;
-          this.profileImg = null;
+          // this.fileName = null;
+          // this.profileImg = null;
           userForm.reset();
           this.notificationService.notify(
             NotificationType.SUCCESS,
             `${response.firstName} ${response.lastName} added successfully.`,
-          );
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          this.notificationService.notify(
-            NotificationType.ERROR,
-            errorResponse.error.message,
-          );
-        },
-      }),
-    );
-  }
-
-  public onUpdateUser(): void {
-    const formData = this.userService.createEditUserFormData(
-      this.editUser.userId,
-      this.editUser,
-      this.profileImg,
-    );
-    this.subs.add(
-      this.userService.editUser(formData).subscribe({
-        next: (response: User) => {
-          this.clickButton('closeEditUserModalButton');
-          // this.getUsers(false);
-          this.fileName = null;
-          this.profileImg = null;
-          this.notificationService.notify(
-            NotificationType.SUCCESS,
-            `${response.firstName} ${response.lastName} updated successfully.`,
           );
         },
         error: (errorResponse: HttpErrorResponse) => {
@@ -138,8 +99,8 @@ export class UserComponent implements OnInit, OnDestroy {
         next: (response: User) => {
           this.authenticationService.addUserToLocalCache(response);
           // this.getUsers(false);
-          this.fileName = null;
-          this.profileImg = null;
+          // this.fileName = null;
+          // this.profileImg = null;
           this.authenticationService.updateUser(response);
           this.notificationService.notify(
             NotificationType.SUCCESS,
@@ -152,7 +113,7 @@ export class UserComponent implements OnInit, OnDestroy {
             errorResponse.error.message,
           );
           this.refreshing = true;
-          this.profileImg = null;
+          // this.profileImg = null;
         },
       }),
     );

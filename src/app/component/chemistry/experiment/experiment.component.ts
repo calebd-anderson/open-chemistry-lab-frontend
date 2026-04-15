@@ -4,9 +4,9 @@ import { Element } from '../../../model/element.model';
 import { FlaskComponent } from './flask/flask.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
-import { ExperimentService } from 'src/app/service/experiment.service';
+import { ExperimentService } from '@app/service/experiment.service';
 import { MatButtonModule } from '@angular/material/button';
-import { InfoIcon } from 'src/app/info-icon.component.svg';
+import { InfoIcon } from '@app/info-icon.component.svg';
 
 interface RemoveElement {
   index: number;

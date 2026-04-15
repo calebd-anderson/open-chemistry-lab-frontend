@@ -1,6 +1,6 @@
 import { Component, effect, inject, linkedSignal, OnInit } from '@angular/core';
 import gsap from 'gsap';
-import { ExperimentService } from 'src/app/service/experiment.service';
+import { ExperimentService } from '@app/service/experiment.service';
 
 @Component({
   selector: 'app-flask',

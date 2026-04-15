@@ -1,18 +1,20 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { NotificationType } from 'src/app/model/enum/notification-type.enum';
-import { User } from 'src/app/model/user';
-import { NotificationService } from 'src/app/service/notification.service';
-import { AuthenticationService } from 'src/app/service/security/authentication.service';
-import { UserService } from 'src/app/service/user.service';
+import { NotificationType } from '@app/model/enum/notification-type.enum';
+import { User } from '@app/model/user';
+import { NotificationService } from '@app/service/notification.service';
+import { AuthenticationService } from '@app/service/security/authentication.service';
+import { UserService } from '@app/service/user.service';
 import {
   HttpErrorResponse,
   HttpEvent,
   HttpEventType,
 } from '@angular/common/http';
 import { SubSink } from 'subsink';
-import { AuthorizationService } from 'src/app/service/security/authorization.service';
-import { CustomHttpResponse } from 'src/app/model/custom-http-response';
+import { AuthorizationService } from '@app/service/security/authorization.service';
+import { CustomHttpResponse } from '@app/model/custom-http-response';
+import { MatDialog } from '@angular/material/dialog';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 @Component({
   selector: 'app-users',
@@ -24,6 +26,7 @@ export class UsersComponent {
   public users: User[];
   public user: User;
   public refreshing: boolean;
+  readonly dialog = inject(MatDialog);
 
   private subs = new SubSink();
 
@@ -38,6 +41,19 @@ export class UsersComponent {
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
     this.getUsers(true);
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      data: { user: this.user },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        // this.animal.set(result);
+      }
+    });
   }
 
   public getUsers(showNotification: boolean): void {
@@ -56,6 +72,7 @@ export class UsersComponent {
           }
         },
         error: (errorResponse: HttpErrorResponse) => {
+          this.refreshing = false;
           this.notificationService.notify(
             NotificationType.ERROR,
             errorResponse.error.message,
@@ -63,6 +80,11 @@ export class UsersComponent {
         },
       }),
     );
+  }
+
+  public onSelectUser(selectedUser: User): void {
+    // this.selectedUser = selectedUser;
+    // this.clickButton('openUserInfo');
   }
 
   public searchUsers(searchTerm: string): void {
@@ -84,8 +106,8 @@ export class UsersComponent {
   }
 
   public onEditUser(editUser: User): void {
-    this.editUser = editUser;
-    this.clickButton('openUserEdit');
+    // this.editUser = editUser;
+    // this.clickButton('openUserEdit');
   }
 
   public onDeleteUser(username: string): void {

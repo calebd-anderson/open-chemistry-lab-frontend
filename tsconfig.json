@@ -6,10 +6,11 @@
     // "baseUrl": "./",
     // "outDir": "./dist/out-tsc",
     "paths": {
-      "*": ["./*"],
+      // "*": ["./*"],
       // Every other path now has an explicit common prefix:
-      // "@app/*": ["./src/app/*"],
+      "@app/*": ["./src/app/*"],
       // "@lib/*": ["./src/lib/*"],
+      "@environments/*": ["./src/environments/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

@@ -12,9 +12,9 @@
           placeholder="Search users..."
         />
       </form>
-      <button [hidden]="!isManager" type="button">
+      <!-- <button [hidden]="!isManager" type="button">
         <i class="fa fa-plus"></i> New User
-      </button>
+      </button> -->
     </div>
     <div>
       <button type="button" (click)="getUsers(true)">
@@ -42,8 +42,8 @@
     </thead>
     @for (appUser of users; track appUser) {
       <tbody>
-        <tr>
-          <td (click)="onSelectUser(appUser)">
+        <tr (click)="onSelectUser(appUser)">
+          <td>
             <img
               height="40"
               width="40"
@@ -51,17 +51,17 @@
               alt="profile image"
             />
           </td>
-          <td (click)="onSelectUser(appUser)">{{ appUser?.userId }}</td>
-          <td (click)="onSelectUser(appUser)">{{ appUser?.firstName }}</td>
-          <td (click)="onSelectUser(appUser)">{{ appUser?.lastName }}</td>
-          <td (click)="onSelectUser(appUser)">{{ appUser?.username }}</td>
-          <td (click)="onSelectUser(appUser)">{{ appUser?.email }}</td>
-          <td (click)="onSelectUser(appUser)">
+          <td>{{ appUser?.userId }}</td>
+          <td>{{ appUser?.firstName }}</td>
+          <td>{{ appUser?.lastName }}</td>
+          <td>{{ appUser?.username }}</td>
+          <td>{{ appUser?.email }}</td>
+          <td>
             <span [hidden]="!appUser?.active">Active</span>
             <span [hidden]="appUser?.active">Inactive</span>
           </td>
           <td>
-            @if (!(currentUsername === appUser.username)) {
+            <!-- @if (!(currentUsername === appUser.username)) {
               <div>
                 <button (click)="onEditUser(appUser)">
                   <i class="fa fa-edit"></i>
@@ -73,13 +73,10 @@
                   <i class="fa fa-trash"></i>
                 </button>
               </div>
-            }
+            } -->
           </td>
         </tr>
       </tbody>
     }
   </table>
 </div>
-
-<button [hidden]="true" type="button" id="openUserInfo"></button>
-<button [hidden]="true" type="button" id="openUserEdit"></button>

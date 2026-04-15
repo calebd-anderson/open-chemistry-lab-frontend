@@ -1,8 +1,8 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthenticationService } from 'src/app/service/security/authentication.service';
-import { FlashCardService } from 'src/app/service/flashcard.service';
+import { AuthenticationService } from '@app/service/security/authentication.service';
+import { FlashCardService } from '@app/service/flashcard.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
