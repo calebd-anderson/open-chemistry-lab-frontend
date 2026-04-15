@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NotificationType } from '@app/model/enum/notification-type.enum';
 import { User } from '@app/model/user';
@@ -27,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
   ],
   templateUrl: './add-user.component.html',
   styleUrl: './add-user.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddUserComponent implements OnDestroy {
   private userService: UserService = inject(UserService);

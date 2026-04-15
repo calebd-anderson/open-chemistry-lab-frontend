@@ -57,20 +57,46 @@
           <td>{{ appUser?.username }}</td>
           <td>{{ appUser?.email }}</td>
           <td>
-            <span [hidden]="!appUser?.active">Active</span>
-            <span [hidden]="appUser?.active">Inactive</span>
+            <!-- <span [hidden]="!appUser?.active" class="badge bg-success"
+              >Active</span
+            >
+            <span [hidden]="appUser?.active" class="badge bg-danger"
+              >Inactive</span
+            > -->
+            <mat-chip-set aria-label="active status">
+              <mat-chip [hidden]="!appUser?.active">Active</mat-chip>
+              <mat-chip [hidden]="appUser?.active">Inactive</mat-chip>
+            </mat-chip-set>
           </td>
           <td>
             @if (!(currentUsername === appUser.username)) {
               <div>
-                <button (click)="onEditUser($event, appUser)">
+                <!-- <button
+                  (click)="onEditUser($event, appUser)"
+                  class="btn btn-outline-info"
+                >
                   <i class="fa fa-edit"></i>
-                </button>
+                </button> -->
                 <button
+                  matFab
+                  aria-label="edit button"
+                  (click)="onEditUser($event, appUser)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <!-- <button
                   [hidden]="!isAdmin"
                   (click)="onDeleteUser(appUser?.username)"
+                  class="btn btn-outline-danger"
                 >
                   <i class="fa fa-trash"></i>
+                </button> -->
+                <button
+                  matFab
+                  aria-label="delete button"
+                  (click)="onDeleteUser(appUser?.username)"
+                >
+                  <mat-icon>delete</mat-icon>
                 </button>
               </div>
             }

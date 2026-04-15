@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -36,6 +36,7 @@ export interface DialogData {
   ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditUserComponent implements OnDestroy {
   private subs = new SubSink();

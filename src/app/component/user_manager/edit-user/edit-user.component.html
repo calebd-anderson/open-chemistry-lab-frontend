@@ -5,15 +5,34 @@
     <small [hidden]="isManager">(read only)</small>
   </h2>
   <mat-dialog-content>
-    <div>
-      <img
-        height="120"
-        width="120"
-        src="{{ editUser?.profileImgUrl }}"
-        alt="{{ editUser?.firstName }}"
-      />
-    </div>
     <form #editUserForm="ngForm">
+      <div>
+        <img
+          height="120"
+          width="120"
+          src="{{ editUser?.profileImgUrl }}"
+          alt="{{ editUser?.firstName }}"
+        />
+        <div>
+          <input
+            id="profileImage"
+            type="file"
+            accept="image/*"
+            [disabled]="!isManager"
+            name="profileImage"
+            (change)="
+              onProfileImageChange(
+                $any($event.target).files[0].name,
+                $any($event.target).files[0]
+              )
+            "
+          />
+          <label for="profileImage">
+            <span [hidden]="!fileName">{{ fileName }}</span>
+            <span [hidden]="fileName">Profile Picture</span>
+          </label>
+        </div>
+      </div>
       <div>
         <label for="firstName">First Name</label>
         <input
@@ -74,29 +93,6 @@
           <option value="ROLE_ADMIN">ADMIN</option>
           <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
         </select>
-      </div>
-      <div>
-        <div>
-          <span>Profile Picture</span>
-        </div>
-        <div>
-          <input
-            type="file"
-            accept="image/*"
-            [disabled]="!isManager"
-            name="profileImage"
-            (change)="
-              onProfileImageChange(
-                $any($event.target).files[0].name,
-                $any($event.target).files[0]
-              )
-            "
-          />
-          <label>
-            <span [hidden]="!fileName">{{ fileName }}</span>
-            <span [hidden]="fileName">Choose File</span>
-          </label>
-        </div>
       </div>
       <fieldset>
         <div>

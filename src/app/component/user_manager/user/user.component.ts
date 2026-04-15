@@ -3,7 +3,7 @@ import {
   HttpEvent,
   HttpEventType,
 } from '@angular/common/http';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -45,6 +45,7 @@ import { DialogData } from '../edit-user/edit-user.component';
     MatDialogClose,
     DatePipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
