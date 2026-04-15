@@ -25,3 +25,11 @@
     )
   );
 }
+
+.mat-spinner-users {
+  @include mat.progress-spinner-overrides(
+    (
+      size: 10px,
+    )
+  );
+}

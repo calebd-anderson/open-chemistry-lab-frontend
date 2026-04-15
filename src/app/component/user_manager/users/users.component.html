@@ -1,31 +1,40 @@
 <!-- users table -->
-<div id="users">
+<div>
   <div>
-    <div>
-      <form>
-        <input
-          name="searchTerm"
-          #searchInput="ngModel"
-          ngModel
-          (ngModelChange)="searchUsers(searchInput.value)"
-          type="search"
-          placeholder="Search users..."
-        />
-      </form>
-      <button [hidden]="!isManager" type="button" (click)="onClickNewUser()">
-        <i class="fa fa-plus"></i> New User
-      </button>
-    </div>
-    <div>
-      <button type="button" (click)="getUsers(true)">
+    <form>
+      <button
+        type="button"
+        (click)="getUsers(true)"
+        matFab
+        aria-label="refresh users button"
+      >
         @if (refreshing) {
           <i class="fas fa-sync fa-spin"></i>
         }
         @if (!refreshing) {
-          <i class="fas fa-sync"></i>
+          <!-- <i class="fas fa-sync"></i> -->
+          <mat-icon>refresh</mat-icon>
         }
       </button>
-    </div>
+      <button
+        [hidden]="!isManager"
+        type="button"
+        (click)="onClickNewUser()"
+        matFab
+        extended
+        aria-label="create user button"
+      >
+        <mat-icon>add</mat-icon>New User
+      </button>
+      <input
+        name="searchTerm"
+        #searchInput="ngModel"
+        ngModel
+        (ngModelChange)="searchUsers(searchInput.value)"
+        type="search"
+        placeholder="Search users..."
+      />
+    </form>
   </div>
   <table>
     <thead>
@@ -40,7 +49,7 @@
         <th>Actions</th>
       </tr>
     </thead>
-    @for (appUser of users; track appUser) {
+    @for (appUser of users; track appUser.userId) {
       <tbody>
         <tr (click)="onSelectUser(appUser)">
           <td>
@@ -64,8 +73,12 @@
               >Inactive</span
             > -->
             <mat-chip-set aria-label="active status">
-              <mat-chip [hidden]="!appUser?.active" class="mat-chip-success">Active</mat-chip>
-              <mat-chip [hidden]="appUser?.active" class="mat-chip-danger">Inactive</mat-chip>
+              <mat-chip [hidden]="!appUser?.active" class="mat-chip-success"
+                >Active</mat-chip
+              >
+              <mat-chip [hidden]="appUser?.active" class="mat-chip-danger"
+                >Inactive</mat-chip
+              >
             </mat-chip-set>
           </td>
           <td>
