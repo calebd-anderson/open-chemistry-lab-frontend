@@ -1,186 +1,78 @@
 <div>
-  <div>
-    <div></div>
+  <h5>Users Management</h5>
+  @if (titleAction$ | async; as title) {
+    <small>{{ title }}</small>
+  }
+</div>
+
+<!-- nav bar -->
+<nav>
+  <div id="navbarCollapse">
     <div>
-      <h5>Users Management</h5>
-      @if (titleAction$ | async; as title) {
-        <small>{{ title }}</small>
-      }
+      <a (click)="changeTitle('Users')" data-bs-toggle="tab" href="#users">
+        <i class="fa fa-users"></i>
+        Users
+      </a>
+      <a
+        [hidden]="!isManager"
+        (click)="changeTitle('Settings')"
+        data-bs-toggle="tab"
+        href="#reset-password"
+      >
+        <i class="fa fa-cogs"></i>
+        Settings
+      </a>
+      <a (click)="changeTitle('Profile')" data-bs-toggle="tab" href="#profile">
+        Welcome, {{ user?.firstName }}
+        <i class="fa fa-user"></i>
+      </a>
     </div>
-    <div></div>
+  </div>
+</nav>
+
+<!-- main content -->
+<div id="myTabContent">
+  
+<app-users />
+
+  <!-- change password  -->
+  <div [hidden]="!isManager" id="reset-password">
+    <form
+      #resetPasswordForm="ngForm"
+      (ngSubmit)="onResetPassword(resetPasswordForm)"
+    >
+      <fieldset>
+        <legend>User Password Management</legend>
+        <div>
+          <label for="reset-password-email">Email address</label>
+          <input
+            type="email"
+            name="reset-password-email"
+            required
+            ngModel
+            placeholder="Enter email (example@email.com)"
+          />
+          <small>We'll never share your email with anyone else.</small>
+        </div>
+        <button type="submit" [disabled]="resetPasswordForm.invalid">
+          @if (refreshing) {
+            <i class="fa fa-spinner fa-spin"></i>
+          }
+          &nbsp;&nbsp;
+          @if (refreshing) {
+            <span>Loading...</span>
+          }
+          @if (!refreshing) {
+            <span>Reset Password</span>
+          }
+        </button>
+      </fieldset>
+    </form>
   </div>
 
-  <!-- nav bar -->
-  <nav>
-    <div id="navbarCollapse">
-      <div>
-        <a (click)="changeTitle('Users')" data-bs-toggle="tab" href="#users">
-          <i class="fa fa-users"></i>
-          Users
-        </a>
-        <a
-          [hidden]="!isManager"
-          (click)="changeTitle('Settings')"
-          data-bs-toggle="tab"
-          href="#reset-password"
-        >
-          <i class="fa fa-cogs"></i>
-          Settings
-        </a>
-        <a
-          (click)="changeTitle('Profile')"
-          data-bs-toggle="tab"
-          href="#profile"
-        >
-          Welcome, {{ user?.firstName }}
-          <i class="fa fa-user"></i>
-        </a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- main content -->
-  <div id="myTabContent">
-    <!-- user table -->
-    <div id="users">
-      <div>
-        <div>
-          <form>
-            <input
-              name="searchTerm"
-              #searchInput="ngModel"
-              ngModel
-              (ngModelChange)="searchUsers(searchInput.value)"
-              type="search"
-              placeholder="Search users..."
-            />
-          </form>
-          <button
-            [hidden]="!isManager"
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target="#addUserModal"
-          >
-            <i class="fa fa-plus"></i> New User
-          </button>
-        </div>
-        <div>
-          <button type="button" (click)="getUsers(true)">
-            @if (refreshing) {
-              <i class="fas fa-sync fa-spin"></i>
-            }
-            @if (!refreshing) {
-              <i class="fas fa-sync"></i>
-            }
-          </button>
-        </div>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Photo</th>
-            <th>User ID</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        @for (appUser of users; track appUser) {
-          <tbody>
-            <tr>
-              <td (click)="onSelectUser(appUser)">
-                <img
-                  height="40"
-                  width="40"
-                  src="{{ appUser?.profileImgUrl }}"
-                  alt="profile image"
-                />
-              </td>
-              <td (click)="onSelectUser(appUser)">{{ appUser?.userId }}</td>
-              <td (click)="onSelectUser(appUser)">{{ appUser?.firstName }}</td>
-              <td (click)="onSelectUser(appUser)">{{ appUser?.lastName }}</td>
-              <td (click)="onSelectUser(appUser)">{{ appUser?.username }}</td>
-              <td (click)="onSelectUser(appUser)">{{ appUser?.email }}</td>
-              <td (click)="onSelectUser(appUser)">
-                <span [hidden]="!appUser?.active">Active</span>
-                <span [hidden]="appUser?.active">Inactive</span>
-              </td>
-              <td>
-                @if (!(currentUsername === appUser.username)) {
-                  <div>
-                    <button (click)="onEditUser(appUser)">
-                      <i class="fa fa-edit"></i>
-                    </button>
-                    <button
-                      [hidden]="!isAdmin"
-                      (click)="onDeleteUser(appUser?.username)"
-                    >
-                      <i class="fa fa-trash"></i>
-                    </button>
-                  </div>
-                }
-              </td>
-            </tr>
-          </tbody>
-        }
-      </table>
-    </div>
-
-    <button
-      [hidden]="true"
-      type="button"
-      id="openUserInfo"
-      data-bs-toggle="modal"
-      data-bs-target="#viewUserModal"
-    ></button>
-    <button
-      [hidden]="true"
-      type="button"
-      id="openUserEdit"
-      data-bs-toggle="modal"
-      data-bs-target="#editUserModal"
-    ></button>
-
-    <!-- change password  -->
-    <div [hidden]="!isManager" id="reset-password">
-      <form
-        #resetPasswordForm="ngForm"
-        (ngSubmit)="onResetPassword(resetPasswordForm)"
-      >
-        <fieldset>
-          <legend>User Password Management</legend>
-          <div>
-            <label for="reset-password-email">Email address</label>
-            <input
-              type="email"
-              name="reset-password-email"
-              required
-              ngModel
-              placeholder="Enter email (example@email.com)"
-            />
-            <small>We'll never share your email with anyone else.</small>
-          </div>
-          <button type="submit" [disabled]="resetPasswordForm.invalid">
-            @if (refreshing) {
-              <i class="fa fa-spinner fa-spin"></i>
-            }
-            &nbsp;&nbsp;
-            @if (refreshing) {
-              <span>Loading...</span>
-            }
-            @if (!refreshing) {
-              <span>Reset Password</span>
-            }
-          </button>
-        </fieldset>
-      </form>
-    </div>
-
-    <!-- user profile model -->
-    <div id="profile">
+  <!-- user profile model -->
+  <div id="profile">
+    <div>
       <div>
         <div>
           <div>
@@ -189,261 +81,232 @@
                 <div>
                   <div>
                     <div>
+                      <img
+                        height="135"
+                        width="135"
+                        src="{{ user?.profileImgUrl }}"
+                        alt=""
+                      />
+                    </div>
+                    @if (fileStatus?.status === "progress") {
                       <div>
-                        <div>
-                          <div>
-                            <div>
-                              <img
-                                height="135"
-                                width="135"
-                                src="{{ user?.profileImgUrl }}"
-                                alt=""
-                              />
-                            </div>
-                            @if (fileStatus?.status === "progress") {
-                              <div>
-                                <div
-                                  role="progressbar"
-                                  [style.width.%]="fileStatus?.percentage"
-                                  aria-valuenow="0"
-                                  aria-valuemin="0"
-                                  aria-valuemax="100"
-                                >
-                                  {{ fileStatus?.percentage }}%
-                                </div>
-                              </div>
-                            }
-                          </div>
-                        </div>
-                        <div>
-                          <div>
-                            <h4>{{ user?.firstName }} {{ user?.lastName }}</h4>
-                            <p>{{ user?.username }}</p>
-                            @if (user?.lastLoginDate !== null) {
-                              <div>
-                                <small
-                                  >Last login:
-                                  {{
-                                    user?.lastLoginDate | date: "medium"
-                                  }}</small
-                                >
-                              </div>
-                            }
-                            <div>
-                              <button
-                                (click)="updateProfileImage()"
-                                type="button"
-                              >
-                                <i class="fa fa-fw fa-camera"></i>
-                                <span>Change Photo</span>
-                              </button>
-                            </div>
-                          </div>
-                          <div>
-                            <div>
-                              <small
-                                >Joined
-                                {{ user?.joinDate | date: "mediumDate" }}</small
-                              >
-                            </div>
-                          </div>
+                        <div
+                          role="progressbar"
+                          [style.width.%]="fileStatus?.percentage"
+                          aria-valuenow="0"
+                          aria-valuemin="0"
+                          aria-valuemax="100"
+                        >
+                          {{ fileStatus?.percentage }}%
                         </div>
                       </div>
+                    }
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <h4>{{ user?.firstName }} {{ user?.lastName }}</h4>
+                    <p>{{ user?.username }}</p>
+                    @if (user?.lastLoginDate !== null) {
                       <div>
-                        <div>
-                          <form
-                            #profileUserForm="ngForm"
-                            (ngSubmit)="
-                              onUpdateCurrentUser(profileUserForm.value)
-                            "
-                            novalidate
-                          >
-                            <div>
-                              <div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <label for="firstName">First Name</label>
-                                      <input
-                                        id="firstName"
-                                        type="text"
-                                        name="firstName"
-                                        required
-                                        [(ngModel)]="user.firstName"
-                                      />
-                                    </div>
-                                  </div>
-                                  <div>
-                                    <div>
-                                      <label for="lastName">Last Name</label>
-                                      <input
-                                        id="lastName"
-                                        type="text"
-                                        name="lastName"
-                                        required
-                                        [(ngModel)]="user.lastName"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <label for="username">Username</label>
-                                      <input
-                                        id="username"
-                                        type="text"
-                                        name="username"
-                                        required
-                                        [(ngModel)]="user.username"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <label for="email">Email</label>
-                                      <input
-                                        id="email"
-                                        type="text"
-                                        name="email"
-                                        required
-                                        [(ngModel)]="user.email"
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <label for="role">Role</label
-                                      ><small [hidden]="isAdmin">
-                                        (read only)</small
-                                      >
-                                      <select
-                                        id="role"
-                                        name="role"
-                                        [disabled]="!isAdmin"
-                                        required
-                                        [(ngModel)]="user.role"
-                                      >
-                                        <option
-                                          [hidden]="!isAdmin"
-                                          value="ROLE_USER"
-                                        >
-                                          USER
-                                        </option>
-                                        <option
-                                          [hidden]="!isAdmin"
-                                          value="ROLE_HR"
-                                        >
-                                          HR
-                                        </option>
-                                        <option
-                                          [hidden]="!isAdmin"
-                                          value="ROLE_MANAGER"
-                                        >
-                                          MANAGER
-                                        </option>
-                                        <option
-                                          [hidden]="!isAdmin"
-                                          value="ROLE_ADMIN"
-                                        >
-                                          ADMIN
-                                        </option>
-                                        <option
-                                          [hidden]="!isAdmin"
-                                          value="ROLE_SUPER_ADMIN"
-                                        >
-                                          SUPER ADMIN
-                                        </option>
-                                      </select>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div>
-                              <div>
-                                <div>
-                                  <b>Account Settings</b
-                                  ><small [hidden]="isManager">
-                                    (read only)</small
-                                  >
-                                </div>
-                                <div>
-                                  <div>
-                                    <div>
-                                      <div>
-                                        <input
-                                          [disabled]="!isManager"
-                                          id="active"
-                                          name="active"
-                                          type="checkbox"
-                                          [(ngModel)]="user.active"
-                                        />
-                                        <label for="active"> Active</label>
-                                      </div>
-                                      <div>
-                                        <input
-                                          [disabled]="!isManager"
-                                          id="notLocked"
-                                          name="notLocked"
-                                          type="checkbox"
-                                          [(ngModel)]="user.notLocked"
-                                        />
-                                        <label for="notLocked"> Unlocked</label>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div>
-                              <div>
-                                <button type="submit">
-                                  @if (refreshing) {
-                                    <i class="fa fa-spinner fa-spin"></i>
-                                  }
-                                  &nbsp;&nbsp;
-                                  @if (refreshing) {
-                                    <span>Loading...</span>
-                                  }
-                                  @if (!refreshing) {
-                                    <span>Save Changes</span>
-                                  }
-                                </button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
+                        <small
+                          >Last login:
+                          {{ user?.lastLoginDate | date: "medium" }}</small
+                        >
                       </div>
+                    }
+                    <div>
+                      <button (click)="updateProfileImage()" type="button">
+                        <i class="fa fa-fw fa-camera"></i>
+                        <span>Change Photo</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      <small
+                        >Joined {{ user?.joinDate | date: "mediumDate" }}</small
+                      >
                     </div>
                   </div>
                 </div>
               </div>
               <div>
                 <div>
-                  <div>
+                  <form
+                    #profileUserForm="ngForm"
+                    (ngSubmit)="onUpdateCurrentUser(profileUserForm.value)"
+                    novalidate
+                  >
                     <div>
-                      <button (click)="onLogOut()">
-                        <span>Logout</span>
-                        <i class="fa fa-sign-in-alt"></i>
-                      </button>
+                      <div>
+                        <div>
+                          <div>
+                            <div>
+                              <label for="firstName">First Name</label>
+                              <input
+                                id="firstName"
+                                type="text"
+                                name="firstName"
+                                required
+                                [(ngModel)]="user.firstName"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <div>
+                              <label for="lastName">Last Name</label>
+                              <input
+                                id="lastName"
+                                type="text"
+                                name="lastName"
+                                required
+                                [(ngModel)]="user.lastName"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div>
+                            <div>
+                              <label for="username">Username</label>
+                              <input
+                                id="username"
+                                type="text"
+                                name="username"
+                                required
+                                [(ngModel)]="user.username"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div>
+                            <div>
+                              <label for="email">Email</label>
+                              <input
+                                id="email"
+                                type="text"
+                                name="email"
+                                required
+                                [(ngModel)]="user.email"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div>
+                            <div>
+                              <label for="role">Role</label
+                              ><small [hidden]="isAdmin"> (read only)</small>
+                              <select
+                                id="role"
+                                name="role"
+                                [disabled]="!isAdmin"
+                                required
+                                [(ngModel)]="user.role"
+                              >
+                                <option [hidden]="!isAdmin" value="ROLE_USER">
+                                  USER
+                                </option>
+                                <option [hidden]="!isAdmin" value="ROLE_HR">
+                                  HR
+                                </option>
+                                <option
+                                  [hidden]="!isAdmin"
+                                  value="ROLE_MANAGER"
+                                >
+                                  MANAGER
+                                </option>
+                                <option [hidden]="!isAdmin" value="ROLE_ADMIN">
+                                  ADMIN
+                                </option>
+                                <option
+                                  [hidden]="!isAdmin"
+                                  value="ROLE_SUPER_ADMIN"
+                                >
+                                  SUPER ADMIN
+                                </option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <h6>Permissions From Role</h6>
-                    @for (authority of user?.authorities; track authority) {
-                      <h6>{{ authority }}</h6>
-                    }
-                  </div>
+                    <div>
+                      <div>
+                        <div>
+                          <b>Account Settings</b
+                          ><small [hidden]="isManager"> (read only)</small>
+                        </div>
+                        <div>
+                          <div>
+                            <div>
+                              <div>
+                                <input
+                                  [disabled]="!isManager"
+                                  id="active"
+                                  name="active"
+                                  type="checkbox"
+                                  [(ngModel)]="user.active"
+                                />
+                                <label for="active"> Active</label>
+                              </div>
+                              <div>
+                                <input
+                                  [disabled]="!isManager"
+                                  id="notLocked"
+                                  name="notLocked"
+                                  type="checkbox"
+                                  [(ngModel)]="user.notLocked"
+                                />
+                                <label for="notLocked"> Unlocked</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <div>
+                        <button type="submit">
+                          @if (refreshing) {
+                            <i class="fa fa-spinner fa-spin"></i>
+                          }
+                          &nbsp;&nbsp;
+                          @if (refreshing) {
+                            <span>Loading...</span>
+                          }
+                          @if (!refreshing) {
+                            <span>Save Changes</span>
+                          }
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <div>
+            <div>
+              <button (click)="onLogOut()">
+                <span>Logout</span>
+                <i class="fa fa-sign-in-alt"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h6>Permissions From Role</h6>
+            @for (authority of user?.authorities; track authority) {
+              <h6>{{ authority }}</h6>
+            }
           </div>
         </div>
       </div>

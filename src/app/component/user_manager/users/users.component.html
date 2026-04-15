@@ -1,0 +1,85 @@
+<!-- users table -->
+<div id="users">
+  <div>
+    <div>
+      <form>
+        <input
+          name="searchTerm"
+          #searchInput="ngModel"
+          ngModel
+          (ngModelChange)="searchUsers(searchInput.value)"
+          type="search"
+          placeholder="Search users..."
+        />
+      </form>
+      <button [hidden]="!isManager" type="button">
+        <i class="fa fa-plus"></i> New User
+      </button>
+    </div>
+    <div>
+      <button type="button" (click)="getUsers(true)">
+        @if (refreshing) {
+          <i class="fas fa-sync fa-spin"></i>
+        }
+        @if (!refreshing) {
+          <i class="fas fa-sync"></i>
+        }
+      </button>
+    </div>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Photo</th>
+        <th>User ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    @for (appUser of users; track appUser) {
+      <tbody>
+        <tr>
+          <td (click)="onSelectUser(appUser)">
+            <img
+              height="40"
+              width="40"
+              src="{{ appUser?.profileImgUrl }}"
+              alt="profile image"
+            />
+          </td>
+          <td (click)="onSelectUser(appUser)">{{ appUser?.userId }}</td>
+          <td (click)="onSelectUser(appUser)">{{ appUser?.firstName }}</td>
+          <td (click)="onSelectUser(appUser)">{{ appUser?.lastName }}</td>
+          <td (click)="onSelectUser(appUser)">{{ appUser?.username }}</td>
+          <td (click)="onSelectUser(appUser)">{{ appUser?.email }}</td>
+          <td (click)="onSelectUser(appUser)">
+            <span [hidden]="!appUser?.active">Active</span>
+            <span [hidden]="appUser?.active">Inactive</span>
+          </td>
+          <td>
+            @if (!(currentUsername === appUser.username)) {
+              <div>
+                <button (click)="onEditUser(appUser)">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button
+                  [hidden]="!isAdmin"
+                  (click)="onDeleteUser(appUser?.username)"
+                >
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            }
+          </td>
+        </tr>
+      </tbody>
+    }
+  </table>
+</div>
+
+<button [hidden]="true" type="button" id="openUserInfo"></button>
+<button [hidden]="true" type="button" id="openUserEdit"></button>

@@ -3,15 +3,22 @@ import { Role } from '../../model/enum/role.enum';
 import { AuthenticationService } from './authentication.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthorizationService {
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService) {}
 
   public get isAdmin(): boolean {
-    if(this.authService.isUserLoggedIn())
-      return this.getUserRole() === Role.ADMIN || this.getUserRole() === Role.SUPER_ADMIN;
+    if (this.authService.isUserLoggedIn())
+      return (
+        this.getUserRole() === Role.ADMIN ||
+        this.getUserRole() === Role.SUPER_ADMIN
+      );
     else return false;
+  }
+
+  public get isManager(): boolean {
+    return this.isAdmin || this.getUserRole() === Role.MANAGER;
   }
 
   public getUserRole(): string {

@@ -10,21 +10,23 @@ import { NotificationType } from '../model/enum/notification-type.enum';
  * @title Snack-bar with configurable position
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationService {
-
   horizontalPosition: MatSnackBarHorizontalPosition = 'start';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private _snackBar: MatSnackBar) {}
 
   notify(type: NotificationType, message: string) {
+    if (!message) {
+      message = 'An error occured. Please try again.';
+    }
     this._snackBar.open(message, 'close', {
       horizontalPosition: this.horizontalPosition,
       verticalPosition: this.verticalPosition,
       panelClass: [type || NotificationType.DEFAULT],
-      duration: 4000
+      duration: 4000,
     });
   }
 
