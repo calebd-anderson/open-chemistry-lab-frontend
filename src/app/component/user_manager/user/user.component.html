@@ -30,10 +30,10 @@
   </div>
 </nav>
 
-<!-- main content -->
-<div id="myTabContent">
-  <app-users />
+<app-users />
 
+<!-- main content -->
+<div>
   <!-- change password  -->
   <div [hidden]="!isManager" id="reset-password">
     <form
@@ -69,267 +69,26 @@
     </form>
   </div>
 
-  <!-- user profile model -->
-  <div id="profile">
-    <div>
+  <!-- modal user info -->
+  <div
+    id="viewUserModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby=""
+    aria-hidden="true"
+  >
+    <div role="document">
       <div>
         <div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <img
-                        height="135"
-                        width="135"
-                        src="{{ user?.profileImgUrl }}"
-                        alt=""
-                      />
-                    </div>
-                    @if (fileStatus?.status === "progress") {
-                      <div>
-                        <div
-                          role="progressbar"
-                          [style.width.%]="fileStatus?.percentage"
-                          aria-valuenow="0"
-                          aria-valuemin="0"
-                          aria-valuemax="100"
-                        >
-                          {{ fileStatus?.percentage }}%
-                        </div>
-                      </div>
-                    }
-                  </div>
-                </div>
-                <div>
-                  <div>
-                    <h4>{{ user?.firstName }} {{ user?.lastName }}</h4>
-                    <p>{{ user?.username }}</p>
-                    @if (user?.lastLoginDate !== null) {
-                      <div>
-                        <small
-                          >Last login:
-                          {{ user?.lastLoginDate | date: "medium" }}</small
-                        >
-                      </div>
-                    }
-                    <div>
-                      <button (click)="updateProfileImage()" type="button">
-                        <i class="fa fa-fw fa-camera"></i>
-                        <span>Change Photo</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <small
-                        >Joined {{ user?.joinDate | date: "mediumDate" }}</small
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div>
-                  <form
-                    #profileUserForm="ngForm"
-                    (ngSubmit)="onUpdateCurrentUser(profileUserForm.value)"
-                    novalidate
-                  >
-                    <div>
-                      <div>
-                        <div>
-                          <div>
-                            <div>
-                              <label for="firstName">First Name</label>
-                              <input
-                                id="firstName"
-                                type="text"
-                                name="firstName"
-                                required
-                                [(ngModel)]="user.firstName"
-                              />
-                            </div>
-                          </div>
-                          <div>
-                            <div>
-                              <label for="lastName">Last Name</label>
-                              <input
-                                id="lastName"
-                                type="text"
-                                name="lastName"
-                                required
-                                [(ngModel)]="user.lastName"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div>
-                            <div>
-                              <label for="username">Username</label>
-                              <input
-                                id="username"
-                                type="text"
-                                name="username"
-                                required
-                                [(ngModel)]="user.username"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div>
-                            <div>
-                              <label for="email">Email</label>
-                              <input
-                                id="email"
-                                type="text"
-                                name="email"
-                                required
-                                [(ngModel)]="user.email"
-                              />
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <div>
-                            <div>
-                              <label for="role">Role</label
-                              ><small [hidden]="isAdmin"> (read only)</small>
-                              <select
-                                id="role"
-                                name="role"
-                                [disabled]="!isAdmin"
-                                required
-                                [(ngModel)]="user.role"
-                              >
-                                <option [hidden]="!isAdmin" value="ROLE_USER">
-                                  USER
-                                </option>
-                                <option [hidden]="!isAdmin" value="ROLE_HR">
-                                  HR
-                                </option>
-                                <option
-                                  [hidden]="!isAdmin"
-                                  value="ROLE_MANAGER"
-                                >
-                                  MANAGER
-                                </option>
-                                <option [hidden]="!isAdmin" value="ROLE_ADMIN">
-                                  ADMIN
-                                </option>
-                                <option
-                                  [hidden]="!isAdmin"
-                                  value="ROLE_SUPER_ADMIN"
-                                >
-                                  SUPER ADMIN
-                                </option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <div>
-                          <b>Account Settings</b
-                          ><small [hidden]="isManager"> (read only)</small>
-                        </div>
-                        <div>
-                          <div>
-                            <div>
-                              <div>
-                                <input
-                                  [disabled]="!isManager"
-                                  id="active"
-                                  name="active"
-                                  type="checkbox"
-                                  [(ngModel)]="user.active"
-                                />
-                                <label for="active"> Active</label>
-                              </div>
-                              <div>
-                                <input
-                                  [disabled]="!isManager"
-                                  id="notLocked"
-                                  name="notLocked"
-                                  type="checkbox"
-                                  [(ngModel)]="user.notLocked"
-                                />
-                                <label for="notLocked"> Unlocked</label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div>
-                        <button type="submit">
-                          @if (refreshing) {
-                            <i class="fa fa-spinner fa-spin"></i>
-                          }
-                          &nbsp;&nbsp;
-                          @if (refreshing) {
-                            <span>Loading...</span>
-                          }
-                          @if (!refreshing) {
-                            <span>Save Changes</span>
-                          }
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div>
-          <div>
-            <div>
-              <button (click)="onLogOut()">
-                <span>Logout</span>
-                <i class="fa fa-sign-in-alt"></i>
-              </button>
-            </div>
-          </div>
+          <h5 id="exampleModalLongTitle">
+            {{ selectedUser?.firstName }}
+            {{ selectedUser?.lastName }}
+          </h5>
+          <button type="button" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <div>
-          <div>
-            <h6>Permissions From Role</h6>
-            @for (authority of user?.authorities; track authority) {
-              <h6>{{ authority }}</h6>
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- modal user info -->
-    <div
-      id="viewUserModal"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby=""
-      aria-hidden="true"
-    >
-      <div role="document">
-        <div>
-          <div>
-            <h5 id="exampleModalLongTitle">
-              {{ selectedUser?.firstName }}
-              {{ selectedUser?.lastName }}
-            </h5>
-            <button type="button" data-bs-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
           <div>
             <div>
               <div>
@@ -337,109 +96,107 @@
                   <div>
                     <div>
                       <div>
-                        <div>
-                          <img
-                            height="120"
-                            width="120"
-                            src="{{ selectedUser?.profileImgUrl }}"
-                            alt="{{ selectedUser?.firstName }}"
-                          />
-                        </div>
+                        <img
+                          height="120"
+                          width="120"
+                          src="{{ selectedUser?.profileImgUrl }}"
+                          alt="{{ selectedUser?.firstName }}"
+                        />
                       </div>
                     </div>
+                  </div>
+                  <div>
                     <div>
+                      <h6>
+                        {{ selectedUser?.firstName }}
+                        {{ selectedUser?.lastName }}
+                      </h6>
+                      <p>{{ selectedUser?.username }}</p>
                       <div>
-                        <h6>
-                          {{ selectedUser?.firstName }}
-                          {{ selectedUser?.lastName }}
-                        </h6>
-                        <p>{{ selectedUser?.username }}</p>
-                        <div>
-                          Status:
-                          <span [hidden]="!selectedUser?.active">Active</span>
-                          <span [hidden]="selectedUser?.active">Inactive</span>
-                        </div>
-                        @if (selectedUser?.lastLoginDate) {
-                          <div>
-                            <small
-                              >Last Login:
-                              {{
-                                selectedUser?.lastLoginDate | date: "medium"
-                              }}</small
-                            >
-                          </div>
-                        }
+                        Status:
+                        <span [hidden]="!selectedUser?.active">Active</span>
+                        <span [hidden]="selectedUser?.active">Inactive</span>
                       </div>
-                      <div>
+                      @if (selectedUser?.lastLoginDate) {
                         <div>
                           <small
-                            >Joined
+                            >Last Login:
                             {{
-                              selectedUser?.joinDate | date: "mediumDate"
+                              selectedUser?.lastLoginDate | date: "medium"
                             }}</small
                           >
                         </div>
+                      }
+                    </div>
+                    <div>
+                      <div>
+                        <small
+                          >Joined
+                          {{
+                            selectedUser?.joinDate | date: "mediumDate"
+                          }}</small
+                        >
                       </div>
                     </div>
                   </div>
                 </div>
-                <ul>
-                  <li>
-                    <i class="fa fa-id-badge"></i>
-                    {{ selectedUser?.userId }}
-                  </li>
-                  <li>
-                    <i class="fa fa-envelope"></i>
-                    {{ selectedUser?.email }}
-                  </li>
-                  <li>
-                    <i class="fa fa-shield-alt"></i>
-                    {{ selectedUser?.role.substring(5) }}
-                    @if (selectedUser?.lastLoginDate) {
-                      <li>
-                        <i class="fa fa-sign-in-alt"></i>
-                        {{ selectedUser?.lastLoginDate | date: "medium" }}
-                      </li>
-                    }
-                  </li>
-
-                  <li>
-                    <span [hidden]="selectedUser?.notLocked">
-                      <i class="fa fa-lock" style="color: red"></i>
-                      Account Locked
-                    </span>
-                    <span [hidden]="!selectedUser?.notLocked">
-                      <i class="fa fa-unlock" style="color: green"></i>
-                      Account Unlocked
-                    </span>
-                  </li>
-                </ul>
               </div>
+              <ul>
+                <li>
+                  <i class="fa fa-id-badge"></i>
+                  {{ selectedUser?.userId }}
+                </li>
+                <li>
+                  <i class="fa fa-envelope"></i>
+                  {{ selectedUser?.email }}
+                </li>
+                <li>
+                  <i class="fa fa-shield-alt"></i>
+                  {{ selectedUser?.role.substring(5) }}
+                  @if (selectedUser?.lastLoginDate) {
+                    <li>
+                      <i class="fa fa-sign-in-alt"></i>
+                      {{ selectedUser?.lastLoginDate | date: "medium" }}
+                    </li>
+                  }
+                </li>
+
+                <li>
+                  <span [hidden]="selectedUser?.notLocked">
+                    <i class="fa fa-lock" style="color: red"></i>
+                    Account Locked
+                  </span>
+                  <span [hidden]="!selectedUser?.notLocked">
+                    <i class="fa fa-unlock" style="color: green"></i>
+                    Account Unlocked
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
-          <div>
-            <button type="button">Close</button>
-          </div>
+        </div>
+        <div>
+          <button type="button">Close</button>
         </div>
       </div>
     </div>
-
-    <!-- profile image change form -->
-    <form enctype="multipart/form-data">
-      <input
-        type="file"
-        (change)="
-          onProfileImageChange(
-            $any($event.target).files[0].name,
-            $any($event.target).files[0]
-          );
-          onUpdateProfileImage()
-        "
-        name="profile-image-input"
-        id="profile-image-input"
-        placeholder="file"
-        accept="image/*"
-      />
-    </form>
   </div>
+
+  <!-- profile image change form -->
+  <form enctype="multipart/form-data">
+    <input
+      type="file"
+      (change)="
+        onProfileImageChange(
+          $any($event.target).files[0].name,
+          $any($event.target).files[0]
+        );
+        onUpdateProfileImage()
+      "
+      name="profile-image-input"
+      id="profile-image-input"
+      placeholder="file"
+      accept="image/*"
+    />
+  </form>
 </div>
