@@ -9,7 +9,13 @@ import { NotificationType } from '@app/model/enum/notification-type.enum';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationService } from '@app/service/notification.service';
 import { User } from '@app/model/user';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogContent,
+  MatDialogTitle,
+  MatDialogActions,
+  MatDialogClose,
+} from '@angular/material/dialog';
 import { AuthorizationService } from '@app/service/security/authorization.service';
 
 export interface DialogData {
@@ -18,7 +24,16 @@ export interface DialogData {
 
 @Component({
   selector: 'app-edit-user',
-  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+  ],
   templateUrl: './edit-user.component.html',
   styleUrl: './edit-user.component.scss',
 })
@@ -27,8 +42,9 @@ export class EditUserComponent implements OnDestroy {
   public userService: UserService = inject(UserService);
   private notificationService: NotificationService =
     inject(NotificationService);
-  
-  private authorizationService: AuthorizationService = inject(AuthorizationService);
+
+  private authorizationService: AuthorizationService =
+    inject(AuthorizationService);
 
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   public editUser = this.data.user;

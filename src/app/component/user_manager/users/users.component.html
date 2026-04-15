@@ -61,9 +61,9 @@
             <span [hidden]="appUser?.active">Inactive</span>
           </td>
           <td>
-            <!-- @if (!(currentUsername === appUser.username)) {
+            @if (!(currentUsername === appUser.username)) {
               <div>
-                <button (click)="onEditUser(appUser)">
+                <button (click)="onEditUser($event, appUser)">
                   <i class="fa fa-edit"></i>
                 </button>
                 <button
@@ -73,7 +73,7 @@
                   <i class="fa fa-trash"></i>
                 </button>
               </div>
-            } -->
+            }
           </td>
         </tr>
       </tbody>

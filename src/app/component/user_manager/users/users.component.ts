@@ -41,6 +41,7 @@ export class UsersComponent {
   public notificationService: NotificationService = inject(NotificationService);
 
   public isManager: boolean = this.authorizationService.isManager;
+  public isAdmin: boolean = this.authorizationService.isAdmin;
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
@@ -118,9 +119,20 @@ export class UsersComponent {
     }
   }
 
-  public onEditUser(editUser: User): void {
+  public onEditUser(event: MouseEvent, editUser: User): void {
+    event.stopPropagation();
     // this.editUser = editUser;
     // this.clickButton('openUserEdit');
+    const dialogRef = this.dialog.open(EditUserComponent, {
+      data: { user: editUser },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        // this.animal.set(result);
+      }
+    });
   }
 
   public onDeleteUser(username: string): void {
@@ -141,5 +153,9 @@ export class UsersComponent {
         },
       }),
     );
+  }
+
+  public get currentUsername(): string {
+    return this.authenticationService.getUserFromLocalCache().username;
   }
 }
