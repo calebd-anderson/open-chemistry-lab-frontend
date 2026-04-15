@@ -3,7 +3,13 @@ import {
   HttpEvent,
   HttpEventType,
 } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -49,14 +55,14 @@ import { DialogData } from '../edit-user/edit-user.component';
 })
 export class UserComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
-  public refreshing: boolean;
+  public refreshing: boolean = false;
   readonly dialogRef = inject(MatDialogRef<UserComponent>);
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   private titleSubject = new BehaviorSubject<string>('Users');
   public titleAction$ = this.titleSubject.asObservable();
-  public user: User;
+  public user: User = new User();
   public selectedUser: User = this.data.user;
-  public profileImg: File;
+  public profileImg: File | undefined;
 
   public fileStatus = new FileUploadStatus();
 
@@ -121,7 +127,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public onUpdateProfileImage() {
     const formData = new FormData();
     formData.append('username', this.user.username);
-    formData.append('profileImg', this.profileImg);
+    if (this.profileImg) formData.append('profileImg', this.profileImg);
     this.subs.add(
       this.userService.updateProfileImage(formData).subscribe({
         next: (event: HttpEvent<any>) => {
@@ -141,9 +147,10 @@ export class UserComponent implements OnInit, OnDestroy {
   private reportUploadProgress(event: HttpEvent<any>): void {
     switch (event.type) {
       case HttpEventType.UploadProgress:
-        this.fileStatus.percentage = Math.round(
-          (100 * event.loaded) / event.total,
-        );
+        if (event.total)
+          this.fileStatus.percentage = Math.round(
+            (100 * event.loaded) / event.total,
+          );
         this.fileStatus.status = 'progress';
         break;
       case HttpEventType.Response:

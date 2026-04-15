@@ -32,9 +32,9 @@ export class FlaskComponent implements OnInit {
 
     // create numBubbles + 1 bubbles
     for (let i = 0; i < numBubbles; i++) {
-      let clone = bubble0.cloneNode() as HTMLElement;
+      let clone = bubble0?.cloneNode() as HTMLElement;
       clone.id = `bubble${i + 1}`;
-      svg.appendChild(clone);
+      svg?.appendChild(clone);
     }
 
     this.tl.fromTo(
@@ -56,6 +56,7 @@ export class FlaskComponent implements OnInit {
 
   ngOnInit(): void {
     const bubble0 = document.getElementById('bubble0');
-    bubble0.style.opacity = '0';
+    if (bubble0)
+      bubble0.style.opacity = '0';
   }
 }

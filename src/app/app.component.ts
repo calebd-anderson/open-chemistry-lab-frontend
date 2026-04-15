@@ -45,7 +45,6 @@ export class AppComponent implements OnInit {
 
   readonly user: WritableSignal<User> = signal<User>(new User());
 
-  public isLoggedIn: boolean;
 
   public authenticationService: AuthenticationService = inject(
     AuthenticationService,
@@ -54,6 +53,8 @@ export class AppComponent implements OnInit {
     inject(AuthorizationService);
   private notificationService: NotificationService =
     inject(NotificationService);
+
+  public isLoggedIn: boolean = this.authenticationService.getIsLoggedIn();
 
   readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
@@ -106,7 +107,7 @@ export class AppComponent implements OnInit {
   public onClickLogout(): void {
     this.authenticationService.logOut();
     this.isLoggedIn = false;
-    this.user.set(null);
+    this.user.set(new User());
     this.router.navigate(['lab']);
     this.openMenu();
     this.sendNotification(
@@ -136,6 +137,6 @@ export class AppComponent implements OnInit {
 
   public openMenu() {
     const menu = document.getElementById('user-nav-menu');
-    menu.classList.toggle('active');
+    menu?.classList.toggle('active');
   }
 }

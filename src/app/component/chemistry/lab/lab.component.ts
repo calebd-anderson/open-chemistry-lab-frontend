@@ -27,7 +27,7 @@ export class LabComponent {
   private authenticationService: AuthenticationService = inject(
     AuthenticationService
   );
-  dialogRef: MatDialogRef<ValidationModalComponent>;
+  dialogRef: MatDialogRef<ValidationModalComponent> | undefined;
   public dialog: MatDialog = inject(MatDialog);
 
   public addInteractedElements(element: Element) {
@@ -55,7 +55,7 @@ export class LabComponent {
         NotificationType.DEFAULT,
         element.name + ' removed from experiment.'
       );
-    } else {
+    } else if (tempAtoms) {
       this.atomsInCompound.set(element.symbol, tempAtoms - 1);
       this._snackBar.notify(
         NotificationType.DEFAULT,
@@ -138,7 +138,7 @@ export class LabComponent {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
       disableClose: false,
     });
-    this.dialogRef.componentInstance.discovery = response.body.title;
+    this.dialogRef.componentInstance.discovery = response.body?.title;
     this.dialogRef.componentInstance.wasSuccessful = 'Congratulations!';
     this.dialogRef.componentInstance.confirmMessage = 'You discovered: ';
 

@@ -29,7 +29,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
 })
 export class RegisterComponent implements OnDestroy {
-  public showLoading: boolean;
+  public showLoading: boolean = false;
   private subscriptions: Subscription[] = [];
   readonly dialog = inject(MatDialog);
   readonly dialogRef = inject(MatDialogRef<RegisterComponent>);

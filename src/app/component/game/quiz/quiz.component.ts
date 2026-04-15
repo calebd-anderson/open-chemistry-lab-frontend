@@ -12,30 +12,30 @@ import { FormsModule, NgForm } from '@angular/forms';
 })
 export class QuizComponent implements OnInit {
   quizzes: Quiz[] = [];
-  question: string;
+  question: string = '?';
   currentQuiz: number = 0;
   answer: any;
-  answerSelected: boolean;
+  answerSelected: boolean = false;
   correctAnswers: number = 0;
   incorrectAnswers: number = 0;
   score: boolean = false;
-  random: number;
+  random: number = 0;
 
   constructor(
     private quizService: QuizService,
     private _snackBar: MatSnackBar,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
   ) {}
 
   ngOnInit(): void {
     this.quizService
       .getQuizByUserId(
-        this.authenticationService.getUserFromLocalCache().userId
+        this.authenticationService.getUserFromLocalCache().userId,
       )
       .subscribe((data) => {
         this.quizzes = data;
         this.random = Math.floor(
-          Math.random() * this.quizzes[0].questionAnswerList.length
+          Math.random() * this.quizzes[0].questionAnswerList.length,
         );
       });
   }
@@ -46,7 +46,7 @@ export class QuizComponent implements OnInit {
     setTimeout(() => {
       this.currentQuiz++;
       this.random = Math.floor(
-        Math.random() * this.quizzes[0].questionAnswerList.length
+        Math.random() * this.quizzes[0].questionAnswerList.length,
       );
       this.answerSelected = false;
       // unselect radio buttons

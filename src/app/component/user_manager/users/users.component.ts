@@ -20,18 +20,24 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 
 @Component({
   selector: 'app-users',
-  imports: [FormsModule, MatButtonModule, MatIconModule, MatChipsModule, MatTableModule],
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatChipsModule,
+    MatTableModule,
+  ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
 export class UsersComponent {
-  public users: User[];
-  public user: User;
-  public refreshing: boolean;
+  public users: User[] | null = [];
+  public user: User = new User();
+  public refreshing: boolean = false;
   readonly dialog = inject(MatDialog);
 
   private subs = new SubSink();
@@ -49,11 +55,11 @@ export class UsersComponent {
 
   displayedColumns: string[] = ['userId', 'firstName'];
 
-          //   <td>{{ appUser?.userId }}</td>
-          // <td>{{ appUser?.firstName }}</td>
-          // <td>{{ appUser?.lastName }}</td>
-          // <td>{{ appUser?.username }}</td>
-          // <td>{{ appUser?.email }}</td>
+  //   <td>{{ appUser?.userId }}</td>
+  // <td>{{ appUser?.firstName }}</td>
+  // <td>{{ appUser?.lastName }}</td>
+  // <td>{{ appUser?.username }}</td>
+  // <td>{{ appUser?.email }}</td>
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
@@ -115,16 +121,21 @@ export class UsersComponent {
 
   public searchUsers(searchTerm: string): void {
     const results: User[] = [];
-    for (const user of this.userService.getUsersFromLocalCache()) {
-      if (
-        user.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-        user.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-        user.username.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
-        user.userId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-      ) {
-        results.push(user);
+    const users = this.userService.getUsersFromLocalCache();
+    if (users)
+      for (const user of users) {
+        if (
+          user.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) !==
+            -1 ||
+          user.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) !==
+            -1 ||
+          user.username.toLowerCase().indexOf(searchTerm.toLowerCase()) !==
+            -1 ||
+          user.userId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+        ) {
+          results.push(user);
+        }
       }
-    }
     this.users = results;
     if (results.length === 0 || !searchTerm) {
       this.users = this.userService.getUsersFromLocalCache();

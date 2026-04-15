@@ -1,5 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NotificationType } from '@app/model/enum/notification-type.enum';
 import { User } from '@app/model/user';
@@ -40,8 +45,8 @@ export class AddUserComponent implements OnDestroy {
 
   private subs = new SubSink();
 
-  public fileName: string;
-  private profileImg: File;
+  public fileName: string = '?';
+  private profileImg: File | undefined = undefined;
 
   public onProfileImageChange(fileName: string, profileImag: File): void {
     this.fileName = fileName;
@@ -50,7 +55,7 @@ export class AddUserComponent implements OnDestroy {
 
   public onAddNewUser(userForm: NgForm): void {
     const formData = this.userService.createUserFormData(
-      null,
+      '',
       userForm.value,
       this.profileImg,
     );

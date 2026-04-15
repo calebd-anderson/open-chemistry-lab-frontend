@@ -3,100 +3,104 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../../model/user';
-import { JwtHelperService } from "@auth0/angular-jwt";
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserRegisterDto } from '../../model/user-register-dto';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-	public host = environment.apiUrl;
-	private token: string;
-	private loggedInUsername: string;
-	private jwtHelper = new JwtHelperService();
+  public host = environment.apiUrl;
+  private token: string | null = '';
+  private loggedInUsername: string | null = '';
+  private jwtHelper = new JwtHelperService();
 
-	private isLoggedIn = signal(false);
+  private isLoggedIn = signal(false);
 
-	private userSubject = new BehaviorSubject<User | null>(null);
-  	user$ = this.userSubject.asObservable();
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
 
-	private user = new BehaviorSubject<User>(this.getUserFromLocalCache());
-	currentUser = this.user.asObservable();
-  	
-  	constructor(private http: HttpClient) {
-		const loginStatus = this.isUserLoggedIn();
-		this.isLoggedIn.update(() => loginStatus);
-	}
+  private user = new BehaviorSubject<User>(this.getUserFromLocalCache());
+  currentUser = this.user.asObservable();
 
-	getIsLoggedIn() {
-		return this.isLoggedIn();
-	}
+  constructor(private http: HttpClient) {
+    const loginStatus = this.isUserLoggedIn();
+    this.isLoggedIn.update(() => loginStatus);
+  }
 
-	setIsLoggedIn(loginStatus: boolean) {
-		this.isLoggedIn.update(() => loginStatus);
-	}
+  getIsLoggedIn() {
+    return this.isLoggedIn();
+  }
 
-	public login(user: User): Observable<HttpResponse<User>> {
-		return this.http.post<User>(`${this.host}/user/login`, user, {observe: 'response'});
-	}
+  setIsLoggedIn(loginStatus: boolean) {
+    this.isLoggedIn.update(() => loginStatus);
+  }
 
-	public register(user: UserRegisterDto): Observable<User> {
-		return this.http.post<User>(`${this.host}/user/register`, user);
-	}
+  public login(user: User): Observable<HttpResponse<User>> {
+    return this.http.post<User>(`${this.host}/user/login`, user, {
+      observe: 'response',
+    });
+  }
 
-	public logOut(): void {
-		this.token = null;
-		this.loggedInUsername = null;
-		localStorage.removeItem('user');
-		localStorage.removeItem('token');
-		localStorage.removeItem('users');
-		this.isLoggedIn.update(() => false);
-	}
+  public register(user: UserRegisterDto): Observable<User> {
+    return this.http.post<User>(`${this.host}/user/register`, user);
+  }
 
-	public saveToken(token: string): void {
-		this.token = token;
-		localStorage.setItem('token', token);
-	}
+  public logOut(): void {
+    this.token = null;
+    this.loggedInUsername = null;
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+    localStorage.removeItem('users');
+    this.isLoggedIn.update(() => false);
+  }
 
-  	// add user to cache
-	public addUserToLocalCache(user: User): void {
-		localStorage.setItem('user', JSON.stringify(user));
-	}
+  public saveToken(token: string): void {
+    this.token = token;
+    localStorage.setItem('token', token);
+  }
 
-	// get user from local cache
-	public getUserFromLocalCache(): User {
-		let user: User = JSON.parse(localStorage.getItem('user'));
-		return user;
-	}
+  // add user to cache
+  public addUserToLocalCache(user: User): void {
+    localStorage.setItem('user', JSON.stringify(user));
+  }
 
-	// get token from local cache
-	public loadToken(): void {
-		this.token = localStorage.getItem('token');
-	}
+  // get user from local cache
+  public getUserFromLocalCache(): User {
+    let user = localStorage.getItem('user');
+    if (user) {
+      return JSON.parse(user) as User;
+    }
+    return new User();
+  }
 
-	public getToken(): string {
-		return this.token;
-	}
+  // get token from local cache
+  public loadToken(): void {
+    this.token = localStorage.getItem('token');
+  }
 
-	// update user accross components
-	public updateUser(user: User) {
-		this.user.next(user);
-	}
+  public getToken(): string {
+    return this.token ? this.token : '';
+  }
 
-	public isUserLoggedIn(): boolean {
-		this.loadToken();
-		if (this.token != null && this.token !== '') {
-			if (this.jwtHelper.decodeToken(this.token).sub != null || '') {
-				if (!this.jwtHelper.isTokenExpired(this.token)) {
-					this.loggedInUsername = this.jwtHelper.decodeToken(this.token).sub;
-					return true;
-				} else {
-					// remove token if expired
-					this.logOut();
-				}
-			}
-		}
-		return false;
-	}
+  // update user accross components
+  public updateUser(user: User) {
+    this.user.next(user);
+  }
+
+  public isUserLoggedIn(): boolean {
+    this.loadToken();
+    if (this.token != null && this.token !== '') {
+      if (this.jwtHelper.decodeToken(this.token).sub != null || '') {
+        if (!this.jwtHelper.isTokenExpired(this.token)) {
+          this.loggedInUsername = this.jwtHelper.decodeToken(this.token).sub;
+          return true;
+        } else {
+          // remove token if expired
+          this.logOut();
+        }
+      }
+    }
+    return false;
+  }
 }
- 

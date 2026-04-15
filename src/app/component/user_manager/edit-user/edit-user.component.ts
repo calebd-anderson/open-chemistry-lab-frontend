@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  OnDestroy,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -49,8 +54,8 @@ export class EditUserComponent implements OnDestroy {
 
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   public editUser = this.data.user;
-  public fileName: string;
-  public profileImg: File;
+  public fileName: string = '?';
+  public profileImg: File | undefined = undefined;
 
   public isManager = this.authorizationService.isManager;
   public isAdmin = this.authorizationService.isAdmin;

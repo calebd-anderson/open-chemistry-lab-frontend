@@ -32,9 +32,9 @@ import { MatButtonModule } from '@angular/material/button';
   ],
 })
 export class LoginComponent implements OnDestroy {
-  public showLoading: boolean;
+  public showLoading: boolean = false;
   private subscriptions: Subscription[] = [];
-  public isLoggedIn: boolean;
+  public isLoggedIn: boolean = false;
   readonly dialog = inject(MatDialog);
   readonly dialogRef = inject(MatDialogRef<LoginComponent>);
 
@@ -54,9 +54,13 @@ export class LoginComponent implements OnDestroy {
       this.authenticationService.login(userForm.value).subscribe({
         next: (response: HttpResponse<User>) => {
           const token = response.headers.get(HeaderType.JWT_TOKEN);
-          const user: User = response.body;
-          this.authenticationService.saveToken(token);
-          this.authenticationService.addUserToLocalCache(user);
+          const user: User | null = response.body;
+          if (token && user) {
+            this.authenticationService.saveToken(token);
+            this.authenticationService.addUserToLocalCache(user);
+          } else {
+            throw new Error();
+          }
           this.router.navigateByUrl('lab');
           userForm.reset();
           this.authenticationService.setIsLoggedIn(true);

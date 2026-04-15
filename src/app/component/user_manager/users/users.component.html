@@ -1,42 +1,26 @@
 <!-- users table -->
-<div>
+<section>
   <div>
     <form>
-      <button
-        type="button"
-        (click)="getUsers(true)"
-        matFab
-        aria-label="refresh users button"
-      >
+      <button type="button" (click)="getUsers(true)" matFab aria-label="refresh users button">
         @if (refreshing) {
-          <i class="fas fa-sync fa-spin"></i>
+        <i class="fas fa-sync fa-spin"></i>
         }
         @if (!refreshing) {
-          <!-- <i class="fas fa-sync"></i> -->
-          <mat-icon>refresh</mat-icon>
+        <!-- <i class="fas fa-sync"></i> -->
+        <mat-icon>refresh</mat-icon>
         }
       </button>
-      <button
-        [hidden]="!isManager"
-        type="button"
-        (click)="onClickNewUser()"
-        matFab
-        extended
-        aria-label="create user button"
-      >
+      <button [hidden]="!isManager" type="button" (click)="onClickNewUser()" matFab extended
+        aria-label="create user button">
         <mat-icon>add</mat-icon>New User
       </button>
-      <input
-        name="searchTerm"
-        #searchInput="ngModel"
-        ngModel
-        (ngModelChange)="searchUsers(searchInput.value)"
-        type="search"
-        placeholder="Search users..."
-      />
+      <input name="searchTerm" #searchInput="ngModel" ngModel (ngModelChange)="searchUsers(searchInput.value)"
+        type="search" placeholder="Search users..." />
     </form>
   </div>
 
+  @if (users) {
   <table mat-table [dataSource]="users" class="mat-elevation-z8">
     <!-- <thead>
       <tr>
@@ -64,4 +48,6 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="onSelectUser(user)"></tr>
   </table>
-</div>
+  }
+
+</section>

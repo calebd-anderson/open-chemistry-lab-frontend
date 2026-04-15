@@ -19,7 +19,7 @@ export class DiscoveriesComponent implements OnInit {
   readonly authenticationService = inject(AuthenticationService)
   readonly _snackBar = inject(NotificationService)
 
-  public loading: boolean;
+  public loading: boolean = false;
 
   public userReactions: UserReaction[] = []
 

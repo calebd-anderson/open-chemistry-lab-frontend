@@ -6,45 +6,53 @@ import { FlashCardService } from '@app/service/flashcard.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'app-flashcard',
-    templateUrl: './flashcard.component.html',
-    styleUrls: ['./flashcard.component.scss'],
-    imports: [FormsModule]
+  selector: 'app-flashcard',
+  templateUrl: './flashcard.component.html',
+  styleUrls: ['./flashcard.component.scss'],
+  imports: [FormsModule],
 })
 export class FlashcardComponent implements OnInit {
   flashcards: any[] = [];
   flashcard: any = {};
   allCards: boolean = false;
 
-  constructor(private router: Router, private service: FlashCardService, private authenticationService: AuthenticationService) { }
+  constructor(
+    private router: Router,
+    private service: FlashCardService,
+    private authenticationService: AuthenticationService,
+  ) {}
 
   ngOnInit(): void {
     if (!this.authenticationService.isUserLoggedIn())
       this.router.navigateByUrl('lab');
     else
-      this.getAllFlashcardsByUserId(this.authenticationService.getUserFromLocalCache().userId);
+      this.getAllFlashcardsByUserId(
+        this.authenticationService.getUserFromLocalCache().userId,
+      );
   }
 
   flipCard(id: number) {
-    if(!this.flashcards[id]['flipped']) {
-      document.getElementById(String(id)).classList.add("flip");
+    if (!this.flashcards[id]['flipped']) {
+      document.getElementById(String(id))?.classList.add('flip');
       this.flashcards[id]['flipped'] = true;
     } else {
-      document.getElementById(String(id)).classList.remove("flip");
+      document.getElementById(String(id))?.classList.remove('flip');
       this.flashcards[id]['flipped'] = false;
     }
   }
 
   public createFlashcard(item: any): void {
     let userId = this.authenticationService.getUserFromLocalCache().userId;
-    item[ "userId" ] = userId;
+    item['userId'] = userId;
     this.service.createFlashcard(item).subscribe({
       next: (response: HttpResponse<any>) => {
-        this.getAllFlashcardsByUserId(this.authenticationService.getUserFromLocalCache().userId);
+        this.getAllFlashcardsByUserId(
+          this.authenticationService.getUserFromLocalCache().userId,
+        );
       },
       error: (errorResponse: HttpErrorResponse) => {
         console.error(errorResponse);
-      }
+      },
     });
   }
 
@@ -55,12 +63,11 @@ export class FlashcardComponent implements OnInit {
       },
       error: (errorResponse: HttpErrorResponse) => {
         console.error(errorResponse);
-      }
+      },
     });
   }
 
   displayCards() {
     this.allCards = !this.allCards;
   }
-
 }

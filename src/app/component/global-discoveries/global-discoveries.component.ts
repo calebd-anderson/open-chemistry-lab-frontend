@@ -21,7 +21,7 @@ export class GlobalDiscoveriesComponent {
   readonly authorizationService = inject(AuthorizationService)
   readonly _snackBar = inject(NotificationService)
 
-  public isLoggedIn: boolean;
+  public isLoggedIn: boolean = false;
 
   public get isAdmin(): boolean {
     if(this.isLoggedIn)

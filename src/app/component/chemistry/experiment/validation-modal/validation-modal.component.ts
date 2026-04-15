@@ -11,8 +11,8 @@ import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 export class ValidationModalComponent {
   constructor(public dialogRef: MatDialogRef<ValidationModalComponent>) {}
 
-  public discovery: string;
-  public confirmMessage: string;
-  public wasSuccessful: string;
-  public isLoggedIn: string;
+  public discovery: string | undefined = '?';
+  public confirmMessage: string = '?';
+  public wasSuccessful: string = '?';
+  public isLoggedIn: string = '?';
 }
