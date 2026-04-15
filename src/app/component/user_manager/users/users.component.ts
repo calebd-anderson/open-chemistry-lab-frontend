@@ -15,6 +15,8 @@ import { AuthorizationService } from '@app/service/security/authorization.servic
 import { CustomHttpResponse } from '@app/model/custom-http-response';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from '../edit-user/edit-user.component';
+import { UserComponent } from '../user/user.component';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
   selector: 'app-users',
@@ -38,15 +40,15 @@ export class UsersComponent {
   public userService: UserService = inject(UserService);
   public notificationService: NotificationService = inject(NotificationService);
 
+  public isManager: boolean = this.authorizationService.isManager;
+
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
     this.getUsers(true);
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(EditUserComponent, {
-      data: { user: this.user },
-    });
+  onClickNewUser(): void {
+    const dialogRef = this.dialog.open(AddUserComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
@@ -85,6 +87,17 @@ export class UsersComponent {
   public onSelectUser(selectedUser: User): void {
     // this.selectedUser = selectedUser;
     // this.clickButton('openUserInfo');
+
+    const dialogRef = this.dialog.open(UserComponent, {
+      data: { user: selectedUser },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log('The dialog was closed');
+      if (result !== undefined) {
+        // this.animal.set(result);
+      }
+    });
   }
 
   public searchUsers(searchTerm: string): void {

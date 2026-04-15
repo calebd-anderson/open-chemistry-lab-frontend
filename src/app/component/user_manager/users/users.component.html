@@ -12,9 +12,9 @@
           placeholder="Search users..."
         />
       </form>
-      <!-- <button [hidden]="!isManager" type="button">
+      <button [hidden]="!isManager" type="button" (click)="onClickNewUser()">
         <i class="fa fa-plus"></i> New User
-      </button> -->
+      </button>
     </div>
     <div>
       <button type="button" (click)="getUsers(true)">

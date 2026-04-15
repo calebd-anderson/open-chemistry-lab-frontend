@@ -1,12 +1,12 @@
-<div>
+<!-- <div>
   <h5>Users Management</h5>
   @if (titleAction$ | async; as title) {
     <small>{{ title }}</small>
   }
-</div>
+</div> -->
 
 <!-- nav bar -->
-<nav>
+<!-- <nav>
   <div id="navbarCollapse">
     <div>
       <a (click)="changeTitle('Users')" data-bs-toggle="tab" href="#users">
@@ -28,14 +28,105 @@
       </a>
     </div>
   </div>
-</nav>
+</nav> -->
 
-<app-users />
+<!-- modal user info -->
+<h2 mat-dialog-title>
+  {{ selectedUser?.firstName }} {{ selectedUser?.lastName }}
+</h2>
+<mat-dialog-content>
+  <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button> -->
+  <div>
+    <div>
+      <div>
+        <div>
+          <div>
+            <div>
+              <div>
+                <img
+                  height="120"
+                  width="120"
+                  src="{{ selectedUser?.profileImgUrl }}"
+                  alt="{{ selectedUser?.firstName }}"
+                />
+              </div>
+            </div>
+          </div>
+          <div>
+            <div>
+              <h6>
+                {{ selectedUser?.firstName }}
+                {{ selectedUser?.lastName }}
+              </h6>
+              <p>{{ selectedUser?.username }}</p>
+              <div>
+                Status:
+                <span [hidden]="!selectedUser?.active">Active</span>
+                <span [hidden]="selectedUser?.active">Inactive</span>
+              </div>
+              @if (selectedUser?.lastLoginDate) {
+                <div>
+                  <small
+                    >Last Login:
+                    {{ selectedUser?.lastLoginDate | date: "medium" }}</small
+                  >
+                </div>
+              }
+            </div>
+            <div>
+              <div>
+                <small
+                  >Joined
+                  {{ selectedUser?.joinDate | date: "mediumDate" }}</small
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ul>
+        <li>
+          <i class="fa fa-id-badge"></i>
+          {{ selectedUser?.userId }}
+        </li>
+        <li>
+          <i class="fa fa-envelope"></i>
+          {{ selectedUser?.email }}
+        </li>
+        <li>
+          <i class="fa fa-shield-alt"></i>
+          {{ selectedUser?.role.substring(5) }}
+          @if (selectedUser?.lastLoginDate) {
+            <li>
+              <i class="fa fa-sign-in-alt"></i>
+              {{ selectedUser?.lastLoginDate | date: "medium" }}
+            </li>
+          }
+        </li>
+
+        <li>
+          <span [hidden]="selectedUser?.notLocked">
+            <i class="fa fa-lock" style="color: red"></i>
+            Account Locked
+          </span>
+          <span [hidden]="!selectedUser?.notLocked">
+            <i class="fa fa-unlock" style="color: green"></i>
+            Account Unlocked
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button matButton mat-dialog-close type="button">Close</button>
+</mat-dialog-actions>
 
 <!-- main content -->
-<div>
-  <!-- change password  -->
-  <div [hidden]="!isManager" id="reset-password">
+<!-- change password  -->
+<!-- <div [hidden]="!isManager" id="reset-password">
     <form
       #resetPasswordForm="ngForm"
       (ngSubmit)="onResetPassword(resetPasswordForm)"
@@ -67,136 +158,4 @@
         </button>
       </fieldset>
     </form>
-  </div>
-
-  <!-- modal user info -->
-  <div
-    id="viewUserModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby=""
-    aria-hidden="true"
-  >
-    <div role="document">
-      <div>
-        <div>
-          <h5 id="exampleModalLongTitle">
-            {{ selectedUser?.firstName }}
-            {{ selectedUser?.lastName }}
-          </h5>
-          <button type="button" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div>
-          <div>
-            <div>
-              <div>
-                <div>
-                  <div>
-                    <div>
-                      <div>
-                        <img
-                          height="120"
-                          width="120"
-                          src="{{ selectedUser?.profileImgUrl }}"
-                          alt="{{ selectedUser?.firstName }}"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <div>
-                      <h6>
-                        {{ selectedUser?.firstName }}
-                        {{ selectedUser?.lastName }}
-                      </h6>
-                      <p>{{ selectedUser?.username }}</p>
-                      <div>
-                        Status:
-                        <span [hidden]="!selectedUser?.active">Active</span>
-                        <span [hidden]="selectedUser?.active">Inactive</span>
-                      </div>
-                      @if (selectedUser?.lastLoginDate) {
-                        <div>
-                          <small
-                            >Last Login:
-                            {{
-                              selectedUser?.lastLoginDate | date: "medium"
-                            }}</small
-                          >
-                        </div>
-                      }
-                    </div>
-                    <div>
-                      <div>
-                        <small
-                          >Joined
-                          {{
-                            selectedUser?.joinDate | date: "mediumDate"
-                          }}</small
-                        >
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <ul>
-                <li>
-                  <i class="fa fa-id-badge"></i>
-                  {{ selectedUser?.userId }}
-                </li>
-                <li>
-                  <i class="fa fa-envelope"></i>
-                  {{ selectedUser?.email }}
-                </li>
-                <li>
-                  <i class="fa fa-shield-alt"></i>
-                  {{ selectedUser?.role.substring(5) }}
-                  @if (selectedUser?.lastLoginDate) {
-                    <li>
-                      <i class="fa fa-sign-in-alt"></i>
-                      {{ selectedUser?.lastLoginDate | date: "medium" }}
-                    </li>
-                  }
-                </li>
-
-                <li>
-                  <span [hidden]="selectedUser?.notLocked">
-                    <i class="fa fa-lock" style="color: red"></i>
-                    Account Locked
-                  </span>
-                  <span [hidden]="!selectedUser?.notLocked">
-                    <i class="fa fa-unlock" style="color: green"></i>
-                    Account Unlocked
-                  </span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div>
-          <button type="button">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- profile image change form -->
-  <form enctype="multipart/form-data">
-    <input
-      type="file"
-      (change)="
-        onProfileImageChange(
-          $any($event.target).files[0].name,
-          $any($event.target).files[0]
-        );
-        onUpdateProfileImage()
-      "
-      name="profile-image-input"
-      id="profile-image-input"
-      placeholder="file"
-      accept="image/*"
-    />
-  </form>
-</div>
+  </div> -->

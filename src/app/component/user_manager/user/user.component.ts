@@ -3,7 +3,7 @@ import {
   HttpEvent,
   HttpEventType,
 } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
@@ -16,75 +16,73 @@ import { User } from '../../../model/user';
 import { AuthenticationService } from '../../../service/security/authentication.service';
 import { NotificationService } from '../../../service/notification.service';
 import { UserService } from '../../../service/user.service';
-import { CommonModule } from '@angular/common';
-import { UsersComponent } from '../users/users.component';
+import { CommonModule, DatePipe } from '@angular/common';
 import { AuthorizationService } from '@app/service/security/authorization.service';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { DialogData } from '../edit-user/edit-user.component';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  imports: [CommonModule, FormsModule, UsersComponent],
+  // imports: [CommonModule, FormsModule, MatDialogContent],
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+    DatePipe,
+  ],
 })
 export class UserComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
   public refreshing: boolean;
+  readonly dialogRef = inject(MatDialogRef<UserComponent>);
+  readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   private titleSubject = new BehaviorSubject<string>('Users');
   public titleAction$ = this.titleSubject.asObservable();
   public user: User;
-  public selectedUser: User;
+  public selectedUser: User = this.data.user;
   public profileImg: File;
 
   public fileStatus = new FileUploadStatus();
+
+  private authenticationService: AuthenticationService = inject(
+    AuthenticationService,
+  );
+  private authorizationService: AuthorizationService =
+    inject(AuthorizationService);
+  private userService: UserService = inject(UserService);
+  private notificationService: NotificationService =
+    inject(NotificationService);
+
   public isAdmin = this.authorizationService.isAdmin;
   public isManager = this.authorizationService.isManager;
 
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    private authorizationService: AuthorizationService,
-    private userService: UserService,
-    private notificationService: NotificationService,
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
   public changeTitle(title: string): void {
     this.titleSubject.next(title);
-  }
-
-  public saveNewUser(): void {
-    this.clickButton('new-user-save');
-  }
-
-  public onAddNewUser(userForm: NgForm): void {
-    const formData = this.userService.createUserFormData(
-      null,
-      userForm.value,
-      this.profileImg,
-    );
-    this.subs.add(
-      this.userService.addUser(formData).subscribe({
-        next: (response: User) => {
-          this.clickButton('new-user-close');
-          // this.getUsers(false);
-          // this.fileName = null;
-          // this.profileImg = null;
-          userForm.reset();
-          this.notificationService.notify(
-            NotificationType.SUCCESS,
-            `${response.firstName} ${response.lastName} added successfully.`,
-          );
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          this.notificationService.notify(
-            NotificationType.ERROR,
-            errorResponse.error.message,
-          );
-        },
-      }),
-    );
   }
 
   public onUpdateCurrentUser(user: User): void {
@@ -171,7 +169,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public updateProfileImage(): void {
-    this.clickButton('profile-image-input');
+    // this.clickButton('profile-image-input');
   }
 
   public onLogOut(): void {
@@ -210,10 +208,6 @@ export class UserComponent implements OnInit, OnDestroy {
 
   public get currentUsername(): string {
     return this.authenticationService.getUserFromLocalCache().username;
-  }
-
-  private clickButton(buttonId: string): void {
-    document.getElementById(buttonId).click();
   }
 
   ngOnDestroy(): void {
