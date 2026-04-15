@@ -36,8 +36,9 @@
       />
     </form>
   </div>
-  <table>
-    <thead>
+
+  <table mat-table [dataSource]="users" class="mat-elevation-z8">
+    <!-- <thead>
       <tr>
         <th>Photo</th>
         <th>User ID</th>
@@ -48,75 +49,19 @@
         <th>Status</th>
         <th>Actions</th>
       </tr>
-    </thead>
-    @for (appUser of users; track appUser.userId) {
-      <tbody>
-        <tr (click)="onSelectUser(appUser)">
-          <td>
-            <img
-              height="40"
-              width="40"
-              src="{{ appUser?.profileImgUrl }}"
-              alt="profile image"
-            />
-          </td>
-          <td>{{ appUser?.userId }}</td>
-          <td>{{ appUser?.firstName }}</td>
-          <td>{{ appUser?.lastName }}</td>
-          <td>{{ appUser?.username }}</td>
-          <td>{{ appUser?.email }}</td>
-          <td>
-            <!-- <span [hidden]="!appUser?.active" class="badge bg-success"
-              >Active</span
-            >
-            <span [hidden]="appUser?.active" class="badge bg-danger"
-              >Inactive</span
-            > -->
-            <mat-chip-set aria-label="active status">
-              <mat-chip [hidden]="!appUser?.active" class="mat-chip-success"
-                >Active</mat-chip
-              >
-              <mat-chip [hidden]="appUser?.active" class="mat-chip-danger"
-                >Inactive</mat-chip
-              >
-            </mat-chip-set>
-          </td>
-          <td>
-            @if (!(currentUsername === appUser.username)) {
-              <div>
-                <!-- <button
-                  (click)="onEditUser($event, appUser)"
-                  class="btn btn-outline-info"
-                >
-                  <i class="fa fa-edit"></i>
-                </button> -->
-                <button
-                  matFab
-                  aria-label="edit button"
-                  (click)="onEditUser($event, appUser)"
-                >
-                  <mat-icon>edit</mat-icon>
-                </button>
-                <!-- <button
-                  [hidden]="!isAdmin"
-                  (click)="onDeleteUser(appUser?.username)"
-                  class="btn btn-outline-danger"
-                >
-                  <i class="fa fa-trash"></i>
-                </button> -->
-                <button
-                  matFab
-                  aria-label="delete button"
-                  (click)="onDeleteUser(appUser?.username)"
-                  class="mat-button-trash"
-                >
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </div>
-            }
-          </td>
-        </tr>
-      </tbody>
-    }
+    </thead> -->
+    <!-- User Id Column -->
+    <ng-container matColumnDef="userId">
+      <th mat-header-cell *matHeaderCellDef>Id.</th>
+      <td mat-cell *matCellDef="let user">{{ user.userId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First name</th>
+      <td mat-cell *matCellDef="let user">{{ user.firstName }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="onSelectUser(user)"></tr>
   </table>
 </div>

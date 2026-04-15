@@ -20,10 +20,11 @@ import { AddUserComponent } from '../add-user/add-user.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
+import {MatTableModule} from '@angular/material/table';
 
 @Component({
   selector: 'app-users',
-  imports: [FormsModule, MatButtonModule, MatIconModule, MatChipsModule],
+  imports: [FormsModule, MatButtonModule, MatIconModule, MatChipsModule, MatTableModule],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
 })
@@ -45,6 +46,14 @@ export class UsersComponent {
 
   public isManager: boolean = this.authorizationService.isManager;
   public isAdmin: boolean = this.authorizationService.isAdmin;
+
+  displayedColumns: string[] = ['userId', 'firstName'];
+
+          //   <td>{{ appUser?.userId }}</td>
+          // <td>{{ appUser?.firstName }}</td>
+          // <td>{{ appUser?.lastName }}</td>
+          // <td>{{ appUser?.username }}</td>
+          // <td>{{ appUser?.email }}</td>
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
