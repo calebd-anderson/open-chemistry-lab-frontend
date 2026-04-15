@@ -64,8 +64,8 @@
               >Inactive</span
             > -->
             <mat-chip-set aria-label="active status">
-              <mat-chip [hidden]="!appUser?.active">Active</mat-chip>
-              <mat-chip [hidden]="appUser?.active">Inactive</mat-chip>
+              <mat-chip [hidden]="!appUser?.active" class="mat-chip-success">Active</mat-chip>
+              <mat-chip [hidden]="appUser?.active" class="mat-chip-danger">Inactive</mat-chip>
             </mat-chip-set>
           </td>
           <td>
@@ -95,6 +95,7 @@
                   matFab
                   aria-label="delete button"
                   (click)="onDeleteUser(appUser?.username)"
+                  class="mat-button-trash"
                 >
                   <mat-icon>delete</mat-icon>
                 </button>

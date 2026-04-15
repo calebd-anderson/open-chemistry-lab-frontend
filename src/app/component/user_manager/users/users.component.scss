@@ -1,0 +1,27 @@
+@use "@angular/material" as mat;
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+.mat-chip-danger {
+  @include mat.chips-overrides(
+    (
+      label-text-color: red,
+    )
+  );
+}
+
+.mat-chip-success {
+  @include mat.chips-overrides(
+    (
+      label-text-color: green,
+    )
+  );
+}
+
+// Customize the entire app. Change :root to your selector if you want to scope the styles.
+.mat-button-trash {
+  @include mat.icon-overrides(
+    (
+      color: red,
+    )
+  );
+}
