@@ -59,13 +59,13 @@ export class UsersComponent {
   public isAdmin: boolean = this.authorizationService.isAdmin;
 
   tableDef: TableDef[] = [
-    { id: 'photo', label: 'Photo' },
+    { id: 'profileImgUrl', label: 'Photo' },
     { id: 'userId', label: 'User Id' },
     { id: 'firstName', label: 'First Name' },
     { id: 'lastName', label: 'Last Name' },
     { id: 'username', label: 'Username' },
     { id: 'email', label: 'Email' },
-    { id: 'status', label: 'Status' },
+    { id: 'active', label: 'Status' },
     { id: 'actions', label: 'Actions' },
   ];
   columnsToDisplay: string[] = this.tableDef.map((data) => data.id);

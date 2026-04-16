@@ -5,7 +5,7 @@
       <button
         type="button"
         (click)="getUsers(true)"
-        matFab
+        matMiniFab
         aria-label="refresh users button"
       >
         @if (refreshing) {
@@ -38,11 +38,52 @@
   </div>
 
   @if (users) {
-    <table mat-table [dataSource]="users" class="mat-elevation-z8">
+    <table mat-table [dataSource]="users">
       @for (column of tableDef; track column) {
         <ng-container matColumnDef="{{ column.id }}">
           <th mat-header-cell *matHeaderCellDef>{{ column.label }}</th>
-          <td mat-cell *matCellDef="let user">{{ user[column.id] }}</td>
+          <td mat-cell *matCellDef="let user">
+            @if (column.id == "profileImgUrl") {
+              <img
+                height="40"
+                width="40"
+                src="{{ user[column.id] }}"
+                alt="profile image"
+              />
+            } @else if (column.id == "active") {
+              <mat-chip-set aria-label="active status">
+                <mat-chip [hidden]="!user[column.id]" class="mat-chip-success"
+                  >Active</mat-chip
+                >
+                <mat-chip [hidden]="user[column.id]" class="mat-chip-danger"
+                  >Inactive</mat-chip
+                >
+              </mat-chip-set>
+            } @else if (column.id == "actions") {
+              @if (!(currentUsername === user.username)) {
+                <div>
+                  <button
+                    matMiniFab
+                    aria-label="edit button"
+                    (click)="onEditUser($event, user)"
+                    class="mat-button"
+                  >
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                  <button
+                    matMiniFab
+                    aria-label="delete button"
+                    (click)="onDeleteUser(user.username)"
+                    class="mat-button mat-button-trash"
+                  >
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              }
+            } @else {
+              {{ user[column.id] }}
+            }
+          </td>
         </ng-container>
       }
 

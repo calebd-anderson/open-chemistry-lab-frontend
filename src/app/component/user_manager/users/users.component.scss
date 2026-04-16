@@ -25,13 +25,8 @@
     )
   );
 }
-
-.mat-spinner-users {
-  @include mat.progress-spinner-overrides(
-    (
-      size: 10px,
-    )
-  );
+.mat-button {
+  margin-right: 0.5rem;
 }
 
 tr:not([mat-header-row]):hover {
