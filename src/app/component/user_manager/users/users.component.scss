@@ -33,3 +33,7 @@
     )
   );
 }
+
+tr:not([mat-header-row]):hover {
+  background: whitesmoke;
+}

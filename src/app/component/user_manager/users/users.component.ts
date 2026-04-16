@@ -22,6 +22,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 
+interface TableDef {
+  id: string;
+  label: string;
+}
+
 @Component({
   selector: 'app-users',
   imports: [
@@ -53,13 +58,17 @@ export class UsersComponent {
   public isManager: boolean = this.authorizationService.isManager;
   public isAdmin: boolean = this.authorizationService.isAdmin;
 
-  displayedColumns: string[] = ['userId', 'firstName'];
-
-  //   <td>{{ appUser?.userId }}</td>
-  // <td>{{ appUser?.firstName }}</td>
-  // <td>{{ appUser?.lastName }}</td>
-  // <td>{{ appUser?.username }}</td>
-  // <td>{{ appUser?.email }}</td>
+  tableDef: TableDef[] = [
+    { id: 'photo', label: 'Photo' },
+    { id: 'userId', label: 'User Id' },
+    { id: 'firstName', label: 'First Name' },
+    { id: 'lastName', label: 'Last Name' },
+    { id: 'username', label: 'Username' },
+    { id: 'email', label: 'Email' },
+    { id: 'status', label: 'Status' },
+    { id: 'actions', label: 'Actions' },
+  ];
+  columnsToDisplay: string[] = this.tableDef.map((data) => data.id);
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
