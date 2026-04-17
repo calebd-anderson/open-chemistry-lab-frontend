@@ -1,38 +1,36 @@
 <!-- users table -->
 <section>
-  <div>
-    <form>
-      <button
-        type="button"
-        (click)="getUsers(true)"
-        aria-label="refresh users button"
-      >
-        @if (refreshing) {
-          <i class="fas fa-sync fa-spin"></i>
-        }
-        @if (!refreshing) {
-          <i class="fas fa-sync"></i>
-        }
-      </button>
-      <button
-        [hidden]="!isManager"
-        type="button"
-        (click)="onClickNewUser()"
-        aria-label="create user button"
-      >
-        <i class="fas fa-add"></i>
-        New User
-      </button>
-      <input
-        name="searchTerm"
-        #searchInput="ngModel"
-        ngModel
-        (ngModelChange)="searchUsers(searchInput.value)"
-        type="search"
-        placeholder="Search users..."
-      />
-    </form>
-  </div>
+  <form>
+    <button
+      type="button"
+      (click)="getUsers(true)"
+      aria-label="refresh users button"
+    >
+      @if (refreshing) {
+        <i class="fas fa-sync fa-spin"></i>
+      }
+      @if (!refreshing) {
+        <i class="fas fa-sync"></i>
+      }
+    </button>
+    <button
+      [hidden]="!isManager"
+      type="button"
+      (click)="onClickNewUser()"
+      aria-label="create user button"
+    >
+      <i class="fas fa-add"></i>
+      New User
+    </button>
+    <input
+      name="searchTerm"
+      #searchInput="ngModel"
+      ngModel
+      (ngModelChange)="searchUsers(searchInput.value)"
+      type="search"
+      placeholder="Search users..."
+    />
+  </form>
 
   @if (users) {
     <table>

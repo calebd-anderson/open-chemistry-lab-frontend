@@ -1,7 +1,15 @@
+section {
+  margin: 1rem 1rem;
+}
+
 button {
   margin-right: 0.5rem;
 }
 
 tr:hover:not(thead>tr) {
   background-color: antiquewhite;
+}
+
+table {
+  width: 100%;
 }
