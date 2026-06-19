@@ -6,119 +6,62 @@
         <mat-label class="input-group-text">
           <i class="fa fa-user"></i>
         </mat-label>
-        <input
-          type="text"
-          class="form-control"
-          name="firstName"
-          placeholder="First name"
-          required
-          ngModel
-          #firstNameInput="ngModel"
-        />
+        <input type="text" class="form-control" name="firstName" placeholder="First name" required ngModel
+          #firstNameInput="ngModel" />
       </div>
       @if (firstNameInput.invalid && firstNameInput.touched) {
-        <span class="help-block" style="color: red"
-          >Please enter a first name</span
-        >
+      <span class="help-block" style="color: red">Please enter a first name</span>
       }
 
       <div class="input-group mb-3">
-        <mat-label class="input-group-text"
-          ><i class="fa fa-user"></i>
+        <mat-label class="input-group-text"><i class="fa fa-user"></i>
         </mat-label>
-        <input
-          type="text"
-          class="form-control"
-          name="lastName"
-          placeholder="Last name"
-          required
-          ngModel
-          #lastNameInput="ngModel"
-        />
+        <input type="text" class="form-control" name="lastName" placeholder="Last name" required ngModel
+          #lastNameInput="ngModel" />
       </div>
       @if (lastNameInput.invalid && lastNameInput.touched) {
-        <span class="help-block" style="color: red"
-          >Please enter a last name</span
-        >
+      <span class="help-block" style="color: red">Please enter a last name</span>
       }
 
       <div class="input-group mb-2">
-        <mat-label class="input-group-text"
-          ><i class="fa fa-id-card"></i
-        ></mat-label>
-        <input
-          type="text"
-          class="form-control"
-          name="username"
-          placeholder="Username"
-          required
-          ngModel
-          #usernameInput="ngModel"
-        />
+        <mat-label class="input-group-text"><i class="fa fa-id-card"></i></mat-label>
+        <input type="text" class="form-control" name="username" placeholder="Username" required ngModel
+          #usernameInput="ngModel" />
       </div>
       @if (usernameInput.invalid && usernameInput.touched) {
-        <span class="help-block" style="color: red"
-          >Please enter a username</span
-        >
+      <span class="help-block" style="color: red">Please enter a username</span>
       }
 
       <!-- email -->
       <div class="input-group mb-2">
-        <mat-label class="input-group-text"
-          ><i class="fa fa-envelope"></i
-        ></mat-label>
-        <input
-          type="email"
-          class="form-control"
-          name="email"
-          placeholder="Email"
-          required
-          ngModel
-          #emailInput="ngModel"
-        />
+        <mat-label class="input-group-text"><i class="fa fa-envelope"></i></mat-label>
+        <input type="email" class="form-control" name="email" placeholder="Email" required ngModel
+          #emailInput="ngModel" />
       </div>
       @if (emailInput.invalid && emailInput.touched) {
-        <span class="help-block" style="color: red"
-          >Please enter an email.</span
-        >
+      <span class="help-block" style="color: red">Please enter an email.</span>
       }
       <!-- password -->
       <div class="input-group mb-2">
-        <mat-label class="input-group-text"
-          ><i class="fa fa-key"></i
-        ></mat-label>
-        <input
-          type="password"
-          class="form-control"
-          name="password"
-          placeholder="Password"
-          required
-          ngModel
-          #passwordInput="ngModel"
-        />
+        <mat-label class="input-group-text"><i class="fa fa-key"></i></mat-label>
+        <input type="password" class="form-control" name="password" placeholder="Password" required ngModel
+          #passwordInput="ngModel" />
       </div>
       @if (emailInput.invalid && emailInput.touched) {
-        <span class="help-block" style="color: red"
-          >Please enter a password.</span
-        >
+      <span class="help-block" style="color: red">Please enter a password.</span>
       }
       <!-- register buttons -->
       <div class="d-flex justify-content-center mt-3">
-        <button
-          [disabled]="registerForm.invalid || showLoading"
-          type="submit"
-          name="button"
-          class="btn login_btn"
-        >
+        <button [disabled]="registerForm.invalid || showLoading" type="submit" name="button" class="btn login_btn">
           @if (showLoading) {
-            <i class="fa fa-spinner fa-spin"></i>
+          <i class="fa fa-spinner fa-spin"></i>
           }
           &nbsp;&nbsp;
           @if (showLoading) {
-            <span>Loading...</span>
+          <span>Loading...</span>
           }
           @if (!showLoading) {
-            <span>Register</span>
+          <span>Register</span>
           }
         </button>
       </div>
