@@ -39,20 +39,28 @@ export class RegisterComponent implements OnDestroy {
     private notificationService: NotificationService,
   ) {}
 
+  user: UserRegisterDto = {
+    firstName: '',
+    lastName: '',
+    username: '',
+    email: '',
+    password: ''
+  };
+
   public onRegister(user: UserRegisterDto): void {
     this.showLoading = true;
     this.subscriptions.push(
       this.authenticationService.register(user).subscribe({
-        next: (response: User) => {
+        next: (createdUser: User) => {
           this.sendNotification(
             NotificationType.SUCCESS,
-            `A new account was created for ${response.username}. Please login to continue.`,
+            `A new account was created for ${createdUser.username}. Please login to continue.`,
           );
-          this.dialogRef.close(response);
+          this.dialogRef.close(createdUser);
           this.showLoading = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
-          console.log(errorResponse);
+          console.error(errorResponse);
           this.sendNotification(
             NotificationType.ERROR,
             errorResponse.error.message,

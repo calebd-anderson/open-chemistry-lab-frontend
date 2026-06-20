@@ -1,7 +1,7 @@
-export type UserRegisterDto = {
-    firstName: string
-    lastName: string
-    username: string
-    email: string
-    password: string
+export interface UserRegisterDto {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  password: string;
 }
