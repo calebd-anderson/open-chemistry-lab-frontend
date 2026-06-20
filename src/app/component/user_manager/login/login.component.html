@@ -3,62 +3,40 @@
   <mat-dialog-content class="mat-typography login_container">
     <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
       <div>
-        <div class="input-group mb-2">
-          <mat-label class="input-group-text"
-            ><i class="fa fa-user"></i
-          ></mat-label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            placeholder="Username"
-            ngModel
-            #usernameInput="ngModel"
-            required
-          />
+        <div class="mb-2">
+          <div class="input-group">
+            <mat-label class="input-group-text"><i class="fa fa-user"></i></mat-label>
+            <input type="text" class="form-control"
+              [class.text-box-error]="!usernameInput.pristine && usernameInput.invalid" name="username"
+              placeholder="Username" ngModel #usernameInput="ngModel" required />
+          </div>
+          @if (usernameInput.invalid && usernameInput.touched) {
+          <span class="form-error">Please enter a username.</span>
+          }
         </div>
-        @if (usernameInput.invalid && usernameInput.touched) {
-          <span class="help-block" style="color: red"
-            >Please enter a username</span
-          >
-        }
-        <div class="input-group mb-2">
-          <mat-label class="input-group-text"
-            ><i class="fa fa-key"></i
-          ></mat-label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            placeholder="Password"
-            ngModel
-            #passwordInput="ngModel"
-            required
-          />
+        <div class="mb-2">
+          <div class="input-group">
+            <mat-label class="input-group-text"><i class="fa fa-key"></i></mat-label>
+            <input type="password" class="form-control"
+              [class.text-box-error]="!passwordInput.pristine && passwordInput.invalid" name="password"
+              placeholder="Password" ngModel #passwordInput="ngModel" required />
+          </div>
+          @if (passwordInput.invalid && passwordInput.touched) {
+          <span class="form-error">Please enter a password.</span>
+          }
         </div>
-
-        @if (passwordInput.invalid && passwordInput.touched) {
-          <span class="help-block" style="color: red"
-            >Please enter a password.</span
-          >
-        }
       </div>
 
-      <button
-        type="submit"
-        [disabled]="loginForm.invalid || showLoading"
-        name="button"
-        class="btn login_btn"
-      >
+      <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="btn login_btn">
         @if (showLoading) {
-          <i class="fa fa-spinner fa-spin"></i>
+        <i class="fa fa-spinner fa-spin"></i>
         }
         &nbsp;&nbsp;
         @if (showLoading) {
-          <span>Loading...</span>
+        <span>Loading...</span>
         }
         @if (!showLoading) {
-          <span>Login</span>
+        <span>Login</span>
         }
       </button>
     </form>
