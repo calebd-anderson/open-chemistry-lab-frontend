@@ -2,7 +2,7 @@
 The frontend for the [open-chemistry-lab-backend](https://github.com/calebd-anderson/open-chemistry-lab-backend).
 
 ## Environment Setup
-[Node](https://nodejs.org/en/download) v. 22  
+[Node](https://nodejs.org/en/download) v. 24
 - `nvm`
   - Mac/Linux
 https://github.com/nvm-sh/nvm
@@ -10,10 +10,13 @@ https://github.com/nvm-sh/nvm
 https://github.com/coreybutler/nvm-windows
 - The JS package manager is [npm](https://www.npmjs.com/)
 
-## Angular 21
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5 and has been upgraded to [Angular 21](https://v21.angular.dev/overview).
+## Angular 22
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5 and has been upgraded to [Angular 22](https://v22.angular.dev/overview).
 
-- [Angular CLI installation](https://v20.angular.dev/installation)
+- [Angular CLI installation](https://angular.dev/installation)
+```sh
+npm install -g @angular/cli
+```
 
 ### Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
