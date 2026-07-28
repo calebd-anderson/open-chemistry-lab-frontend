@@ -1,7 +1,7 @@
 <!-- modal edit user -->
 <div role="dialog" aria-labelledby="edit user modal" aria-hidden="true">
   <h2 mat-dialog-title>
-    Edit {{ editUser?.firstName }} {{ editUser?.lastName }}
+    Edit {{ editUser.firstName }} {{ editUser.lastName }}
     <small [hidden]="isManager">(read only)</small>
   </h2>
   <mat-dialog-content>
@@ -10,8 +10,8 @@
         <img
           height="120"
           width="120"
-          src="{{ editUser?.profileImgUrl }}"
-          alt="{{ editUser?.firstName }}"
+          src="{{ editUser.profileImgUrl }}"
+          alt="{{ editUser.firstName }}"
         />
         <div>
           <input

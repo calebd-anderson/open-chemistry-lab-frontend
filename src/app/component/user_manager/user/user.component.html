@@ -32,7 +32,7 @@
 
 <!-- modal user info -->
 <h2 mat-dialog-title>
-  {{ selectedUser?.firstName }} {{ selectedUser?.lastName }}
+  {{ selectedUser.firstName }} {{ selectedUser.lastName }}
 </h2>
 <mat-dialog-content>
   <!-- <button type="button" data-bs-dismiss="modal" aria-label="Close">
@@ -48,8 +48,8 @@
                 <img
                   height="120"
                   width="120"
-                  src="{{ selectedUser?.profileImgUrl }}"
-                  alt="{{ selectedUser?.firstName }}"
+                  src="{{ selectedUser.profileImgUrl }}"
+                  alt="{{ selectedUser.firstName }}"
                 />
               </div>
             </div>
@@ -57,20 +57,20 @@
           <div>
             <div>
               <h6>
-                {{ selectedUser?.firstName }}
-                {{ selectedUser?.lastName }}
+                {{ selectedUser.firstName }}
+                {{ selectedUser.lastName }}
               </h6>
-              <p>{{ selectedUser?.username }}</p>
+              <p>{{ selectedUser.username }}</p>
               <div>
                 Status:
-                <span [hidden]="!selectedUser?.active">Active</span>
-                <span [hidden]="selectedUser?.active">Inactive</span>
+                <span [hidden]="!selectedUser.active">Active</span>
+                <span [hidden]="selectedUser.active">Inactive</span>
               </div>
-              @if (selectedUser?.lastLoginDate) {
+              @if (selectedUser.lastLoginDate) {
                 <div>
                   <small
                     >Last Login:
-                    {{ selectedUser?.lastLoginDate | date: "medium" }}</small
+                    {{ selectedUser.lastLoginDate | date: "medium" }}</small
                   >
                 </div>
               }
@@ -79,7 +79,7 @@
               <div>
                 <small
                   >Joined
-                  {{ selectedUser?.joinDate | date: "mediumDate" }}</small
+                  {{ selectedUser.joinDate | date: "mediumDate" }}</small
                 >
               </div>
             </div>
@@ -89,29 +89,29 @@
       <ul>
         <li>
           <i class="fa fa-id-badge"></i>
-          {{ selectedUser?.userId }}
+          {{ selectedUser.userId }}
         </li>
         <li>
           <i class="fa fa-envelope"></i>
-          {{ selectedUser?.email }}
+          {{ selectedUser.email }}
         </li>
         <li>
           <i class="fa fa-shield-alt"></i>
-          {{ selectedUser?.role?.substring(5) }}
-          @if (selectedUser?.lastLoginDate) {
+          {{ selectedUser.role.substring(5) }}
+          @if (selectedUser.lastLoginDate) {
             <li>
               <i class="fa fa-sign-in-alt"></i>
-              {{ selectedUser?.lastLoginDate | date: "medium" }}
+              {{ selectedUser.lastLoginDate | date: "medium" }}
             </li>
           }
         </li>
 
         <li>
-          <span [hidden]="selectedUser?.notLocked">
+          <span [hidden]="selectedUser.notLocked">
             <i class="fa fa-lock" style="color: red"></i>
             Account Locked
           </span>
-          <span [hidden]="!selectedUser?.notLocked">
+          <span [hidden]="!selectedUser.notLocked">
             <i class="fa fa-unlock" style="color: green"></i>
             Account Unlocked
           </span>

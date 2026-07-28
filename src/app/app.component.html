@@ -15,7 +15,7 @@
         <img
           height="40"
           width="40"
-          src="{{ user()?.profileImgUrl }}"
+          src="{{ user().profileImgUrl }}"
           class="rounded-circle img-fluid img-thumbnail"
           alt="profile image"
         />
@@ -26,8 +26,8 @@
 
 <nav id="user-nav-menu">
   <div id="nav-item1">
-    <span>{{ user()?.firstName }}</span>
-    <button id="close-menu-button" (click)="openMenu()">
+    <span>{{ user().firstName }}</span>
+    <button id="close-menu-button" (click)="openMenu()" title="Close Menu" type="button">
       <svg close-icon></svg>
     </button>
   </div>

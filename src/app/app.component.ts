@@ -42,9 +42,7 @@ import { RegisterComponent } from './component/user_manager/register/register.co
   ],
 })
 export class AppComponent implements OnInit {
-
   readonly user: WritableSignal<User> = signal<User>(new User());
-
 
   public authenticationService: AuthenticationService = inject(
     AuthenticationService,
@@ -77,7 +75,7 @@ export class AppComponent implements OnInit {
         this.user.set(result);
       } else if (result === 'register') {
         this.openRegister();
-      } 
+      }
     });
   }
 
