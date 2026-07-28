@@ -19,5 +19,5 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
   { path: 'quiz', component: QuizComponent, canActivate: [AuthenticationGuard] },
   { path: 'flashcard', component: FlashcardComponent, canActivate: [AuthenticationGuard] },
-  { path: '', redirectTo: 'about', pathMatch: 'full' }
+  { path: '', redirectTo: 'lab', pathMatch: 'full' }
 ]
