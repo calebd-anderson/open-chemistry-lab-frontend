@@ -4,7 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build ics-499-front-end --configuration production",
+    "build:dev": "ng build ics-499-front-end --configuration development",
+    "build:prod-opt": "ng build ics-499-front-end --configuration production --output-hashing=all --stats-json --verbose",
+    "build:prod-min": "ng build ics-499-front-end --configuration production --stats-json",
+    "analyze": "ng build --configuration production --stats-json && webpack-bundle-analyzer dist/stats.json",
+    "analyze:quick": "ng build --configuration production --stats-json --webpack-stats-output-file=dist/stats.json && npx webpack-bundle-analyzer dist/stats.json dist/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -34,12 +39,17 @@
     "@angular/compiler-cli": "^21.2.7",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
+    "css-minimizer-webpack-plugin": "^8.0.0",
     "jasmine-core": "~4.0.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.1.0",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "pug": "^3.0.2",
-    "typescript": "5.9.3"
+    "sass": "^1.102.0",
+    "terser-webpack-plugin": "^5.6.1",
+    "typescript": "5.9.3",
+    "webpack-bundle-analyzer": "^5.3.1",
+    "webpack-cli": "^7.2.2"
   }
 }
