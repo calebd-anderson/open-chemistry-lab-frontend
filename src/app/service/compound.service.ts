@@ -1,8 +1,13 @@
 import { Injectable } from '@angular/core';
-import {observable, Observable, Subject} from "rxjs";
-import { HttpClient, HttpResponse } from "@angular/common/http";
-import { Reaction, UserReaction } from "../model/compound";
-import {environment} from "../../environments/environment";
+import { Observable, Subject } from 'rxjs';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Reaction, UserReaction } from '../model/compound';
+import { environment } from '../../environments/environment';
+
+export interface ValidateCompoundPayload {
+  elements: Array<{ symbol: string; numberOfAtoms: number }>;
+  userId: string | null;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +15,11 @@ import {environment} from "../../environments/environment";
 export class CompoundService {
   public host = environment.apiUrl;
   subject = new Subject<void>();
+
   constructor(private http: HttpClient) { }
 
-  public validate(payload: { elements: any[]; userId: any; }): Observable<HttpResponse<Reaction>> {
-    return this.http.post<Reaction>(`${this.host}/compound/validate`, payload, {observe: "response"});
+  public validate(payload: ValidateCompoundPayload): Observable<HttpResponse<Reaction>> {
+    return this.http.post<Reaction>(`${this.host}/compound/validate`, payload, { observe: 'response' });
   }
 
   public getAllDiscoveries(): Observable<Reaction[]> {
@@ -22,7 +28,7 @@ export class CompoundService {
 
   public getUserDiscoveries(userId: string): Observable<UserReaction[]> {
     return this.http.get<UserReaction[]>(`${this.host}/compound/getByUserId`, {
-      params: {userId: userId},
+      params: { userId },
     });
   }
 }

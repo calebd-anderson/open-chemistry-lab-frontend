@@ -60,10 +60,10 @@ export class RegisterComponent implements OnDestroy {
           this.showLoading = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
-          console.error(errorResponse);
           this.sendNotification(
             NotificationType.ERROR,
-            errorResponse.error.message,
+            errorResponse.error?.message ||
+              'Registration failed. Please try again or check your input.',
           );
           this.showLoading = false;
         },

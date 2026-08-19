@@ -3,6 +3,17 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 
+export interface Flashcard {
+  id?: number;
+  term: string;
+  question: string;
+  answer: string;
+  userId?: string;
+  flipped?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,17 +23,16 @@ export class FlashCardService {
 
   constructor(private http: HttpClient) { }
 
-  public createFlashcard(item: any): Observable<any> {
-    // console.log(item);
-    return this.http.post<any>(`${this.host}/flashcards/add`, item);
+  public createFlashcard(flashcard: Flashcard): Observable<Flashcard> {
+    return this.http.post<Flashcard>(`${this.host}/flashcards/add`, flashcard);
   }
 
-  public getAllFlashcard(): Observable<any> {
-    return this.http.get<any>(`${this.host}/flashcards/all`);
+  public getAllFlashcard(): Observable<Flashcard[]> {
+    return this.http.get<Flashcard[]>(`${this.host}/flashcards/all`);
   }
 
-  public getFlashcardsByUserId(userId: string): Observable<any> {
-    return this.http.get<any>(`${this.host}/flashcards/userflashcards/${userId}`);
+  public getFlashcardsByUserId(userId: string): Observable<Flashcard[]> {
+    return this.http.get<Flashcard[]>(`${this.host}/flashcards/userflashcards/${userId}`);
   }
 
 }

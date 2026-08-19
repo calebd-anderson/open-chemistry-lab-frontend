@@ -20,7 +20,7 @@ import { Reaction } from '@app/model/compound';
 })
 export class LabComponent {
   elementsInCompound = signal<Element[]>([]);
-  atomsInCompound: Map<String, number> = new Map();
+  atomsInCompound: Map<string, number> = new Map();
   private _snackBar: NotificationService = inject(NotificationService);
   public experimentService: ExperimentService = inject(ExperimentService);
   private compoundService: CompoundService = inject(CompoundService);
@@ -97,7 +97,10 @@ export class LabComponent {
         },
       });
     } else {
-      console.warn('Unable to save findings, no user is logged in.');
+      this._snackBar.notify(
+        NotificationType.WARNING,
+        'Unable to save discovery anonymously. Please create an account to save your findings.'
+      );
       let payload = {
         elements,
         userId: null,

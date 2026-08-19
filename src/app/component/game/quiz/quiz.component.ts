@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Quiz } from '../../../model/quiz';
 import { QuizService } from '../../../service/quiz.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../../../service/security/authentication.service';
+import { NotificationType } from '../../../model/enum/notification-type.enum';
+import { NotificationService } from '../../../service/notification.service';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
@@ -14,18 +16,18 @@ export class QuizComponent implements OnInit {
   quizzes: Quiz[] = [];
   question: string = '?';
   currentQuiz: number = 0;
-  answer: any;
+  answer: string | null = null;
   answerSelected: boolean = false;
   correctAnswers: number = 0;
   incorrectAnswers: number = 0;
   score: boolean = false;
   random: number = 0;
 
-  constructor(
-    private quizService: QuizService,
-    private _snackBar: MatSnackBar,
-    private authenticationService: AuthenticationService,
-  ) {}
+  private _snackBar = inject(MatSnackBar);
+  private authenticationService = inject(AuthenticationService);
+  private notificationService = inject(NotificationService);
+
+  constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
     this.quizService

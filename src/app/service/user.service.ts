@@ -40,7 +40,6 @@ export class UserService {
     );
   }
 
-  // could be better to pass any
   public updateProfileImage(formData: FormData): Observable<HttpEvent<User>> {
     return this.http.post<User>(
       `${this.host}/user/updateprofileimg`,
@@ -94,7 +93,6 @@ export class UserService {
     profileImage: File | undefined,
   ): FormData {
     const formData = new FormData();
-    // console.log(selectedUserId);
     formData.append('userId', selectedUserId);
     formData.append('firstName', user.firstName);
     formData.append('lastName', user.lastName);
