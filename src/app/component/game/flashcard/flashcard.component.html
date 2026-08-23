@@ -59,7 +59,7 @@
   @if (allCards) {
   <div class="flashcard-container">
     <div class="card-grid">
-      @for (displayCard of flashcards; track displayCard; let i = $index) {
+      @for (displayCard of flashcards; track displayCard.id; let i = $index) {
       <div class="card" id="{{ i }}" (click)="flipCard(i)">
         <div class="front">{{ displayCard.question }}</div>
         <div class="back">{{ displayCard.answer }}</div>
