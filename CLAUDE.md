@@ -39,9 +39,12 @@ This is an Angular 22 frontend application for the Open Chemistry Lab, following
 - **Discoveries (`src/app/component/discoveries/`)**: Browsing scientific findings and global discoveries.
 
 ### Styling & UI
-- **Tailwind CSS v4**: Integrated with Angular's @angular/build. 
-  - Uses `@import "tailwindcss";` in `src/styles.scss` (required for Tailwind v4).
-  - Sass deprecation warning about `@import`: This is expected behavior; Tailwind v4's `@import` directive is a CSS-level import that works with Sass before compilation. To suppress warnings, wrap in a separate CSS file (`src/tailwind.css`) and import that from SCSS using `@use`.
+- **Tailwind CSS v4**: Integrated with Angular's @angular/build via `ng add tailwindcss`. 
+  - Uses `@import "tailwindcss";` in `src/tailwind.css` (required for Tailwind v4).
+  - In `src/styles.scss`: use `@use "tailwind.css"` to import it after Angular Material theme
+  - Sass deprecation warning about `@import`: Expected and harmless - this is CSS-level import via @angular/build. The `@use` directive in SCSS suppresses the warning
+  - **PostCSS plugin error**: Don't install postcss/autoprefixer deps or create config files. If errors occur, run `ng add tailwindcss` to properly register Tailwind build hooks with @angular/build
+  - **No config files needed**: Angular handles content discovery and CSS compilation natively. Never add `tailwind.config.js` or `postcss.config.*` files when using @angular/build with Tailwind v4
 - **Angular Material**: Used for complex UI components and theming.
 - **GSAP**: Used for high-fidelity animations, particularly within the periodic table and experiment modules.
 
