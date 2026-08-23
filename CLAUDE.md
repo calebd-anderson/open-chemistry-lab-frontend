@@ -39,7 +39,9 @@ This is an Angular 22 frontend application for the Open Chemistry Lab, following
 - **Discoveries (`src/app/component/discoveries/`)**: Browsing scientific findings and global discoveries.
 
 ### Styling & UI
-- **Tailwind CSS**: Used for utility-first styling and layout.
+- **Tailwind CSS v4**: Integrated with Angular's @angular/build. 
+  - Uses `@import "tailwindcss";` in `src/styles.scss` (required for Tailwind v4).
+  - Sass deprecation warning about `@import`: This is expected behavior; Tailwind v4's `@import` directive is a CSS-level import that works with Sass before compilation. To suppress warnings, wrap in a separate CSS file (`src/tailwind.css`) and import that from SCSS using `@use`.
 - **Angular Material**: Used for complex UI components and theming.
 - **GSAP**: Used for high-fidelity animations, particularly within the periodic table and experiment modules.
 
