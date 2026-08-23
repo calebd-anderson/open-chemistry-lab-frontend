@@ -52,12 +52,19 @@ export class FlashcardComponent implements OnInit {
   }
 
   flipCard(flashcardId: number): void {
-    if (this.flashcards[flashcardId]) {
-      const card = this.flashcards[flashcardId];
-      card.flipped = !card.flipped;
+    // if (this.flashcards[flashcardId]) {
+    //   const card = this.flashcards[flashcardId];
+    //   card.flipped = !card.flipped;
 
-      // Re-fetch to get latest state from API if needed
-      setTimeout(() => this.loadFlashcards(), 100);
+    //   // Re-fetch to get latest state from API if needed
+    //   setTimeout(() => this.loadFlashcards(), 100);
+    // }
+    if (!this.flashcards[flashcardId]['flipped']) {
+      document.getElementById(String(flashcardId))?.classList.add('flip');
+      this.flashcards[flashcardId]['flipped'] = true;
+    } else {
+      document.getElementById(String(flashcardId))?.classList.remove('flip');
+      this.flashcards[flashcardId]['flipped'] = false;
     }
   }
 
@@ -75,14 +82,12 @@ export class FlashcardComponent implements OnInit {
         );
       },
       error: (errorResponse: HttpErrorResponse) => {
-        const errorMessage = errorResponse.error?.message ||
-          errorResponse.status === 401 ? 'Not authorized. Please login.' :
-          'Failed to create flashcard.';
+        const errorMessage =
+          errorResponse.error?.message || errorResponse.status === 401
+            ? 'Not authorized. Please login.'
+            : 'Failed to create flashcard.';
 
-        this.notificationService.notify(
-          NotificationType.ERROR,
-          errorMessage,
-        );
+        this.notificationService.notify(NotificationType.ERROR, errorMessage);
       },
     });
   }
