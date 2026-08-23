@@ -2,6 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## App Summary
+This is an Angular 21/22 frontend for backend. The backend is a Spring Boot API in a different repository. The purpose for the app is a fun yet educational chemistry web app featuring an interactive periodic table of elements allowing users to create molecules/compounds and learn about their properties based on different combinations of elements from the periodic table. The anonymous mode allows anyone who visits the website to experiment with chemistry by manipulating the interactive periodic table of elements. The authenticated mode allows users to save their molecule/compound discoveries to their account. 
+
 ## Common Commands
 
 ### Development
