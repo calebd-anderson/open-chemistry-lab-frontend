@@ -1,0 +1,2 @@
+- [tailwind-v4-import-and-viewport-fix](Tailwind-v4-import-and-viewport-fix.md) — Tailwind v4 configuration (angular/build native handling, no config files needed) + inline test block added to index.html as visual proof
+- [tailwind-v4-setup-complete](Tailwind-v4-setup-complete.md) — Bootstrap migrated, removed postcss/autoprefixer deps, deleted config files; bug fixed by running `ng add tailwindcss` which registers Tailwind build hooks with @angular/build - rainbow test box at localhost:4200 confirms working
