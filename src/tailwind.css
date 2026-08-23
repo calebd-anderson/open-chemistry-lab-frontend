@@ -1,1 +1,81 @@
 @import 'tailwindcss';
+
+/*
+ * Global Chemistry Lab Styles
+ * ----------------------------------------
+ * Science-inspired aesthetic with educational charm:
+ * - Cyan-to-blue gradients for scientific atmosphere
+ * - Gold/amber accents inspired by chemistry glassware
+ * - Dark navy backgrounds for modern laboratory feel
+ */
+
+/* Typography enhancements for educational content */
+h3 {
+  @apply text-xl font-bold;
+}
+
+td {
+  @apply cursor-pointer;
+}
+
+/* Chemistry-themed color utilities */
+@utility chemistry-border-gold {
+  border-color: #f1fec6;
+  border-width: 3px;
+  border-style: solid;
+}
+
+@utility chemistry-bg-cyan {
+  background: radial-gradient(
+    circle,
+    rgba(48, 197, 255, 1) 0%,
+    rgba(42, 45, 52, 1) 100%
+  );
+}
+
+/* Gold-bordered action button theme */
+.btn-gold {
+  @apply chemistry-border-gold rounded-xl cursor-pointer select-none p-1 w-48 h-12;
+}
+
+/* Snackbar overrides for success/warning/error states */
+.green-success-snackbar {
+  @apply bg-green-500 text-white;
+}
+
+.red-error-snackbar {
+  @apply bg-red-500 text-white;
+}
+
+.orange-warning-snackbar {
+  @apply bg-orange-500 text-white;
+}
+
+.default-snackbar {
+  @apply font-medium;
+}
+
+/* Navigation menu utility classes */
+.nav-menu-active {
+  @apply w-64 transition-all duration-500 ease-in-out;
+}
+
+.nav-menu-closed {
+  @apply w-0 transition-all duration-500 ease-in-out overflow-hidden;
+}
+
+/* Element selection glow effects for periodic table */
+.element-glow-primary {
+  box-shadow: 0 0 12px rgba(48, 197, 255, 0.6);
+}
+
+.element-glow-secondary {
+  box-shadow: 0 0 12px rgba(42, 190, 255, 0.6);
+}
+
+/* Subtle scientific pattern overlay */
+.science-pattern {
+  background-image:
+    radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0);
+  background-color: rgba(255, 255, 255, 0.03);
+}

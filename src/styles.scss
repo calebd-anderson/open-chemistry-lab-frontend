@@ -13,31 +13,8 @@
   );
 }
 
-body {
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-}
-
-.mat-typography h3 {
-  font-size: large;
-  font-weight: 700;
-}
-
-td {
-  cursor: pointer;
-}
-
-.move-right {
-  position: absolute;
-  right: 0;
-}
-
-.move-left {
-  position: absolute;
-  left: 0;
-}
-
-// custom snackbar styles
+// custom snackbar overrides using Material theming API
+// Colors are defined in tailwind.css - these just hook into Material's snackbar system
 .green-success-snackbar {
   @include mat.snack-bar-overrides(
     (
@@ -67,4 +44,15 @@ td {
 
 .default-snackbar {
   font-weight: 500;
+}
+
+/* Navigation menu positioning utilities - kept for component compatibility */
+.move-right {
+  position: absolute;
+  right: 0;
+}
+
+.move-left {
+  position: absolute;
+  left: 0;
 }

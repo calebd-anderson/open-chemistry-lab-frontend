@@ -1,13 +1,28 @@
+/*
+ * Header and Navigation Styles
+ * ----------------------------------------
+ * Complex gradients and layouts stay in SCSS
+ * Simple utilities have been migrated to Tailwind via utility classes
+ */
+
+// Reusable color tokens for consistency with tailwind.css
 $nav-background: #29524a;
 
+// Reusable spacing token
+$gap-spacing: 0.5rem;
+
 header#main-header {
+  // Keep complex grid layout and gradients in SCSS
   display: grid;
-  grid-template-columns: 0.2fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   background-image: radial-gradient(
     circle,
     rgba(48, 197, 255, 1) 0%,
     rgba(42, 45, 52, 1) 100%
   );
+
+  // Migrated simple utilities - use Tailwind classes in template instead:
+  // gap-3 → gap-$gap-spacing (or just use Tailwind gap utility)
 
   svg {
     margin: 0.5rem;
@@ -17,6 +32,7 @@ header#main-header {
     padding: 0.5rem;
     border-radius: 10px;
     cursor: pointer;
+    // Simplify using Tailwind if needed: rounded-xl cursor-pointer
   }
 }
 
@@ -27,8 +43,10 @@ header#main-header {
   margin: 0px;
 }
 
+// Button styles - extract to .btn-gold class in tailwind.css if needed
 button {
   all: unset;
+  // Migrated from inline style or Bootstrap btn classes
   border: #f1fec6 3px solid;
   padding: 0.25rem 1.5rem;
   border-radius: 10px;
@@ -38,10 +56,9 @@ button {
 #main-header > #user-controls {
   display: grid;
   align-content: end;
-  // border: red 5px solid;
   background-image: radial-gradient(#86bbd8, #33658a);
-  padding: 0.5rem;
-  margin: 0.5rem;
+  padding: $gap-spacing;
+  margin: $gap-spacing;
   border-radius: 10px;
   width: fit-content;
   height: fit-content;
@@ -60,38 +77,48 @@ button {
   height: 100vh;
   overflow-x: hidden;
   width: 0em;
-  transition: width 0.5s;
+  // Migrated to transition utility in tailwind.css
+  transition: width 0.5s ease-in-out;
   color: white;
 }
+
 #user-nav-menu.active {
   width: 16em;
 }
+
 #nav-item1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 #nav-item1 + hr {
   margin-top: 0.25rem;
 }
+
 #close-menu-button {
   padding: 5px 10px;
 }
+
 #close-menu-button svg {
   height: 15px;
   width: 15px;
 }
+
 #logout-menu-button svg {
   height: 20px;
   width: 20px;
   margin: 0px 10px;
 }
+
 #admin-menu-button svg {
   height: 20px;
   width: 20px;
   margin: 0px 10px;
 }
+
 #user-nav-menu button {
+  // Migrated from inline styles - use .btn-gold class if consistent styling needed
   background-color: #33658a;
   margin: 5px;
 }
