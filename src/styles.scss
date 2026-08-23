@@ -1,48 +1,116 @@
 /* You can add global styles to this file, and also import other style files */
-@use "@angular/material" as mat;
 
 @use "tailwind.css";
 
 // Bootstrap removed as requested.
 
-// Customize the entire app. Change :root to your selector if you want to scope the styles.
-:root {
-  @include mat.theme(
-    (color: mat.$blue-palette, typography: Roboto, density: 0),
-    // $overrides: (surface: #091324, on-surface: #fff)
+// =====================================================
+// GLOBAL CHEMISTRY LABORATORY STYLES (Pure CSS/SCSS)
+// =====================================================
+
+// Chemistry education laboratory theme
+body {
+  // Clean laboratory workspace background
+  background: linear-gradient(180deg,
+    #f0f9ff 0%,
+    #e0f2fe 40%,
+    #dbeafe 100%
   );
+
+  color: #1e293b; // Dark slate for readable text
+
+  // Subtle molecular lattice pattern on body
+  &::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(circle at 1px 1px, rgba(56, 189, 248, 0.03) 1px, transparent 0);
+    background-size: 30px 30px;
+  }
+
+  // Selection color matching chemistry theme
+  &::selection {
+    background-color: rgba(56, 189, 248, 0.3);
+    color: #1e3a8a;
+  }
 }
 
-// custom snackbar overrides using Material theming API
-// Colors are defined in tailwind.css - these just hook into Material's snackbar system
+/* Typography for educational content - Pure CSS */
+h1 {
+  // Main title - discovery feel
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: #1e3a8a; // Deep navy for titles
+}
+
+h2 {
+  font-size: 1.875rem;
+  font-weight: 600;
+  margin-top: 2rem;
+  color: #334155;
+}
+
+h3 {
+  // Section headers - learning objectives
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+  color: #1e40af; // Blue for educational content
+}
+
+p {
+  line-height: 1.6;
+  color: #374151; // Softer gray for body text
+}
+
+/* Typography overrides - remove any .mat-typography class usage */
+.mat-typography {
+  @extend %typography-reset;
+
+  h1, h2, h3, p {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+  }
+}
+
+%typography-reset {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Custom snackbar overrides using pure CSS classes */
+// Success state - scientific green for correct reactions
 .green-success-snackbar {
-  @include mat.snack-bar-overrides(
-    (
-      container-color: #2bbe68,
-      supporting-text-color: var(--mat-sys-on-surface),
-    )
-  );
+  background-color: #22c55e !important; // Scientific green
+  color: #ffffff !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+  font-weight: 500;
 }
 
+/* Error state - classic red for unsafe/invalid compounds */
 .red-error-snackbar {
-  @include mat.snack-bar-overrides(
-    (
-      container-color: var(--mat-sys-error),
-      supporting-text-color: var(--mat-sys-on-surface),
-    )
-  );
+  background-color: #ef4444 !important; // Red-500
+  color: #ffffff !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+  font-weight: 500;
 }
 
+/* Warning state - amber for experimental caution */
 .orange-warning-snackbar {
-  @include mat.snack-bar-overrides(
-    (
-      container-color: #ff6f00,
-      supporting-text-color: var(--mat-sys-on-surface),
-    )
-  );
-}
-
-.default-snackbar {
+  background-color: #f59e0b !important; // Amber-500
+  color: #ffffff !important;
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
   font-weight: 500;
 }
 
@@ -56,3 +124,142 @@
   position: absolute;
   left: 0;
 }
+
+/* ==============================================
+   LAB SURFACE EFFECTS (non-destructive)
+   ============================================== */
+
+// Clean lab bench surface - subtle gradient
+.lab-bench-surface {
+  background: linear-gradient(180deg,
+    #f0f9ff 0%,
+    #e0f2fe 40%,
+    #dbeafe 100%
+  );
+}
+
+// Chemical spill effect (for error states or warnings)
+.chemical-spill {
+  background: radial-gradient(circle at center,
+    rgba(239, 68, 68, 0.15) 0%,
+    rgba(248, 113, 113, 0.08) 50%,
+    transparent 70%
+  );
+}
+
+// Frosted glass for scientific equipment overlays
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+// Laboratory dark mode for night lab scenes
+.laboratory-dark {
+  background-color: #0f172a; // Slate-950
+  color: #e2e8f0; // Slate-200
+
+  h1, h2, h3 {
+    color: #94a3b8;
+  }
+
+  p {
+    color: #cbd5e1;
+  }
+}
+
+/* ==============================================
+   CURSOR & INTERACTION STATES
+   ============================================== */
+
+// All table cells clickable - chemistry discovery interface
+td {
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(56, 189, 248, 0.1); // Subtle blue hover
+
+    &:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: -2px;
+    }
+  }
+}
+
+tr:focus-within td {
+  background-color: rgba(167, 139, 250, 0.1); // Purple for focused rows
+}
+
+/* ==============================================
+   SCIENTIFIC COLOR UTILITIES
+   ============================================== */
+
+// Element group colors as CSS custom properties
+:root {
+  --chemistry-alkali: rgba(56, 189, 248, 0.3); // Blue for alkali metals
+  --chemistry-noble-gas: rgba(167, 139, 250, 0.3); // Lavender for noble gases
+  --chemistry-halogen: rgba(52, 211, 153, 0.3); // Green-teal for halogens
+  --chemistry-transition-metal: rgba(96, 165, 250, 0.3); // Steel blue for metals
+}
+
+/* ==============================================
+   UTILITY CLASSES FOR COMPONENTS
+   ============================================== */
+
+// Border glow for interactive elements (no Material dependencies)
+.glow-border {
+  box-shadow: inset 0 0 0 2px var(--chemistry-alkali);
+}
+
+// Shimmer effect for active experiment states
+.shimmer-active {
+  background: linear-gradient(90deg,
+    rgba(56, 189, 248, 0.1) 0%,
+    rgba(13, 148, 136, 0.1) 25%,
+    rgba(56, 189, 248, 0.15) 50%,
+    rgba(13, 148, 136, 0.1) 75%,
+    rgba(56, 189, 248, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
+
+// Rounded corners for scientific glassware appearance
+.science-rounded {
+  border-radius: 16px;
+}
+
+/* ==============================================
+   FOOTER STYLES
+   ============================================== */
+
+footer, .mat-footer {
+  background-color: #f8fafc;
+  border-top: 1px solid #e2e8f0;
+  padding: 1.5rem;
+
+  p {
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+
+  a {
+    color: #3b82f6;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
