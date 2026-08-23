@@ -37,14 +37,8 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
 
 ## Styling and Layout
-### [Bootstrap](https://getbootstrap.com/)
-Bootstrap (v. 5.3.8) is used.
-- [BS Modals](https://getbootstrap.com/docs/5.3/components/modal/)
-  - The root `app` component login button
-  - The `user_mananger` system
-    - login
-    - register
-    - user
+### [Tailwind CSS](https://tailwindcss.com/)
+Tailwind CSS is used for utility-first styling.
 
 ### [Angular Material](https://material.angular.dev/)
 - [Theming](https://material.angular.dev/guide/theming)
