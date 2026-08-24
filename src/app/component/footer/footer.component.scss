@@ -1,7 +1,7 @@
 @use "@/tailwind.css";
 
 footer {
-  @apply bg-gradient-to-r from-slate-900 via-gray-900 to-slate-900 border-t border-cyan-800 shadow-lg py-3 px-4 sticky bottom-0 z-50;
+  @apply bg-gradient-to-r from-slate-900 via-gray-900 to-slate-900 border-t border-cyan-800 shadow-lg py-3 px-4 mt-auto;
 }
 
 .footer-button {
