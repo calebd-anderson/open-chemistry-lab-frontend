@@ -14,7 +14,7 @@ header h1 {
 }
 
 .login-btn {
-  @apply bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-2 px-5 rounded-lg transition duration-300 transform hover:scale-105 shadow-md;
+  @apply bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-2 px-5 rounded-lg transition duration-300 transform hover:scale-105 shadow-md cursor-pointer;
 }
 
 #user-controls {
@@ -134,7 +134,7 @@ header h1 {
 }
 
 #user-nav-menu button {
-  @apply bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 m-1 py-2 px-4 rounded-lg hover:from-slate-700 hover:to-gray-700 transition duration-300 shadow-sm border border-slate-700;
+  @apply bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 m-1 py-2 px-4 rounded-lg hover:from-slate-700 hover:to-gray-700 transition duration-300 shadow-sm border border-slate-700 cursor-pointer;
 }
 
 #user-nav-menu span {
@@ -147,7 +147,7 @@ header h1 {
 
 /* Add a modern pulse animation for profile button when clicked */
 .profileInfo button {
-  @apply transition-all duration-300 ease-in-out;
+  @apply transition-all duration-300 ease-in-out cursor-pointer;
 }
 
 .profileInfo button:active {
