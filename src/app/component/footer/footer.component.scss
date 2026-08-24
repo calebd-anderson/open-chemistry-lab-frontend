@@ -1,0 +1,57 @@
+@use "@/tailwind.css";
+
+footer {
+  @apply bg-gradient-to-r from-slate-900 via-gray-900 to-slate-900 border-t border-cyan-800 shadow-lg py-3 px-4 sticky bottom-0 z-50;
+}
+
+.footer-button {
+  @apply flex flex-col items-center justify-center;
+}
+
+.footer-icon {
+  @apply w-6 h-6 text-cyan-300 hover:text-cyan-100 transition-colors duration-200;
+}
+
+.footer-label {
+  @apply text-xs text-cyan-200 mt-1 hover:text-cyan-100 transition-colors duration-200 font-medium;
+}
+
+/* Chemistry-themed hover effects */
+footer button:hover .footer-icon {
+  @apply animate-pulse;
+}
+
+/* Add subtle glow effect to icons */
+footer .footer-icon {
+  filter: drop-shadow(0 0 1px rgba(34, 211, 238, 0.7));
+}
+
+footer button:hover .footer-icon {
+  filter: drop-shadow(0 0 3px rgba(34, 211, 238, 0.9));
+}
+
+/* Add a subtle animation to the footer */
+@keyframes footerGlow {
+  0% { box-shadow: 0 0 3px rgba(34, 211, 238, 0.2); }
+  50% { box-shadow: 0 0 8px rgba(34, 211, 238, 0.4); }
+  100% { box-shadow: 0 0 3px rgba(34, 211, 238, 0.2); }
+}
+
+footer {
+  animation: footerGlow 6s ease-in-out infinite;
+}
+
+/* Add pointer cursor to buttons */
+footer button {
+  @apply cursor-pointer transition-all duration-200;
+}
+
+/* Add subtle hover effect for buttons */
+footer button:hover {
+  @apply transform scale-110;
+}
+
+/* Add a slight elevation effect on active button */
+footer button:active {
+  @apply transform scale-95;
+}

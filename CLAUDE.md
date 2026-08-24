@@ -86,6 +86,8 @@ The application uses a guard-based authentication system:
 
 Unit tests are run using Karma with Jasmine. Tests are organized alongside the code they test in the same directory structure.
 
+NOTE: Automated testing is currently not implemented for this project. As such, do not attempt to run automated tests as part of the development process. Manual verification and build checks should be used instead.
+
 ## Styling
 
 The application uses:

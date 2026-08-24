@@ -23,6 +23,7 @@ import { CloseIcon } from './close.component.svg';
 import { LogoutIcon } from './logout.component.svg';
 import { AdminIcon } from './admin.component.svg';
 import { RegisterComponent } from './component/user_manager/register/register.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,7 @@ import { RegisterComponent } from './component/user_manager/register/register.co
     CloseIcon,
     LogoutIcon,
     AdminIcon,
+    FooterComponent,
   ],
 })
 export class AppComponent implements OnInit {
