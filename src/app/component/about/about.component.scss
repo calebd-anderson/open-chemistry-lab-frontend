@@ -4,8 +4,31 @@ article {
     margin: 2rem;
 }
 
+/* Chemistry-themed styling for about page */
+.about-container {
+    @apply bg-gradient-to-br from-slate-50 to-cyan-50 rounded-xl shadow-md p-6 border border-cyan-100;
+}
 
-/* Tailwind CSS test */
-.tailwind-test {
-    @apply bg-yellow-100 border border-yellow-400 text-yellow-700 p-4 rounded mt-4;
+.about-section {
+    @apply mb-6 last:mb-0;
+}
+
+.about-section h2 {
+    @apply text-xl font-bold text-emerald-800 mb-3 pb-1 border-b border-cyan-200;
+}
+
+.about-section p {
+    @apply text-gray-700 leading-relaxed mb-3;
+}
+
+.about-section ul {
+    @apply list-disc pl-5 space-y-1;
+}
+
+.about-section li a {
+    @apply text-cyan-700 hover:text-emerald-700 transition duration-200 underline;
+}
+
+.about-section li a:hover {
+    @apply no-underline;
 }

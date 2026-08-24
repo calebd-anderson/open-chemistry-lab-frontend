@@ -1,22 +1,29 @@
-<header id="main-header">
-  <svg logo-icon (click)="openDialog()"></svg>
+<header class="bg-gradient-to-r from-emerald-900 via-teal-800 to-cyan-900 shadow-lg py-4 px-6 flex justify-between items-center border-b border-cyan-700">
+  <div class="flex items-center cursor-pointer" (click)="openDialog()">
+    <svg logo-icon class="w-8 h-8 text-cyan-300"></svg>
+    <h1 class="ml-3 text-xl font-bold text-cyan-100">The Open Chemistry Lab</h1>
+  </div>
 
-  <h1>The Open Chemistry Lab</h1>
-
-  <div id="user-controls">
+  <div id="user-controls" class="flex items-center">
     <div [hidden]="authenticationService.getIsLoggedIn()">
-      <button (click)="openLogin()" class="login-btn" type="button">
+      <button
+        (click)="openLogin()"
+        class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium py-2 px-4 rounded-lg transition duration-200 transform hover:scale-105"
+        type="button">
         Login
       </button>
     </div>
 
     <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()">
-      <button (click)="openMenu()">
+      <button
+        (click)="openMenu()"
+        class="flex items-center focus:outline-none"
+        type="button">
         <img
           height="40"
           width="40"
           src="{{ user().profileImgUrl }}"
-          class="rounded-circle img-fluid img-thumbnail"
+          class="rounded-full border-2 border-cyan-500 w-10 h-10 object-cover"
           alt="profile image"
         />
       </button>
@@ -24,34 +31,55 @@
   </div>
 </header>
 
-<nav id="user-nav-menu">
-  <div id="nav-item1">
-    <span>{{ user().firstName }}</span>
-    <button id="close-menu-button" (click)="openMenu()" title="Close Menu" type="button">
-      <svg close-icon></svg>
+<!-- Navigation menu that only appears when user is logged in -->
+<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn()" class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen">
+  <div class="flex justify-between items-center mb-4">
+    <span class="font-semibold text-cyan-100">{{ user().firstName }}</span>
+    <button
+      id="close-menu-button"
+      (click)="openMenu()"
+      title="Close Menu"
+      type="button"
+      class="text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200">
+      <svg close-icon class="w-6 h-6"></svg>
     </button>
   </div>
-  <hr />
-  <button (click)="onClickProfile()">Profile</button>
-  <div [hidden]="!isAdmin" id="admin-menu">
-    <hr />
-    <button id="admin-menu-button" routerLink="/user/management">
-      <svg admin-icon></svg>
-      User Managment
+
+  <hr class="my-2 border-slate-700" />
+
+  <div class="menu-content">
+    <button
+      (click)="onClickProfile()"
+      class="block w-full text-left py-2 px-4 hover:from-slate-800 hover:to-gray-800 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100">
+      Profile
+    </button>
+
+    <div [hidden]="!isAdmin" id="admin-menu">
+      <hr class="my-2 border-slate-700" />
+      <button
+        id="admin-menu-button"
+        routerLink="/user/management"
+        class="flex items-center w-full text-left py-2 px-4 hover:from-slate-800 hover:to-gray-800 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100">
+        <svg admin-icon class="w-5 h-5 mr-2 text-cyan-300"></svg>
+        User Management
+      </button>
+    </div>
+
+    <hr class="my-2 border-slate-700" />
+
+    <button
+      id="logout-menu-button"
+      [hidden]="!authenticationService.getIsLoggedIn()"
+      (click)="onClickLogout()"
+      class="flex items-center w-full text-left py-2 px-4 hover:from-slate-800 hover:to-gray-800 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100"
+    >
+      <svg logout-icon class="w-5 h-5 mr-2 text-cyan-300"></svg>
+      Logout
     </button>
   </div>
-  <hr />
-  <button
-    id="logout-menu-button"
-    [hidden]="!authenticationService.getIsLoggedIn()"
-    (click)="onClickLogout()"
-  >
-    <svg logout-icon></svg>
-    Logout
-  </button>
 </nav>
 
 <app-tabs />
 
-<!-- dynamic routs -->
+<!-- dynamic routes -->
 <router-outlet></router-outlet>

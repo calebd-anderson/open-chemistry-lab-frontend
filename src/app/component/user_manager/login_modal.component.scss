@@ -1,26 +1,37 @@
-.login_btn {
-  width: 100%;
-  background: #1b4f72;
-  color: white;
+@use "../../../tailwind.css";
+
+.login-btn {
+  @apply w-full bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-800 hover:to-teal-800 text-white font-semibold py-3 px-4 rounded-lg transition duration-300 shadow-md;
 }
 
 .input-group-text {
-  background: #1b4f72;
-  color: white;
-  border: 0;
-  border-radius: 0.25rem 0 0 0.25rem;
+  @apply bg-gradient-to-r from-emerald-700 to-teal-700 text-white border-0 rounded-l-lg;
 }
 
 .links > button {
-  margin: 0px 15px 0px;
-  color: #2c3e50;
-  cursor: pointer;
+  @apply m-2 text-cyan-700 hover:text-emerald-700 cursor-pointer transition duration-200;
 }
 
 .form-error {
-  color: #AC3931;
+  @apply text-red-600;
 }
 
 .text-box-error {
-  border: #AC3931 solid 2px;
+  @apply border-red-500;
+}
+
+.login-modal {
+  @apply bg-gradient-to-br from-slate-50 to-cyan-50 rounded-xl shadow-lg p-6 border border-cyan-100;
+}
+
+.login-form {
+  @apply space-y-4;
+}
+
+.login-input {
+  @apply w-full px-4 py-2 border border-cyan-200 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition duration-200;
+}
+
+.login-header {
+  @apply text-xl font-bold text-emerald-800 mb-4 pb-2 border-b border-cyan-200;
 }
