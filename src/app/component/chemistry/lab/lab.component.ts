@@ -32,6 +32,9 @@ export class LabComponent {
   dialogRef: MatDialogRef<ValidationModalComponent> | undefined;
   public dialog: MatDialog = inject(MatDialog);
 
+  // Collapsible table state
+  isTableExpanded = signal(true);
+
   public addInteractedElements(element: Element) {
     // Check if adding this element would exceed the limit of 6
     if (this.elementsInCompound().length >= 6) {
@@ -178,6 +181,11 @@ export class LabComponent {
       this.dialogRef.componentInstance.isLoggedIn =
         'Create an account to save your discovery!';
     }
+  }
+
+  // Toggle the periodic table visibility
+  public togglePeriodicTable() {
+    this.isTableExpanded.update(prev => !prev);
   }
 
   // Method to update the periodic table with current elements

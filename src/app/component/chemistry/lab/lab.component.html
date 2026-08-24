@@ -76,10 +76,25 @@
     </section>
   </div>
 
-  <section class="pt">
-    <periodic-table
-      class="pt"
-      (sendElementMessage)="addInteractedElements($event)"
-    />
+  <!-- Collapsible Periodic Table Section -->
+  <section id="periodic-table-container">
+    <button
+      id="toggle-table-btn"
+      (click)="togglePeriodicTable()"
+      [attr.aria-label]="isTableExpanded() ? 'Collapse periodic table' : 'Expand periodic table'"
+    >
+      {{ isTableExpanded() ? 'Collapse Table' : 'Expand Table' }}
+    </button>
+
+    <div
+      id="periodic-table-section"
+      [class.expanded]="isTableExpanded()"
+      [class.collapsed]="!isTableExpanded()"
+    >
+      <periodic-table
+        class="pt"
+        (sendElementMessage)="addInteractedElements($event)"
+      />
+    </div>
   </section>
 </article>
