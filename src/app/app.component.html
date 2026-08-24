@@ -32,25 +32,29 @@
 </header>
 
 <!-- Navigation menu that only appears when user is logged in -->
-<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn() || !isMenuOpen" class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform transition-transform duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen">
-  <div class="flex justify-between items-center mb-4">
-    <span class="font-semibold text-cyan-100">{{ user().firstName }}</span>
+<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn() || !isMenuOpen" class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform transition-all duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen">
+  <div class="flex justify-between items-center mb-6">
+    <span class="font-semibold text-cyan-100 text-lg">{{ user().firstName }}</span>
     <button
       id="close-menu-button"
       (click)="openMenu()"
       title="Close Menu"
       type="button"
-      class="text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200">
+      class="text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110">
       <svg close-icon class="w-6 h-6"></svg>
     </button>
   </div>
 
   <hr class="my-2 border-slate-700" />
 
-  <div class="menu-content">
+  <div class="menu-content space-y-2">
     <button
       (click)="onClickProfile()"
-      class="block w-full text-left py-2 px-4 hover:from-slate-800 hover:to-gray-800 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100">
+      class="flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500">
+      <svg class="w-5 h-5 mr-3 text-cyan-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2"/>
+        <path d="M12 14C8.13435 14 5 17.1344 5 21H19C19 17.1344 15.8656 14 12 14Z" stroke="currentColor" stroke-width="2"/>
+      </svg>
       Profile
     </button>
 
@@ -59,8 +63,8 @@
       <button
         id="admin-menu-button"
         routerLink="/user/management"
-        class="flex items-center w-full text-left py-2 px-4 hover:from-slate-800 hover:to-gray-800 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100">
-        <svg admin-icon class="w-5 h-5 mr-2 text-cyan-300"></svg>
+        class="flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500">
+        <svg admin-icon class="w-5 h-5 mr-3 text-cyan-300"></svg>
         User Management
       </button>
     </div>
@@ -71,9 +75,9 @@
       id="logout-menu-button"
       [hidden]="!authenticationService.getIsLoggedIn()"
       (click)="onClickLogout()"
-      class="flex items-center w-full text-left py-2 px-4 hover:from-slate-800 hover:to-gray-800 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100"
+      class="flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500"
     >
-      <svg logout-icon class="w-5 h-5 mr-2 text-cyan-300"></svg>
+      <svg logout-icon class="w-5 h-5 mr-3 text-cyan-300"></svg>
       Logout
     </button>
   </div>

@@ -22,11 +22,74 @@ header h1 {
 }
 
 #user-nav-menu {
-  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform transition-transform duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen;
+  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform transition-all duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen;
+  @apply opacity-0 translate-x-full pointer-events-none;
 }
 
 #user-nav-menu.active {
-  @apply transform translate-x-0;
+  @apply opacity-100 translate-x-0 pointer-events-auto;
+}
+
+/* Add a subtle shadow effect */
+#user-nav-menu::before {
+  content: '';
+  @apply absolute inset-0 bg-gradient-to-r from-slate-900/80 to-gray-900/80 rounded-l-2xl shadow-xl;
+  z-index: -1;
+}
+
+/* Add a modern glow effect to the border */
+#user-nav-menu {
+  box-shadow:
+    0 0 15px rgba(34, 211, 238, 0.3),
+    0 0 30px rgba(34, 211, 238, 0.1);
+}
+
+#user-nav-menu.active {
+  box-shadow:
+    0 0 20px rgba(34, 211, 238, 0.5),
+    0 0 40px rgba(34, 211, 238, 0.2);
+}
+
+/* Add smooth entrance animation */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#user-nav-menu {
+  animation: slideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* Add a staggered animation for menu items */
+.menu-content button {
+  @apply opacity-0 translate-x-4;
+  animation: fadeInSlideIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.menu-content button:nth-child(1) { animation-delay: 0.1s; }
+.menu-content button:nth-child(2) { animation-delay: 0.2s; }
+.menu-content button:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes fadeInSlideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Add a subtle hover effect */
+#user-nav-menu button {
+  @apply transition-all duration-300 ease-out;
+}
+
+#user-nav-menu button:hover {
+  @apply scale-105 shadow-lg;
 }
 
 /* Ensure the menu doesn't overflow */
@@ -45,7 +108,7 @@ header h1 {
 }
 
 #close-menu-button {
-  @apply text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200;
+  @apply text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110;
 }
 
 #logout-menu-button svg, #admin-menu-button svg {
@@ -62,4 +125,14 @@ header h1 {
 
 #user-nav-menu hr {
   @apply w-5/6 my-2 border-slate-700;
+}
+
+/* Add a modern pulse animation for profile button when clicked */
+.profileInfo button {
+  @apply transition-all duration-300 ease-in-out;
+}
+
+.profileInfo button:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
 }

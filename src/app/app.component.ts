@@ -100,7 +100,8 @@ export class AppComponent implements OnInit {
 
   public onClickProfile(): void {
     this.router.navigate(['/profile']);
-    this.openMenu();
+    // Don't close the menu when navigating to profile
+    // Just let it stay open
   }
 
   public onClickLogout(): void {
