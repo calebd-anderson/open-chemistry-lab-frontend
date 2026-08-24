@@ -15,4 +15,12 @@ export class ValidationModalComponent {
   public confirmMessage: string = '?';
   public wasSuccessful: string = '?';
   public isLoggedIn: string = '?';
+
+  onNoClick(): void {
+    this.dialogRef.close(false);
+  }
+
+  onSaveClick(): void {
+    this.dialogRef.close(true);
+  }
 }

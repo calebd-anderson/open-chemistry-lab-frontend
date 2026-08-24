@@ -36,4 +36,9 @@ export class ExperimentComponent {
   public removeElementFromCompound(i: number, element: Element) {
     this.removeElement.emit({ index: i, element: element });
   }
+
+  // Get the count of each element in the compound
+  getElementCount(elementSymbol: string): number {
+    return this.elementsInCompound().filter(e => e.symbol === elementSymbol).length;
+  }
 }

@@ -1,5 +1,64 @@
 #discovery {
-  color: rgb(41, 99, 95);
+  color: #0c4a6e;
   font-size: larger;
-  font-weight: 500;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: linear-gradient(to right, #e6f7ff, #b3e0ff);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 0 0.5rem;
+}
+
+.mat-dialog-title {
+  color: #0c4a6e;
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(to right, #e6f7ff, #b3e0ff);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.mat-dialog-content {
+  color: #0c4a6e;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+button[matButton] {
+  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  min-width: 120px;
+}
+
+button[matButton]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+button[matButton]:active {
+  transform: translateY(0);
+}
+
+/* Add a subtle chemical theme to the modal */
+.mat-dialog-container {
+  background: linear-gradient(135deg, #e6f7ff 0%, #b3e0ff 100%);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }

@@ -52,6 +52,26 @@ export class FlaskComponent implements OnInit {
       },
       'random(-.2, .6, .2)'
     );
+
+    // Add more sophisticated animation for bubbles
+    this.tl.fromTo(
+      '.bubble',
+      {
+        scale: 0.5,
+        rotation: 0,
+        filter: 'blur(0px)'
+      },
+      {
+        scale: 1.2,
+        rotation: 360,
+        filter: 'blur(1px)',
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut'
+      },
+      0
+    );
   }
 
   ngOnInit(): void {

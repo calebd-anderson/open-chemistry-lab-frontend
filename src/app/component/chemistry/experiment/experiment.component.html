@@ -10,12 +10,14 @@
       <div
         class="element-in-compound"
         (click)="removeElementFromCompound(i, element)"
+        [attr.data-element]="element?.symbol"
         [ngStyle]="{
           'background-image':
             'linear-gradient(30deg, grey 10%, #' + element?.cPKHexColor + ')'
         }"
       >
-        {{ element?.symbol }}
+        <span class="element-symbol">{{ element?.symbol }}</span>
+        <span class="element-name" style="font-size: 0.7rem; margin-top: 0.2rem;">{{ element?.name }}</span>
       </div>
       }
     </div>
@@ -33,8 +35,10 @@
       </button>
     </div>
     } @else {
-    <svg info-icon></svg>
-    <span>The experiment is empty.</span>
+    <div class="empty-state">
+      <svg info-icon></svg>
+      <p>The experiment is empty. Add elements to begin your chemistry exploration!</p>
+    </div>
     }
   </section>
   <section>
