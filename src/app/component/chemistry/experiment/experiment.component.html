@@ -1,47 +1,65 @@
-@if (experimentService.getIsActive()) {
-<mat-progress-bar mode="indeterminate" />
-}
-<div id="experiment-box">
-  <section id="compound-test" [class.active]="elementsInCompound().length > 0">
-    @if (elementsInCompound().length > 0) {
-    <div class="compound">
-      @for (element of elementsInCompound(); track `element_${$index}`; let i = $index) {
-      <!-- "{'background-color': '#' + element?.cPKHexColor}" -->
-      <div
-        class="element-in-compound"
-        (click)="removeElementFromCompound(i, element)"
-        [attr.data-element]="element?.symbol"
-        [ngStyle]="{
-          'background-image':
-            'linear-gradient(30deg, grey 10%, #' + element?.cPKHexColor + ')'
-        }"
-      >
-        <span class="element-symbol">{{ element?.symbol }}</span>
-        <span class="element-name" style="font-size: 0.7rem; margin-top: 0.2rem;">{{ element?.name }}</span>
-      </div>
+<article>
+  @if (experimentService.getIsActive()) {
+    <mat-progress-bar mode="indeterminate" />
+  }
+  <div id="experiment-box">
+    <section
+      id="compound-test"
+      [class.active]="elementsInCompound().length > 0"
+    >
+      @if (elementsInCompound().length > 0) {
+        <div class="compound">
+          @for (
+            element of elementsInCompound();
+            track `element_${$index}`;
+            let i = $index
+          ) {
+            <!-- "{'background-color': '#' + element?.cPKHexColor}" -->
+            <div
+              class="element-in-compound"
+              (click)="removeElementFromCompound(i, element)"
+              [attr.data-element]="element?.symbol"
+              [ngStyle]="{
+                'background-image':
+                  'linear-gradient(30deg, grey 10%, #' +
+                  element?.cPKHexColor +
+                  ')',
+              }"
+            >
+              <span class="element-symbol">{{ element?.symbol }}</span>
+              <span
+                class="element-name"
+                style="font-size: 0.7rem; margin-top: 0.2rem"
+                >{{ element?.name }}</span
+              >
+            </div>
+          }
+        </div>
+        <!-- run experiment buttons -->
+        <div id="validate-btn">
+          <button
+            matButton="elevated"
+            color="primary"
+            (click)="runExperiment.emit()"
+          >
+            Run Experiment
+          </button>
+          <button matButton="elevated" (click)="clearExperiment.emit()">
+            Clear Experiment
+          </button>
+        </div>
+      } @else {
+        <div class="empty-state">
+          <svg info-icon></svg>
+          <p>
+            The experiment is empty. Add elements to begin your chemistry
+            exploration!
+          </p>
+        </div>
       }
-    </div>
-    <!-- run experiment buttons -->
-    <div id="validate-btn">
-      <button
-        matButton="elevated"
-        color="primary"
-        (click)="runExperiment.emit()"
-      >
-        Run Experiment
-      </button>
-      <button matButton="elevated" (click)="clearExperiment.emit()">
-        Clear Experiment
-      </button>
-    </div>
-    } @else {
-    <div class="empty-state">
-      <svg info-icon></svg>
-      <p>The experiment is empty. Add elements to begin your chemistry exploration!</p>
-    </div>
-    }
-  </section>
-  <section>
-    <app-flask id="flask" />
-  </section>
-</div>
+    </section>
+    <section>
+      <app-flask id="flask" />
+    </section>
+  </div>
+</article>
