@@ -1,0 +1,243 @@
+@use "../../../../tailwind.css";
+
+.profile-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.main-body {
+  @apply mt-6;
+}
+
+.grid-cols-1 {
+  @apply grid grid-cols-1;
+}
+
+.md\:grid-cols-3 {
+  @apply md:grid-cols-3;
+}
+
+.gap-4 {
+  @apply gap-4;
+}
+
+.md\:col-span-1 {
+  @apply md:col-span-1;
+}
+
+.md\:col-span-2 {
+  @apply md:col-span-2;
+}
+
+.rounded-lg {
+  @apply rounded-lg;
+}
+
+.shadow-md {
+  @apply shadow-md;
+}
+
+.bg-white {
+  @apply bg-white;
+}
+
+.p-6 {
+  @apply p-6;
+}
+
+.flex {
+  @apply flex;
+}
+
+.flex-col {
+  @apply flex-col;
+}
+
+.items-center {
+  @apply items-center;
+}
+
+.text-center {
+  @apply text-center;
+}
+
+.rounded-full {
+  @apply rounded-full;
+}
+
+.w-32 {
+  @apply w-32;
+}
+
+.h-32 {
+  @apply h-32;
+}
+
+.object-cover {
+  @apply object-cover;
+}
+
+.border-2 {
+  @apply border-2;
+}
+
+.border-cyan-500 {
+  @apply border-cyan-500;
+}
+
+.mt-3 {
+  @apply mt-3;
+}
+
+.text-xl {
+  @apply text-xl;
+}
+
+.font-bold {
+  @apply font-bold;
+}
+
+.text-gray-800 {
+  @apply text-gray-800;
+}
+
+.divide-y {
+  @apply divide-y;
+}
+
+.divide-gray-200 {
+  @apply divide-gray-200;
+}
+
+.py-3 {
+  @apply py-3;
+}
+
+.justify-between {
+  @apply justify-between;
+}
+
+.items-center {
+  @apply items-center;
+}
+
+.flex-wrap {
+  @apply flex-wrap;
+}
+
+.mb-0 {
+  @apply mb-0;
+}
+
+.text-gray-600 {
+  @apply text-gray-600;
+}
+
+.mr-2 {
+  @apply mr-2;
+}
+
+.icon-inline {
+  /* This class is not a Tailwind utility, so we leave it as-is */
+}
+
+.grid-cols-1 {
+  @apply grid-cols-1;
+}
+
+.md\:grid-cols-2 {
+  @apply md:grid-cols-2;
+}
+
+.col-span-1 {
+  @apply col-span-1;
+}
+
+.mb-4 {
+  @apply mb-4;
+}
+
+.font-medium {
+  @apply font-medium;
+}
+
+.progress-container {
+  @apply w-full bg-gray-200 rounded-full h-2;
+}
+
+.progress-bar {
+  @apply bg-blue-600 h-full;
+}
+
+.mt-1 {
+  @apply mt-1;
+}
+
+.text-green-600 {
+  @apply text-green-600;
+}
+
+.mt-2 {
+  @apply mt-2;
+}
+
+.bg-gray-500 {
+  @apply bg-gray-500;
+}
+
+.hover\:bg-gray-700 {
+  @apply hover:bg-gray-700;
+}
+
+.shadow {
+  @apply shadow;
+}
+
+.appearance-none {
+  @apply appearance-none;
+}
+
+.border {
+  @apply border;
+}
+
+.rounded {
+  @apply rounded;
+}
+
+.w-full {
+  @apply w-full;
+}
+
+.py-2 {
+  @apply py-2;
+}
+
+.px-3 {
+  @apply px-3;
+}
+
+.text-gray-700 {
+  @apply text-gray-700;
+}
+
+.leading-tight {
+  @apply leading-tight;
+}
+
+.focus\:outline-none {
+  @apply focus:outline-none;
+}
+
+/* focus:shadow-outline is not a valid Tailwind class - removing it */
+
+.material-icons {
+  /* This is a custom class for Material Icons, not a Tailwind utility */
+}
+
+.text-info {
+  /* This is a custom class, not a Tailwind utility */
+}
+
+.mr-2 {
+  @apply mr-2;
+}

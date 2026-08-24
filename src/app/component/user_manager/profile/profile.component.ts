@@ -107,6 +107,10 @@ export class ProfileComponent implements OnInit {
     this.clickButton('profile-image-input');
   }
 
+  public onClickCancel(): void {
+    this.edit = false;
+  }
+
   private sendNotification(
     notificationType: NotificationType,
     message: string,

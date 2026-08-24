@@ -53,6 +53,7 @@ export class AppComponent implements OnInit {
     inject(NotificationService);
 
   public isLoggedIn: boolean = this.authenticationService.getIsLoggedIn();
+  public isMenuOpen: boolean = false;
 
   readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
@@ -135,6 +136,21 @@ export class AppComponent implements OnInit {
 
   public openMenu() {
     const menu = document.getElementById('user-nav-menu');
-    menu?.classList.toggle('active');
+    if (menu) {
+      // Close the menu when clicking outside of it
+      document.addEventListener('click', (event) => {
+        const isClickInsideMenu = menu.contains(event.target as Node);
+        const isClickOnProfileImage = (event.target as Element).closest('.profileInfo');
+
+        if (!isClickInsideMenu && !isClickOnProfileImage) {
+          menu.classList.remove('active');
+          this.isMenuOpen = false;
+        }
+      });
+
+      // Toggle the menu
+      menu.classList.toggle('active');
+      this.isMenuOpen = !this.isMenuOpen;
+    }
   }
 }

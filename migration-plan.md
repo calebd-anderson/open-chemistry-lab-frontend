@@ -1,87 +1,98 @@
-# Bootstrap to Tailwind CSS Migration Plan
+# Migration Plan: Bootstrap to Tailwind CSS
 
 ## Overview
-This document outlines the systematic approach to migrate from Bootstrap to Tailwind CSS in the Open Chemistry Lab frontend application while preserving Material UI functionality.
+This document outlines the systematic approach to migrate the Open Chemistry Lab frontend application from Bootstrap to Tailwind CSS while preserving Material UI components and maintaining the chemistry-themed aesthetic.
 
-## Phase 1: Preparation (Completed)
-- Removed test Tailwind component from about page
-- Refactored main app header and navigation components to use Tailwind classes instead of Bootstrap grid system
+## Migration Strategy
+1. **Systematic Component-by-Component Approach**: Migrate one component at a time, testing after each change
+2. **Preserve Material UI Components**: Keep all Angular Material components (mat-dialog, mat-button, etc.) intact
+3. **Maintain Chemistry-Themed Aesthetic**: Follow the guidelines in CLAUDE.md for typography, color, and design
+4. **Avoid Inline Styles**: Use Tailwind's utility classes instead of inline styles or simple wrapper classes
+5. **Preserve Periodic Table Component**: Do not modify the periodic table component during this migration
 
-## Phase 2: Component-by-Component Migration
+## Migration Phases
 
-### 2.1 User Management Components
-These components will be migrated to use Tailwind CSS classes:
-- `/src/app/component/user_manager/login/login.component.html` *(First component - completed)*
-- `/src/app/component/user_manager/register/register.component.html` 
-- `/src/app/component/user_manager/profile/profile.component.html`
-- `/src/app/component/user_manager/users/users.component.html`
-- `/src/app/component/user_manager/add-user/add-user.component.html`
-- `/src/app/component/user_manager/edit-user/edit-user.component.html`
+### Phase 1: Core Application Components
+- `src/app/app.component.html` - Right vertical flyout menu with animation
+- `src/app/app.component.scss` - Menu animation and visibility control
+- `src/app/app.component.ts` - Menu toggle functionality
 
-### 2.2 Game Components
-These components will be migrated to use Tailwind CSS classes:
-- `/src/app/component/game/flashcard/flashcard.component.html`
-- `/src/app/component/game/quiz/quiz.component.html`
+### Phase 2: User Management Pages
+- `src/app/component/user_manager/login/login.component.html`
+- `src/app/component/user_manager/login/login.component.scss`
+- `src/app/component/user_manager/register/register.component.html`
+- `src/app/component/user_manager/register/register.component.scss`
+- `src/app/component/user_manager/profile/profile.component.html`
+- `src/app/component/user_manager/profile/profile.component.scss`
 
-### 2.3 Chemistry Lab Components
-These components will be migrated to use Tailwind CSS classes:
-- `/src/app/component/chemistry/experiment/experiment.component.html`
-- `/src/app/component/chemistry/lab/lab.component.html`
-- `/src/app/component/chemistry/experiment/validation-modal/validation-modal.component.html`
-- `/src/app/component/chemistry/experiment/flask/flask.component.html`
+### Phase 3: Chemistry Lab Components
+- `src/app/component/chemistry_lab/periodic_table/periodic_table.component.html`
+- `src/app/component/chemistry_lab/periodic_table/periodic_table.component.scss`
+- `src/app/component/chemistry_lab/molecule_builder/molecule_builder.component.html`
+- `src/app/component/chemistry_lab/molecule_builder/molecule_builder.component.scss`
 
-### 2.4 Other Components
-These components will be migrated to use Tailwind CSS classes:
-- `/src/app/component/global-discoveries/global-discoveries.component.html`
-- `/src/app/component/discoveries/discoveries.component.html`
-- `/src/app/component/tabs/tabs.component.html`
+### Phase 4: Game Components
+- `src/app/component/game/quiz/quiz.component.html`
+- `src/app/component/game/quiz/quiz.component.scss`
+- `src/app/component/game/flashcard/flashcard.component.html`
+- `src/app/component/game/flashcard/flashcard.component.scss`
 
-## Phase 3: Material UI Preservation
+### Phase 5: Other UI Components
+- `src/app/component/shared/header/header.component.html`
+- `src/app/component/shared/header/header.component.scss`
+- `src/app/component/shared/footer/footer.component.html`
+- `src/app/component/shared/footer/footer.component.scss`
 
-### 3.1 Components That Must NOT Be Modified
-The following Material UI components must preserve their functionality and styling:
-- `mat-dialog` - Modal dialogs
-- `mat-button` - Buttons with Material styling
-- `mat-snackbar` - Notifications
-- `mat-sidenav` - Side navigation
-- `mat-icon` - Icons
-- `mat-card` - Cards
-- `mat-form-field` - Form fields
+## Implementation Guidelines
 
-### 3.2 Special Considerations
-- Navigation buttons that open dialogs (like login/register) should not be refactored as routes
-- Interactive elements like the periodic table must remain unchanged
-- All Material UI components must retain their functionality while using Tailwind for layout and styling
+### CSS Migration Rules
+1. **Use @apply directive**: Import Tailwind CSS using `@use "../../../tailwind.css";` in SCSS files
+2. **Replace Bootstrap classes**: Convert all Bootstrap grid classes (col-sm-8, offset-2) to Tailwind equivalents
+3. **Fix invalid classes**: Replace decimal values like h-1.5 with valid Tailwind classes (h-2)
+4. **Maintain responsive design**: Use Tailwind's responsive prefixes (sm:, md:, lg:, xl:)
+5. **Preserve Material UI**: Do not modify Angular Material components or their styling
 
-## Phase 4: Implementation Approach
+### Component-Specific Considerations
+1. **Right Vertical Flyout Menu**:
+   - Only visible when user is logged in
+   - Animates on click of profile image
+   - Uses CSS transforms for smooth animation
+   - Follows chemistry-themed color palette
 
-### 4.1 Migration Strategy
-1. Identify Bootstrap classes in each component
-2. Replace with equivalent Tailwind CSS utility classes
-3. Maintain same visual appearance and layout
-4. Preserve all Material UI functionality
-5. Test that components work correctly after migration
+2. **Profile Component**:
+   - Migrated to Tailwind classes
+   - Fixed invalid Tailwind class issues (h-1.5 → h-2, etc.)
+   - Maintained Material UI functionality
 
-### 4.2 Key Patterns to Follow
-- Use Tailwind's responsive utilities instead of Bootstrap's grid system
-- Replace `col-*` classes with Tailwind's `w-*` and `flex-*` utilities
-- Replace `btn-*` classes with Tailwind's button styling utilities
-- Maintain Material UI component structure and functionality
-- Avoid inline styles - use custom Tailwind classes instead
+3. **Quiz Component**:
+   - Removed Bootstrap grid classes
+   - Replaced with Tailwind equivalents
+   - Preserved existing functionality
 
-### 4.3 Testing Requirements
-- Ensure all components render correctly
-- Verify Material UI functionality remains intact
-- Test responsive behavior
-- Confirm no visual regressions
+### Testing Requirements
+1. **Build Verification**: Ensure both development and production builds work
+2. **Functionality Testing**: Verify all components work as expected
+3. **Responsive Design**: Test on different screen sizes
+4. **Material UI Integration**: Confirm Angular Material components still work correctly
 
-## Phase 5: Verification Process
-After migrating each component:
-1. Review the changes made
-2. Run application to ensure no visual or functional regressions
-3. Test that Material UI components still work as expected
-4. Verify that all functionality is preserved
-5. Only proceed to next component after successful verification
+## Timeline and Milestones
+- Phase 1: Complete core application components (2-3 hours)
+- Phase 2: Complete user management pages (3-4 hours)
+- Phase 3: Complete chemistry lab components (4-5 hours)
+- Phase 4: Complete game components (2-3 hours)
+- Phase 5: Complete other UI components (2-3 hours)
+- Testing and Final Review: 2 hours
 
-## Phase 6: Timeline
-This migration will be completed in multiple steps, with each component being migrated systematically to ensure quality and maintainability.
+## Risk Mitigation
+1. **Component Isolation**: Work on one component at a time to prevent cascading issues
+2. **Backup Strategy**: Create git commits after each phase for easy rollback if needed
+3. **Testing**: Run build tests after each migration step
+4. **Documentation**: Keep detailed notes of changes made for future reference
+
+## Success Criteria
+1. All components compile without errors
+2. Application functions as expected
+3. Material UI components work correctly
+4. Responsive design is maintained
+5. Chemistry-themed aesthetic is preserved
+6. No breaking changes to existing functionality

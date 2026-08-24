@@ -22,7 +22,7 @@ header h1 {
 }
 
 #user-nav-menu {
-  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen;
+  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform transition-transform duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen;
 }
 
 #user-nav-menu.active {
@@ -57,7 +57,7 @@ header h1 {
 }
 
 #user-nav-menu span {
-  @apply m-2.5 text-cyan-200;
+  @apply m-2 text-cyan-200;
 }
 
 #user-nav-menu hr {

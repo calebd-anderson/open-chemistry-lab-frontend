@@ -1,50 +1,49 @@
-.question-container {    
-    max-width: 1200px;
-    margin: 200px auto; 
-    display: flex;
-    justify-content: center;                
+@use "../../../../tailwind.css";
+
+.question-container {
+  @apply max-w-4xl mx-auto mt-20 flex justify-center;
 }
 
 button {
-  font-size: 20px;            
+  @apply text-lg;
 }
+
 .question-form-container {
-    max-width: 800px;
-    margin: 10px auto;
+  @apply max-w-2xl mx-auto my-2;
 }
 
 mat-card-content {
-  font-size: 30px;
+  @apply text-2xl;
 }
 
 li {
-  list-style: none;
+  @apply list-none;
 }
 
 .option-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 8px;
+  @apply flex items-center mb-2;
 }
+
 input {
-  margin-right: 10px;
+  @apply mr-2;
 }
 
 .correctAnswer {
-  color: green;
+  @apply text-green-600 font-bold;
 }
+
 .incorrectAnswer {
-  color: red;
+  @apply text-red-600 font-bold;
 }
+
 .toggle-score {
-  color: #2C3E50;
-  cursor: pointer;
+  @apply text-slate-800 cursor-pointer;
 }
+
 .score {
-  margin: 10px;
+  @apply my-2;
 }
 
 .submit-btn {
-  margin: 10px;
+  @apply m-2;
 }

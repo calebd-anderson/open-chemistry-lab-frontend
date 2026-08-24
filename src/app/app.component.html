@@ -32,7 +32,7 @@
 </header>
 
 <!-- Navigation menu that only appears when user is logged in -->
-<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn()" class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform translate-x-full transition-transform duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen">
+<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn() || !isMenuOpen" class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform transition-transform duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen">
   <div class="flex justify-between items-center mb-4">
     <span class="font-semibold text-cyan-100">{{ user().firstName }}</span>
     <button
