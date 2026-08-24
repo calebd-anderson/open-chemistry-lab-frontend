@@ -9,7 +9,7 @@ This is an Angular 21/22 frontend for backend. The backend is a Spring Boot API 
 
 This is a frontend application for an open chemistry lab platform built with Angular 22. The application features:
 
-- A responsive UI using Bootstrap 5.3.8 and Angular Material
+- A responsive UI using Tailwind CSS and Angular Material
 - User authentication and authorization system
 - Chemistry lab simulation components
 - Interactive educational tools like quizzes and flashcards
@@ -19,7 +19,7 @@ This is a frontend application for an open chemistry lab platform built with Ang
 
 - Angular 22 (with Angular CLI 13.2.5 upgraded to v22)
 - TypeScript 5.9.3
-- Bootstrap 5.3.8
+- Tailwind CSS
 - Angular Material for UI components
 - GSAP for animations
 - Karma for unit testing
@@ -90,7 +90,7 @@ Unit tests are run using Karma with Jasmine. Tests are organized alongside the c
 
 The application uses:
 - SCSS for styling
-- Bootstrap 5.3.8 for responsive layout
+- Tailwind CSS for responsive layout
 - Angular Material components for UI elements
 - Custom styles for specific components
 
@@ -118,3 +118,27 @@ Avoid generic AI-generated aesthetics:
 - Cookie-cutter design that lacks context-specific character
 
 Interpret creatively and make unexpected choices that feel genuinely designed for the context. Vary between light and dark themes, different fonts, different aesthetics. You still tend to converge on common choices (Space Grotesk, for example) across generations. Avoid this: it is critical that you think outside the box!
+
+## Using Tailwind CSS
+When using Tailwind CSS in SCSS or Sass stylesheets, you'll need to import the src/tailwind.css file with `@use "tailwind.css"` or from a component you'll need to map the path to where 'tailwind.css' actually is. The application has been configured to support this usage pattern.
+
+For components that use Tailwind CSS classes in SCSS files, follow this pattern:
+1. Import Tailwind at the top of your SCSS file using `@use "../../../tailwind.css";` (adjust the path as needed based on component location)
+2. Use Tailwind's @apply directive to apply utility classes within your custom styles
+3. The import path should be relative to the component's SCSS file location
+
+Example:
+```scss
+@use "../../../tailwind.css";
+
+article {
+    margin: 2rem;
+}
+
+/* Tailwind CSS test */
+.tailwind-test {
+    @apply bg-yellow-100 border border-yellow-400 text-yellow-700 p-4 rounded mt-4;
+}
+```
+
+This ensures Tailwind's utility classes are available for use in your component styles.

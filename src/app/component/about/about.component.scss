@@ -1,3 +1,11 @@
+@use "../../../tailwind.css";
+
 article {
     margin: 2rem;
+}
+
+
+/* Tailwind CSS test */
+.tailwind-test {
+    @apply bg-yellow-100 border border-yellow-400 text-yellow-700 p-4 rounded mt-4;
 }
