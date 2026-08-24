@@ -22,18 +22,22 @@ header h1 {
 }
 
 #user-nav-menu {
-  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform transition-all duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen;
-  @apply opacity-0 translate-x-full pointer-events-none;
+  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed z-50 transform transition-all duration-300 ease-in-out rounded-xl w-72 overflow-hidden;
+  @apply opacity-0 translate-y-5 pointer-events-none;
+  /* Ensure menu is positioned absolutely and not affected by Tailwind positioning */
+  position: absolute !important;
+  width: 18rem; /* 18rem = 288px */
+  border-radius: 1.25rem; /* rounded-xl */
 }
 
 #user-nav-menu.active {
-  @apply opacity-100 translate-x-0 pointer-events-auto;
+  @apply opacity-100 translate-y-0 pointer-events-auto;
 }
 
 /* Add a subtle shadow effect */
 #user-nav-menu::before {
   content: '';
-  @apply absolute inset-0 bg-gradient-to-r from-slate-900/80 to-gray-900/80 rounded-l-2xl shadow-xl;
+  @apply absolute inset-0 bg-gradient-to-r from-slate-900/80 to-gray-900/80 rounded-xl shadow-xl;
   z-index: -1;
 }
 
@@ -54,11 +58,11 @@ header h1 {
 @keyframes slideIn {
   from {
     opacity: 0;
-    transform: translateX(100%);
+    transform: translateY(20px) scale(0.95);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -97,10 +101,16 @@ header h1 {
   box-sizing: border-box;
 }
 
-/* Add scrolling for long menus */
-#user-nav-menu .menu-content {
-  max-height: calc(100vh - 80px);
-  overflow-y: auto;
+/* Remove scrolling and make menu fixed height */
+.menu-content {
+  max-height: none;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+/* Ensure no scrollbars appear at all */
+#user-nav-menu {
+  overflow: hidden !important;
 }
 
 #nav-item1 {
@@ -108,7 +118,15 @@ header h1 {
 }
 
 #close-menu-button {
-  @apply text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110;
+  @apply text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110 rounded-full p-1;
+}
+
+#close-menu-button {
+  @apply text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110 rounded-full p-1;
+}
+
+#close-menu-button svg {
+  @apply w-3 h-3;
 }
 
 #logout-menu-button svg, #admin-menu-button svg {

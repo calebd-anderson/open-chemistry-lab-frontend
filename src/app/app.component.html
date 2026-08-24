@@ -32,16 +32,16 @@
 </header>
 
 <!-- Navigation menu that only appears when user is logged in -->
-<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn() || !isMenuOpen" class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed top-16 right-0 z-50 transform transition-all duration-300 ease-in-out border-l-4 border-cyan-500 w-64 h-screen">
-  <div class="flex justify-between items-center mb-6">
+<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn() || !isMenuOpen" class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed z-50 transform transition-all duration-300 ease-in-out rounded-xl w-72">
+  <div class="flex justify-between items-center mb-4">
     <span class="font-semibold text-cyan-100 text-lg">{{ user().firstName }}</span>
     <button
       id="close-menu-button"
       (click)="openMenu()"
       title="Close Menu"
       type="button"
-      class="text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110">
-      <svg close-icon class="w-6 h-6"></svg>
+      class="text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110 rounded-full p-1">
+      <svg close-icon class="w-3 h-3"></svg>
     </button>
   </div>
 

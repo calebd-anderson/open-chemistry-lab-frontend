@@ -155,6 +155,37 @@ export class AppComponent implements OnInit {
       this.isMenuOpen = !this.isMenuOpen;
 
       if (this.isMenuOpen) {
+        // Use setTimeout to ensure DOM is fully updated before positioning
+        setTimeout(() => {
+          // Calculate position directly beneath profile image
+          const profileButton = document.querySelector('.profileInfo button');
+          if (profileButton) {
+            const rect = profileButton.getBoundingClientRect();
+
+            let topPos = rect.bottom + 12; // Added margin underneath profile icon
+            let leftPos = rect.left + rect.width / 2 - menu.offsetWidth / 2;
+
+            // Ensure the menu stays within viewport bounds
+            const menuWidth = menu.offsetWidth;
+            if (leftPos < 0) {
+              leftPos = 0;
+            } else if (leftPos + menuWidth > window.innerWidth) {
+              leftPos = window.innerWidth - menuWidth;
+            }
+
+            // Add right margin to the menu for better positioning
+            // This will ensure it's not too close to the right edge
+            const rightMargin = 16; // 16px right margin
+            if (leftPos + menuWidth > window.innerWidth - rightMargin) {
+              leftPos = window.innerWidth - menuWidth - rightMargin;
+            }
+
+            // Position menu directly under the profile image, centered
+            menu.style.top = topPos + 'px';
+            menu.style.left = leftPos + 'px';
+          }
+        }, 0);
+
         document.addEventListener('click', handleClickOutside);
       }
     }
