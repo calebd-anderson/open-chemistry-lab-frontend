@@ -96,6 +96,10 @@ $unknownColor: #cccccc
       background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%)
       pointer-events: none
 
+  // Ensure animations work properly by temporarily disabling transitions during animation
+  .square.gsap-animating
+    transition: none !important
+
   &.selected
     box-shadow: 0 0 15px rgba(59, 130, 246, 0.8), 0 0 25px rgba(59, 130, 246, 0.6), 0 0 35px rgba(59, 130, 246, 0.4)
     border: 2px solid #3b82f6

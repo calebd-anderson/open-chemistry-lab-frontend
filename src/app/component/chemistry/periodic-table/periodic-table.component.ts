@@ -48,13 +48,8 @@ export class PeriodicTableComponent {
   }
 
   public selectElement(event: MouseEvent) {
-    // Find the element that was clicked (handling event delegation properly)
-    let clickedElement = event.target as HTMLElement;
-
-    // Navigate up the DOM to find the outer element div
-    while (clickedElement && !clickedElement.classList.contains('element')) {
-      clickedElement = clickedElement.parentElement as HTMLElement;
-    }
+    // Get the clicked element directly
+    const clickedElement = event.currentTarget as HTMLElement;
 
     if (!clickedElement) return;
 
@@ -70,16 +65,19 @@ export class PeriodicTableComponent {
       // Add animation to the clicked element
       const elementSquare = clickedElement.querySelector('.square');
       if (elementSquare) {
-        console.log('Animating element square:', elementSquare); // Debug line
-
-        // Create a more impressive animation with multiple effects
+        // Stop any existing animations on this element first
+        gsap.killTweensOf(elementSquare);
+        // Add temporary class for animation  
+        elementSquare.classList.add('gsap-animating'); 
+        // Apply animation using GSAP
         gsap.fromTo(
           elementSquare,
           {
             scale: 1,
             rotation: 0,
             boxShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
-            opacity: 1
+            opacity: 1,
+            transformOrigin: "center"
           },
           {
             scale: 1.4,
@@ -89,6 +87,8 @@ export class PeriodicTableComponent {
             duration: 0.8,
             ease: 'elastic.out(1.5, 0.5)',
             onComplete: () => {
+              // Remove temporary class after animation 
+              elementSquare.classList.remove('gsap-animating'); 
               // Reset the element to its normal state after animation
               gsap.set(elementSquare, {
                 scale: 1,
