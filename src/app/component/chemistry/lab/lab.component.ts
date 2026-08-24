@@ -105,44 +105,47 @@ export class LabComponent {
       elements.push({ symbol: key, numberOfAtoms: value });
     }
 
-    // to do: the subscribe method should call back an HTTP error that sends a front-end notification
-    if (this.authenticationService.isUserLoggedIn()) {
-      let payload = {
-        elements,
-        userId: this.authenticationService.getUserFromLocalCache().userId,
-      };
-      // careful of memory leak
-      this.compoundService.validate(payload).subscribe({
-        next: (response: HttpResponse<Reaction>) => {
-          this.openConfirmationDialogSuccess(response, true);
-          this.experimentService.setIsActive(false);
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          this.openConfirmationDialogFail(errorResponse);
-          this.experimentService.setIsActive(false);
-        },
-      });
-    } else {
-      this._snackBar.notify(
-        NotificationType.WARNING,
-        'Unable to save discovery anonymously. Please create an account to save your findings.'
-      );
-      let payload = {
-        elements,
-        userId: null,
-      };
-      // careful of memory leak
-      this.compoundService.validate(payload).subscribe({
-        next: (response: HttpResponse<Reaction>) => {
-          this.openConfirmationDialogSuccess(response, false);
-          this.experimentService.setIsActive(false);
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          this.openConfirmationDialogFail(errorResponse);
-          this.experimentService.setIsActive(false);
-        },
-      });
-    }
+    // Add synthetic delay after flask animation starts but before API request
+    setTimeout(() => {
+      // to do: the subscribe method should call back an HTTP error that sends a front-end notification
+      if (this.authenticationService.isUserLoggedIn()) {
+        let payload = {
+          elements,
+          userId: this.authenticationService.getUserFromLocalCache().userId,
+        };
+        // careful of memory leak
+        this.compoundService.validate(payload).subscribe({
+          next: (response: HttpResponse<Reaction>) => {
+            this.openConfirmationDialogSuccess(response, true);
+            this.experimentService.setIsActive(false);
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            this.openConfirmationDialogFail(errorResponse);
+            this.experimentService.setIsActive(false);
+          },
+        });
+      } else {
+        this._snackBar.notify(
+          NotificationType.WARNING,
+          'Unable to save discovery anonymously. Please create an account to save your findings.'
+        );
+        let payload = {
+          elements,
+          userId: null,
+        };
+        // careful of memory leak
+        this.compoundService.validate(payload).subscribe({
+          next: (response: HttpResponse<Reaction>) => {
+            this.openConfirmationDialogSuccess(response, false);
+            this.experimentService.setIsActive(false);
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            this.openConfirmationDialogFail(errorResponse);
+            this.experimentService.setIsActive(false);
+          },
+        });
+      }
+    }, 2000); // 2 second delay
   }
 
   public openConfirmationDialogFail(response: HttpErrorResponse) {
