@@ -97,10 +97,13 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  public onProfileImageChange(fileName: string, profileImag: File): void {
-    this.fileName = fileName;
-    this.profileImg = profileImag;
-    this.user.profileImgUrl = `${this.user.profileImgUrl}?time=${new Date().getTime()}`;
+  public onProfileImageChange(event: any): void {
+    if (event.target && event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      this.fileName = file.name;
+      this.profileImg = file;
+      this.user.profileImgUrl = `${this.user.profileImgUrl}?time=${new Date().getTime()}`;
+    }
   }
 
   public updateProfileImage(): void {
@@ -151,7 +154,11 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  private clickButton(buttonId: string): void {
+  public clickButton(buttonId: string): void {
     document.getElementById(buttonId)?.click();
+  }
+
+  public onClickCancel(): void {
+    this.edit = false;
   }
 }
