@@ -31,6 +31,18 @@
   overflow: hidden;
 }
 
+/* Add margin between experiment section and periodic table */
+#periodic-table-container {
+  @apply mt-8;
+}
+
+/* Add responsive margin for mobile devices */
+@media (max-width: 768px) {
+  #periodic-table-container {
+    @apply mt-6;
+  }
+}
+
 #experiment-section::before {
   content: '';
   position: absolute;
@@ -48,6 +60,17 @@
 #experiment-section > * {
   position: relative;
   z-index: 1;
+}
+
+/* Add a subtle visual separator */
+#experiment-section::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, #3b82f6, transparent);
 }
 
 #instructions {
@@ -71,7 +94,7 @@
 
 /* Collapsible periodic table styles */
 #periodic-table-container {
-  @apply relative;
+  @apply relative mt-6 bg-white rounded-2xl shadow-xl p-4 border border-cyan-200;
 }
 
 #toggle-table-btn {
@@ -79,12 +102,19 @@
   @apply w-32 flex items-center justify-center;
 }
 
+/* Add margin for mobile devices */
+@media (max-width: 768px) {
+  #periodic-table-container {
+    @apply mt-4;
+  }
+}
+
 #toggle-table-btn:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 #periodic-table-section {
-  @apply bg-white rounded-2xl shadow-xl p-4 border border-cyan-200 overflow-hidden transition-all duration-500 ease-in-out;
+  @apply bg-white rounded-2xl p-4 overflow-hidden transition-all duration-500 ease-in-out;
   max-height: 800px;
 }
 
@@ -117,6 +147,11 @@
 
   #toggle-table-btn {
     @apply w-24 text-sm py-1 px-2;
+  }
+
+  /* Add responsive margin for mobile */
+  #periodic-table-container {
+    @apply mt-4;
   }
 }
 
