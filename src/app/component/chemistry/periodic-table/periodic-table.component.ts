@@ -48,37 +48,66 @@ export class PeriodicTableComponent {
   }
 
   public selectElement(event: MouseEvent) {
-    const element = event.target as HTMLElement;
-    let elmIndex = parseInt(element.id) - 1;
+    // Find the element that was clicked (handling event delegation properly)
+    let clickedElement = event.target as HTMLElement;
+
+    // Navigate up the DOM to find the outer element div
+    while (clickedElement && !clickedElement.classList.contains('element')) {
+      clickedElement = clickedElement.parentElement as HTMLElement;
+    }
+
+    if (!clickedElement) return;
+
+    // Get the atomic number from the input id that's inside this element
+    const inputElement = clickedElement.querySelector('.activate');
+    if (!inputElement) return;
+
+    const atomicNumber = parseInt(inputElement.id);
+    let elmIndex = atomicNumber - 1;
 
     const interactedElement = this.elements()[elmIndex];
     if (interactedElement) {
       // Add animation to the clicked element
-      const elementSquare = element.closest('.element')?.querySelector('.square');
+      const elementSquare = clickedElement.querySelector('.square');
       if (elementSquare) {
+        console.log('Animating element square:', elementSquare); // Debug line
+
+        // Create a more impressive animation with multiple effects
         gsap.fromTo(
           elementSquare,
           {
             scale: 1,
             rotation: 0,
-            boxShadow: '0 0 0px rgba(255, 255, 255, 0.3)'
+            boxShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
+            opacity: 1
           },
           {
-            scale: 1.2,
-            rotation: 360,
-            boxShadow: '0 0 20px rgba(255, 255, 255, 0.8)',
-            duration: 0.6,
-            ease: 'elastic.out(1, 0.3)',
+            scale: 1.4,
+            rotation: 720, // 2 full rotations
+            boxShadow: '0 0 30px rgba(59, 130, 246, 0.8), 0 0 60px rgba(59, 130, 246, 0.6)',
+            opacity: 0.9,
+            duration: 0.8,
+            ease: 'elastic.out(1.5, 0.5)',
             onComplete: () => {
               // Reset the element to its normal state after animation
               gsap.set(elementSquare, {
                 scale: 1,
                 rotation: 0,
-                boxShadow: '0 0 5px rgba(255, 255, 255, 0.3)'
+                boxShadow: '0 0 5px rgba(255, 255, 255, 0.3)',
+                opacity: 1
               });
             }
           }
         );
+
+        // Add a secondary pulse effect for extra visual impact
+        gsap.to(elementSquare, {
+          duration: 0.4,
+          scale: 1.1,
+          repeat: 2,
+          yoyo: true,
+          ease: 'sine.inOut'
+        });
       }
 
       this.sendElementMessage.emit(interactedElement);
