@@ -19,7 +19,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['../login_modal.component.scss'],
+  styleUrls: ['./register.component.scss'],
   imports: [
     FormsModule,
     MatDialogContent,

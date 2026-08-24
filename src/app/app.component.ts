@@ -138,19 +138,24 @@ export class AppComponent implements OnInit {
     const menu = document.getElementById('user-nav-menu');
     if (menu) {
       // Close the menu when clicking outside of it
-      document.addEventListener('click', (event) => {
+      const handleClickOutside = (event: MouseEvent) => {
         const isClickInsideMenu = menu.contains(event.target as Node);
         const isClickOnProfileImage = (event.target as Element).closest('.profileInfo');
 
         if (!isClickInsideMenu && !isClickOnProfileImage) {
           menu.classList.remove('active');
           this.isMenuOpen = false;
+          document.removeEventListener('click', handleClickOutside);
         }
-      });
+      };
 
       // Toggle the menu
       menu.classList.toggle('active');
       this.isMenuOpen = !this.isMenuOpen;
+
+      if (this.isMenuOpen) {
+        document.addEventListener('click', handleClickOutside);
+      }
     }
   }
 }

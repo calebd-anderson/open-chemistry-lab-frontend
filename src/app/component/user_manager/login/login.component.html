@@ -1,7 +1,7 @@
 <section>
   <h3 mat-dialog-title class="text-xl font-semibold text-cyan-800">Login</h3>
-  <mat-dialog-content class="mat-typography login_container">
-    <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)">
+  <mat-dialog-content class="mat-typography login-container">
+    <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" class="login-form">
       <div>
         <div class="mb-4">
           <div class="flex items-center border border-cyan-300 rounded-lg overflow-hidden bg-white">
@@ -13,10 +13,10 @@
               ngModel
               #usernameInput="ngModel"
               required
-              class="flex-1 px-3 py-2 focus:outline-none" />
+              class="flex-1 px-3 py-2 focus:outline-none login-input" />
           </div>
           @if (usernameInput.invalid && usernameInput.touched) {
-          <span class="text-red-600 text-sm mt-1">Please enter a username.</span>
+          <span class="text-red-600 text-sm mt-1 form-error">Please enter a username.</span>
           }
         </div>
         <div class="mb-4">
@@ -29,15 +29,15 @@
               ngModel
               #passwordInput="ngModel"
               required
-              class="flex-1 px-3 py-2 focus:outline-none" />
+              class="flex-1 px-3 py-2 focus:outline-none login-input" />
           </div>
           @if (passwordInput.invalid && passwordInput.touched) {
-          <span class="text-red-600 text-sm mt-1">Please enter a password.</span>
+          <span class="text-red-600 text-sm mt-1 form-error">Please enter a password.</span>
           }
         </div>
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium py-2 px-6 rounded-lg transition duration-200 transform hover:scale-105 w-full">
+      <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="login-btn">
         @if (showLoading) {
         <i class="fa fa-spinner fa-spin"></i>
         }
@@ -53,6 +53,6 @@
   </mat-dialog-content>
   <mat-dialog-actions class="flex items-center justify-between">
     Don't have an account yet?
-    <button matButton (click)="onClickRegister()" class="text-cyan-600 hover:text-cyan-800 font-medium">Register</button>
+    <button matButton (click)="onClickRegister()" class="links">Register</button>
   </mat-dialog-actions>
 </section>
