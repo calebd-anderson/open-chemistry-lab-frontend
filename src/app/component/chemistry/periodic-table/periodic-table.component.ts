@@ -6,6 +6,7 @@ import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { CommonModule } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
+import gsap from 'gsap';
 
 @Component({
   selector: 'periodic-table',
@@ -48,6 +49,26 @@ export class PeriodicTableComponent {
 
     const interactedElement = this.elements()[elmIndex];
     if (interactedElement) {
+      // Add animation to the clicked element
+      const elementSquare = element.closest('.element')?.querySelector('.square');
+      if (elementSquare) {
+        gsap.fromTo(
+          elementSquare,
+          {
+            scale: 1,
+            rotation: 0,
+            boxShadow: '0 0 0px rgba(255, 255, 255, 0.3)'
+          },
+          {
+            scale: 1.2,
+            rotation: 360,
+            boxShadow: '0 0 20px rgba(255, 255, 255, 0.8)',
+            duration: 0.6,
+            ease: 'elastic.out(1, 0.3)'
+          }
+        );
+      }
+
       this.sendElementMessage.emit(interactedElement);
       this._snackBar.notify(
         NotificationType.DEFAULT,

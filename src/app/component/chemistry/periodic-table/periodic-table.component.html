@@ -34,7 +34,7 @@
             name="elements"
           />
           <div class="overlay"></div>
-          <div class="square">
+          <div class="square" [id]="'element-square-' + element.atomicNumber">
             <div class="model"></div>
             <div class="atomic-number">{{ element.atomicNumber }}</div>
             <div class="label">
