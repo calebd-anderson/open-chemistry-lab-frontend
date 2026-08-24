@@ -13,12 +13,13 @@ import {
 import { SubSink } from 'subsink';
 import { FileUploadStatus } from '../../../model/file-upload-status';
 import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
 })
 export class ProfileComponent implements OnInit {
   public user: User = new User();

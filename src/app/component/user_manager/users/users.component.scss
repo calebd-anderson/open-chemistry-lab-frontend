@@ -1,15 +1,17 @@
+@use "@/tailwind.css";
+
 section {
-  margin: 1rem 1rem;
+  @apply max-w-7xl mx-auto px-4 py-6;
 }
 
 button {
-  margin-right: 0.5rem;
+  @apply mr-2;
 }
 
 tr:hover:not(thead>tr) {
-  background-color: antiquewhite;
+  @apply bg-gray-50;
 }
 
 table {
-  width: 100%;
+  @apply w-full;
 }

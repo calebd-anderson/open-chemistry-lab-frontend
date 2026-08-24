@@ -1,15 +1,16 @@
 <!-- create flashcard -->
-<div class="flashcards">
-  <h1 class="text-center">Create Flashcards</h1>
-  <div class="d-flex justify-content-center form_container">
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <h1 class="text-center text-3xl font-bold text-emerald-800 mb-8">Create Flashcards</h1>
+  <div class="flex justify-center">
     <form
       #flascardForm="ngForm"
       (ngSubmit)="createFlashcard(flascardForm.value)"
+      class="w-full max-w-md"
     >
-      <div class="input-group">
+      <div class="mb-4">
         <input
           type="text"
-          class="form-control"
+          class="w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
           name="question"
           placeholder="Enter a question"
           ngModel
@@ -18,28 +19,28 @@
         />
       </div>
       @if (questionInput.invalid && questionInput.touched) {
-      <div class="help-block">Please enter a question.</div>
+      <div class="text-red-600 text-sm mb-2">Please enter a question.</div>
       }
-      <div class="input-group mt-3">
+      <div class="mb-4">
         <input
           type="text"
-          class="form-control"
+          class="w-full px-4 py-3 border border-emerald-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white"
           name="answer"
-          placeholder="Enter the corret answer"
+          placeholder="Enter the correct answer"
           ngModel
           #answerInput="ngModel"
           required
         />
       </div>
       @if (answerInput.invalid && answerInput.touched) {
-      <div class="help-block">Please enter a answer.</div>
+      <div class="text-red-600 text-sm mb-2">Please enter an answer.</div>
       }
-      <div class="d-flex justify-content-center mt-3 login_container">
+      <div class="flex justify-center mt-6">
         <button
           type="submit"
           [disabled]="flascardForm.invalid"
           name="button"
-          class="btn btn-primary"
+          class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200 transform hover:scale-105 disabled:opacity-50 shadow-lg"
         >
           <span>Submit</span>
         </button>
@@ -47,22 +48,24 @@
     </form>
   </div>
   @if(flashcards.length > 0) {
-  <div class="mt-4">
-    <div class="d-flex justify-content-center links">
-      <a (click)="displayCards()" class="ml-2 toggle-cards"
-        >Hide/See My Flash Card(s)</a
-      >
-    </div>
+  <div class="mt-8 flex justify-center">
+    <a (click)="displayCards()" class="ml-2 text-emerald-600 hover:text-emerald-800 cursor-pointer underline">
+      Hide/See My Flash Card(s)
+    </a>
   </div>
   }
   <!-- list -->
   @if (allCards) {
-  <div class="flashcard-container">
-    <div class="card-grid">
+  <div class="mt-10">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       @for (displayCard of flashcards; track displayCard.id; let i = $index) {
       <div class="card" id="{{ i }}" (click)="flipCard(i)">
-        <div class="front">{{ displayCard.question }}</div>
-        <div class="back">{{ displayCard.answer }}</div>
+        <div class="front bg-white border border-emerald-200 rounded-lg shadow p-4 h-24 flex items-center justify-center">
+          {{ displayCard.question }}
+        </div>
+        <div class="back bg-cyan-50 border border-cyan-200 rounded-lg shadow p-4 h-24 flex items-center justify-center">
+          {{ displayCard.answer }}
+        </div>
       </div>
       }
     </div>

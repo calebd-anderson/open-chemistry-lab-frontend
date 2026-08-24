@@ -120,16 +120,15 @@ Avoid generic AI-generated aesthetics:
 Interpret creatively and make unexpected choices that feel genuinely designed for the context. Vary between light and dark themes, different fonts, different aesthetics. You still tend to converge on common choices (Space Grotesk, for example) across generations. Avoid this: it is critical that you think outside the box!
 
 ## Using Tailwind CSS
-When using Tailwind CSS in SCSS or Sass stylesheets, you'll need to import the src/tailwind.css file with `@use "tailwind.css"` or from a component you'll need to map the path to where 'tailwind.css' actually is. The application has been configured to support this usage pattern.
+When using Tailwind CSS in SCSS or Sass stylesheets, you'll need to import the src/tailwind.css file with `@use "@/tailwind.css";` or from a component you'll need to map the path to where 'tailwind.css' actually is. The application has been configured to support this usage pattern.
 
 For components that use Tailwind CSS classes in SCSS files, follow this pattern:
-1. Import Tailwind at the top of your SCSS file using `@use "../../../tailwind.css";` (adjust the path as needed based on component location)
+1. Import Tailwind at the top of your SCSS file using `@use "@/tailwind.css";` (this works regardless of component nesting level due to tsconfig path mapping)
 2. Use Tailwind's @apply directive to apply utility classes within your custom styles
-3. The import path should be relative to the component's SCSS file location
 
 Example:
 ```scss
-@use "../../../tailwind.css";
+@use "@/tailwind.css";
 
 article {
     margin: 2rem;

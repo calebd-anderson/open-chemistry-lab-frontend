@@ -1,4 +1,4 @@
-@use "../../../../tailwind.css";
+@use "@/tailwind.css";
 
 .register-container {
   @apply bg-gradient-to-br from-slate-50 to-cyan-50 rounded-xl shadow-lg p-6 border border-cyan-100;
