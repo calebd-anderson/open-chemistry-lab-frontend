@@ -13,13 +13,12 @@ import {
 import { SubSink } from 'subsink';
 import { FileUploadStatus } from '../../../model/file-upload-status';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule],
 })
 export class ProfileComponent implements OnInit {
   public user: User = new User();
@@ -106,10 +105,6 @@ export class ProfileComponent implements OnInit {
 
   public updateProfileImage(): void {
     this.clickButton('profile-image-input');
-  }
-
-  public onClickCancel(): void {
-    this.edit = false;
   }
 
   private sendNotification(
