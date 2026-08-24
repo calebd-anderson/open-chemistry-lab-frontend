@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ViewChild } from '@angular/core';
 import { PeriodicTableComponent } from '../periodic-table/periodic-table.component';
 import { ExperimentComponent } from '../experiment/experiment.component';
 import { Element } from '@app/model/element.model';
@@ -19,6 +19,8 @@ import { Reaction } from '@app/model/compound';
   styleUrl: './lab.component.scss',
 })
 export class LabComponent {
+  @ViewChild(PeriodicTableComponent) periodicTable!: PeriodicTableComponent;
+
   elementsInCompound = signal<Element[]>([]);
   atomsInCompound: Map<string, number> = new Map();
   private _snackBar: NotificationService = inject(NotificationService);
@@ -40,6 +42,9 @@ export class LabComponent {
     } else {
       this.atomsInCompound.set(element.symbol, tempAtoms + 1);
     }
+
+    // Update the periodic table with the new elements
+    this.updatePeriodicTableElements();
   }
 
   public getElementsInCompound(): Element[] {
@@ -62,11 +67,17 @@ export class LabComponent {
         element.name + ' removed from experiment.'
       );
     }
+
+    // Update the periodic table with the new elements
+    this.updatePeriodicTableElements();
   }
 
   public clearExperiment() {
     this.elementsInCompound.set([]);
     this.atomsInCompound.clear();
+
+    // Update the periodic table with no elements
+    this.updatePeriodicTableElements();
   }
 
   public validateCompound() {
@@ -148,6 +159,13 @@ export class LabComponent {
     if (!isLoggedIn) {
       this.dialogRef.componentInstance.isLoggedIn =
         'Create an account to save your discovery!';
+    }
+  }
+
+  // Method to update the periodic table with current elements
+  private updatePeriodicTableElements() {
+    if (this.periodicTable) {
+      this.periodicTable.updateElementsInExperiment(this.elementsInCompound());
     }
   }
 }

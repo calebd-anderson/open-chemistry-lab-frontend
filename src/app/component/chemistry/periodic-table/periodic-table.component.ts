@@ -36,8 +36,12 @@ export class PeriodicTableComponent {
   public progressSpinner: boolean = false;
 
   sendElementMessage = output<Element>();
+  elementSelected = output<Element>();
 
   private _snackBar: NotificationService = inject(NotificationService);
+
+  // Track which elements are currently in the experiment
+  elementsInExperiment = signal<Set<string>>(new Set());
 
   async ngOnInit() {
     this.elements.set(await this.elementService.getElements());
@@ -64,7 +68,15 @@ export class PeriodicTableComponent {
             rotation: 360,
             boxShadow: '0 0 20px rgba(255, 255, 255, 0.8)',
             duration: 0.6,
-            ease: 'elastic.out(1, 0.3)'
+            ease: 'elastic.out(1, 0.3)',
+            onComplete: () => {
+              // Reset the element to its normal state after animation
+              gsap.set(elementSquare, {
+                scale: 1,
+                rotation: 0,
+                boxShadow: '0 0 5px rgba(255, 255, 255, 0.3)'
+              });
+            }
           }
         );
       }
@@ -75,6 +87,17 @@ export class PeriodicTableComponent {
         interactedElement.name + ' added to experiment.',
       );
     }
+  }
+
+  // Method to update the set of elements currently in the experiment
+  public updateElementsInExperiment(elements: Element[]) {
+    const elementSymbols = new Set<string>(elements.map(e => e.symbol));
+    this.elementsInExperiment.set(elementSymbols);
+  }
+
+  // Method to check if an element is currently in the experiment
+  public isElementInExperiment(symbol: string): boolean {
+    return this.elementsInExperiment().has(symbol);
   }
 
   public sortElements(input: Element[]): Element[] {

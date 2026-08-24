@@ -24,7 +24,7 @@
     <div class="periodic-table">
       @for (element of this.sortElements(elements()); track element) {
         <div
-          [ngClass]="['element', element.tablePosition, element.groupBlock]"
+          [ngClass]="['element', element.tablePosition, element.groupBlock, isElementInExperiment(element.symbol) ? 'selected' : '']"
           (click)="selectElement($event)"
         >
           <input
