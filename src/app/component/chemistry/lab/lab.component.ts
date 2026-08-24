@@ -33,6 +33,15 @@ export class LabComponent {
   public dialog: MatDialog = inject(MatDialog);
 
   public addInteractedElements(element: Element) {
+    // Check if adding this element would exceed the limit of 6
+    if (this.elementsInCompound().length >= 6) {
+      this._snackBar.notify(
+        NotificationType.WARNING,
+        'Maximum of 6 elements allowed in experiment. Please remove an element first.'
+      );
+      return;
+    }
+
     if (this.elementsInCompound().length == 0)
       window.scrollTo({ top: 0, behavior: 'smooth' });
     let tempAtoms = this.atomsInCompound.get(element.symbol);
@@ -42,6 +51,12 @@ export class LabComponent {
     } else {
       this.atomsInCompound.set(element.symbol, tempAtoms + 1);
     }
+
+    // Show notification that element was added
+    this._snackBar.notify(
+      NotificationType.DEFAULT,
+      element.name + ' added to experiment.'
+    );
 
     // Update the periodic table with the new elements
     this.updatePeriodicTableElements();

@@ -63,10 +63,7 @@ export class PeriodicTableComponent {
     if (interactedElement) {
       // Simple selection without animation
       this.sendElementMessage.emit(interactedElement);
-      this._snackBar.notify(
-        NotificationType.DEFAULT,
-        interactedElement.name + ' added to experiment.',
-      );
+      // Note: Notification is now handled in LabComponent to allow proper limit checking
     }
   }
 
