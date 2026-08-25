@@ -140,7 +140,7 @@ export class PeriodicTableComponent {
         return { row: 2, col: atomicNumber - 2 };
       } else {
         // B(5) = col 13, C(6) = col 14, N(7) = col 15, O(8) = col 16, F(9) = col 17, Ne(10) = col 18
-        return { row: 2, col: 12 + (atomicNumber - 5) };
+        return { row: 2, col: 13 + (atomicNumber - 5) };
       }
     }
 
@@ -151,7 +151,7 @@ export class PeriodicTableComponent {
         return { row: 3, col: atomicNumber - 10 };
       } else {
         // Al(13) = col 13, Si(14) = col 14, P(15) = col 15, S(16) = col 16, Cl(17) = col 17, Ar(18) = col 18
-        return { row: 3, col: 12 + (atomicNumber - 13) };
+        return { row: 3, col: 13 + (atomicNumber - 13) };
       }
     }
 
@@ -162,7 +162,7 @@ export class PeriodicTableComponent {
         return { row: 4, col: atomicNumber - 18 };
       } else {
         // Sc(21) to Kr(36) are in columns 13-18 of the main table
-        return { row: 4, col: 12 + (atomicNumber - 21) };
+        return { row: 4, col: 13 + (atomicNumber - 21) };
       }
     }
 
@@ -173,7 +173,7 @@ export class PeriodicTableComponent {
         return { row: 5, col: atomicNumber - 36 };
       } else {
         // Y(39) to Xe(54) are in columns 13-18 of the main table
-        return { row: 5, col: 12 + (atomicNumber - 39) };
+        return { row: 5, col: 13 + (atomicNumber - 39) };
       }
     }
 
@@ -184,7 +184,7 @@ export class PeriodicTableComponent {
         return { row: 6, col: atomicNumber - 54 };
       } else {
         // La(57) to Rn(86) are in columns 13-18 of the main table (but La is handled above)
-        return { row: 6, col: 12 + (atomicNumber - 57) };
+        return { row: 6, col: 13 + (atomicNumber - 57) };
       }
     }
 
@@ -195,7 +195,7 @@ export class PeriodicTableComponent {
         return { row: 7, col: atomicNumber - 86 };
       } else {
         // Ac(89) to Og(118) are in columns 13-18 of the main table (but Ac is handled above)
-        return { row: 7, col: 12 + (atomicNumber - 89) };
+        return { row: 7, col: 13 + (atomicNumber - 89) };
       }
     }
 
