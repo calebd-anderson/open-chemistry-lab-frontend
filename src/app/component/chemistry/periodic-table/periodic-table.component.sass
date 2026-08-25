@@ -18,7 +18,8 @@ $unknownColor: #cccccc
   background: $bgColor
   text-shadow: 0 0 0.4vw currentColor
   position: relative
-  overflow: hidden
+  overflow-x: auto
+  overflow-y: hidden
   padding: 2%
   border-radius: 15px
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05)
@@ -27,6 +28,9 @@ $unknownColor: #cccccc
   border: 1px solid rgba(255, 255, 255, 0.08)
   min-height: 600px
   max-height: 80vh
+  width: 100%
+  scrollbar-width: thin
+  scrollbar-color: rgba(255, 255, 255, 0.5) transparent
 
   &.hidden
     display: none
@@ -42,11 +46,27 @@ $unknownColor: #cccccc
     opacity: 0
     pointer-events: none
 
+  // Custom scrollbar styling for WebKit browsers
+  &::-webkit-scrollbar
+    height: 8px
+
+  &::-webkit-scrollbar-track
+    background: transparent
+
+  &::-webkit-scrollbar-thumb
+    background-color: rgba(255, 255, 255, 0.5)
+    border-radius: 4px
+
+  // Ensure the inner content can overflow
+  .periodic-table
+    min-width: 1200px
+
 .periodic-table
   display: grid
   grid-gap: $gridGap
   grid-template-columns: repeat(18, 1fr)
   min-height: 500px
+  min-width: 1200px
 
 // --------------------------------------
 // ELEMENT
@@ -393,6 +413,7 @@ $unknownColor: #cccccc
   pointer-events: none
   user-select: none
   margin-top: 10px
+  width: fit-content
 
   .row
     --bs-gutter-x: 0rem
