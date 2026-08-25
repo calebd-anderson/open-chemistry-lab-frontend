@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lab',
+  standalone: true,
   imports: [PeriodicTableComponent, ExperimentComponent, MatIconModule],
   templateUrl: './lab.component.html',
   styleUrls: ['./lab.component.scss', './lab.component.svg.scss'],
@@ -22,8 +23,9 @@ import { MatIconModule } from '@angular/material/icon';
 export class LabComponent {
   @ViewChild(PeriodicTableComponent) periodicTable!: PeriodicTableComponent;
 
-  elementsInCompound = signal<Element[]>([]);
+  elementsInCompound = signal<{element: Element, id: number}[]>([]);
   atomsInCompound: Map<string, number> = new Map();
+  private nextId = 0;
   private _snackBar: NotificationService = inject(NotificationService);
   public experimentService: ExperimentService = inject(ExperimentService);
   private compoundService: CompoundService = inject(CompoundService);
@@ -53,7 +55,7 @@ export class LabComponent {
     }
 
     let tempAtoms = this.atomsInCompound.get(element.symbol);
-    this.elementsInCompound.update((e) => [...e, element]);
+    this.elementsInCompound.update((e) => [...e, { element, id: this.nextId++ }]);
     if (tempAtoms == null) {
       this.atomsInCompound.set(element.symbol, 1);
     } else {
@@ -70,13 +72,14 @@ export class LabComponent {
     this.updatePeriodicTableElements();
   }
 
-  public getElementsInCompound(): Element[] {
+  public getElementsInCompound(): {element: Element, id: number}[] {
     return this.elementsInCompound();
   }
 
-  public removeElementFromCompound(index: number, element: Element) {
+  public removeElementFromCompound(index: number) {
+    const element = this.elementsInCompound()[index].element;
     let tempAtoms = this.atomsInCompound.get(element.symbol);
-    this.elementsInCompound().splice(index, 1);
+    this.elementsInCompound.update((elements) => elements.filter((_, i) => i !== index));
     if (tempAtoms == 1) {
       this.atomsInCompound.delete(element.symbol);
       this._snackBar.notify(
@@ -125,6 +128,7 @@ export class LabComponent {
         this.compoundService.validate(payload).subscribe({
           next: (response: HttpResponse<Reaction>) => {
             this.openConfirmationDialogSuccess(response, true);
+
             this.experimentService.setIsActive(false);
           },
           error: (errorResponse: HttpErrorResponse) => {
@@ -206,7 +210,7 @@ export class LabComponent {
   // Method to update the periodic table with current elements
   private updatePeriodicTableElements() {
     if (this.periodicTable) {
-      this.periodicTable.updateElementsInExperiment(this.elementsInCompound());
+      this.periodicTable.updateElementsInExperiment(this.elementsInCompound().map(item => item.element));
     }
   }
 }

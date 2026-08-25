@@ -11,8 +11,8 @@ import { MatIconModule } from '@angular/material/icon';
 
 interface RemoveElement {
   index: number;
-  element: Element;
 }
+
 @Component({
   selector: 'app-experiment',
   imports: [
@@ -27,7 +27,7 @@ interface RemoveElement {
   styleUrls: ['./experiment.component.scss'],
 })
 export class ExperimentComponent implements AfterViewInit {
-  elementsInCompound = input.required<Element[]>();
+  elementsInCompound = input.required<{element: Element, id: number}[]>();
   isTableExpanded = input<boolean>(false);
 
   removeElement = output<RemoveElement>();
@@ -74,19 +74,19 @@ export class ExperimentComponent implements AfterViewInit {
 
   public removeElementFromCompound(i: number, element: Element) {
     // Add animation class for removing elements
-    const elementToRemove = this.elementRef.nativeElement.querySelector(`.element-in-compound[data-element="${element.symbol}"]`);
+    const elementToRemove = this.elementRef.nativeElement.querySelector(`.element-in-compound[data-index="${i}"]`);
     if (elementToRemove) {
       elementToRemove.classList.add('remove');
       setTimeout(() => {
-        this.removeElement.emit({ index: i, element: element });
+        this.removeElement.emit({ index: i });
       }, 500);
     } else {
-      this.removeElement.emit({ index: i, element: element });
+      this.removeElement.emit({ index: i });
     }
   }
 
   // Get the count of each element in the compound
   getElementCount(elementSymbol: string): number {
-    return this.elementsInCompound().filter(e => e.symbol === elementSymbol).length;
+    return this.elementsInCompound().filter(item => item.element.symbol === elementSymbol).length;
   }
 }

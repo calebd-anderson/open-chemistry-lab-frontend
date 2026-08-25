@@ -37,11 +37,11 @@
         </div>
       </div>
 
-      <app-experiment
+<app-experiment
         [elementsInCompound]="elementsInCompound()"
         [isTableExpanded]="isTableExpanded()"
         (removeElement)="
-          removeElementFromCompound($event.index, $event.element)
+          removeElementFromCompound($event.index)
         "
         (runExperiment)="validateCompound()"
         (clearExperiment)="clearExperiment()"
