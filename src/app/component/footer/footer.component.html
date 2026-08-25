@@ -1,79 +1,47 @@
-<footer class="bg-gradient-to-r from-slate-900 via-gray-900 to-slate-900 border-t border-cyan-800 shadow-lg py-3 px-4 mt-auto">
-  <div class="flex justify-between items-center max-w-7xl mx-auto">
-    <!-- Left side - Lab button -->
-    <button
-      (click)="goToLab()"
-      class="flex flex-col items-center"
-      title="Chemistry Lab">
-      <svg class="w-8 h-8 text-cyan-300 hover:text-cyan-100 transition-colors duration-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 3L2 9L12 15L22 9L12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M2 15L12 21L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M2 9L12 15L22 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="text-xs text-cyan-200 mt-1 hover:text-cyan-100 transition-colors duration-200">Lab</span>
-    </button>
+<footer class="bg-slate-950 border-t border-slate-800 py-12 px-4 mt-auto">
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+    <!-- Column 1: About -->
+    <div class="space-y-4">
+      <h3 class="text-white text-lg font-semibold">Open Chemistry Lab</h3>
+      <p class="text-slate-400 text-sm leading-relaxed">
+        An interactive platform for exploring the wonders of chemistry. Create molecules, discover compounds, and learn through hands-on simulation.
+      </p>
+    </div>
 
-    <!-- Center - Discoveries button -->
-    <button
-      (click)="goToDiscoveries()"
-      class="flex flex-col items-center"
-      title="My Discoveries">
-      <svg class="w-8 h-8 text-emerald-300 hover:text-emerald-100 transition-colors duration-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="text-xs text-emerald-200 mt-1 hover:text-emerald-100 transition-colors duration-200">Discoveries</span>
-    </button>
+    <!-- Column 2: Explore -->
+    <div class="space-y-4">
+      <h3 class="text-white text-lg font-semibold">Explore</h3>
+      <ul class="space-y-2">
+        <li>
+          <button (click)="goToLab()" class="text-slate-400 hover:text-white text-sm transition-colors">Chemistry Lab</button>
+        </li>
+        <li>
+          <button (click)="goToDiscoveries()" class="text-slate-400 hover:text-white text-sm transition-colors">My Discoveries</button>
+        </li>
+        <li>
+          <button (click)="goToGlobalDiscoveries()" class="text-slate-400 hover:text-white text-sm transition-colors">Global Discoveries</button>
+        </li>
+        <li>
+          <button (click)="goToQuiz()" class="text-slate-400 hover:text-white text-sm transition-colors">Quizzes</button>
+        </li>
+        <li>
+          <button (click)="goToFlashcard()" class="text-slate-400 hover:text-white text-sm transition-colors">Flashcards</button>
+        </li>
+      </ul>
+    </div>
 
-    <!-- Right side - Global Discoveries button -->
-    <button
-      (click)="goToGlobalDiscoveries()"
-      class="flex flex-col items-center"
-      title="Global Discoveries">
-      <svg class="w-8 h-8 text-blue-300 hover:text-blue-100 transition-colors duration-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M16 6C16 7.65685 14.6569 9 13 9H5C3.34315 9 2 7.65685 2 6V3C2 1.34315 3.34315 0 5 0H13C14.6569 0 16 1.34315 16 3V6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M23 21V19C22.9997 18.0841 22.644 17.2051 22.0018 16.4926C21.3596 15.7801 20.4742 15.293 19.5 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M20 6C20 7.65685 18.6569 9 17 9H10C8.34315 9 7 7.65685 7 6V3C7 1.34315 8.34315 0 10 0H17C18.6569 0 20 1.34315 20 3V6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="text-xs text-blue-200 mt-1 hover:text-blue-100 transition-colors duration-200">Global</span>
-    </button>
+    <!-- Column 3: Legal -->
+    <div class="space-y-4">
+      <h3 class="text-white text-lg font-semibold">Legal</h3>
+      <ul class="space-y-2">
+        <li><a href="#" class="text-slate-400 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
+        <li><a href="#" class="text-slate-400 hover:text-white text-sm transition-colors">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
 
-    <!-- Quiz button -->
-    <button
-      (click)="goToQuiz()"
-      class="flex flex-col items-center"
-      title="Quiz">
-      <svg class="w-8 h-8 text-purple-300 hover:text-purple-100 transition-colors duration-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 15V18M12 6V9M12 3L12 6M12 18L12 21M12 3L12 6M12 18L12 21M12 6L12 9M12 15L12 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 3C15.866 3 19 6.13401 19 10C19 13.866 15.866 17 12 17C8.13401 17 5 13.866 5 10C5 6.13401 8.13401 3 12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="text-xs text-purple-200 mt-1 hover:text-purple-100 transition-colors duration-200">Quiz</span>
-    </button>
-
-    <!-- Flashcard button -->
-    <button
-      (click)="goToFlashcard()"
-      class="flex flex-col items-center"
-      title="Flashcards">
-      <svg class="w-8 h-8 text-yellow-300 hover:text-yellow-100 transition-colors duration-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M6 2L18 2C19.1046 2 20 2.89543 20 4V20C20 21.1046 19.1046 22 18 22L6 22C4.89543 22 4 21.1046 4 20L4 4C4 2.89543 4.89543 2 6 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M6 10H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M6 14H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M6 18H18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="text-xs text-yellow-200 mt-1 hover:text-yellow-100 transition-colors duration-200">Flashcards</span>
-    </button>
-
-    <!-- About button -->
-    <button
-      (click)="goToAbout()"
-      class="flex flex-col items-center"
-      title="About">
-      <svg class="w-8 h-8 text-cyan-300 hover:text-cyan-100 transition-colors duration-200" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 15V18M12 6V9M12 3L12 6M12 18L12 21M12 3L12 6M12 18L12 21M12 6L12 9M12 15L12 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M12 3C15.866 3 19 6.13401 19 10C19 13.866 15.866 17 12 17C8.13401 17 5 13.866 5 10C5 6.13401 8.13401 3 12 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-      <span class="text-xs text-cyan-200 mt-1 hover:text-cyan-100 transition-colors duration-200">About</span>
-    </button>
+  <!-- Bottom Row -->
+  <div class="max-w-7xl mx-auto border-t border-slate-800 mt-12 pt-8 text-center text-slate-50	">
+    <p class="copyright">&copy; 2026 Open Chemistry Lab. All rights reserved.</p>
   </div>
 </footer>
