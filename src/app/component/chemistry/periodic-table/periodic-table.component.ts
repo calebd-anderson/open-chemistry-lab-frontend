@@ -120,49 +120,83 @@ export class PeriodicTableComponent {
 
   // Get the grid position for an element based on its atomic number
   public getGridPosition(atomicNumber: number): { row: number, col: number } {
-    // Lanthanides (57-71)
+    // Lanthanides (57-71) - placed in row 8, columns 4-18
     if (atomicNumber >= 57 && atomicNumber <= 71) {
       return { row: 8, col: 4 + (atomicNumber - 57) };
     }
-    // Actinides (89-103)
+    // Actinides (89-103) - placed in row 9, columns 4-18
     if (atomicNumber >= 89 && atomicNumber <= 103) {
-      return { row: 9, 	col: 4 + (atomicNumber - 89) };
+      return { row: 9, col: 4 + (atomicNumber - 89) };
     }
 
-    // Period 1
+    // Period 1: H(1) and He(2)
     if (atomicNumber === 1) return { row: 1, col: 1 };
     if (atomicNumber === 2) return { row: 1, col: 18 };
 
-    // Period 2
+    // Period 2: Li(3) to Ne(10)
     if (atomicNumber >= 3 && atomicNumber <= 10) {
-      return { row: 2, col: atomicNumber <= 4 ? atomicNumber - 1 : 13 + (atomicNumber - 5) };
+      if (atomicNumber <= 4) {
+        // Li(3) = col 1, Be(4) = col 2
+        return { row: 2, col: atomicNumber - 2 };
+      } else {
+        // B(5) = col 13, C(6) = col 14, N(7) = col 15, O(8) = col 16, F(9) = col 17, Ne(10) = col 18
+        return { row: 2, col: 12 + (atomicNumber - 5) };
+      }
     }
 
-    // Period 3
+    // Period 3: Na(11) to Ar(18)
     if (atomicNumber >= 11 && atomicNumber <= 18) {
-      return { row: 3, col: atomicNumber <= 12 ? atomicNumber - 10 : 13 + (atomicNumber - 13) };
+      if (atomicNumber <= 12) {
+        // Na(11) = col 1, Mg(12) = col 2
+        return { row: 3, col: atomicNumber - 10 };
+      } else {
+        // Al(13) = col 13, Si(14) = col 14, P(15) = col 15, S(16) = col 16, Cl(17) = col 17, Ar(18) = col 18
+        return { row: 3, col: 12 + (atomicNumber - 13) };
+      }
     }
 
-    // Period 4
+    // Period 4: K(19) to Kr(36)
     if (atomicNumber >= 19 && atomicNumber <= 36) {
-      return { row: 4, col: atomicNumber <= 20 ? atomicNumber - 18 : 13 + (atomicNumber - 21) };
+      if (atomicNumber <= 20) {
+        // K(19) = col 1, Ca(20) = col 2
+        return { row: 4, col: atomicNumber - 18 };
+      } else {
+        // Sc(21) to Kr(36) are in columns 13-18 of the main table
+        return { row: 4, col: 12 + (atomicNumber - 21) };
+      }
     }
 
-    // Period 5
+    // Period 5: Rb(37) to Xe(54)
     if (atomicNumber >= 37 && atomicNumber <= 54) {
-      return { row: 5, col: atomicNumber <= 38 ? atomicNumber - 36 : 13 + (atomicNumber - 39) };
+      if (atomicNumber <= 38) {
+        // Rb(37) = col 1, Sr(38) = col 2
+        return { row: 5, col: atomicNumber - 36 };
+      } else {
+        // Y(39) to Xe(54) are in columns 13-18 of the main table
+        return { row: 5, col: 12 + (atomicNumber - 39) };
+      }
     }
 
-    // Period 6
+    // Period 6: Cs(55) to Rn(86)
     if (atomicNumber >= 55 && atomicNumber <= 86) {
-      if (atomicNumber >= 57 && atomicNumber <= 71) return this.getGridPosition(atomicNumber);
-      return { row: 6, col: atomicNumber <= 56 ? atomicNumber - 54 : atomicNumber - 69 };
+      if (atomicNumber <= 56) {
+        // Cs(55) = col 1, Ba(56) = col 2
+        return { row: 6, col: atomicNumber - 54 };
+      } else {
+        // La(57) to Rn(86) are in columns 13-18 of the main table (but La is handled above)
+        return { row: 6, col: 12 + (atomicNumber - 57) };
+      }
     }
 
-    // Period 7
+    // Period 7: Fr(87) to Og(118)
     if (atomicNumber >= 87 && atomicNumber <= 118) {
-      if (atomicNumber >= 89 && atomicNumber <= 103) return this.getGridPosition(atomicNumber);
-      return { row: 	7, col: atomicNumber <= 88 ? atomicNumber - 86 : atomicNumber - 101 };
+      if (atomicNumber <= 88) {
+        // Fr(87) = col 1, Ra(88) = col 2
+        return { row: 7, col: atomicNumber - 86 };
+      } else {
+        // Ac(89) to Og(118) are in columns 13-18 of the main table (but Ac is handled above)
+        return { row: 7, col: 12 + (atomicNumber - 89) };
+      }
     }
 
     return { row: 0, col: 0 };
