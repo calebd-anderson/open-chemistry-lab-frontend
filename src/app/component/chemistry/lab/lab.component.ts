@@ -17,7 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
   selector: 'app-lab',
   imports: [PeriodicTableComponent, ExperimentComponent, MatIconModule],
   templateUrl: './lab.component.html',
-  styleUrls: ['./lab.component.scss'],
+  styleUrls: ['./lab.component.scss', './lab.component.svg.scss'],
 })
 export class LabComponent {
   @ViewChild(PeriodicTableComponent) periodicTable!: PeriodicTableComponent;
