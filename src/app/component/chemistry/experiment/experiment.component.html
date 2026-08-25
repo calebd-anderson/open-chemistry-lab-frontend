@@ -19,8 +19,10 @@
               (click)="removeElementFromCompound(i, item.element)"
               [attr.data-element]="item.element.symbol"
               [attr.data-index]="i"
+              [style.border-color]="item.element.cPKHexColor ? '#' + item.element.cPKHexColor : undefined"
+              [style.box-shadow]="item.element.cPKHexColor ? '0 0 10px #' + item.element.cPKHexColor : undefined"
             >
-              <span class="element-symbol">{{ item.element.symbol }}</span>
+              <span class::element-symbol [style.color]="item.element.cPKHexColor ? '#' + item.element.cPKHexColor : undefined">{{ item.element.symbol }}</span>
               <span class="element-name">{{ item.element.name }}</span>
             </div>
           }
