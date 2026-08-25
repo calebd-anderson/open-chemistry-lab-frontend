@@ -1,30 +1,46 @@
 /* SVG Styles for Chemistry Toggle Button */
 .toggle-icon {
-  stroke: white;
+  stroke: #3b82f6; /* cyan-600 */
   fill: none;
   stroke-width: 2;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: all 0.3s ease;
 }
 
 .bg-circle {
-  stroke: white;
+  stroke: #3b82f6; /* cyan-600 */
   stroke-width: 2;
+  fill: rgba(59, 130, 246, 0.1); /* cyan-600 with transparency */
 }
 
 .arrow-path {
-  stroke: white;
-  stroke-width: 2;
+  stroke: #1d4ed8; /* blue-700 */
+  stroke-width: 2.5;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 .center-circle {
-  fill: white;
+  fill: #1d4ed8; /* blue-700 */
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
 }
 
 .atom-dot {
-  fill: white;
+  fill: #3b82f6; /* cyan-600 */
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
 }
 
 .bond-line {
-  stroke: white;
+  stroke: #3b82f6; /* cyan-600 */
   stroke-width: 2;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+/* Hover effects for better interactivity */
+.toggle-button:hover .toggle-icon {
+  stroke: #1d4ed8; /* blue-700 on hover */
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+}
+
+.toggle-button:hover .bg-circle {
+  fill: rgba(29, 78, 216, 0.15); /* blue-700 with more transparency on hover */
 }
