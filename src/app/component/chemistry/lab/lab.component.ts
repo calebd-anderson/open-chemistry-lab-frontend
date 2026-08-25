@@ -39,6 +39,9 @@ export class LabComponent {
   // Collapsible tips state
   isTipsExpanded = signal(true);
 
+  // Tab state
+  activeTab = signal<'tips' | 'table'>('tips');
+
   public addInteractedElements(element: Element) {
     // Check if adding this element would exceed the limit of 6
     if (this.elementsInCompound().length >= 6) {
@@ -195,6 +198,11 @@ export class LabComponent {
   // Toggle the chemistry tips visibility
   public toggleTips() {
     this.isTipsExpanded.update(prev => !prev);
+  }
+
+  // Switch between tabs
+  public switchTab(tab: 'tips' | 'table') {
+    this.activeTab.set(tab);
   }
 
   // Method to update the periodic table with current elements

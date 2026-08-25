@@ -40,6 +40,8 @@
     0 10px 15px rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
+  /* Make experiment section smaller to make room for tabbed interface */
+  min-height: 400px;
 }
 
 /* Add margin between experiment section and periodic table */
@@ -101,6 +103,32 @@
 
 #experiment-box:active {
   transform: translateY(-3px);
+}
+
+/* Tabbed interface styles */
+#tab-container {
+  @apply lg:col-span-1 bg-white rounded-2xl shadow-xl p-4 border border-cyan-200;
+  min-height: 400px; /* Match the experiment section height */
+}
+
+#tab-container .flex {
+  @apply border-b border-cyan-200 mb-4;
+}
+
+#tab-container button {
+  @apply py-2 px-4 font-medium text-sm rounded-t-lg transition-colors duration-200 focus:outline-none;
+}
+
+#tab-container button.active {
+  @apply bg-cyan-100 text-cyan-800 border-b-2 border-cyan-500;
+}
+
+#tab-container button:not(.active) {
+  @apply text-gray-600 hover:text-cyan-700 hover:bg-cyan-50;
+}
+
+#tab-content {
+  @apply p-4;
 }
 
 /* Collapsible periodic table styles */
@@ -205,6 +233,11 @@ button .svg-icon {
   /* Add responsive margin for mobile */
   #periodic-table-container {
     @apply mt-4;
+  }
+
+  /* Make the tab container full width on mobile */
+  #tab-container {
+    @apply col-span-1;
   }
 }
 
