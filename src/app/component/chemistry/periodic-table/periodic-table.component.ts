@@ -42,6 +42,9 @@ export class PeriodicTableComponent {
   // Track which elements are currently in the experiment
   elementsInExperiment = signal<Set<string>>(new Set());
 
+  // Signal to control table visibility
+  isTableExpanded = signal(true);
+
   async ngOnInit() {
     this.elements.set(await this.elementService.getElements());
   }

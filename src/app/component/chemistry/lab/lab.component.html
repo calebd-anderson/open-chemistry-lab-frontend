@@ -9,16 +9,37 @@
 
   <div id="lab-content">
     <section id="experiment-section">
-      <div id="instructions">
-        <p>
+      <div id="instructions" class="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4">
+        <p class="mb-3">
           Click on elements from the periodic table to add them to your
           experiment. Combine different elements to form compounds and see what
           happens when you run the experiment!
         </p>
+        <!-- Toggle button for periodic table in instructions area -->
+        <div class="flex items-center justify-between">
+          <button
+            class="w-auto bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg flex items-center justify-center hover:from-cyan-600 hover:to-blue-600 transition-all duration-200 hover:cursor-pointer hover:shadow-xl toggle-button px-4 py-2 rounded-full"
+            (click)="togglePeriodicTable()"
+            [title]="isTableExpanded() ? 'Collapse Periodic Table' : 'Expand Periodic Table'"
+            [attr.aria-expanded]="isTableExpanded()"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block toggle-icon mr-2">
+              <circle cx="12" cy="12" r="10" class="bg-circle"/>
+              <path d="M12 6v6l4 2" class="arrow-path"/>
+              <circle cx="12" cy="12" r="3" class="center-circle"/>
+              <circle cx="8" cy="8" r="1.5" class="atom-dot"/>
+              <circle cx="16" cy="16" r="1.5" class="atom-dot"/>
+              <path d="M12 18l-3-3m6 0l3-3" class="bond-line"/>
+            </svg>
+            <span class="button-text">{{ isTableExpanded() ? 'Close Table' : 'Open Table' }}</span>
+            <span class="sr-only">{{ isTableExpanded() ? 'Collapse' : 'Expand' }} Periodic Table</span>
+          </button>
+        </div>
       </div>
 
       <app-experiment
         [elementsInCompound]="elementsInCompound()"
+        [isTableExpanded]="isTableExpanded()"
         (removeElement)="
           removeElementFromCompound($event.index, $event.element)
         "
@@ -77,15 +98,7 @@
   </div>
 
   <!-- Collapsible Periodic Table Section -->
-  <section id="periodic-table-container">
-    <button
-      id="toggle-table-btn"
-      (click)="togglePeriodicTable()"
-      [attr.aria-label]="isTableExpanded() ? 'Collapse periodic table' : 'Expand periodic table'"
-    >
-      {{ isTableExpanded() ? 'Collapse Table' : 'Expand Table' }}
-    </button>
-
+  <section id="periodic-table-container" [class.hidden]="!isTableExpanded()">
     <div
       id="periodic-table-section"
       [class.expanded]="isTableExpanded()"

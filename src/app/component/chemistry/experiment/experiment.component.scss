@@ -144,7 +144,7 @@
   flex-wrap: wrap;
 }
 
-button {
+.experiment-button {
   margin: 0.5rem;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
@@ -154,19 +154,18 @@ button {
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.1),
     0 1px 3px rgba(0, 0, 0, 0.08);
-  background: linear-gradient(to right, #3b82f6, #1d4ed8);
-  color: white;
   border: none;
+  min-width: 120px;
 }
 
-button:hover {
+.experiment-button:hover {
   transform: translateY(-2px);
   box-shadow:
     0 6px 12px rgba(0, 0, 0, 0.15),
     0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-button:active {
+.experiment-button:active {
   transform: translateY(0);
 }
 
@@ -224,6 +223,76 @@ h2 {
   cursor: pointer;
   margin: 0.25rem;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.toggle-table-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 30;
+  background-color: #3b82f6;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  border: 2px solid white;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  /* Add a subtle shine effect */
+  background: linear-gradient(145deg, #3b82f6, #1d4ed8);
+}
+
+.toggle-table-btn:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.1);
+  box-shadow:
+    0 6px 8px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-table-btn:active {
+  transform: scale(0.95);
+}
+
+/* Add a subtle pulse animation to draw attention */
+@keyframes attention-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Apply pulse animation when table is collapsed (not visible) */
+.toggle-table-btn:not(.visible) {
+  animation: attention-pulse 2s infinite;
+}
+
+/* Add a subtle glow effect for better visibility */
+.toggle-table-btn::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(3px);
+}
+
+/* Add a subtle shadow to make it stand out from the background */
+.toggle-table-btn {
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    0 0 10px rgba(59, 130, 246, 0.3);
 }
 
 /* Chemistry-themed color scheme */
@@ -285,4 +354,33 @@ h2 {
 .element-in-compound[data-element="Na"] {
   background: linear-gradient(145deg, #ccccff, #9999ff);
   color: white;
+}
+
+/* Pulse animation for attention when table is collapsed */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+/* Glow effect for the toggle button */
+.toggle-button-glow {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.toggle-button-glow:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+/* Animation for the toggle button when table is collapsed */
+.collapsed-toggle {
+  animation: pulse 2s infinite;
 }

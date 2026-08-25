@@ -1,4 +1,4 @@
-<div class="periodic-table-container">
+<div class="periodic-table-container" [ngClass]="{ 'hidden': !isTableExpanded() }">
   @if (!(elements().length > 0)) {
     <div class="loading">
       <div>Connecting to science ...</div>

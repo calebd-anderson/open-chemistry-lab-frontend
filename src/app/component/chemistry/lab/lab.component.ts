@@ -11,12 +11,13 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ValidationModalComponent } from '../experiment/validation-modal/validation-modal.component';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Reaction } from '@app/model/compound';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lab',
-  imports: [PeriodicTableComponent, ExperimentComponent],
+  imports: [PeriodicTableComponent, ExperimentComponent, MatIconModule],
   templateUrl: './lab.component.html',
-  styleUrl: './lab.component.scss',
+  styleUrls: ['./lab.component.scss'],
 })
 export class LabComponent {
   @ViewChild(PeriodicTableComponent) periodicTable!: PeriodicTableComponent;
@@ -33,7 +34,7 @@ export class LabComponent {
   public dialog: MatDialog = inject(MatDialog);
 
   // Collapsible table state
-  isTableExpanded = signal(true);
+  isTableExpanded = signal(false);
 
   public addInteractedElements(element: Element) {
     // Check if adding this element would exceed the limit of 6

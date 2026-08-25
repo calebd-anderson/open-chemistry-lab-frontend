@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ExperimentService } from '@app/service/experiment.service';
 import { MatButtonModule } from '@angular/material/button';
 import { InfoIcon } from '@app/info-icon.component.svg';
+import { MatIconModule } from '@angular/material/icon';
 
 interface RemoveElement {
   index: number;
@@ -19,6 +20,7 @@ interface RemoveElement {
     MatProgressBarModule,
     CommonModule,
     MatButtonModule,
+    MatIconModule,
     InfoIcon,
   ],
   templateUrl: './experiment.component.html',
@@ -26,6 +28,7 @@ interface RemoveElement {
 })
 export class ExperimentComponent {
   elementsInCompound = input.required<Element[]>();
+  isTableExpanded = input<boolean>(false);
 
   removeElement = output<RemoveElement>();
   runExperiment = output<void>();

@@ -1,4 +1,4 @@
-<article>
+<article class="relative">
   @if (experimentService.getIsActive()) {
     <mat-progress-bar mode="indeterminate" />
   }
@@ -41,10 +41,16 @@
             matButton="elevated"
             color="primary"
             (click)="runExperiment.emit()"
+            class="experiment-button"
           >
             Run Experiment
           </button>
-          <button matButton="elevated" (click)="clearExperiment.emit()">
+          <button
+            matButton="elevated"
+            color="warn"
+            (click)="clearExperiment.emit()"
+            class="experiment-button"
+          >
             Clear Experiment
           </button>
         </div>

@@ -97,9 +97,40 @@
   @apply relative mt-6 bg-white rounded-2xl shadow-xl p-4 border border-cyan-200;
 }
 
+/* Add margin between experiment section and periodic table to separate them visually */
+#periodic-table-container {
+  margin-top: 2rem !important;
+}
+
+/* Fix duplicate borders by removing the border from the periodic table section when it's collapsed */
+#periodic-table-container.collapsed {
+  border: none !important;
+}
+
+/* Ensure SVG icons in buttons are properly visible */
+button svg {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  stroke: white !important;
+  fill: none !important;
+}
+
+/* Make sure the button content is properly aligned */
+button .svg-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
 #toggle-table-btn {
   @apply absolute top-2 right-2 z-10 bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-cyan-500;
   @apply w-32 flex items-center justify-center;
+}
+
+/* Ensure SVG icons are visible in toggle buttons */
+button .svg-icon {
+  display: inline-block !important;
+  vertical-align: middle !important;
 }
 
 /* Add margin for mobile devices */
