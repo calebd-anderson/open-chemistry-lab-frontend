@@ -22,6 +22,17 @@
   @apply max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6;
 }
 
+/* Adjust layout when tips are collapsed */
+@media (min-width: 1024px) {
+  .tips-collapsed #lab-content {
+    grid-template-columns: 1fr 1fr; /* Two columns when tips are collapsed */
+  }
+
+  .tips-collapsed #info-section {
+    display: none;
+  }
+}
+
 #experiment-section {
   @apply lg:col-span-2 bg-white rounded-2xl shadow-xl p-6 border border-cyan-200;
   box-shadow:
@@ -264,4 +275,17 @@ button .svg-icon {
 #info-section > * {
   position: relative;
   z-index: 1;
+}
+
+/* Tips section toggle styles */
+#tips-content {
+  transition: all 0.3s ease;
+}
+
+#tips-content.collapsed {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  margin: 0;
 }
