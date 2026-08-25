@@ -1,11 +1,10 @@
-import { Component, inject, output, signal, Signal, WritableSignal } from '@angular/core';
+import { Component, inject, output, signal, Signal } from '@angular/core';
 import { Element } from '../../../model/element.model';
 import { ElementService } from '../../../service/element.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { CommonModule } from '@angular/common';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'periodic-table',
@@ -17,21 +16,23 @@ export class PeriodicTableComponent {
   elementService = inject(ElementService);
 
   elements = signal<Element[]>([]);
+  filteredElements = signal<Element[]>([]);
+
+  // Group blocks for CSS grid organization
+  groupBlocks = [
+    'Alkali metal',
+    'Alkaline earth metal',
+    'Transition metal',
+    'Post-transition metal',
+    'Metalloid',
+    'Nonmetal',
+    'Halogen',
+    'Noble gas',
+    'Lanthanide',
+    'Actinide'
+  ];
 
   pageTitle: string = 'Lab';
-  added: number = 0;
-  categories: string[] = [
-    'alkali-metals',
-    'alkaline-earth-metals',
-    'lanthanoids',
-    'actinoids',
-    'transition-metals',
-    'post-transition-metals',
-    'metalloids',
-    'other-nonmetals',
-    'noble-gasses',
-    'unknown',
-  ];
   public progressSpinner: boolean = false;
 
   sendElementMessage = output<Element>();
@@ -45,29 +46,24 @@ export class PeriodicTableComponent {
   // Signal to control table visibility
   isTableExpanded = signal(true);
 
+  // Current filter state
+  currentFilter = signal<string>('all');
+
   async ngOnInit() {
-    this.elements.set(await this.elementService.getElements());
+    try {
+      const allElements = await this.elementService.getElements();
+      this.elements.set(allElements);
+      this.filteredElements.set(allElements);
+
+      // Initialize with all elements shown
+      this.updateFilteredElements('all');
+    } catch (error) {
+      console.error('Error loading elements:', error);
+    }
   }
 
-  public selectElement(event: MouseEvent) {
-    // Get the clicked element directly
-    const clickedElement = event.currentTarget as HTMLElement;
-
-    if (!clickedElement) return;
-
-    // Get the atomic number from the input id that's inside this element
-    const inputElement = clickedElement.querySelector('.activate');
-    if (!inputElement) return;
-
-    const atomicNumber = parseInt(inputElement.id);
-    let elmIndex = atomicNumber - 1;
-
-    const interactedElement = this.elements()[elmIndex];
-    if (interactedElement) {
-      // Simple selection without animation
-      this.sendElementMessage.emit(interactedElement);
-      // Note: Notification is now handled in LabComponent to allow proper limit checking
-    }
+  public selectElement(element: Element) {
+    this.sendElementMessage.emit(element);
   }
 
   // Method to update the set of elements currently in the experiment
@@ -86,6 +82,40 @@ export class PeriodicTableComponent {
     const currentElements = this.elementsInExperiment();
     currentElements.delete(elementSymbol);
     this.elementsInExperiment.set(currentElements);
+  }
+
+  // Filter elements by group block
+  public filterElements(groupBlock: string) {
+    this.currentFilter.set(groupBlock);
+    this.updateFilteredElements(groupBlock);
+  }
+
+  private updateFilteredElements(groupBlock: string) {
+    if (groupBlock === 'all') {
+      this.filteredElements.set(this.elements());
+    } else {
+      const filtered = this.elements().filter(element =>
+        element.groupBlock === groupBlock
+      );
+      this.filteredElements.set(filtered);
+    }
+  }
+
+  // Get the CSS class for element styling based on group block
+  getElementClass(groupBlock: string): string {
+    switch (groupBlock) {
+      case 'Alkali metal': return 'alkali-metal';
+      case 'Alkaline earth metal': return 'alkaline-earth-metal';
+      case 'Transition metal': return 'transition-metal';
+      case 'Post-transition metal': return 'post-transition-metal';
+      case 'Metalloid': return 'metalloid';
+      case 'Nonmetal': return 'nonmetal';
+      case 'Halogen': return 'halogen';
+      case 'Noble gas': return 'noble-gas';
+      case 'Lanthanide': return 'lanthanide';
+      case 'Actinide': return 'actinide';
+      default: return 'unknown';
+    }
   }
 
   public sortElements(input: Element[]): Element[] {
