@@ -1,9 +1,117 @@
 svg {
   width: auto;
-  height: 300px;
+  height: 320px;
   filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+  margin: 0 auto;
+  display: block;
 }
 
 .bubble {
-  filter: drop-shadow(3px 5px 2px rgb(0, 68, 255));
+  filter: drop-shadow(3px 5px 2px rgba(0, 68, 255, 0.5));
+  opacity: 0.7;
+}
+
+/* Chemistry-themed bubbles */
+.bubble:nth-child(odd) {
+  fill: url(#radialGradient48);
+}
+
+.bubble:nth-child(even) {
+  fill: url(#radialGradient38);
+}
+
+#flask {
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.2));
+  stroke-width: 1.5;
+  stroke: #a0cfff;
+  stroke-opacity: 0.7;
+}
+
+#radialGradient48 {
+  stop:nth-child(1) {
+    stop-color: #8ff;
+    stop-opacity: 0.15;
+  }
+
+  stop:nth-child(2) {
+    stop-color: #71d0f0;
+    stop-opacity: 0.40694;
+  }
+}
+
+#radialGradient38 {
+  stop:nth-child(1) {
+    stop-color: #ff9999;
+    stop-opacity: 0.2;
+  }
+
+  stop:nth-child(2) {
+    stop-color: #ff5252;
+    stop-opacity: 0.3;
+  }
+}
+
+/* Add a subtle gradient to the flask */
+#flask {
+  fill: url(#radialGradient22);
+  paint-order: normal;
+  stroke-linejoin: round;
+  stroke-opacity: 0.80662;
+  stroke-width: 0.522;
+  stroke: #cecfff;
+}
+
+/* Add a subtle glow effect to the flask */
+#flask::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background: linear-gradient(45deg, #8ff, #71d0f0);
+  filter: blur(20px);
+  opacity: 0.3;
+  z-index: -1;
+}
+
+/* Enhanced chemistry visuals */
+#flask {
+  // Add a more pronounced gradient for better chemistry feel
+  fill: url(#chemistryGradient);
+}
+
+#chemistryGradient {
+  stop:nth-child(1) {
+    stop-color: #e6f7ff;
+    stop-opacity: 1;
+  }
+
+  stop:nth-child(2) {
+    stop-color: #b3e0ff;
+    stop-opacity: 1;
+  }
+
+  stop:nth-child(3) {
+    stop-color: #80c9ff;
+    stop-opacity: 1;
+  }
+}
+
+/* Add more detailed bubble effects */
+.bubble {
+  // Make bubbles more realistic with inner glow
+  filter: drop-shadow(2px 3px 1px rgba(0, 68, 255, 0.4));
+
+  // Add a subtle animation to bubbles
+  animation: bubbleFloat 6s ease-in-out infinite;
+}
+
+@keyframes bubbleFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.1);
+  }
 }

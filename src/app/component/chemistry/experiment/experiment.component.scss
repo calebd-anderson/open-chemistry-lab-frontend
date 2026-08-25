@@ -1,22 +1,25 @@
+// Chemistry-themed experiment component styling
+
 #title {
   display: block;
   text-align: center;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 700;
   color: #0c4a6e;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  letter-spacing: 1px;
 }
 
 .compound {
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 1.5rem;
   background: linear-gradient(145deg, #e6f7ff, #b3e0ff);
   box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.08);
+    0 8px 25px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
   margin: 1rem auto;
-  min-height: 120px;
+  min-height: 140px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -24,6 +27,7 @@
   border: 1px solid #93d9ff;
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
 .compound::before {
@@ -49,32 +53,37 @@
   border-radius: 50%;
   padding: 1rem;
   margin: 0.75rem;
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
   font-weight: bold;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   box-shadow:
-    0 4px 8px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.15),
     inset 0 2px 4px rgba(255, 255, 255, 0.3);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 2px solid rgba(255, 255, 255, 0.5);
   position: relative;
   overflow: hidden;
   user-select: none;
   background: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(255,255,255,0.2));
   border: 1px solid rgba(135, 206, 250, 0.3);
+  z-index: 2;
 }
 
 .element-in-compound:hover {
-  transform: translateY(-5px) scale(1.05);
+  transform: translateY(-8px) scale(1.1);
   box-shadow:
-    0 6px 12px rgba(0, 0, 0, 0.15),
+    0 12px 20px rgba(0, 0, 0, 0.2),
     inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  z-index: 3;
 }
 
 .element-in-compound:active {
   transform: scale(0.95);
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound::before {
@@ -89,93 +98,74 @@
 }
 
 .element-symbol {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  margin-bottom: 0.2rem;
+  text-shadow: 0 2px 3px rgba(0,0,0,0.3);
+  margin-bottom: 0.3rem;
+  z-index: 2;
 }
 
 .element-name {
-  font-size: 0.6rem;
-  opacity: 0.8;
+  font-size: 0.65rem;
+  opacity: 0.9;
   text-align: center;
-}
-
-.element-in-compound:hover {
-  transform: translateY(-5px) scale(1.05);
-  box-shadow:
-    0 6px 12px rgba(0, 0, 0, 0.15),
-    inset 0 2px 4px rgba(255, 255, 255, 0.5);
-}
-
-.element-in-compound:active {
-  transform: scale(0.95);
-}
-
-.element-in-compound::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%);
-  pointer-events: none;
-}
-
-.element-symbol {
-  font-size: 1.4rem;
-  font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  margin-bottom: 0.2rem;
-}
-
-.element-name {
-  font-size: 0.6rem;
-  opacity: 0.8;
-  text-align: center;
+  z-index: 2;
 }
 
 #validate-btn {
   margin: 2rem 0;
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
 }
 
 .experiment-button {
   margin: 0.5rem;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease;
+  border-radius: 12px;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.15),
     0 1px 3px rgba(0, 0, 0, 0.08);
   border: none;
-  min-width: 120px;
+  min-width: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  z-index: 2;
 }
 
 .experiment-button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
   box-shadow:
-    0 6px 12px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.2),
     0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .experiment-button:active {
   transform: translateY(0);
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.15),
+    0 1px 2px rgba(0, 0, 0, 0.08);
 }
 
 #clear-btn {
   background: linear-gradient(to right, #ef4444, #dc2626);
+  color: white;
+}
+
+#run-btn {
+  background: linear-gradient(to right, #10b981, #059669);
+  color: white;
 }
 
 #compound-test {
   grid-column: 1/3;
-  z-index: 20; /* Above flask but below experiment-box background */
+  z-index: 20;
 }
 
 #experiment-box {
@@ -183,32 +173,35 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   background: linear-gradient(145deg, #e6f7ff, #b3e0ff);
-  border-radius: 16px;
-  padding: 1.5rem;
+  border-radius: 20px;
+  padding: 2rem;
   box-shadow:
-    0 8px 25px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  height: 28rem;
-  margin: 1rem;
+    0 12px 30px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  height: 32rem;
+  margin: 1.5rem;
   border: 1px solid #93d9ff;
-  z-index: 5; /* Below flask but above everything else */
+  z-index: 5;
 }
 
 h2 {
   margin: 1rem 0;
   color: #0c4a6e;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 3;
 }
 
 #flask-container {
   position: absolute;
-  bottom: 0;
+  bottom: -20px;
   right: 0;
-  width: 40%;
+  width: 45%;
   height: auto;
-  z-index: 10; /* Behind compound-test but above experiment-box */
+  z-index: 10;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
 }
 
 #flask {
@@ -217,42 +210,53 @@ h2 {
   filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
 }
 
-[info-icon] {
-  height: 30px;
-  width: 30px;
-  cursor: pointer;
-  margin: 0.25rem;
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  color: #4b5563;
+  font-size: 1.1rem;
+  opacity: 0.8;
+}
+
+.empty-state svg {
+  height: 40px;
+  width: 40px;
+  margin-bottom: 1rem;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  fill: #3b82f6;
 }
 
 .toggle-table-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   z-index: 30;
   background-color: #3b82f6;
   color: white;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.15),
     0 1px 3px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: 2px solid white;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  /* Add a subtle shine effect */
   background: linear-gradient(145deg, #3b82f6, #1d4ed8);
 }
 
 .toggle-table-btn:hover {
   background-color: #1d4ed8;
-  transform: scale(1.1);
+  transform: scale(1.1) rotate(90deg);
   box-shadow:
-    0 6px 8px rgba(0, 0, 0, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.2),
     0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -260,127 +264,214 @@ h2 {
   transform: scale(0.95);
 }
 
-/* Add a subtle pulse animation to draw attention */
-@keyframes attention-pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-/* Apply pulse animation when table is collapsed (not visible) */
-.toggle-table-btn:not(.visible) {
-  animation: attention-pulse 2s infinite;
-}
-
-/* Add a subtle glow effect for better visibility */
-.toggle-table-btn::before {
-  content: '';
-  position: absolute;
-  top: -3px;
-  left: -3px;
-  right: -3px;
-  bottom: -3px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, #3b82f6, #1d4ed8);
-  z-index: -1;
-  opacity: 0.3;
-  filter: blur(3px);
-}
-
-/* Add a subtle shadow to make it stand out from the background */
-.toggle-table-btn {
-  box-shadow:
-    0 4px 6px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.08),
-    0 0 10px rgba(59, 130, 246, 0.3);
-}
-
-/* Chemistry-themed color scheme */
-.element-in-compound {
-  background: linear-gradient(145deg, #ffffff, #e6f7ff);
-}
-
-/* Element-specific colors for visual learning */
+/* Chemistry-themed color scheme for elements */
 .element-in-compound[data-element="H"] {
-  background: linear-gradient(145deg, #ff9999, #ff6666);
+  background: linear-gradient(145deg, #ff6b6b, #ff5252);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(255, 82, 82, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="He"] {
-  background: linear-gradient(145deg, #ffcc99, #ff9966);
+  background: linear-gradient(145deg, #ff9e6d, #ff7b3a);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(255, 123, 58, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="Li"] {
-  background: linear-gradient(145deg, #ccccff, #9999ff);
+  background: linear-gradient(145deg, #6b72e8, #5f52ff);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(95, 82, 255, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="Be"] {
-  background: linear-gradient(145deg, #ccffcc, #66ff66);
+  background: linear-gradient(145deg, #67e8a1, #34d399);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(52, 211, 153, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="B"] {
-  background: linear-gradient(145deg, #ffcc99, #ff9966);
+  background: linear-gradient(145deg, #fbbf24, #f59e0b);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(245, 158, 11, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="C"] {
-  background: linear-gradient(145deg, #cccccc, #999999);
+  background: linear-gradient(145deg, #6b7280, #4b5563);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(75, 85, 99, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="N"] {
-  background: linear-gradient(145deg, #99ccff, #6699ff);
+  background: linear-gradient(145deg, #60a5fa, #3b82f6);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(59, 130, 246, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="O"] {
-  background: linear-gradient(145deg, #ff9999, #ff6666);
+  background: linear-gradient(145deg, #f87171, #ef4444);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(239, 68, 68, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="F"] {
-  background: linear-gradient(145deg, #99ccff, #6699ff);
+  background: linear-gradient(145deg, #60a5fa, #3b82f6);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(59, 130, 246, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="Ne"] {
-  background: linear-gradient(145deg, #ffcc99, #ff9966);
+  background: linear-gradient(145deg, #ff9e6d, #ff7b3a);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(255, 123, 58, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
 .element-in-compound[data-element="Na"] {
-  background: linear-gradient(145deg, #ccccff, #9999ff);
+  background: linear-gradient(145deg, #6b72e8, #5f52ff);
   color: white;
+  box-shadow:
+    0 6px 12px rgba(95, 82, 255, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
 }
 
-/* Pulse animation for attention when table is collapsed */
-@keyframes pulse {
+.element-in-compound[data-element="Mg"] {
+  background: linear-gradient(145deg, #67e8a1, #34d399);
+  color: white;
+  box-shadow:
+    0 6px 12px rgba(52, 211, 153, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.element-in-compound[data-element="Al"] {
+  background: linear-gradient(145deg, #6b7280, #4b5563);
+  color: white;
+  box-shadow:
+    0 6px 12px rgba(75, 85, 99, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.element-in-compound[data-element="Si"] {
+  background: linear-gradient(145deg, #fbbf24, #f59e0b);
+  color: white;
+  box-shadow:
+    0 6px 12px rgba(245, 158, 11, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.element-in-compound[data-element="P"] {
+  background: linear-gradient(145deg, #fbbf24, #f59e0b);
+  color: white;
+  box-shadow:
+    0 6px 12px rgba(245, 158, 11, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.element-in-compound[data-element="S"] {
+  background: linear-gradient(145deg, #fbbf24, #f59e0b);
+  color: white;
+  box-shadow:
+    0 6px 12px rgba(245, 158, 11, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.element-in-compound[data-element="Cl"] {
+  background: linear-gradient(145deg, #60a5fa, #3b82f6);
+  color: white;
+  box-shadow:
+    0 6px 12px rgba(59, 130, 246, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.element-in-compound[data-element="K"] {
+  background: linear-gradient(145deg, #6b72e8, #5f52ff);
+  color: white;
+  box-shadow:
+    0 6px 12px rgba(95, 82, 255, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.element-in-compound[data-element="Ca"] {
+  background: linear-gradient(145deg, #67e8a1, #34d399);
+  color: white;
+  box-shadow:
+    0 6px 12px rgba(52, 211, 153, 0.3),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+/* Animation for element removal */
+.element-in-compound.remove {
+  animation: removeElement 0.5s ease forwards;
+}
+
+@keyframes removeElement {
   0% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    transform: scale(1);
+    opacity: 1;
   }
-  70% {
-    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
   }
   100% {
-    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    transform: scale(0);
+    opacity: 0;
   }
 }
 
-/* Glow effect for the toggle button */
-.toggle-button-glow {
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
+/* Animation for element addition */
+.element-in-compound.add {
+  animation: addElement 0.5s ease forwards;
 }
 
-.toggle-button-glow:hover {
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.1);
-  transform: scale(1.05);
+@keyframes addElement {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/* Animation for the toggle button when table is collapsed */
-.collapsed-toggle {
-  animation: pulse 2s infinite;
+/* Progress bar styling */
+mat-progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  z-index: 30;
+}
+
+mat-progress-bar::ng-deep .mat-progress-bar-fill {
+  background: linear-gradient(to right, #10b981, #059669);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+mat-progress-bar::ng-deep .mat-progress-bar-buffer {
+  background: rgba(16, 185, 129, 0.2);
 }

@@ -14,24 +14,13 @@
             track `element_${$index}`;
             let i = $index
           ) {
-            <!-- "{'background-color': '#' + element?.cPKHexColor}" -->
             <div
               class="element-in-compound"
               (click)="removeElementFromCompound(i, element)"
               [attr.data-element]="element?.symbol"
-              [ngStyle]="{
-                'background-image':
-                  'linear-gradient(30deg, grey 10%, #' +
-                  element?.cPKHexColor +
-                  ')',
-              }"
             >
               <span class="element-symbol">{{ element?.symbol }}</span>
-              <span
-                class="element-name"
-                style="font-size: 0.7rem; margin-top: 0.2rem"
-                >{{ element?.name }}</span
-              >
+              <span class="element-name">{{ element?.name }}</span>
             </div>
           }
         </div>
@@ -42,16 +31,18 @@
             color="primary"
             (click)="runExperiment.emit()"
             class="experiment-button"
+            id="run-btn"
           >
-            Run Experiment
+            <span>Run Experiment</span>
           </button>
           <button
             matButton="elevated"
             color="warn"
             (click)="clearExperiment.emit()"
             class="experiment-button"
+            id="clear-btn"
           >
-            Clear Experiment
+            <span>Clear Experiment</span>
           </button>
         </div>
       } @else {
