@@ -18,7 +18,7 @@ export class ElementService {
     if (response) {
       // Do something with the cached response
       elements = await response.json();
-      return elements;
+      return this.parseElements(elements);
     } else {
       // The response is not cached, fetch it from the network
       const response = await fetch(request.url);
@@ -26,7 +26,14 @@ export class ElementService {
       const clonedResponse = response.clone();
       cache.put(request, clonedResponse);
       elements = await response.json();
-      return elements;
+      return this.parseElements(elements);
     }
+  }
+
+  private parseElements(elements: any[]): Element[] {
+    return elements.map(el => ({
+      ...el,
+      atomicNumber: typeof el.atomicNumber === 'string' ? parseInt(el.atomicNumber, 10) : el.atomicNumber,
+    })) as Element[];
   }
 }

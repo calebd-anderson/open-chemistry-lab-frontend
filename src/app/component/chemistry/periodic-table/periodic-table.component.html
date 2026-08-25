@@ -41,10 +41,12 @@
       <div
         class="element-card {{ getElementClass(element.groupBlock) }}"
         [class.in-experiment]="isElementInExperiment(element.symbol)"
+        [style.grid-row]="getGridPosition(element.atomicNumber).row"
+        [style.grid-column]="getGridPosition(element.atomicNumber).col"
         (click)="selectElement(element)"
         role="gridcell"
         tabindex="0"
-        [attr.aria-label]="'Element ' + element.name + ' with atomic number ' + element.atomicNumber"
+        [attr.aria-lib-label]="'Element ' + element.name + ' with atomic number ' + element.atomicNumber"
       >
         <div class="element-content">
           <span class="atomic-number">{{ element.atomicNumber }}</span>
