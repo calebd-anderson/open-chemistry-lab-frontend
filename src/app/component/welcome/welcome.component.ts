@@ -7,9 +7,9 @@ import { MatDialogModule } from '@angular/material/dialog';
   imports: [MatButtonModule, MatDialogModule],
   template: `
     <section id="welcom-dialog">
-      <h2 mat-dialog-title>Welcome to the Open Chemistry Lab</h2>
+      <h2 mat-dialog-title>Welcome to Reactive Voyage</h2>
       <mat-dialog-content class="mat-typography">
-        <h3>What is the Open Chemistry Lab?</h3>
+        <h3>What is Reactive Voyage?</h3>
         <p>
           This is an educational application that allows anyone to experiment
           with an interactive periodic table of elements.
@@ -23,7 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         </p>
       </mat-dialog-content>
       <mat-dialog-actions>
-        <button matButton mat-dialog-close>Close</button>
+        <button matButton mat-dialog-close>Dismiss</button>
       </mat-dialog-actions>
     </section>
   `,

@@ -11,13 +11,13 @@ import { LabComponent } from './component/chemistry/lab/lab.component';
 import { UsersComponent } from './component/user_manager/users/users.component';
 
 export const routes: Routes = [
-  { path: 'about', component: AboutComponent },
   { path: 'lab', component: LabComponent },
+  { path: 'about', component: AboutComponent },
   { path: 'globaldiscoveries', component: GlobalDiscoveriesComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'discoveries', component: DiscoveriesComponent, canActivate: [AuthenticationGuard] },
   { path: 'user/management', component: UsersComponent, canActivate: [AuthenticationGuard, AuthorizationGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationGuard] },
   { path: 'quiz', component: QuizComponent, canActivate: [AuthenticationGuard] },
   { path: 'flashcard', component: FlashcardComponent, canActivate: [AuthenticationGuard] },
-  { path: '', redirectTo: 'lab', pathMatch: 'full' }
+  { path: '', redirectTo: 'about', pathMatch: 'full' }
 ]

@@ -51,7 +51,7 @@ export class TabsComponent {
     return [
       {
         path: 'lab',
-        label: 'Interactive Periodic Table',
+        label: 'Catalyst Engine',
       },
       {
         path: 'globaldiscoveries',
