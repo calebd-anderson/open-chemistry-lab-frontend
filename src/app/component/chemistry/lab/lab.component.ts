@@ -46,7 +46,7 @@ export class LabComponent {
 
   public addInteractedElements(element: Element) {
     // Check if adding this element would exceed the limit of 6
-    if (this.elementsInCompound().length >= 6) {
+    if (this.elementsInCompound().length >= 10) {
       this._snackBar.notify(
         NotificationType.WARNING,
         'Maximum of 6 elements allowed in experiment. Please remove an element first.'

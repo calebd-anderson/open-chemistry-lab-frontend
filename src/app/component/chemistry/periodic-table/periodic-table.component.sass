@@ -16,32 +16,6 @@
     margin: 0
     color: #333
 
-.filter-buttons
-  display: flex
-  flex-wrap: wrap
-  justify-content: center
-  gap: 0.5rem
-  max-width: 100%
-
-.filter-btn
-  padding: 0.5rem 1rem
-  border: 1px solid #ddd
-  background-color: #f5f5f5
-  border-radius: 20px
-  cursor: pointer
-  font-size: 0.9rem
-  transition: all 0.3s ease
-  white-space: nowrap
-
-  &:hover
-    background-color: #e0e0e0
-    transform: translateY(-1px)
-
-  &.active
-    background-color: #4a6fa5
-    color: white
-    border-color: #4a6fa5
-
 .periodic-table-grid
   display: grid
   grid-template-columns: repeat(18, 1fr)
@@ -49,7 +23,6 @@
   min-width: 800px
   padding: 0.5rem
   border-radius: 0.5rem
-  background-color: #f0f0f0
 
   &.loading
     opacity: 0.6
@@ -102,53 +75,53 @@
 
 // Group-specific styling
 .alkali-metal
-  background-color: #ff6b6b !important
+  background-color: #ff6b6b
   color: white
 
 .alkaline-earth-metal
-  background-color: #4ecdc4 !important
+  background-color: #4ecdc4
   color: white
 
 .transition-metal
-  background-color: #45b7d1 !important
+  background-color: #45b7d1
   color: white
 
 .post-transition-metal
-  background-color: #96ceb4 !important
+  background-color: #96ceb4
   color: white
 
 .metalloid
-  background-color: #feca57 !important
+  background-color: #feca57
   color: white
 
 .nonmetal
-  background-color: #ff9ff3 !important
+  background-color: #ff9ff3
   color: white
 
 .halogen
-  background-color: #54a0ff !important
+  background-color: #54a0ff
   color: white
 
 .noble-gas
-  background-color: #5f27cd !important
+  background-color: #5f27cd
   color: white
 
 .lanthanide
-  background-color: #00d2d3 !important
+  background-color: #00d2d3
   color: white
 
 .actinide
-  background-color: #ff9f40 !important
+  background-color: #ff9f40
   color: white
 
 .unknown
-  background-color: #6c757d !important
+  background-color: #6c757d
   color: white
 
 // Special styling for elements in experiment
 .element-card.in-experiment
   transform: scale(1.1)
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8) !important
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8)
   border: 2px solid gold
 
 // Responsive adjustments

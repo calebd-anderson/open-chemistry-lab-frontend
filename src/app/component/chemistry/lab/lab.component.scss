@@ -138,20 +138,20 @@
 
 /* Add margin between experiment section and periodic table to separate them visually */
 #periodic-table-container {
-  margin-top: 2rem !important;
+  margin-top: 2rem;
 }
 
 /* Fix duplicate borders by removing the border from the periodic table section when it's collapsed */
 #periodic-table-container.collapsed {
-  border: none !important;
+  border: none;
 }
 
 /* Ensure SVG icons in buttons are properly visible */
 button svg {
-  display: inline-block !important;
-  vertical-align: middle !important;
-  stroke: white !important;
-  fill: none !important;
+  display: inline-block;
+  vertical-align: middle;
+  stroke: white;
+  fill: none;
 }
 
 /* Improve text and background contrast for toggle button */
@@ -167,9 +167,9 @@ button svg {
 
 /* Make sure the button content is properly aligned */
 button .svg-container {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #toggle-table-btn {
@@ -179,8 +179,8 @@ button .svg-container {
 
 /* Ensure SVG icons are visible in toggle buttons */
 button .svg-icon {
-  display: inline-block !important;
-  vertical-align: middle !important;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 /* Add margin for mobile devices */
@@ -195,7 +195,7 @@ button .svg-icon {
 }
 
 #periodic-table-section {
-  @apply bg-white rounded-2xl p-4 overflow-hidden transition-all duration-500 ease-in-out;
+  @apply bg-white rounded-2xl p-4 transition-all duration-500 ease-in-out;
   max-height: 800px;
 }
 

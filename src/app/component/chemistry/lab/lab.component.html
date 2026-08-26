@@ -9,7 +9,10 @@
 
   <div id="lab-content">
     <section id="experiment-section">
-      <div id="instructions" class="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4">
+      <div
+        id="instructions"
+        class="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4"
+      >
         <p class="mb-3">
           Click on elements from the periodic table to add them to your
           experiment. Combine different elements to form compounds and see what
@@ -20,36 +23,57 @@
           <button
             class="w-auto bg-gradient-to-r from-cyan-500 to-blue-500 shadow-lg flex items-center justify-center hover:from-cyan-600 hover:to-blue-600 transition-all duration-200 hover:cursor-pointer hover:shadow-xl toggle-button px-4 py-2 rounded-full"
             (click)="togglePeriodicTable()"
-            [title]="isTableExpanded() ? 'Collapse Periodic Table' : 'Expand Periodic Table'"
+            [title]="
+              isTableExpanded()
+                ? 'Collapse Periodic Table'
+                : 'Expand Periodic Table'
+            "
             [attr.aria-expanded]="isTableExpanded()"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block toggle-icon mr-2">
-              <circle cx="12" cy="12" r="10" class="bg-circle"/>
-              <path d="M12 6v6l4 2" class="arrow-path"/>
-              <circle cx="12" cy="12" r="3" class="center-circle"/>
-              <circle cx="8" cy="8" r="1.5" class="atom-dot"/>
-              <circle cx="16" cy="16" r="1.5" class="atom-dot"/>
-              <path d="M12 18l-3-3m6 0l3-3" class="bond-line"/>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="inline-block toggle-icon mr-2"
+            >
+              <circle cx="12" cy="12" r="10" class="bg-circle" />
+              <path d="M12 6v6l4 2" class="arrow-path" />
+              <circle cx="12" cy="12" r="3" class="center-circle" />
+              <circle cx="8" cy="8" r="1.5" class="atom-dot" />
+              <circle cx="16" cy="16" r="1.5" class="atom-dot" />
+              <path d="M12 18l-3-3m6 0l3-3" class="bond-line" />
             </svg>
-            <span class="button-text">{{ isTableExpanded() ? 'Close Table' : 'Open Table' }}</span>
-            <span class="sr-only">{{ isTableExpanded() ? 'Collapse' : 'Expand' }} Periodic Table</span>
+            <span class="button-text">{{
+              isTableExpanded() ? "Close Table" : "Open Table"
+            }}</span>
+            <span class="sr-only"
+              >{{ isTableExpanded() ? "Collapse" : "Expand" }} Periodic
+              Table</span
+            >
           </button>
         </div>
       </div>
 
-<app-experiment
+      <app-experiment
         [elementsInCompound]="elementsInCompound()"
         [isTableExpanded]="isTableExpanded()"
-        (removeElement)="
-          removeElementFromCompound($event.index)
-        "
+        (removeElement)="removeElementFromCompound($event.index)"
         (runExperiment)="validateCompound()"
         (clearExperiment)="clearExperiment()"
       />
     </section>
 
     <!-- Tabbed Interface for Periodic Table and Tips -->
-    <div id="tab-container" class="bg-white rounded-2xl shadow-xl p-4 border border-cyan-200">
+    <div
+      id="tab-container"
+      class="bg-white rounded-2xl shadow-xl p-4 border border-cyan-200"
+    >
       <div class="flex border-b border-cyan-200 mb-4">
         <button
           id="tips-tab"
@@ -70,28 +94,28 @@
       </div>
 
       <div id="tab-content">
-        @if (activeTab() === 'tips') {
+        @if (activeTab() === "tips") {
           <section id="info-section" class="p-4">
             <div class="space-y-3">
               <div class="p-3 bg-blue-50 rounded-lg border border-blue-200">
                 <h3 class="font-semibold text-blue-800">Element Symbols</h3>
                 <p class="text-sm text-blue-700">
-                  Each element has a unique symbol that represents it in chemical
-                  formulas.
+                  Each element has a unique symbol that represents it in
+                  chemical formulas.
                 </p>
               </div>
               <div class="p-3 bg-green-50 rounded-lg border border-green-200">
                 <h3 class="font-semibold text-green-800">Atomic Numbers</h3>
                 <p class="text-sm text-green-700">
-                  The atomic number tells you how many protons are in an element's
-                  nucleus.
+                  The atomic number tells you how many protons are in an
+                  element's nucleus.
                 </p>
               </div>
               <div class="p-3 bg-purple-50 rounded-lg border border-purple-200">
                 <h3 class="font-semibold text-purple-800">Chemical Bonds</h3>
                 <p class="text-sm text-purple-700">
-                  Atoms form bonds to achieve stability by sharing or transferring
-                  electrons.
+                  Atoms form bonds to achieve stability by sharing or
+                  transferring electrons.
                 </p>
               </div>
             </div>
@@ -101,16 +125,19 @@
             >
               <h3 class="font-bold text-cyan-800 mb-2">Did You Know?</h3>
               <p class="text-sm text-cyan-700">
-                Water (H₂O) is made of two hydrogen atoms and one oxygen atom. The
-                subscript numbers show how many atoms are in each molecule.
+                Water (H₂O) is made of two hydrogen atoms and one oxygen atom.
+                The subscript numbers show how many atoms are in each molecule.
               </p>
             </div>
 
-            <div class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200">
+            <div
+              class="mt-4 p-3 bg-yellow-50 rounded-lg border border-yellow-200"
+            >
               <h3 class="font-semibold text-yellow-800">Experiment Tip</h3>
               <p class="text-sm text-yellow-700">
                 Try combining different elements to see how they react. Some
-                combinations will form stable compounds while others may be unstable.
+                combinations will form stable compounds while others may be
+                unstable.
               </p>
             </div>
           </section>
@@ -129,15 +156,9 @@
 
   <!-- Collapsible Periodic Table Section (for mobile) -->
   <section id="periodic-table-container" [class.hidden]="!isTableExpanded()">
-    <div
-      id="periodic-table-section"
-      [class.expanded]="isTableExpanded()"
-      [class.collapsed]="!isTableExpanded()"
-    >
-      <periodic-table
-        class="pt"
-        (sendElementMessage)="addInteractedElements($event)"
-      />
-    </div>
+    <periodic-table
+      class="pt"
+      (sendElementMessage)="addInteractedElements($event)"
+    />
   </section>
 </article>
