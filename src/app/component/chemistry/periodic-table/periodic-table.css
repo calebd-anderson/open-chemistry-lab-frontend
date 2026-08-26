@@ -9,10 +9,6 @@
   margin: 0 0 1.5em 0;
 }
 
-mat-spinner {
-  display: inline-block;
-}
-
 .table-header {
   text-align: center;
   padding: 1rem 0;

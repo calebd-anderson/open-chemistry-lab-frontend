@@ -32,7 +32,6 @@ export class PeriodicTableComponent {
     'Actinide'
   ];
 
-  pageTitle: string = 'Lab';
   public progressSpinner: boolean = false;
 
   sendElementMessage = output<Element>();
