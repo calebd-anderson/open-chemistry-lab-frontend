@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   imports: [MatTabNavPanel, MatTabsModule, RouterModule],
+  styleUrl: 'tabs.css'
 })
 export class TabsComponent {
   readonly authenticationService = inject(AuthenticationService);

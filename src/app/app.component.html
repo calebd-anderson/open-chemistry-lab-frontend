@@ -1,13 +1,14 @@
-<header class="bg-gradient-to-r from-emerald-900 via-teal-800 to-cyan-900 shadow-lg py-2 px-4 flex justify-between items-center border-b border-cyan-700">
+<header id="main-header" class="gradient-header">
   <div class="flex items-center cursor-pointer" (click)="openDialog()">
     <svg logo-icon class="w-6 h-6 text-cyan-300"></svg>
-    <h1 class="ml-2 text-lg font-bold text-cyan-100">Reactive Voyage</h1>
+    <h1 class="ml-2 text-lg font-bold text-cyan-100">The Reactive Voyage</h1>
   </div>
+
+  <app-tabs />
 
   <div id="user-controls" class="flex items-center">
     <div [hidden]="authenticationService.getIsLoggedIn()">
-      <button
-        (click)="openLogin()"
+      <button (click)="openLogin()"
         class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium py-1 px-3 rounded-lg transition duration-200 transform hover:scale-105 cursor-pointer"
         type="button">
         Login
@@ -15,31 +16,20 @@
     </div>
 
     <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()">
-      <button
-        (click)="openMenu()"
-        class="flex items-center focus:outline-none"
-        type="button">
-        <img
-          height="32"
-          width="32"
-          src="{{ user().profileImgUrl }}"
-          class="rounded-full border-2 border-cyan-500 w-8 h-8 object-cover"
-          alt="profile image"
-        />
+      <button (click)="openMenu()" class="flex items-center focus:outline-none" type="button">
+        <img height="32" width="32" src="{{ user().profileImgUrl }}"
+          class="rounded-full border-2 border-cyan-500 w-8 h-8 object-cover" alt="profile image" />
       </button>
     </div>
   </div>
 </header>
 
 <!-- Navigation menu that only appears when user is logged in -->
-<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn() || !isMenuOpen" class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed z-50 transform transition-all duration-300 ease-in-out rounded-xl w-72">
+<nav id="user-nav-menu" [hidden]="!authenticationService.getIsLoggedIn() || !isMenuOpen"
+  class="bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed z-50 transform transition-all duration-300 ease-in-out rounded-xl w-72">
   <div class="flex justify-between items-center mb-4">
     <span class="font-semibold text-cyan-100 text-lg">{{ user().firstName }}</span>
-    <button
-      id="close-menu-button"
-      (click)="openMenu()"
-      title="Close Menu"
-      type="button"
+    <button id="close-menu-button" (click)="openMenu()" title="Close Menu" type="button"
       class="text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110 rounded-full p-1">
       <svg close-icon class="w-3 h-3"></svg>
     </button>
@@ -48,21 +38,21 @@
   <hr class="my-2 border-slate-700" />
 
   <div class="menu-content space-y-2">
-    <button
-      (click)="onClickProfile()"
+    <button (click)="onClickProfile()" type="button"
       class="flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500">
       <svg class="w-5 h-5 mr-3 text-cyan-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2"/>
-        <path d="M12 14C8.13435 14 5 17.1344 5 21H19C19 17.1344 15.8656 14 12 14Z" stroke="currentColor" stroke-width="2"/>
+        <path
+          d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+          stroke="currentColor" stroke-width="2" />
+        <path d="M12 14C8.13435 14 5 17.1344 5 21H19C19 17.1344 15.8656 14 12 14Z" stroke="currentColor"
+          stroke-width="2" />
       </svg>
       Profile
     </button>
 
     <div [hidden]="!isAdmin" id="admin-menu">
       <hr class="my-2 border-slate-700" />
-      <button
-        id="admin-menu-button"
-        routerLink="/user/management"
+      <button id="admin-menu-button" routerLink="/user/management"
         class="flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500">
         <svg admin-icon class="w-5 h-5 mr-3 text-cyan-300"></svg>
         User Management
@@ -71,19 +61,14 @@
 
     <hr class="my-2 border-slate-700" />
 
-    <button
-      id="logout-menu-button"
-      [hidden]="!authenticationService.getIsLoggedIn()"
-      (click)="onClickLogout()"
-      class="flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500"
-    >
+    <button id="logout-menu-button" [hidden]="!authenticationService.getIsLoggedIn()" (click)="onClickLogout()"
+      class="flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500">
       <svg logout-icon class="w-5 h-5 mr-3 text-cyan-300"></svg>
       Logout
     </button>
   </div>
 </nav>
 
-<app-tabs />
 
 <!-- dynamic routes -->
 <router-outlet></router-outlet>
