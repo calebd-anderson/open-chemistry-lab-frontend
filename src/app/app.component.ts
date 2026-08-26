@@ -25,7 +25,7 @@ import { FooterComponent } from './component/footer/footer.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss', './app.component.css'],
+  styleUrls: ['./app.component.scss'],
   imports: [
     TabsComponent,
     RouterOutlet,
