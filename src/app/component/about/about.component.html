@@ -1,142 +1,295 @@
-<article class="about-container">
-  <header class="about-header mb-10 text-center">
-    <h1 class="text-4xl font-bold text-emerald-900 mb-2">The Open Chemistry Lab</h1>
-    <p class="text-lg text-cyan-700 italic">The Evolution of a Capstone Project in Computer Information Technology</p>
+<div class="min-h-screen bg-slate-50 font-sans text-slate-900">
+  <!-- Hero Section -->
+  <header
+    class="relative overflow-hidden bg-slate-900 py-24 text-center text-white"
+  >
+    <div class="absolute inset-0 opacity-20">
+      <!-- Subtle background pattern/gradient -->
+      <div
+        class="absolute inset-0 bg-gradient-to-tr from-indigo-500 via-transparent to-amber-500"
+      ></div>
+      <div
+        class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-30"
+      ></div>
+    </div>
+
+    <div class="relative z-10 px-4 mx-auto max-w-4xl">
+      <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+        The
+        <span
+          class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-amber-400"
+          >Open Chemistry</span
+        >
+        Lab
+      </h1>
+      <p
+        class="text-xl md:text-2xl text-slate-300 font-light max-w-2xl mx-auto leading-relaxed"
+      >
+        An immersive, interactive exploration of computational chemistry and
+        molecular discovery.
+      </p>
+    </div>
   </header>
 
-  <section class="about-section mb-8">
-    <div class="flex items-start mb-4">
-      <div class="flex-shrink-0 mr-4">
-        <span class="text-2xl font-bold text-emerald-700">1.</span>
+  <main class="relative z-10 -mt-12 px-4 pb-24 mx-auto max-w-6xl">
+    <!-- Mission Section -->
+    <section class="mb-16">
+      <div
+        class="bg-white rounded-3xl shadow-xl p-8 md:p-12 border border-slate-100"
+      >
+        <div class="max-w-3xl mx-auto text-center">
+          <span
+            class="inline-block px-4 py-1 mb-6 text-sm font-semibold tracking-wider text-indigo-600 uppercase bg-indigo-50 rounded-full"
+          >
+            Our Mission
+          </span>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-800 mb-6">
+            Bridging Education and Experimentation
+          </h2>
+          <p class="text-lg text-slate-600 leading-relaxed">
+            The Open ChemLab project was born from a highly motivated desire to
+            facilitate the discovery of real-world chemical facts through
+            hands-on experimentation. By leveraging the power of the
+            <a
+              href="https://pubchemdocs.ncbi.nlm.nih.gov/pug-rest-tutorial"
+              class="text-indigo-600 hover:text-indigo-800 transition-colors duration-200 underline decoration-indigo-200 underline-offset-4"
+              >PubChem API</a
+            >, we provide an accessible platform for users to manipulate
+            elements and explore the complex properties of molecular compounds.
+          </p>
+        </div>
       </div>
-      <div>
-        <h2 class="text-2xl font-semibold text-emerald-800 mb-3 border-b border-cyan-200 pb-1">Project Overview</h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          "The Open ChemLab" project was initiated as a Bachelor of Science capstone
-          endeavor. The primary objective is educational, facilitating the discovery
-          of real-world chemical facts through experimentation with various combinations
-          of elements from the periodic table of elements. This project leverages an
-          external RESTful API data service named
-          <a href="https://pubchemdocs.ncbi.nlm.nih.gov/pug-rest-tutorial" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">PubChem</a>.
-        </p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="about-section mb-8">
-    <div class="flex items-start mb-4">
-      <div class="flex-shrink-0 mr-4">
-        <span class="text-2xl font-bold text-emerald-700">2.</span>
-      </div>
-      <div>
-        <h2 class="text-2xl font-semibold text-emerald-800 mb-3 border-b border-cyan-200 pb-1">Architecture & Implementation</h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          The application follows a backend-for-frontend (BFF) architectural pattern.
-          The source code is publicly available on GitHub:
+    <!-- Features Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Architecture Card -->
+      <div
+        class="bg-white p-8 rounded-3xl shadow-sm border border-scale-100 flex flex-col h-full transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+      >
+        <div
+          class="w-12 h-12 bg-indigo-100 rounded-2xl flex items-center justify-center mb-6 text-indigo-600"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800 mb-4">Architecture</h3>
+        <p class="text-slate-600 mb-6 flex-grow">
+          Built using a robust Backend-for-Frontend (BFF) pattern, ensuring high
+          performance and seamless data integration.
         </p>
-        <ul class="list-disc pl-8 space-y-2">
+        <div class="space-y-3">
+          <a
+            href="https://github.com/calebd-anderson/open-chemistry-lab-backend"
+            class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 group"
+          >
+            <span class="mr-2">Backend Repository</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </a>
+          <a
+            href="https://github.com/calebd-anderson/open-chemistry-lab-frontend"
+            class="flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 group"
+          >
+            <span class="mr-2">Frontend Repository</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Tech Stack Card -->
+      <div
+        class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col h-full transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+      >
+        <div
+          class="w-12 h-12 bg-amber-100 rounded-2xl flex items-center justify-center mb-6 text-amber-600"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800 mb-4">Tech Stack</h3>
+        <div class="flex flex-wrap gap-2">
+          <span
+            class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium"
+            >Angular 22</span
+          >
+          <span
+            class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium"
+            >Spring Boot</span
+          >
+          <span
+            class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium"
+            >MongoDB</span
+          >
+          <span
+            class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium"
+            >GSAP</span
+          >
+          <span
+            class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium"
+            >Tailwind CSS</span
+          >
+          <span
+            class="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-xs font-medium"
+            >TypeScript</span
+          >
+        </div>
+      </div>
+
+      <!-- Resources Card -->
+      <div
+        class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 flex flex-col h-full transition-all duration-300 hover:shadow-md hover:-translate-y-1"
+      >
+        <div
+          class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 text-emerald-600"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800 mb-4">Related Resources</h3>
+        <ul class="space-y-3">
           <li>
-            Backend -
-            <a href="https://github.com/calebd-anderson/open-chemistry-lab-backend" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">https://github.com/calebd-anderson/open-chemistry-lab-backend</a>
+            <a
+              href="https://pubchem.ncbi.nlm.nih.gov/periodic-table"
+              class="text-sm text-indigo-600 hover:underline"
+              >PubChem Periodic Table</a
+            >
           </li>
           <li>
-            Frontend -
-            <a href="https://github.com/calebd-anderson/open-chemistry-lab-frontend" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">https://github.com/calebd-anderson/open-chemistry-lab-frontend</a>
+            <a
+              href="https://github.com/tamalchowdhury/periodic-table"
+              class="text-sm text-indigo-600 hover:underline"
+              >Periodic Table Project</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://github.com/FlorianFe/Elements"
+              class="text-sm text-indigo-600 hover:underline"
+              >Elements Explorer</a
+            >
           </li>
         </ul>
       </div>
-    </div>
-  </section>
 
-  <section class="about-section mb-8">
-    <div class="flex items-start mb-4">
-      <div class="flex-shrink-0 mr-4">
-        <span class="text-2xl font-bold text-emerald-700">3.</span>
-      </div>
-      <div>
-        <h2 class="text-2xl font-semibold text-emerald-800 mb-3 border-b border-cyan-200 pb-1">Technologies</h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          The project is built using the following technologies:
-        </p>
-        <ul class="list-disc pl-8 space-y-2">
-          <li>
-            <a href="https://spring.io/projects/spring-boot" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">Spring Boot</a> - Web API
-          </li>
-          <li>
-            <a href="https://www.mongodb.com/docs/languages/java/" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">MongoDB</a> - NoSQL persistence
-          </li>
-          <li><a href="https://angular.dev/" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">Angular</a> - Frontend framework</li>
-          <li><a href="https://gsap.com/" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">GSAP</a> - Advanced animations</li>
-          <li>
-            <a href="https://codepen.io/mikegolus/pen/OwrPgB" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">Periodic Table</a> - Interactive periodic table CSS
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section class="about-section mb-8">
-    <div class="flex items-start mb-4">
-      <div class="flex-shrink-0 mr-4">
-        <span class="text-2xl font-bold text-emerald-700">4.</span>
-      </div>
-      <div>
-        <h2 class="text-2xl font-semibold text-emerald-800 mb-3 border-b border-cyan-200 pb-1">Project Team</h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          The original team consisted of the following members, including myself:
-        </p>
-        <ul class="list-disc pl-8 space-y-2">
-          <li>
-            Caleb Anderson (myself) -
-            <a href="mailto:caleb&#64;calebdanderson.dev" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">caleb&#64;calebdanderson.dev</a>
-          </li>
-          <li>
-            Andrew Vick -
-            <a href="mailto:andrew.vick&#64;my.metrostate.edu" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">andrew.vick&#64;my.metrostate.edu</a>
-          </li>
-          <li>
-            Don Nguyen -
-            <a href="mailto:donnguyen000&#64;gmail.com" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">donnguyen000&#64;gmail.com</a>
-          </li>
-          <li>
-            Mohomudwale Mohomed -
-            <a href="mailto:mohomudwale.mohomed&#64;my.metrostate.edu" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">mohomudwale.mohomed&#64;my.metrostate.edu</a>
-          </li>
-          <li>
-            Abebe Gebeyehu -
-            <a href="mailto:agebeyehu1&#64;my.anokaramsey.edu" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">agebeyehu1&#64;my.anokaramsey.edu</a>
-          </li>
-        </ul>
+      <!-- Team Card (Full width on mobile, spans 2 columns on large) -->
+      <div
+        class="md:col-span-2 lg:col-span-3 bg-white p-8 rounded-3xl shadow-sm border border-slate-100 transition-all duration-300 hover:shadow-md"
+      >
+        <div
+          class="flex flex-col md:flex-row md:items-center md:justify-between"
+        >
+          <div class="mb-6 md:mb-0">
+            <h3 class="text-2xl font-bold text-slate-80int mb-2">
+              The Creative Team
+            </h3>
+            <p class="text-slate-600">
+              The original contributors behind this educational endeavor.
+            </p>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="flex items-center space-x-3">
+              <div
+                class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600"
+              >
+                CA
+              </div>
+              <span class="text-sm font-medium text-slate-700"
+                >Caleb Anderson</span
+              >
+            </div>
+            <div class="flex items-center space-x-3">
+              <div
+                class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600"
+              >
+                AV
+              </div>
+              <span class="text-sm font-medium text-slate-700"
+                >Andrew Vick</span
+              >
+            </div>
+            <div class="flex items-center space-x-3">
+              <div
+                class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600"
+              >
+                DN
+              </div>
+              <span class="text-sm font-medium text-slate-700">Don Nguyen</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <div
+                class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-600"
+              >
+                MM
+              </div>
+              <span class="text-sm font-medium text-slate-700"
+                >Mohomudwale Mohomed</span
+              >
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
-
-  <section class="about-section mb-8">
-    <div class="flex items-start mb-4">
-      <div class="flex-shrink-0 mr-4">
-        <span class="text-2xl font-bold text-emerald-700">5.</span>
-      </div>
-      <div>
-        <h2 class="text-2xl font-semibold text-emerald-800 mb-3 border-b border-cyan-200 pb-1">Related Resources</h2>
-        <p class="text-gray-700 leading-relaxed mb-4">
-          Other notable periodic table projects I discovered:
-        </p>
-        <ul class="list-disc pl-8 space-y-2">
-          <li>
-            <a href="https://github.com/tamalchowdhury/periodic-table" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">https://github.com/tamalchowdhury/periodic-table</a>
-          </li>
-          <li>
-            <a href="https://github.com/FlorianFe/Elements" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">https://github.com/FlorianFe/Elements</a>
-          </li>
-          <li>
-            <a href="https://pubchem.ncbi.nlm.nih.gov/periodic-table" class="text-cyan-700 hover:text-emerald-700 transition duration-200 underline">https://pubchem.ncbi.nlm.nih.gov/periodic-table</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <footer class="mt-12 pt-6 border-t border-cyan-200 text-center">
-    <p class="text-gray-600 italic">A collaborative effort in computational chemistry education</p>
-  </footer>
-</article>
+  </main>
+</div>
