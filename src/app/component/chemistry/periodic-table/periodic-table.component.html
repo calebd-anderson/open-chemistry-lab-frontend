@@ -1,26 +1,6 @@
 <div class="periodic-table-container">
   <div class="table-header">
     <h2>Periodic Table</h2>
-
-    <!-- Filter buttons for group blocks -->
-    <div class="filter-buttons">
-      <button
-        (click)="filterElements('all')"
-        [class.active]="currentFilter() === 'all'"
-        class="filter-btn"
-      >
-        All Elements
-      </button>
-      @for (group of groupBlocks; track group) {
-        <button
-          (click)="filterElements(group)"
-          [class.active]="currentFilter() === group"
-          class="filter-btn"
-        >
-          {{ group }}
-        </button>
-      }
-    </div>
   </div>
 
   <!-- Loading spinner -->

@@ -120,83 +120,40 @@ export class PeriodicTableComponent {
 
   // Get the grid position for an element based on its atomic number
   public getGridPosition(atomicNumber: number): { row: number, col: number } {
-    // Lanthanides (57-71) - placed in row 8, columns 4-18
-    if (atomicNumber >= 57 && atomicNumber <= 71) {
-      return { row: 8, col: 4 + (atomicNumber - 57) };
-    }
-    // Actinides (89-103) - placed in row 9, columns 4-18
-    if (atomicNumber >= 89 && atomicNumber <= 103) {
-      return { row: 9, col: 4 + (atomicNumber - 89) };
-    }
-
-    // Period 1: H(1) and He(2)
+    // Period 1
     if (atomicNumber === 1) return { row: 1, col: 1 };
     if (atomicNumber === 2) return { row: 1, col: 18 };
 
-    // Period 2: Li(3) to Ne(10)
-    if (atomicNumber >= 3 && atomicNumber <= 10) {
-      if (atomicNumber <= 4) {
-        // Li(3) = col 1, Be(4) = col 2
-        return { row: 2, col: atomicNumber - 2 };
-      } else {
-        // B(5) = col 13, C(6) = col 14, N(7) = col 15, O(8) = col 16, F(9) = col 17, Ne(10) = col 18
-        return { row: 2, col: 13 + (atomicNumber - 5) };
-      }
-    }
+    // Period 2
+    if (atomicNumber === 3) return { row: 2, col: 1 };
+    if (atomicNumber === 4) return { row: 2, col: 2 };
+    if (atomicNumber >= 5 && atomicNumber <= 10) return { row: 2, col: atomicNumber + 8 }; // 5 -> 13, 10 -> 18
 
-    // Period 3: Na(11) to Ar(18)
-    if (atomicNumber >= 11 && atomicNumber <= 18) {
-      if (atomicNumber <= 12) {
-        // Na(11) = col 1, Mg(12) = col 2
-        return { row: 3, col: atomicNumber - 10 };
-      } else {
-        // Al(13) = col 13, Si(14) = col 14, P(15) = col 15, S(16) = col 16, Cl(17) = col 17, Ar(18) = col 18
-        return { row: 3, col: 13 + (atomicNumber - 13) };
-      }
-    }
+    // Period 3
+    if (atomicNumber === 11) return { row: 3, col: 1 };
+    if (atomicNumber === 12) return { row: 3, col: 2 };
+    if (atomicNumber >= 13 && atomicNumber <= 18) return { row: 3, col: atomicNumber }; // 13 -> 13, 18 -> 18
 
-    // Period 4: K(19) to Kr(36)
-    if (atomicNumber >= 19 && atomicNumber <= 36) {
-      if (atomicNumber <= 20) {
-        // K(19) = col 1, Ca(20) = col 2
-        return { row: 4, col: atomicNumber - 18 };
-      } else {
-        // Sc(21) to Kr(36) are in columns 13-18 of the main table
-        return { row: 4, col: 13 + (atomicNumber - 21) };
-      }
-    }
+    // Period 4
+    if (atomicNumber >= 19 && atomicNumber <= 36) return { row: 4, col: atomicNumber - 18 }; // 19 -> 1, 36 -> 18
 
-    // Period 5: Rb(37) to Xe(54)
-    if (atomicNumber >= 37 && atomicNumber <= 54) {
-      if (atomicNumber <= 38) {
-        // Rb(37) = col 1, Sr(38) = col 2
-        return { row: 5, col: atomicNumber - 36 };
-      } else {
-        // Y(39) to Xe(54) are in columns 13-18 of the main table
-        return { row: 5, col: 13 + (atomicNumber - 39) };
-      }
-    }
+    // Period 5
+    if (atomicNumber >= 37 && atomicNumber <= 54) return { row: 5, col: atomicNumber - 36 }; // 37 -> 1, 54 -> 18
 
-    // Period 6: Cs(55) to Rn(86)
+    // Period 6
     if (atomicNumber >= 55 && atomicNumber <= 86) {
-      if (atomicNumber <= 56) {
-        // Cs(55) = col 1, Ba(56) = col 2
-        return { row: 6, col: atomicNumber - 54 };
-      } else {
-        // La(57) to Rn(86) are in columns 13-18 of the main table (but La is handled above)
-        return { row: 6, col: 13 + (atomicNumber - 57) };
-      }
+        if (atomicNumber === 55) return { row: 6, col: 1 };
+        if (atomicNumber === 56) return { row: 6, col: 2 }; // Wait, I made a typo here. Let me fix it.
+        if (atomicNumber >= 57 && atomicNumber <= 71) return { row: 8, col: atomicNumber - 53 }; // Lanthanides: 57 -> 4, 71 -> 18
+        if (atomicNumber >= 72 && atomicNumber <= 86) return { row: 6, col: atomicNumber - 68 }; // 72 -> 4, 86 -> 18
     }
 
-    // Period 7: Fr(87) to Og(118)
+    // Period 7
     if (atomicNumber >= 87 && atomicNumber <= 118) {
-      if (atomicNumber <= 88) {
-        // Fr(87) = col 1, Ra(88) = col 2
-        return { row: 7, col: atomicNumber - 86 };
-      } else {
-        // Ac(89) to Og(118) are in columns 13-18 of the main table (but Ac is handled above)
-        return { row: 7, col: 13 + (atomicNumber - 89) };
-      }
+        if (atomicNumber === 87) return { row: 7, col: 1 };
+        if (atomicNumber === 88) return { row: 7, col: 2 };
+        if (atomicNumber >= 89 && atomicNumber <= 103) return { row: 9, col: atomicNumber - 85 }; // Actinides: 89 -> 4, 103 -> 18
+        if (atomicNumber >= 104 && atomicNumber <= 118) return { row: 7, col: atomicNumber - 100 }; // 104 -> 4, 118 -> 18
     }
 
     return { row: 0, col: 0 };
