@@ -1,14 +1,13 @@
 import { Component, inject, output, signal, Signal } from '@angular/core';
 import { Element } from '../../../model/element.model';
 import { ElementService } from '../../../service/element.service';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotificationService } from '../../../service/notification.service';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'periodic-table',
-  imports: [CommonModule, MatProgressSpinnerModule],
+  imports: [CommonModule],
   templateUrl: './periodic-table.component.html',
   styleUrls: ['./periodic-table.component.sass', './periodic-table.css'],
 })
@@ -29,7 +28,7 @@ export class PeriodicTableComponent {
     'Halogen',
     'Noble gas',
     'Lanthanide',
-    'Actinide'
+    'Actinide',
   ];
 
   public progressSpinner: boolean = false;
@@ -67,7 +66,7 @@ export class PeriodicTableComponent {
 
   // Method to update the set of elements currently in the experiment
   public updateElementsInExperiment(elements: Element[]) {
-    const elementSymbols = new Set<string>(elements.map(e => e.symbol));
+    const elementSymbols = new Set<string>(elements.map((e) => e.symbol));
     this.elementsInExperiment.set(elementSymbols);
   }
 
@@ -93,8 +92,8 @@ export class PeriodicTableComponent {
     if (groupBlock === 'all') {
       this.filteredElements.set(this.elements());
     } else {
-      const filtered = this.elements().filter(element =>
-        element.groupBlock === groupBlock
+      const filtered = this.elements().filter(
+        (element) => element.groupBlock === groupBlock,
       );
       this.filteredElements.set(filtered);
     }
@@ -103,22 +102,33 @@ export class PeriodicTableComponent {
   // Get the CSS class for element styling based on group block
   getElementClass(groupBlock: string): string {
     switch (groupBlock) {
-      case 'Alkali metal': return 'alkali-metal';
-      case 'Alkaline earth metal': return 'alkaline-earth-metal';
-      case 'Transition metal': return 'transition-metal';
-      case 'Post-transition metal': return 'post-transition-metal';
-      case 'Metalloid': return 'metalloid';
-      case 'Nonmetal': return 'nonmetal';
-      case 'Halogen': return 'halogen';
-      case 'Noble gas': return 'noble-gas';
-      case 'Lanthanide': return 'lanthanide';
-      case 'Actinide': return 'actinide';
-      default: return 'unknown';
+      case 'Alkali metal':
+        return 'alkali-metal';
+      case 'Alkaline earth metal':
+        return 'alkaline-earth-metal';
+      case 'Transition metal':
+        return 'transition-metal';
+      case 'Post-transition metal':
+        return 'post-transition-metal';
+      case 'Metalloid':
+        return 'metalloid';
+      case 'Nonmetal':
+        return 'nonmetal';
+      case 'Halogen':
+        return 'halogen';
+      case 'Noble gas':
+        return 'noble-gas';
+      case 'Lanthanide':
+        return 'lanthanide';
+      case 'Actinide':
+        return 'actinide';
+      default:
+        return 'unknown';
     }
   }
 
   // Get the grid position for an element based on its atomic number
-  public getGridPosition(atomicNumber: number): { row: number, col: number } {
+  public getGridPosition(atomicNumber: number): { row: number; col: number } {
     // Period 1
     if (atomicNumber === 1) return { row: 1, col: 1 };
     if (atomicNumber === 2) return { row: 1, col: 18 };
@@ -126,33 +136,41 @@ export class PeriodicTableComponent {
     // Period 2
     if (atomicNumber === 3) return { row: 2, col: 1 };
     if (atomicNumber === 4) return { row: 2, col: 2 };
-    if (atomicNumber >= 5 && atomicNumber <= 10) return { row: 2, col: atomicNumber + 8 }; // 5 -> 13, 10 -> 18
+    if (atomicNumber >= 5 && atomicNumber <= 10)
+      return { row: 2, col: atomicNumber + 8 }; // 5 -> 13, 10 -> 18
 
     // Period 3
     if (atomicNumber === 11) return { row: 3, col: 1 };
     if (atomicNumber === 12) return { row: 3, col: 2 };
-    if (atomicNumber >= 13 && atomicNumber <= 18) return { row: 3, col: atomicNumber }; // 13 -> 13, 18 -> 18
+    if (atomicNumber >= 13 && atomicNumber <= 18)
+      return { row: 3, col: atomicNumber }; // 13 -> 13, 18 -> 18
 
     // Period 4
-    if (atomicNumber >= 19 && atomicNumber <= 36) return { row: 4, col: atomicNumber - 18 }; // 19 -> 1, 36 -> 18
+    if (atomicNumber >= 19 && atomicNumber <= 36)
+      return { row: 4, col: atomicNumber - 18 }; // 19 -> 1, 36 -> 18
 
     // Period 5
-    if (atomicNumber >= 37 && atomicNumber <= 54) return { row: 5, col: atomicNumber - 36 }; // 37 -> 1, 54 -> 18
+    if (atomicNumber >= 37 && atomicNumber <= 54)
+      return { row: 5, col: atomicNumber - 36 }; // 37 -> 1, 54 -> 18
 
     // Period 6
     if (atomicNumber >= 55 && atomicNumber <= 86) {
-        if (atomicNumber === 55) return { row: 6, col: 1 };
-        if (atomicNumber === 56) return { row: 6, col: 2 }; // Wait, I made a typo here. Let me fix it.
-        if (atomicNumber >= 57 && atomicNumber <= 71) return { row: 8, col: atomicNumber - 53 }; // Lanthanides: 57 -> 4, 71 -> 18
-        if (atomicNumber >= 72 && atomicNumber <= 86) return { row: 6, col: atomicNumber - 68 }; // 72 -> 4, 86 -> 18
+      if (atomicNumber === 55) return { row: 6, col: 1 };
+      if (atomicNumber === 56) return { row: 6, col: 2 }; // Wait, I made a typo here. Let me fix it.
+      if (atomicNumber >= 57 && atomicNumber <= 71)
+        return { row: 8, col: atomicNumber - 53 }; // Lanthanides: 57 -> 4, 71 -> 18
+      if (atomicNumber >= 72 && atomicNumber <= 86)
+        return { row: 6, col: atomicNumber - 68 }; // 72 -> 4, 86 -> 18
     }
 
     // Period 7
     if (atomicNumber >= 87 && atomicNumber <= 118) {
-        if (atomicNumber === 87) return { row: 7, col: 1 };
-        if (atomicNumber === 88) return { row: 7, col: 2 };
-        if (atomicNumber >= 89 && atomicNumber <= 103) return { row: 9, col: atomicNumber - 85 }; // Actinides: 89 -> 4, 103 -> 18
-        if (atomicNumber >= 104 && atomicNumber <= 118) return { row: 7, col: atomicNumber - 100 }; // 104 -> 4, 118 -> 18
+      if (atomicNumber === 87) return { row: 7, col: 1 };
+      if (atomicNumber === 88) return { row: 7, col: 2 };
+      if (atomicNumber >= 89 && atomicNumber <= 103)
+        return { row: 9, col: atomicNumber - 85 }; // Actinides: 89 -> 4, 103 -> 18
+      if (atomicNumber >= 104 && atomicNumber <= 118)
+        return { row: 7, col: atomicNumber - 100 }; // 104 -> 4, 118 -> 18
     }
 
     return { row: 0, col: 0 };
@@ -160,9 +178,10 @@ export class PeriodicTableComponent {
 
   // Sort elements by atomic number
   public sortElements() {
-    const sorted = [...this.elements()].sort((a, b) => a.atomicNumber - b.atomicNumber);
+    const sorted = [...this.elements()].sort(
+      (a, b) => a.atomicNumber - b.atomicNumber,
+    );
     this.elements.set(sorted);
     this.filteredElements.set(sorted);
   }
-
 }
