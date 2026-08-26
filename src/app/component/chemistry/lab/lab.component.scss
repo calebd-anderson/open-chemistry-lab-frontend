@@ -19,22 +19,12 @@
 }
 
 #lab-content {
-  @apply max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6;
-}
-
-/* Adjust layout when tips are collapsed */
-@media (min-width: 1024px) {
-  .tips-collapsed #lab-content {
-    grid-template-columns: 1fr 1fr; /* Two columns when tips are collapsed */
-  }
-
-  .tips-collapsed #info-section {
-    display: none;
-  }
+  @apply mx-auto grid grid-cols-2 gap-6;
+  max-width: 90%;
 }
 
 #experiment-section {
-  @apply lg:col-span-2 bg-white rounded-2xl shadow-xl p-6 border border-cyan-200;
+  @apply bg-white rounded-2xl shadow-xl p-6 border border-cyan-200;
   box-shadow:
     0 4px 6px rgba(0, 0, 0, 0.05),
     0 10px 15px rgba(0, 0, 0, 0.05);
@@ -307,6 +297,10 @@ button .svg-icon {
 #info-section > * {
   position: relative;
   z-index: 1;
+}
+
+.tab-button {
+  cursor: pointer;
 }
 
 /* Tips section toggle styles */

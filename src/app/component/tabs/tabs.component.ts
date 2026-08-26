@@ -51,7 +51,7 @@ export class TabsComponent {
     return [
       {
         path: 'lab',
-        label: 'Catalyst Engine',
+        label: 'Chemistry Lab',
       },
       {
         path: 'globaldiscoveries',

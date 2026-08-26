@@ -7,9 +7,9 @@ import { MatDialogModule } from '@angular/material/dialog';
   imports: [MatButtonModule, MatDialogModule],
   template: `
     <section id="welcom-dialog">
-      <h2 mat-dialog-title>Welcome to Reactive Voyage</h2>
+      <h2 mat-dialog-title>Welcome to Catalyst Engine</h2>
       <mat-dialog-content class="mat-typography">
-        <h3>What is Reactive Voyage?</h3>
+        <h3>What is Catalyst Engine?</h3>
         <p>
           This is an educational application that allows anyone to experiment
           with an interactive periodic table of elements.

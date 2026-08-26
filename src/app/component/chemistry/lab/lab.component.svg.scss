@@ -34,13 +34,3 @@
   stroke-width: 2;
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
 }
-
-/* Hover effects for better interactivity */
-.toggle-button:hover .toggle-icon {
-  stroke: #1d4ed8; /* blue-700 on hover */
-  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
-}
-
-.toggle-button:hover .bg-circle {
-  fill: rgba(29, 78, 216, 0.15); /* blue-700 with more transparency on hover */
-}
