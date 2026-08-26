@@ -1,11 +1,10 @@
 <section class="validation-modal">
-  <h2 mat-dialog-title>Molecule Discovery!</h2>
-  <mat-dialog-content class="mat-typography">
+  <h2>Molecule Discovery!</h2>
+  <div class="dialog-content">
     <p>You've created a <span id="discovery">{{discovery}}</span> molecule.</p>
     <p>{{confirmMessage}}</p>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="onSaveClick()" color="primary">Save Discovery</button>
-  </mat-dialog-actions>
+  </div>
+  <div class="dialog-actions">
+    <button (click)="onNoClick()" type="button">Cancel</button>
+  </div>
 </section>

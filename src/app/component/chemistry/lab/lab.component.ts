@@ -11,12 +11,11 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ValidationModalComponent } from '../experiment/validation-modal/validation-modal.component';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Reaction } from '@app/model/compound';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-lab',
   standalone: true,
-  imports: [PeriodicTableComponent, ExperimentComponent, MatIconModule],
+  imports: [PeriodicTableComponent, ExperimentComponent],
   templateUrl: './lab.component.html',
   styleUrls: ['./lab.component.scss', './lab.component.svg.scss'],
 })

@@ -1,18 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-@use "@angular/material" as mat;
+@use "./app/styles/theme.scss";
 
 // Customize the entire app. Change :root to your selector if you want to scope the styles.
-:root {
-  @include mat.theme(
-    (color: mat.$blue-palette, typography: Roboto, density: 0),
-    // $overrides: (surface: #091324, on-surface: #fff)
-  );
-}
+// :root {
+//   @include mat.theme(
+//     (color: mat.$blue-palette, typography: Roboto, density: 0),
+//     // $overrides: (surface: #091324, on-surface: #fff)
+//   );
+// }
 
-body {
-  background: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-}
+// body {
+//   background: var(--mat-sys-surface);
+//   color: var(--mat-sys-on-surface);
+// }
 
 .mat-typography h3 {
   font-size: large;
@@ -34,32 +34,32 @@ td {
 }
 
 // custom snackbar styles
-.green-success-snackbar {
-  @include mat.snack-bar-overrides(
-    (
-      container-color: #2bbe68,
-      supporting-text-color: var(--mat-sys-on-surface),
-    )
-  );
-}
+// .green-success-snackbar {
+//   @include mat.snack-bar-overrides(
+//     (
+//       container-color: #2bbe68,
+//       supporting-text-color: var(--mat-sys-on-surface),
+//     )
+//   );
+// }
 
-.red-error-snackbar {
-  @include mat.snack-bar-overrides(
-    (
-      container-color: var(--mat-sys-error),
-      supporting-text-color: var(--mat-sys-on-surface),
-    )
-  );
-}
+// .red-error-snackbar {
+//   @include mat.snack-bar-overrides(
+//     (
+//       container-color: var(--mat-sys-error),
+//       supporting-text-color: var(--mat-sys-on-surface),
+//     )
+//   );
+// }
 
-.orange-warning-snackbar {
-  @include mat.snack-bar-overrides(
-    (
-      container-color: #ff6f00,
-      supporting-text-color: var(--mat-sys-on-surface),
-    )
-  );
-}
+// .orange-warning-snackbar {
+//   @include mat.snack-bar-overrides(
+//     (
+//       container-color: #ff6f00,
+//       supporting-text-color: var(--mat-sys-on-surface),
+//     )
+//   );
+// }
 
 .default-snackbar {
   font-weight: 500;

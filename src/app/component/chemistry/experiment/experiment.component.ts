@@ -5,9 +5,7 @@ import { FlaskComponent } from './flask/flask.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { ExperimentService } from '@app/service/experiment.service';
-import { MatButtonModule } from '@angular/material/button';
 import { InfoIcon } from '@app/info-icon.component.svg';
-import { MatIconModule } from '@angular/material/icon';
 
 interface RemoveElement {
   index: number;
@@ -19,8 +17,6 @@ interface RemoveElement {
     FlaskComponent,
     MatProgressBarModule,
     CommonModule,
-    MatButtonModule,
-    MatIconModule,
     InfoIcon,
   ],
   templateUrl: './experiment.component.html',

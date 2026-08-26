@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-validation-modal',
   templateUrl: './validation-modal.component.html',
   styleUrl: './validation-modal.scss',
-  imports: [MatButtonModule, MatDialogModule],
+  imports: [MatDialogModule],
 })
 export class ValidationModalComponent {
   constructor(public dialogRef: MatDialogRef<ValidationModalComponent>) {}
@@ -17,10 +16,6 @@ export class ValidationModalComponent {
   public isLoggedIn: string = '?';
 
   onNoClick(): void {
-    this.dialogRef.close(false);
-  }
-
-  onSaveClick(): void {
-    this.dialogRef.close(true);
+    this.dialogRef.close();
   }
 }
