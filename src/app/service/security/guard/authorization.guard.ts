@@ -25,7 +25,7 @@ export class AuthorizationGuard {
   }
 
   private isAuthorized(): boolean {
-    if (this.authorizationService.isAdmin) {
+    if (this.authorizationService.isAdmin()) {
       return true;
     }
     this.router.navigate(['/lab']);

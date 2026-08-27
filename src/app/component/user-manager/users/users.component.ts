@@ -55,8 +55,8 @@ export class UsersComponent {
   public userService: UserService = inject(UserService);
   public notificationService: NotificationService = inject(NotificationService);
 
-  public isManager: boolean = this.authorizationService.isManager;
-  public isAdmin: boolean = this.authorizationService.isAdmin;
+  public isManager: boolean = this.authorizationService.isManager();
+  public isAdmin: boolean = this.authorizationService.isAdmin();
 
   tableDef: TableDef[] = [
     { id: 'profileImgUrl', label: 'Photo' },

@@ -40,8 +40,8 @@ export class AddUserComponent implements OnDestroy {
     inject(NotificationService);
   private authorizationService: AuthorizationService =
     inject(AuthorizationService);
-  public isAdmin: boolean = this.authorizationService.isAdmin;
-  public isManager: boolean = this.authorizationService.isManager;
+  public isAdmin: boolean = this.authorizationService.isAdmin();
+  public isManager: boolean = this.authorizationService.isManager();
 
   private subs = new SubSink();
 
