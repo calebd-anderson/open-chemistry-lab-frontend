@@ -1,10 +1,10 @@
 <header id="main-header">
     <div class="flex items-center cursor-pointer">
-        <svg logo-icon class="w-6 h-6 text-cyan-300"></svg>
+        <svg logo-icon id="logo-icon"></svg>
         <h1 class="ml-2 text-lg font-bold text-cyan-100">Catalyst Engine</h1>
     </div>
 
-    <div id="user-controls" class="flex items-center">
+    <div id="user-controls">
         <div [hidden]="authenticationService.getIsLoggedIn()">
             <button (click)="openLogin()"
                 class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium py-1 px-3 rounded-lg transition duration-200 transform hover:scale-105 cursor-pointer"
@@ -13,8 +13,8 @@
             </button>
         </div>
 
-        <div class="profileInfo" [hidden]="!authenticationService.getIsLoggedIn()">
-            <button (click)="openMenu()" class="flex items-center focus:outline-none" type="button">
+        <div class="profile-icon" [hidden]="!authenticationService.getIsLoggedIn()">
+            <button (click)="openMenu()" type="button">
                 <img height="32" width="32" src="{{ user()?.profileImgUrl }}"
                     class="rounded-full border-2 border-cyan-500 w-8 h-8 object-cover" alt="profile image" />
             </button>

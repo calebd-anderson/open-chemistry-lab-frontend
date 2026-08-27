@@ -48,7 +48,7 @@ export class MainHeaderComponent {
       const handleClickOutside = (event: MouseEvent) => {
         const isClickInsideMenu = menu.contains(event.target as Node);
         const isClickOnProfileImage = (event.target as Element).closest(
-          '.profileInfo',
+          '.profile-icon',
         );
 
         if (!isClickInsideMenu && !isClickOnProfileImage) {
