@@ -13,7 +13,7 @@ import { NotificationService } from './service/notification.service';
 import { MatDialog } from '@angular/material/dialog';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { FooterComponent } from './component/footer/footer.component';
-import { UserNavComponent } from './component/user_manager/user-nav/user-nav.component';
+import { UserNavComponent } from './component/user-manager/user-nav/user-nav.component';
 import { MainHeaderComponent } from './component/main-header/main-header.component';
 
 @Component({

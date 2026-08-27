@@ -1,5 +1,5 @@
-import { AdminIcon } from '@/app/component/user_manager/user-nav/admin.component.svg';
-import { LogoutIcon } from '@/app/component/user_manager/user-nav/logout.component.svg';
+import { AdminIcon } from '@/app/component/user-manager/user-nav/admin.component.svg';
+import { LogoutIcon } from '@/app/component/user-manager/user-nav/logout.component.svg';
 import { User } from '@/app/model/user';
 import { AuthenticationService } from '@/app/service/security/authentication.service';
 import { AuthorizationService } from '@/app/service/security/authorization.service';

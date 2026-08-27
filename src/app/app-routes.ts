@@ -3,12 +3,12 @@ import { AuthenticationGuard } from './service/security/guard/authentication.gua
 import { QuizComponent } from '@component/game/quiz/quiz.component';
 import { FlashcardComponent } from '@component/game/flashcard/flashcard.component';
 import { AuthorizationGuard } from '@service/security/guard/authorization.guard';
-import { ProfileComponent } from '@component/user_manager/account-form/profile/profile.component';
+import { ProfileComponent } from '@/app/component/user-manager/account-form/profile/profile.component';
 import { AboutComponent } from '@component/about/about.component';
 import { DiscoveriesComponent } from '@component/discoveries/user-discoveries/discoveries.component';
 import { GlobalDiscoveriesComponent } from '@component/discoveries/global-discoveries/global-discoveries.component';
 import { LabComponent } from '@component/chemistry/lab/lab.component';
-import { UsersComponent } from '@component/user_manager/users/users.component';
+import { UsersComponent } from '@/app/component/user-manager/users/users.component';
 
 export const routes: Routes = [
   { path: 'lab', component: LabComponent },
