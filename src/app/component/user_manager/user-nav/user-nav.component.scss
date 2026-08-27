@@ -1,34 +1,33 @@
 @use "@/tailwind.css";
 
 #user-nav-menu {
-  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed z-50 transform transition-all duration-300 ease-in-out rounded-xl w-72 overflow-hidden;
   @apply opacity-0 translate-y-5 pointer-events-none;
+  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-2 px-6 fixed z-50 transform transition-all duration-300 ease-in-out rounded-xl;
   /* Ensure menu is positioned absolutely and not affected by Tailwind positioning */
-  position: absolute !important;
   width: 18rem; /* 18rem = 288px */
   border-radius: 1.25rem; /* rounded-xl */
+  box-shadow:
+    0 0 15px rgba(34, 211, 238, 0.3),
+    0 0 30px rgba(34, 211, 238, 0.1);
+  right: 0.5rem;
 }
 
 #user-nav-menu.active {
   @apply opacity-100 translate-y-0 pointer-events-auto;
 }
 
-/* Add a subtle shadow effect */
-#user-nav-menu::before {
-  content: "";
-  @apply absolute inset-0 bg-gradient-to-r from-slate-900/80 to-gray-900/80 rounded-xl shadow-xl;
-  z-index: -1;
+.menu-content {
+  padding-bottom: 1rem;
 }
 
-/* Add a modern glow effect to the border */
-#user-nav-menu {
-  box-shadow:
-    0 0 15px rgba(34, 211, 238, 0.3),
-    0 0 30px rgba(34, 211, 238, 0.1);
+.menu-content button {
+  cursor: pointer;
 }
 
-#user-nav-menu.active {
-  box-shadow:
-    0 0 20px rgba(34, 211, 238, 0.5),
-    0 0 40px rgba(34, 211, 238, 0.2);
+.menu-content button span {
+  color: cyan;
+}
+
+.user-nav-button {
+  @apply flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500;
 }
