@@ -41,7 +41,7 @@ export class LabComponent {
   isTipsExpanded = signal(true);
 
   // Tab state
-  activeTab = signal<'tips' | 'table'>('tips');
+  activeTab = signal<'tips' | 'table'>('table');
 
   public addInteractedElements(element: Element) {
     // Check if adding this element would exceed the limit of 6

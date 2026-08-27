@@ -11,7 +11,6 @@ import { User } from './model/user';
 import { AuthenticationService } from './service/security/authentication.service';
 import { AuthorizationService } from './service/security/authorization.service';
 import { NotificationService } from './service/notification.service';
-import { WelcomeComponent } from './component/welcome/welcome.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { LoginComponent } from './component/user_manager/login/login.component';
@@ -61,7 +60,6 @@ export class AppComponent implements OnInit {
       let user: User = this.authenticationService.getUserFromLocalCache();
       this.user.set(user);
     }
-    this.dialog.open(WelcomeComponent);
   }
 
   openLogin() {
@@ -83,10 +81,6 @@ export class AppComponent implements OnInit {
         this.openLogin();
       }
     });
-  }
-
-  openDialog() {
-    this.dialog.open(WelcomeComponent);
   }
 
   getLoggedIn(newItem: User) {
