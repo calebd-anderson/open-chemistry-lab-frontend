@@ -6,15 +6,14 @@
   </div>
   } @else {
   <!-- Periodic table grid -->
-  <div class="periodic-table-grid" [ngClass]="{ 'loading': progressSpinner }" role="grid"
-    aria-label="Periodic table of elements">
+  <div class="periodic-table-grid" [ngClass]="{ 'loading': progressSpinner }" aria-label="Periodic table of elements">
 
     <!-- Grid items for elements -->
     @for (element of filteredElements(); track element.atomicNumber) {
     <div class="element-card {{ element.groupBlock }}" [class.in-experiment]="isElementInExperiment(element.symbol)"
       [style.grid-row]="getGridPosition(element.atomicNumber).row"
-      [style.grid-column]="getGridPosition(element.atomicNumber).col" (click)="selectElement(element)" role="gridcell"
-      tabindex="0" [attr.aria-lib-label]="'Element ' + element.name + ' with atomic number ' + element.atomicNumber">
+      [style.grid-column]="getGridPosition(element.atomicNumber).col" (click)="selectElement(element)" tabindex="0"
+      [attr.aria-lib-label]="'Element ' + element.name + ' with atomic number ' + element.atomicNumber">
       <div class="element-content">
         <span class="atomic-number">{{ element.atomicNumber }}</span>
         <span class="symbol">{{ element.symbol }}</span>
