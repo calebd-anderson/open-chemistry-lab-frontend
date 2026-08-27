@@ -10,24 +10,57 @@
     0 0 15px rgba(34, 211, 238, 0.3),
     0 0 30px rgba(34, 211, 238, 0.1);
   right: 0.5rem;
+  animation: slideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
 
 #user-nav-menu.active {
   @apply opacity-100 translate-y-0 pointer-events-auto;
 }
 
+.menu-heading {
+  @apply flex justify-between items-center mb-4;
+}
+
+#user-nav-menu hr {
+  @apply w-5/6 my-2 border-slate-700;
+}
+
 .menu-content {
   padding-bottom: 1rem;
 }
 
-.menu-content button {
+/* Add a subtle hover effect */
+.user-nav-button {
+  @apply transition-all duration-300 ease-out;
+  @apply bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 m-1 py-2 px-4 rounded-lg hover:from-slate-700 hover:to-gray-700 transition duration-300 shadow-sm border border-slate-700 cursor-pointer;
+  @apply flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500;
   cursor: pointer;
 }
 
-.menu-content button span {
-  color: cyan;
+.user-nav-button:hover {
+  @apply scale-105 shadow-lg;
 }
 
-.user-nav-button {
-  @apply flex items-center w-full text-left py-3 px-4 rounded-lg transition duration-200 bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 hover:from-slate-700 hover:to-gray-700 hover:scale-[1.02] shadow-sm border border-slate-700 hover:border-cyan-500;
+#logout-menu-button svg,
+#admin-menu-button svg {
+  @apply h-5 w-5 mr-2 text-cyan-300;
 }
+
+#user-nav-menu span {
+  @apply m-2 text-cyan-200;
+}
+
+/* Add a staggered animation for menu items */
+// .menu-content button {
+//   @apply opacity-0 translate-x-4;
+//   animation: fadeInSlideIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+// }
+// .menu-content button:nth-child(1) {
+//   animation-delay: 0.1s;
+// }
+// .menu-content button:nth-child(2) {
+//   animation-delay: 0.2s;
+// }
+// .menu-content button:nth-child(3) {
+//   animation-delay: 0.3s;
+// }

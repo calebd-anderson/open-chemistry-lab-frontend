@@ -1,26 +1,5 @@
 @use "@/tailwind.css";
 
-// Tailwind-based styling for app component with unique chemistry aesthetic
-#main-header {
-  @apply bg-gradient-to-r from-emerald-900 via-teal-800 to-cyan-900 shadow-lg px-3 flex justify-between items-center border-b border-cyan-700;
-}
-
-header svg {
-  @apply m-1 h-8 w-8 p-1 rounded-full cursor-pointer bg-gradient-to-br from-cyan-300 to-cyan-100 shadow-md;
-}
-
-header h1 {
-  @apply text-center text-lg font-bold text-cyan-100 tracking-wide;
-}
-
-.login-btn {
-  @apply bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-1 px-3 rounded-lg transition duration-300 transform hover:scale-105 shadow-md cursor-pointer;
-}
-
-#user-controls {
-  @apply flex items-center bg-gradient-to-r from-cyan-800 to-blue-900 p-2 m-2 rounded-xl w-fit h-fit justify-self-end self-center shadow-lg border border-cyan-700;
-}
-
 /* Ensure proper layout with sticky footer */
 body {
   @apply min-h-screen flex flex-col;
@@ -35,8 +14,6 @@ footer {
   @apply mt-auto;
 }
 
-
-
 /* Add smooth entrance animation */
 @keyframes slideIn {
   from {
@@ -47,93 +24,4 @@ footer {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-}
-
-#user-nav-menu {
-  animation: slideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-}
-
-/* Add a staggered animation for menu items */
-.menu-content button {
-  @apply opacity-0 translate-x-4;
-  animation: fadeInSlideIn 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-}
-
-.menu-content button:nth-child(1) { animation-delay: 0.1s; }
-.menu-content button:nth-child(2) { animation-delay: 0.2s; }
-.menu-content button:nth-child(3) { animation-delay: 0.3s; }
-
-@keyframes fadeInSlideIn {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Add a subtle hover effect */
-#user-nav-menu button {
-  @apply transition-all duration-300 ease-out;
-}
-
-#user-nav-menu button:hover {
-  @apply scale-105 shadow-lg;
-}
-
-/* Ensure the menu doesn't overflow */
-#user-nav-menu * {
-  box-sizing: border-box;
-}
-
-/* Remove scrolling and make menu fixed height */
-.menu-content {
-  max-height: none;
-  overflow-y: hidden;
-  overflow-x: hidden;
-}
-
-/* Ensure no scrollbars appear at all */
-#user-nav-menu {
-  overflow: hidden !important;
-}
-
-#nav-item1 {
-  @apply flex justify-between items-center mb-4;
-}
-
-#close-menu-button {
-  @apply text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110 rounded-full p-1;
-}
-
-#close-menu-button {
-  @apply text-cyan-300 hover:text-cyan-100 focus:outline-none transition duration-200 transform hover:scale-110 rounded-full p-1;
-}
-
-#close-menu-button svg {
-  @apply w-3 h-3;
-}
-
-#logout-menu-button svg, #admin-menu-button svg {
-  @apply h-5 w-5 mr-2 text-cyan-300;
-}
-
-#user-nav-menu button {
-  @apply bg-gradient-to-r from-slate-800 to-gray-800 text-cyan-100 m-1 py-2 px-4 rounded-lg hover:from-slate-700 hover:to-gray-700 transition duration-300 shadow-sm border border-slate-700 cursor-pointer;
-}
-
-#user-nav-menu span {
-  @apply m-2 text-cyan-200;
-}
-
-#user-nav-menu hr {
-  @apply w-5/6 my-2 border-slate-700;
-}
-
-/* Add a modern pulse animation for profile button when clicked */
-.profileInfo button {
-  @apply transition-all duration-300 ease-in-out cursor-pointer;
-}
-
-.profileInfo button:active {
-  transform: scale(0.95);
-  box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
 }

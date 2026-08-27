@@ -1,10 +1,11 @@
 <!-- Navigation menu that only appears when user is logged in -->
 <nav id="user-nav-menu">
-    <div class="flex justify-between items-center mb-4">
-        <span class="font-semibold text-cyan-100 text-lg">{{ user()?.firstName }}</span>
+    <div class="menu-heading">
+        <span class="font-semibold text-cyan-100 text-lg">{{ user()?.username }}</span>
+        <span class="text-cyan-100 text-sm">{{ user()?.firstName }}</span>
     </div>
 
-    <hr class="my-2 border-slate-700" />
+    <hr />
 
     <div class="menu-content">
         <button (click)="onClickProfile()" type="button" class="user-nav-button">
@@ -19,14 +20,14 @@
         </button>
 
         <div [hidden]="!isAdmin" id="admin-menu">
-            <hr class="my-2 border-slate-700" />
+            <hr />
             <button id="admin-menu-button" routerLink="/user/management" type="button" class="user-nav-button">
                 <svg admin-icon class="w-5 h-5 mr-3 text-cyan-300"></svg>
                 User Management
             </button>
         </div>
 
-        <hr class="my-2 border-slate-700" />
+        <hr />
 
         <button id="logout-menu-button" [hidden]="!authenticationService.getIsLoggedIn()" (click)="onClickLogout()"
             type="button" class="user-nav-button">
