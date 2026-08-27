@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, computed } from '@angular/core';
 import { Role } from '../../model/enum/role.enum';
 import { AuthenticationService } from './authentication.service';
 
@@ -8,20 +8,15 @@ import { AuthenticationService } from './authentication.service';
 export class AuthorizationService {
   constructor(private authService: AuthenticationService) {}
 
-  public get isAdmin(): boolean {
-    if (this.authService.isUserLoggedIn())
-      return (
-        this.getUserRole() === Role.ADMIN ||
-        this.getUserRole() === Role.SUPER_ADMIN
-      );
-    else return false;
-  }
+  public readonly isAdmin = computed(() => {
+    const user = this.authService.user();
+    return user ? (user.role === Role.ADMIN || user.role === Role.SUPER_ADMIN) : false;
+  });
 
-  public get isManager(): boolean {
-    return this.isAdmin || this.getUserRole() === Role.MANAGER;
-  }
+  public readonly isManager = computed(() => {
+    const user = this.authService.user();
+    return user ? (user.role === Role.ADMIN || user.role === Role.SUPER_ADMIN || user.role === Role.MANAGER) : false;
+  });
 
-  public getUserRole(): string {
-    return this.authService.getUserFromLocalCache().role;
-  }
+  public readonly userRole = computed(() => this.authService.user()?.role || '');
 }

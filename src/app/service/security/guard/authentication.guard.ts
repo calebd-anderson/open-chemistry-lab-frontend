@@ -3,7 +3,6 @@ import {
   ActivatedRouteSnapshot,
   Router,
   RouterStateSnapshot,
-  UrlTree,
 } from '@angular/router';
 import { NotificationType } from '../../../model/enum/notification-type.enum';
 import { AuthenticationService } from '../authentication.service';
@@ -21,18 +20,6 @@ export class AuthenticationGuard {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean {
-    return this.isUserLoggedIn();
-  }
-
-  private isUserLoggedIn(): boolean {
-    if (this.authenticationService.isUserLoggedIn()) {
-      return true;
-    }
-    this.router.navigate(['/lab']);
-    this.notificationService.notify(
-      NotificationType.ERROR,
-      'You need to login to access that page.'.toUpperCase()
-    );
-    return false;
+    return this.authenticationService.isLoggedIn();
   }
 }

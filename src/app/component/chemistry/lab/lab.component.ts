@@ -11,6 +11,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ValidationModalComponent } from '../experiment/validation-modal/validation-modal.component';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Reaction } from '@app/model/compound';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lab',
@@ -118,10 +119,10 @@ export class LabComponent {
     // Add synthetic delay after flask animation starts but before API request
     setTimeout(() => {
       // to do: the subscribe method should call back an HTTP error that sends a front-end notification
-      if (this.authenticationService.isUserLoggedIn()) {
+      if (this.authenticationService.isLoggedIn()) {
         let payload = {
           elements,
-          userId: this.authenticationService.getUserFromLocalCache().userId,
+          userId: this.authenticationService.user()?.userId || null,
         };
         // careful of memory leak
         this.compoundService.validate(payload).subscribe({
@@ -178,6 +179,10 @@ export class LabComponent {
     response: HttpResponse<Reaction>,
     isLoggedIn: boolean
   ) {
+    this.dialogRef = this.asyncDialog(response, isLoggedIn);
+  }
+
+  private asyncDialog(response: HttpResponse<Reaction>, isLoggedIn: boolean) {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
       disableClose: false,
     });
@@ -189,6 +194,7 @@ export class LabComponent {
       this.dialogRef.componentInstance.isLoggedIn =
         'Create an account to save your discovery!';
     }
+    return this.dialogRef;
   }
 
   // Toggle the periodic table visibility

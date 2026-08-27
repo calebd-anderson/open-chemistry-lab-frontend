@@ -3,7 +3,7 @@ import { LogoutIcon } from '@/app/component/user-manager/user-nav/logout.compone
 import { User } from '@/app/model/user';
 import { AuthenticationService } from '@/app/service/security/authentication.service';
 import { AuthorizationService } from '@/app/service/security/authorization.service';
-import { Component, inject, input, model } from '@angular/core';
+import { Component, inject, model } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -24,11 +24,6 @@ export class UserNavComponent {
   user = model<User | null>();
   isMenuOpen = false;
 
-  public get isAdmin(): boolean {
-    if (this.user()) return this.authorizationService.isAdmin;
-    else return false;
-  }
-
   public onClickProfile(): void {
     this.router.navigate(['/profile']);
     // Don't close the menu when navigating to profile
@@ -39,10 +34,5 @@ export class UserNavComponent {
     this.authenticationService.logOut();
     this.user.set(null);
     this.router.navigate(['lab']);
-    // this.openMenu();
-    // this.sendNotification(
-    //   NotificationType.SUCCESS,
-    //   "You've been successfully logged out.",
-    // );
   }
 }

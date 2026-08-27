@@ -19,17 +19,17 @@
             Profile
         </button>
 
-        <div [hidden]="!this.authorizationService.isAdmin" id="admin-menu">
+        <div [hidden]="!authorizationService.isAdmin()" id="admin-menu">
             <hr />
             <button id="admin-menu-button" routerLink="/user/management" type="button" class="user-nav-button">
-                <svg admin-icon class="w-5 h-5 mr-3 text-cyan-300"></svg>
+                <svg admin-icon class="w-5 h5 mr-3 text-cyan-300"></svg>
                 User Management
             </button>
         </div>
 
         <hr />
 
-        <button id="logout-menu-button" [hidden]="!authenticationService.getIsLoggedIn()" (click)="onClickLogout()"
+        <button id="logout-menu-button" [hidden]="!authenticationService.isLoggedIn()" (click)="onClickLogout()"
             type="button" class="user-nav-button">
             <svg logout-icon class="w-5 h-5 mr-3 text-cyan-300"></svg>
             Logout
