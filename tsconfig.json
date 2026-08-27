@@ -11,6 +11,9 @@
       "@/*": ["./src/*"],
       "@app/*": ["./src/app/*"],
       // "@lib/*": ["./src/lib/*"],
+      "@component/*": ["./src/app/component/*"],
+      "@service/*": ["./src/app/service/*"],
+      "@model/*": ["./src/app/model/*"],
       "@environments/*": ["./src/environments/*"]
     },
     "esModuleInterop": true,
