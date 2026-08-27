@@ -81,7 +81,10 @@ export class UserComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.user = this.authenticationService.getUserFromLocalCache();
+    const cachedUser = this.authenticationService.getUserFromLocalCache();
+    if (cachedUser) {
+      this.user = cachedUser;
+    }
   }
 
   onNoClick(): void {
@@ -155,9 +158,7 @@ export class UserComponent implements OnInit, OnDestroy {
         break;
       case HttpEventType.Response:
         if (event.status === 200) {
-          this.user.profileImgUrl = `${
-            event.body.profileImgUrl
-          }?time=${new Date().getTime()}`;
+          this.user.profileImgUrl = `${event.body.profileImgUrl}?time=${new Date().getTime()}`;
           this.notificationService.notify(
             NotificationType.SUCCESS,
             `${event.body.firstName}\'s profile image updated successfully.`,
@@ -215,7 +216,8 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public get currentUsername(): string {
-    return this.authenticationService.getUserFromLocalCache().username;
+    const user = this.authenticationService.getUserFromLocalCache();
+    return user?.username || '';
   }
 
   ngOnDestroy(): void {

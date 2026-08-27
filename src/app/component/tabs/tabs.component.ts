@@ -17,13 +17,11 @@ export class TabsComponent {
   tabLinks: Signal<itablink[]> = computed(() => this.populateTabs());
 
   private get isAdmin(): boolean {
-    if (this.authenticationService.getIsLoggedIn())
-      return this.authorizationService.isAdmin;
-    else return false;
+    return this.authorizationService.isAdmin();
   }
 
   private populateTabs(): itablink[] {
-    if (!this.authenticationService.getIsLoggedIn()) {
+    if (!this.authenticationService.isLoggedIn()) {
       // not logged in
       let excludeTabs = [
         'globaldiscoveries',

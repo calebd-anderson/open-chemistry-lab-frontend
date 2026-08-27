@@ -33,7 +33,13 @@ export class FlashcardComponent implements OnInit {
   }
 
   loadFlashcards(): void {
-    const userId = this.authenticationService.getUserFromLocalCache().userId;
+    const user = this.authenticationService.getUserFromLocalCache();
+    if (!user || !user.userId) {
+      this.router.navigateByUrl('/lab');
+      return;
+    }
+
+    const userId = user.userId;
     this.service.getFlashcardsByUserId(userId).subscribe({
       next: (response: Flashcard[]) => {
         this.flashcards = response.sort((a, b) => a.id! - b.id!);
@@ -52,13 +58,8 @@ export class FlashcardComponent implements OnInit {
   }
 
   flipCard(flashcardId: number): void {
-    // if (this.flashcards[flashcardId]) {
-    //   const card = this.flashcards[flashcardId];
-    //   card.flipped = !card.flipped;
+    if (!this.flashcards[flashcardId]) return;
 
-    //   // Re-fetch to get latest state from API if needed
-    //   setTimeout(() => this.loadFlashcards(), 100);
-    // }
     if (!this.flashcards[flashcardId]['flipped']) {
       document.getElementById(String(flashcardId))?.classList.add('flip');
       this.flashcards[flashcardId]['flipped'] = true;
@@ -69,7 +70,16 @@ export class FlashcardComponent implements OnInit {
   }
 
   public createFlashcard(flashcard: CreateFlashcardInput): void {
-    const userId = this.authenticationService.getUserFromLocalCache().userId;
+    const user = this.authenticationService.getUserFromLocalCache();
+    if (!user || !user.userId) {
+      this.notificationService.notify(
+        NotificationType.ERROR,
+        'You must be logged in to create flashcards.',
+      );
+      return;
+    }
+
+    const userId = user.userId;
 
     flashcard.userId = userId;
 

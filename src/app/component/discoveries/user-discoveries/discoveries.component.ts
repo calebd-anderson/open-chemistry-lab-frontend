@@ -27,18 +27,25 @@ export class DiscoveriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    let userId: string = this.authenticationService.getUserFromLocalCache().userId
-    this.subs.add(
-      this.compoundService.getUserDiscoveries(userId).subscribe({
-        next: (response: UserReaction[]) => {
-          this.userReactions = response;
-          this.loading = false;
-        },
-        error: (errorResponse: HttpErrorResponse) => {
-          this._snackBar.notify(NotificationType.ERROR, "Failed to get user discoveries.");
-          this.loading = false;
-        }
-      })
-    );
+    const user = this.authenticationService.getUserFromLocalCache();
+
+    if (user && user.userId) {
+      const userId = user.userId;
+      this.subs.add(
+        this.compoundService.getUserDiscoveries(userId).subscribe({
+          next: (response: UserReaction[]) => {
+            this.userReactions = response;
+            this.loading = false;
+          },
+	        error: (errorResponse: HttpErrorResponse) => {
+            this._snackBar.notify(NotificationType.ERROR, "Failed to get user discoveries.");
+            this.loading = false;
+          },
+        })
+      );
+    } else {
+      this.loading = false;
+      this._snackBar.notify(NotificationType.WARNING, "You must be logged in to see your discoveries.");
+    }
   }
 }

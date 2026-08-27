@@ -29,7 +29,7 @@ import { MainHeaderComponent } from './component/main-header/main-header.compone
   ],
 })
 export class AppComponent implements OnInit {
-  protected user: WritableSignal<User> = signal<User>(new User());
+  protected user: WritableSignal<User | null> = signal<User | null>(null);
 
   public authenticationService: AuthenticationService = inject(
     AuthenticationService,
@@ -38,17 +38,19 @@ export class AppComponent implements OnInit {
   private notificationService: NotificationService =
     inject(NotificationService);
 
-  public isLoggedIn: boolean = this.authenticationService.getIsLoggedIn();
+  public isLoggedIn: boolean = this.authenticationService.isLoggedIn();
 
   readonly dialog = inject(MatDialog);
   private readonly router = inject(Router);
 
   ngOnInit(): void {
-    const loginStatus = this.authenticationService.getIsLoggedIn();
+    const loginStatus = this.authenticationService.isLoggedIn();
     if (loginStatus) {
       this.isLoggedIn = true;
-      let user: User = this.authenticationService.getUserFromLocalCache();
-      this.user.set(user);
+      let user = this.authenticationService.getUserFromLocalCache();
+      if (user) {
+        this.user.set(user);
+      }
     }
   }
 

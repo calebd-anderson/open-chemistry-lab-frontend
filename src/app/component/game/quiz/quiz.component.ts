@@ -30,15 +30,20 @@ export class QuizComponent implements OnInit {
   constructor(private quizService: QuizService) {}
 
   ngOnInit(): void {
+    const user = this.authenticationService.getUserFromLocalCache();
+    if (!user || !user.userId) {
+      return;
+	  }
+
     this.quizService
-      .getQuizByUserId(
-        this.authenticationService.getUserFromLocalCache().userId,
-      )
+      .getQuizByUserId(user.userId)
       .subscribe((data) => {
         this.quizzes = data;
-        this.random = Math.floor(
-          Math.random() * this.quizzes[0].questionAnswerList.length,
-        );
+        if (this.quizzes.length > 0) {
+          this.random = Math.floor(
+            Math.random() * this.quizzes[0].questionAnswerList.length,
+          );
+        }
       });
   }
 
@@ -47,9 +52,11 @@ export class QuizComponent implements OnInit {
 
     setTimeout(() => {
       this.currentQuiz++;
-      this.random = Math.floor(
-        Math.random() * this.quizzes[0].questionAnswerList.length,
-      );
+      if (this.quizzes.length > 0) {
+        this.random = Math.floor(
+          Math.random() * this.quizzes[0].questionAnswerList.length,
+        );
+      }
       this.answerSelected = false;
       // unselect radio buttons
       for (let i = 0; i < document.getElementsByName('answers').length; i++) {
@@ -61,8 +68,8 @@ export class QuizComponent implements OnInit {
     }, 6000);
 
     if (
-      form.value.answers ==
-      this.quizzes[this.random]?.questionAnswerList[this.random].answer
+      this.quizzes[this.random]?.questionAnswerList[this.random].answer ==
+      form.value.answers
     ) {
       this.correctAnswers++;
       return true;

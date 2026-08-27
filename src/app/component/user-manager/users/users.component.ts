@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
+import { CommonModule } from '@angular/common';
 
 interface TableDef {
   id: string;
@@ -35,6 +36,7 @@ interface TableDef {
     MatIconModule,
     MatChipsModule,
     MatTableModule,
+    CommonModule,
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
@@ -71,7 +73,10 @@ export class UsersComponent {
   columnsToDisplay: string[] = this.tableDef.map((data) => data.id);
 
   ngOnInit(): void {
-    this.user = this.authenticationService.getUserFromLocalCache();
+    const cachedUser = this.authenticationService.getUserFromLocalCache();
+    if (cachedUser) {
+      this.user = cachedUser;
+    }
     this.getUsers(true);
   }
 
@@ -114,7 +119,6 @@ export class UsersComponent {
   public onSelectUser(selectedUser: User): void {
     // this.selectedUser = selectedUser;
     // this.clickButton('openUserInfo');
-
     const dialogRef = this.dialog.open(UserComponent, {
       data: { user: selectedUser },
     });
@@ -151,7 +155,7 @@ export class UsersComponent {
 
   public onEditUser(event: MouseEvent, editUser: User): void {
     event.stopPropagation();
-    // this.editUser = editUser;
+    // this.editUser = edit
     // this.clickButton('openUserEdit');
     const dialogRef = this.dialog.open(EditUserComponent, {
       data: { user: editUser },
@@ -185,6 +189,11 @@ export class UsersComponent {
   }
 
   public get currentUsername(): string {
-    return this.authenticationService.getUserFromLocalCache().username;
+    const user = this.authenticationService.getUserFromLocalCache();
+    return user?.username || '';
+  }
+
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

@@ -7,7 +7,7 @@ import { NotificationType } from '../../model/enum/notification-type.enum';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
   constructor(
@@ -21,23 +21,23 @@ export class FooterComponent {
   }
 
   goToDiscoveries() {
-    if (this.authenticationService.getIsLoggedIn()) {
-      this.router.navigate(['/discoveries']);
+    if (this.authenticationService.isLoggedIn()) {
+      this.router.navigate(['/discover/discoveries']);
     } else {
       this.notificationService.notify(NotificationType.INFO, 'Please create an account to access your discoveries.');
     }
   }
 
   goToGlobalDiscoveries() {
-    if (this.authenticationService.getIsLoggedIn()) {
-      this.router.navigate(['/globaldiscoveries']);
+    if (this.authenticationService.isLoggedIn()) {
+      this.router.navigate(['/discoveries/global']);
     } else {
       this.notificationService.notify(NotificationType.INFO, 'Please create an account to view global discoveries.');
     }
   }
 
   goToQuiz() {
-    if (this.authenticationService.getIsLoggedIn()) {
+    if (this.authenticationService.isLoggedIn()) {
       this.router.navigate(['/quiz']);
     } else {
       this.notificationService.notify(NotificationType.INFO, 'Please create an account to take quizzes.');
@@ -45,7 +45,7 @@ export class FooterComponent {
   }
 
   goToFlashcard() {
-    if (this.authenticationService.getIsLoggedIn()) {
+    if (this.authenticationService.isLoggedIn()) {
       this.router.navigate(['/flashcard']);
     } else {
       this.notificationService.notify(NotificationType.INFO, 'Please create an account to use flashcards.');

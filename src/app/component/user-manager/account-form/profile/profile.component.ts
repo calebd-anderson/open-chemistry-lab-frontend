@@ -37,8 +37,10 @@ export class ProfileComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    let user: User = this.authenticationService.getUserFromLocalCache();
-    this.user = user;
+    const cachedUser = this.authenticationService.getUserFromLocalCache();
+    if (cachedUser) {
+      this.user = cachedUser;
+    }
   }
 
   public onClickEdit(): void {
@@ -46,9 +48,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public get currentUsername(): string {
-    let username: string =
-      this.authenticationService.getUserFromLocalCache().username;
-    return username;
+    return this.authenticationService.getUserFromLocalCache()?.username || '';
   }
 
   public onUpdateCurrentUser(user: User): void {

@@ -2,7 +2,7 @@
 <div role="dialog" aria-labelledby="edit user modal" aria-hidden="true">
   <h2 mat-dialog-title>
     Edit {{ editUser.firstName }} {{ editUser.lastName }}
-    <small [hidden]="isManager">(read only)</small>
+    <small [hidden]="isManager()">(read only)</small>
   </h2>
   <mat-dialog-content>
     <form #editUserForm="ngForm">
@@ -18,7 +18,7 @@
             id="profileImage"
             type="file"
             accept="image/*"
-            [disabled]="!isManager"
+            [disabled]="!isManager()"
             name="profileImage"
             (change)="
               onProfileImageChange(
@@ -39,7 +39,7 @@
           id="firstName"
           type="text"
           name="firstName"
-          [disabled]="!isManager"
+          [disabled]="!isManager()"
           required
           [(ngModel)]="editUser.firstName"
         />
@@ -50,7 +50,7 @@
           id="lastName"
           type="text"
           name="lastName"
-          [disabled]="!isManager"
+          [disabled]="!isManager()"
           required
           [(ngModel)]="editUser.lastName"
         />
@@ -61,7 +61,7 @@
           id="username"
           type="text"
           name="username"
-          [disabled]="!isManager"
+          [disabled]="!isManager()"
           required
           [(ngModel)]="editUser.username"
         />
@@ -72,18 +72,16 @@
           id="email"
           type="email"
           name="email"
-          [disabled]="!isManager"
+          [disabled]="!isManager()"
           required
           [(ngModel)]="editUser.email"
         />
       </div>
       <div>
-        <label for="authority"
-          >Role <small [hidden]="isAdmin">(read only)</small></label
-        >
+        <label for="authority">Role <small [hidden]="isAdmin()">(read only)</small></label>
         <select
           name="role"
-          [disabled]="!isAdmin"
+          [disabled]="!isAdmin()"
           required
           [(ngModel)]="editUser.role"
         >
@@ -101,10 +99,10 @@
               id="active"
               name="active"
               type="checkbox"
-              [disabled]="!isManager"
+              [disabled]="!isManager()"
               [(ngModel)]="editUser.active"
             />
-            Acitve <small [hidden]="isManager">(read only)</small>
+            Acitve <small [hidden]="isManager()">(read only)</small>
           </label>
         </div>
         <div>
@@ -113,10 +111,10 @@
               id="locked"
               name="locked"
               type="checkbox"
-              [disabled]="!isManager"
+              [disabled]="!isManager()"
               [(ngModel)]="editUser.notLocked"
             />
-            Unlocked <small [hidden]="isManager">(read only)</small>
+            Unlocked <small [hidden]="isManager()">(read only)</small>
           </label>
         </div>
       </fieldset>
@@ -126,7 +124,7 @@
     <button
       type="button"
       (click)="onUpdateUser()"
-      [disabled]="!isManager || editUserForm.invalid"
+      [disabled]="!isManager() || editUserForm.invalid"
       matButton="elevated"
     >
       Save Changes

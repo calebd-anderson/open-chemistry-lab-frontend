@@ -34,7 +34,6 @@ import { MatButtonModule } from '@angular/material/button';
 export class LoginComponent implements OnDestroy {
   public showLoading: boolean = false;
   private subscriptions: Subscription[] = [];
-  public isLoggedIn: boolean = false;
   readonly dialog = inject(MatDialog);
   readonly dialogRef = inject(MatDialogRef<LoginComponent>);
 
@@ -63,7 +62,6 @@ export class LoginComponent implements OnDestroy {
           }
           this.router.navigateByUrl('lab');
           userForm.reset();
-          this.authenticationService.setIsLoggedIn(true);
           this.sendNotification(
             NotificationType.SUCCESS,
             "You've been successfully logged in.",
@@ -72,7 +70,6 @@ export class LoginComponent implements OnDestroy {
           this.showLoading = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this.authenticationService.setIsLoggedIn(false);
           this.sendNotification(
             NotificationType.ERROR,
             errorResponse.error.message,

@@ -14,18 +14,13 @@ import { AuthorizationService } from '@service/security/authorization.service';
   templateUrl: './global-discoveries.component.html',
   styleUrl: './global-discoveries.component.scss',
 })
-export class GlobalDiscoveriesComponent {
+export class GlobalDiscoveriesComponent implements OnInit {
   readonly compoundService = inject(CompoundService);
   readonly authenticationService = inject(AuthenticationService);
   readonly authorizationService = inject(AuthorizationService);
   readonly _snackBar = inject(NotificationService);
 
-  public isLoggedIn: boolean = false;
-
-  public get isAdmin(): boolean {
-    if (this.isLoggedIn) return this.authorizationService.isAdmin;
-    else return false;
-  }
+  public isAdmin: boolean = false;
 
   public discoveries: Reaction[] = [];
   public loading: boolean = false;
@@ -34,12 +29,7 @@ export class GlobalDiscoveriesComponent {
 
   ngOnInit(): void {
     this.loading = true;
-
-    if (this.authenticationService.isUserLoggedIn()) {
-      this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
-    }
+    this.isAdmin = this.authorizationService.isAdmin();
 
     this.subs.add(
       this.compoundService.getAllDiscoveries().subscribe({
