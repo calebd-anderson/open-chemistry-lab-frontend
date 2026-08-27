@@ -18,7 +18,7 @@ export class UserNavComponent {
   public authenticationService: AuthenticationService = inject(
     AuthenticationService,
   );
-  private authorizationService: AuthorizationService =
+  protected authorizationService: AuthorizationService =
     inject(AuthorizationService);
 
   user = model<User | null>();
