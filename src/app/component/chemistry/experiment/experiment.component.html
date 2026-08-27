@@ -1,9 +1,9 @@
-<article class="relative">
+<section>
   @if (experimentService.getIsActive()) {
     <mat-progress-bar mode="indeterminate" />
   }
   <div id="experiment-box">
-    <section
+    <div
       id="compound-test"
       [class.active]="elementsInCompound().length > 0"
     >
@@ -33,15 +33,17 @@
             (click)="runExperiment.emit()"
             class="experiment-button"
             id="run-btn"
+            type="button"
           >
-            <span>Run Experiment</span>
+            Run Experiment
           </button>
           <button
             (click)="clearExperiment.emit()"
             class="experiment-button"
             id="clear-btn"
+            type="button"
           >
-            <span>Clear Experiment</span>
+            Clear Experiment
           </button>
         </div>
       } @else {
@@ -53,9 +55,9 @@
           </p>
         </div>
       }
-    </section>
-    <section id="flask-container">
+    </div>
+    <div id="flask-container">
       <app-flask id="flask" />
-    </section>
+    </div>
   </div>
-</article>
+</section>

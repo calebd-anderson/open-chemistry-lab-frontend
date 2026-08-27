@@ -1,6 +1,5 @@
 <article class="lab-container" [class.tips-collapsed]="!isTipsExpanded()">
-  <header id="lab-header">
-
+  <hgroup id="lab-header">
     <h1 id="lab-title"> <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none"
         stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
         class="inline-block toggle-icon mr-2">
@@ -15,21 +14,21 @@
       Explore chemical compounds and reactions through interactive
       experimentation
     </p>
-  </header>
+  </hgroup>
 
   <div id="lab-content">
-    <section id="experiment-section">
-      <div id="instructions" class="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4">
+    <div id="experiment-section">
+      <aside id="instructions" class="p-4 bg-blue-50 rounded-lg border border-blue-200 mb-4">
         <p class="mb-3">
           Click on elements from the periodic table to add them to your
           experiment. Combine different elements to form compounds and see what
           happens when you run the experiment!
         </p>
-      </div>
+      </aside>
       <app-experiment [elementsInCompound]="elementsInCompound()" [isTableExpanded]="isTableExpanded()"
         (removeElement)="removeElementFromCompound($event.index)" (runExperiment)="validateCompound()"
         (clearExperiment)="clearExperiment()" />
-    </section>
+    </div>
 
     <!-- Tabbed Interface for Periodic Table and Tips -->
     <div id="tab-container" class="bg-white rounded-2xl shadow-xl p-4 border border-cyan-200">

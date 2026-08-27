@@ -35,38 +35,7 @@ footer {
   @apply mt-auto;
 }
 
-#user-nav-menu {
-  @apply bg-gradient-to-b from-slate-900 to-gray-900 shadow-2xl py-4 px-6 fixed z-50 transform transition-all duration-300 ease-in-out rounded-xl w-72 overflow-hidden;
-  @apply opacity-0 translate-y-5 pointer-events-none;
-  /* Ensure menu is positioned absolutely and not affected by Tailwind positioning */
-  position: absolute !important;
-  width: 18rem; /* 18rem = 288px */
-  border-radius: 1.25rem; /* rounded-xl */
-}
 
-#user-nav-menu.active {
-  @apply opacity-100 translate-y-0 pointer-events-auto;
-}
-
-/* Add a subtle shadow effect */
-#user-nav-menu::before {
-  content: '';
-  @apply absolute inset-0 bg-gradient-to-r from-slate-900/80 to-gray-900/80 rounded-xl shadow-xl;
-  z-index: -1;
-}
-
-/* Add a modern glow effect to the border */
-#user-nav-menu {
-  box-shadow:
-    0 0 15px rgba(34, 211, 238, 0.3),
-    0 0 30px rgba(34, 211, 238, 0.1);
-}
-
-#user-nav-menu.active {
-  box-shadow:
-    0 0 20px rgba(34, 211, 238, 0.5),
-    0 0 40px rgba(34, 211, 238, 0.2);
-}
 
 /* Add smooth entrance animation */
 @keyframes slideIn {

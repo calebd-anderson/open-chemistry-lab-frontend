@@ -15,11 +15,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { LoginComponent } from './component/user_manager/login/login.component';
 import { ChemLogo as ChemLogo } from './logo.component';
-import { CloseIcon } from './close.component.svg';
-import { LogoutIcon } from './logout.component.svg';
-import { AdminIcon } from './admin.component.svg';
 import { RegisterComponent } from './component/user_manager/register/register.component';
 import { FooterComponent } from './component/footer/footer.component';
+import { UserNavComponent } from './component/user_manager/user-nav/user-nav.component';
 
 @Component({
   selector: 'app-root',
@@ -28,22 +26,18 @@ import { FooterComponent } from './component/footer/footer.component';
   imports: [
     TabsComponent,
     RouterOutlet,
-    RouterLink,
     ChemLogo,
-    CloseIcon,
-    LogoutIcon,
-    AdminIcon,
     FooterComponent,
+    UserNavComponent
   ],
 })
 export class AppComponent implements OnInit {
-  readonly user: WritableSignal<User> = signal<User>(new User());
+  protected user: WritableSignal<User> = signal<User>(new User());
 
   public authenticationService: AuthenticationService = inject(
     AuthenticationService,
   );
-  private authorizationService: AuthorizationService =
-    inject(AuthorizationService);
+
   private notificationService: NotificationService =
     inject(NotificationService);
 
@@ -88,29 +82,6 @@ export class AppComponent implements OnInit {
     this.isLoggedIn = true;
   }
 
-  public onClickProfile(): void {
-    this.router.navigate(['/profile']);
-    // Don't close the menu when navigating to profile
-    // Just let it stay open
-  }
-
-  public onClickLogout(): void {
-    this.authenticationService.logOut();
-    this.isLoggedIn = false;
-    this.user.set(new User());
-    this.router.navigate(['lab']);
-    this.openMenu();
-    this.sendNotification(
-      NotificationType.SUCCESS,
-      "You've been successfully logged out.",
-    );
-  }
-
-  public get isAdmin(): boolean {
-    if (this.isLoggedIn) return this.authorizationService.isAdmin;
-    else return false;
-  }
-
   private sendNotification(
     notificationType: NotificationType,
     message: string,
@@ -142,42 +113,7 @@ export class AppComponent implements OnInit {
 
       // Toggle the menu
       menu.classList.toggle('active');
-      this.isMenuOpen = !this.isMenuOpen;
-
-      if (this.isMenuOpen) {
-        // Use setTimeout to ensure DOM is fully updated before positioning
-        setTimeout(() => {
-          // Calculate position directly beneath profile image
-          const profileButton = document.querySelector('.profileInfo button');
-          if (profileButton) {
-            const rect = profileButton.getBoundingClientRect();
-
-            let topPos = rect.bottom + 12; // Added margin underneath profile icon
-            let leftPos = rect.left + rect.width / 2 - menu.offsetWidth / 2;
-
-            // Ensure the menu stays within viewport bounds
-            const menuWidth = menu.offsetWidth;
-            if (leftPos < 0) {
-              leftPos = 0;
-            } else if (leftPos + menuWidth > window.innerWidth) {
-              leftPos = window.innerWidth - menuWidth;
-            }
-
-            // Add right margin to the menu for better positioning
-            // This will ensure it's not too close to the right edge
-            const rightMargin = 16; // 16px right margin
-            if (leftPos + menuWidth > window.innerWidth - rightMargin) {
-              leftPos = window.innerWidth - menuWidth - rightMargin;
-            }
-
-            // Position menu directly under the profile image, centered
-            menu.style.top = topPos + 'px';
-            menu.style.left = leftPos + 'px';
-          }
-        }, 0);
-
-        document.addEventListener('click', handleClickOutside);
-      }
+      console.log(menu.classList)
     }
   }
 }
