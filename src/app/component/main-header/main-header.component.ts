@@ -1,5 +1,5 @@
 import { Component, inject, model } from '@angular/core';
-import { ChemLogo } from '../../logo.component';
+import { ChemLogo } from '@app/assets/logo.component';
 import { User } from '../../model/user';
 import { AuthenticationService } from '../../service/security/authentication.service';
 import { LoginComponent } from '../user_manager/login/login.component';

@@ -1,11 +1,18 @@
-import { Component, inject, input, output, ElementRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  input,
+  output,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { Element } from '../../../model/element.model';
 
 import { FlaskComponent } from './flask/flask.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CommonModule } from '@angular/common';
 import { ExperimentService } from '@app/service/experiment.service';
-import { InfoIcon } from '@app/info-icon.component.svg';
+import { InfoIcon } from '@app/assets/info-icon.component.svg';
 
 interface RemoveElement {
   index: number;
@@ -13,17 +20,12 @@ interface RemoveElement {
 
 @Component({
   selector: 'app-experiment',
-  imports: [
-    FlaskComponent,
-    MatProgressBarModule,
-    CommonModule,
-    InfoIcon,
-  ],
+  imports: [FlaskComponent, MatProgressBarModule, CommonModule, InfoIcon],
   templateUrl: './experiment.component.html',
   styleUrls: ['./experiment.component.scss'],
 })
 export class ExperimentComponent implements AfterViewInit {
-  elementsInCompound = input.required<{element: Element, id: number}[]>();
+  elementsInCompound = input.required<{ element: Element; id: number }[]>();
   isTableExpanded = input<boolean>(false);
 
   removeElement = output<RemoveElement>();
@@ -39,7 +41,8 @@ export class ExperimentComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     // Add animation classes to elements when they're added
-    const compoundContainer = this.elementRef.nativeElement.querySelector('.compound');
+    const compoundContainer =
+      this.elementRef.nativeElement.querySelector('.compound');
     if (compoundContainer) {
       // Observe new elements being added
       const observer = new MutationObserver((mutations) => {
@@ -49,7 +52,10 @@ export class ExperimentComponent implements AfterViewInit {
               if (node.nodeType === 1) {
                 // Check if the node has the class we're looking for
                 const elementNode = node as HTMLElement;
-                if (elementNode.classList && elementNode.classList.contains('element-in-compound')) {
+                if (
+                  elementNode.classList &&
+                  elementNode.classList.contains('element-in-compound')
+                ) {
                   // Add animation class for new elements
                   setTimeout(() => {
                     elementNode.classList.add('add');
@@ -70,7 +76,9 @@ export class ExperimentComponent implements AfterViewInit {
 
   public removeElementFromCompound(i: number, element: Element) {
     // Add animation class for removing elements
-    const elementToRemove = this.elementRef.nativeElement.querySelector(`.element-in-compound[data-index="${i}"]`);
+    const elementToRemove = this.elementRef.nativeElement.querySelector(
+      `.element-in-compound[data-index="${i}"]`,
+    );
     if (elementToRemove) {
       elementToRemove.classList.add('remove');
       setTimeout(() => {
@@ -83,6 +91,8 @@ export class ExperimentComponent implements AfterViewInit {
 
   // Get the count of each element in the compound
   getElementCount(elementSymbol: string): number {
-    return this.elementsInCompound().filter(item => item.element.symbol === elementSymbol).length;
+    return this.elementsInCompound().filter(
+      (item) => item.element.symbol === elementSymbol,
+    ).length;
   }
 }
