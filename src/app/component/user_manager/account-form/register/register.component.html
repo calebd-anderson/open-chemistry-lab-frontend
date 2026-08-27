@@ -6,61 +6,46 @@
       <div class="mb-2">
         <div class="flex items-center border border-cyan-300 rounded-lg overflow-hidden bg-white">
           <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-user"></i></mat-label>
-          <input type="text"
-            [class.text-box-error]="!firstNameInput.pristine && firstNameInput.invalid"
-            name="firstName"
-            placeholder="First name"
-            required
-            [(ngModel)]="user.firstName"
-            #firstNameInput="ngModel"
+          <input type="text" [class.text-box-error]="!firstNameInput.pristine && firstNameInput.invalid"
+            name="firstName" placeholder="First name" required [(ngModel)]="user.firstName" #firstNameInput="ngModel"
             class="flex-1 px-3 py-2 focus:outline-none register-input" />
         </div>
-        <small [hidden]="firstNameInput.valid || firstNameInput.pristine" class="form-error">Please enter a first name.</small>
+        <small [hidden]="firstNameInput.valid || firstNameInput.pristine" class="form-error">Please enter a first
+          name.</small>
       </div>
 
       <!-- last name -->
       <div class="mb-2">
         <div class="flex items-center border border-cyan-300 rounded-lg overflow-hidden bg-white">
           <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-user"></i></mat-label>
-          <input type="text"
-            [class.text-box-error]="!lastNameInput.pristine && lastNameInput.invalid"
-            name="lastName"
-            placeholder="Last name"
-            required
-            [(ngModel)]="user.lastName"
-            #lastNameInput="ngModel"
+          <input type="text" [class.text-box-error]="!lastNameInput.pristine && lastNameInput.invalid" name="lastName"
+            placeholder="Last name" required [(ngModel)]="user.lastName" #lastNameInput="ngModel"
             class="flex-1 px-3 py-2 focus:outline-none register-input" />
         </div>
-        <small [hidden]="lastNameInput.valid || lastNameInput.pristine" class="form-error">Please enter a last name.</small>
+        <small [hidden]="lastNameInput.valid || lastNameInput.pristine" class="form-error">Please enter a last
+          name.</small>
       </div>
 
       <!-- username -->
       <div class="mb-2">
         <div class="flex items-center border border-cyan-300 rounded-lg overflow-hidden bg-white">
-          <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-id-card"></i></mat-label>
-          <input type="text"
-            name="username"
-            [class.text-box-error]="!usernameInput.pristine && usernameInput.invalid"
-            placeholder="Username"
-            required
-            [(ngModel)]="user.username"
-            #usernameInput="ngModel"
+          <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i
+              class="fa fa-id-card"></i></mat-label>
+          <input type="text" name="username" [class.text-box-error]="!usernameInput.pristine && usernameInput.invalid"
+            placeholder="Username" required [(ngModel)]="user.username" #usernameInput="ngModel"
             class="flex-1 px-3 py-2 focus:outline-none register-input" />
         </div>
-        <small [hidden]="usernameInput.valid || usernameInput.pristine" class="form-error">Please enter a username.</small>
+        <small [hidden]="usernameInput.valid || usernameInput.pristine" class="form-error">Please enter a
+          username.</small>
       </div>
 
       <!-- email -->
       <div class="mb-2">
         <div class="flex items-center border border-cyan-300 rounded-lg overflow-hidden bg-white">
-          <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-envelope"></i></mat-label>
-          <input type="email"
-            [class.text-box-error]="!emailInput.pristine && emailInput.invalid"
-            name="email"
-            placeholder="Email"
-            required
-            [(ngModel)]="user.email"
-            #emailInput="ngModel"
+          <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i
+              class="fa fa-envelope"></i></mat-label>
+          <input type="email" [class.text-box-error]="!emailInput.pristine && emailInput.invalid" name="email"
+            placeholder="Email" required [(ngModel)]="user.email" #emailInput="ngModel"
             class="flex-1 px-3 py-2 focus:outline-none register-input" />
         </div>
         <small [hidden]="emailInput.valid || emailInput.pristine" class="form-error">Please enter an email.</small>
@@ -70,16 +55,12 @@
       <div class="mb-2">
         <div class="flex items-center border border-cyan-300 rounded-lg overflow-hidden bg-white">
           <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-key"></i></mat-label>
-          <input type="password"
-            [class.text-box-error]="!passwordInput.pristine && passwordInput.invalid"
-            name="password"
-            placeholder="Password"
-            required
-            [(ngModel)]="user.password"
-            #passwordInput="ngModel"
+          <input type="password" [class.text-box-error]="!passwordInput.pristine && passwordInput.invalid"
+            name="password" placeholder="Password" required [(ngModel)]="user.password" #passwordInput="ngModel"
             class="flex-1 px-3 py-2 focus:outline-none register-input" />
         </div>
-        <small [hidden]="passwordInput.valid || passwordInput.pristine" class="form-error">Please enter a password.</small>
+        <small [hidden]="passwordInput.valid || passwordInput.pristine" class="form-error">Please enter a
+          password.</small>
       </div>
 
       <!-- register buttons -->
@@ -101,6 +82,7 @@
   </mat-dialog-content>
   <mat-dialog-actions class="flex items-center justify-between">
     Already have an account?
-    <button type="button" matButton (click)="onClickLogin()" class="text-cyan-600 hover:text-cyan-800 font-medium">Log In</button>
+    <button type="button" matButton (click)="onClickLogin()" class="text-cyan-600 hover:text-cyan-800 font-medium">Log
+      In</button>
   </mat-dialog-actions>
 </section>

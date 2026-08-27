@@ -1,18 +1,13 @@
-<section>
-  <h3 mat-dialog-title class="text-xl font-semibold text-cyan-800">Login</h3>
-  <mat-dialog-content class="mat-typography login-container">
+<div>
+  <h3 mat-dialog-title>Login</h3>
+  <mat-dialog-content class="login-container">
     <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" class="login-form">
       <div>
         <div class="mb-4">
           <div class="flex items-center border border-cyan-300 rounded-lg overflow-hidden bg-white">
-            <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-user"></i></mat-label>
-            <input type="text"
-              [class.text-box-error]="!usernameInput.pristine && usernameInput.invalid"
-              name="username"
-              placeholder="Username"
-              ngModel
-              #usernameInput="ngModel"
-              required
+            <span class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-user"></i></span>
+            <input type="text" [class.text-box-error]="!usernameInput.pristine && usernameInput.invalid" name="username"
+              placeholder="Username" ngModel #usernameInput="ngModel" required
               class="flex-1 px-3 py-2 focus:outline-none login-input" />
           </div>
           @if (usernameInput.invalid && usernameInput.touched) {
@@ -21,14 +16,9 @@
         </div>
         <div class="mb-4">
           <div class="flex items-center border border-cyan-300 rounded-lg overflow-hidden bg-white">
-            <mat-label class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-key"></i></mat-label>
-            <input type="password"
-              [class.text-box-error]="!passwordInput.pristine && passwordInput.invalid"
-              name="password"
-              placeholder="Password"
-              ngModel
-              #passwordInput="ngModel"
-              required
+            <span class="input-group-text bg-cyan-100 px-3 py-2 text-cyan-700"><i class="fa fa-key"></i></span>
+            <input type="password" [class.text-box-error]="!passwordInput.pristine && passwordInput.invalid"
+              name="password" placeholder="Password" ngModel #passwordInput="ngModel" required
               class="flex-1 px-3 py-2 focus:outline-none login-input" />
           </div>
           @if (passwordInput.invalid && passwordInput.touched) {
@@ -55,4 +45,4 @@
     Don't have an account yet?
     <button matButton (click)="onClickRegister()" class="links">Register</button>
   </mat-dialog-actions>
-</section>
+</div>

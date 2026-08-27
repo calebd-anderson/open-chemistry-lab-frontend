@@ -1,35 +1,3 @@
-<!-- <div>
-  <h5>Users Management</h5>
-  @if (titleAction$ | async; as title) {
-    <small>{{ title }}</small>
-  }
-</div> -->
-
-<!-- nav bar -->
-<!-- <nav>
-  <div id="navbarCollapse">
-    <div>
-      <a (click)="changeTitle('Users')" data-bs-toggle="tab" href="#users">
-        <i class="fa fa-users"></i>
-        Users
-      </a>
-      <a
-        [hidden]="!isManager"
-        (click)="changeTitle('Settings')"
-        data-bs-toggle="tab"
-        href="#reset-password"
-      >
-        <i class="fa fa-cogs"></i>
-        Settings
-      </a>
-      <a (click)="changeTitle('Profile')" data-bs-toggle="tab" href="#profile">
-        Welcome, {{ user?.firstName }}
-        <i class="fa fa-user"></i>
-      </a>
-    </div>
-  </div>
-</nav> -->
-
 <!-- modal user info -->
 <h2 mat-dialog-title>
   {{ selectedUser.firstName }} {{ selectedUser.lastName }}
@@ -45,12 +13,8 @@
           <div>
             <div>
               <div>
-                <img
-                  height="120"
-                  width="120"
-                  src="{{ selectedUser.profileImgUrl }}"
-                  alt="{{ selectedUser.firstName }}"
-                />
+                <img height="120" width="120" src="{{ selectedUser.profileImgUrl }}"
+                  alt="{{ selectedUser.firstName }}" />
               </div>
             </div>
           </div>
@@ -67,20 +31,16 @@
                 <span [hidden]="selectedUser.active">Inactive</span>
               </div>
               @if (selectedUser.lastLoginDate) {
-                <div>
-                  <small
-                    >Last Login:
-                    {{ selectedUser.lastLoginDate | date: "medium" }}</small
-                  >
-                </div>
+              <div>
+                <small>Last Login:
+                  {{ selectedUser.lastLoginDate | date: "medium" }}</small>
+              </div>
               }
             </div>
             <div>
               <div>
-                <small
-                  >Joined
-                  {{ selectedUser.joinDate | date: "mediumDate" }}</small
-                >
+                <small>Joined
+                  {{ selectedUser.joinDate | date: "mediumDate" }}</small>
               </div>
             </div>
           </div>
@@ -99,11 +59,11 @@
           <i class="fa fa-shield-alt"></i>
           {{ selectedUser.role.substring(5) }}
           @if (selectedUser.lastLoginDate) {
-            <li>
-              <i class="fa fa-sign-in-alt"></i>
-              {{ selectedUser.lastLoginDate | date: "medium" }}
-            </li>
-          }
+        <li>
+          <i class="fa fa-sign-in-alt"></i>
+          {{ selectedUser.lastLoginDate | date: "medium" }}
+        </li>
+        }
         </li>
 
         <li>

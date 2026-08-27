@@ -1,11 +1,11 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Subscription } from 'rxjs';
-import { NotificationType } from '../../../model/enum/notification-type.enum';
-import { User } from '../../../model/user';
-import { AuthenticationService } from '../../../service/security/authentication.service';
-import { NotificationService } from '../../../service/notification.service';
-import { UserRegisterDto } from '../../../model/user-register-dto';
+import { NotificationType } from '@model/enum/notification-type.enum';
+import { User } from '@model/user';
+import { AuthenticationService } from '@service/security/authentication.service';
+import { NotificationService } from '@service/notification.service';
+import { UserRegisterDto } from '@model/user-register-dto';
 import { FormsModule } from '@angular/forms';
 import {
   MatDialog,
@@ -33,18 +33,18 @@ export class RegisterComponent implements OnDestroy {
   private subscriptions: Subscription[] = [];
   readonly dialog = inject(MatDialog);
   readonly dialogRef = inject(MatDialogRef<RegisterComponent>);
-
-  constructor(
-    private authenticationService: AuthenticationService,
-    private notificationService: NotificationService,
-  ) {}
+  private authenticationService: AuthenticationService = inject(
+    AuthenticationService,
+  );
+  private notificationService: NotificationService =
+    inject(NotificationService);
 
   user: UserRegisterDto = {
     firstName: '',
     lastName: '',
     username: '',
     email: '',
-    password: ''
+    password: '',
   };
 
   public onRegister(user: UserRegisterDto): void {

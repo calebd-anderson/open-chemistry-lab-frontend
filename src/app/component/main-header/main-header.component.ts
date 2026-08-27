@@ -2,9 +2,9 @@ import { Component, inject, model } from '@angular/core';
 import { ChemLogo } from '@app/assets/logo.component';
 import { User } from '../../model/user';
 import { AuthenticationService } from '../../service/security/authentication.service';
-import { LoginComponent } from '../user_manager/login/login.component';
+import { LoginComponent } from '../user_manager/account-form/login/login.component';
 import { MatDialog } from '@angular/material/dialog';
-import { RegisterComponent } from '../user_manager/register/register.component';
+import { RegisterComponent } from '../user_manager/account-form/register/register.component';
 
 @Component({
   selector: 'app-main-header',

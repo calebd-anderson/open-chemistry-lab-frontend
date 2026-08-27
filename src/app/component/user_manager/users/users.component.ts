@@ -15,7 +15,7 @@ import { AuthorizationService } from '@app/service/security/authorization.servic
 import { CustomHttpResponse } from '@app/model/custom-http-response';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from '../edit-user/edit-user.component';
-import { UserComponent } from '../user/user.component';
+import { UserComponent } from '../user-card/user.component';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';

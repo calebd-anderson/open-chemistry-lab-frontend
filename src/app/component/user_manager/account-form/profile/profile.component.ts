@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../../model/user';
+import { Component, inject, OnInit } from '@angular/core';
+import { User } from '@model/user';
 import { Router } from '@angular/router';
-import { UserService } from '../../../service/user.service';
-import { AuthenticationService } from '../../../service/security/authentication.service';
-import { NotificationService } from '../../../service/notification.service';
-import { NotificationType } from '../../../model/enum/notification-type.enum';
+import { UserService } from '@service/user.service';
+import { AuthenticationService } from '@service/security/authentication.service';
+import { NotificationService } from '@service/notification.service';
+import { NotificationType } from '@model/enum/notification-type.enum';
 import {
   HttpErrorResponse,
   HttpEvent,
   HttpEventType,
 } from '@angular/common/http';
 import { SubSink } from 'subsink';
-import { FileUploadStatus } from '../../../model/file-upload-status';
+import { FileUploadStatus } from '@model/file-upload-status';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -27,13 +27,14 @@ export class ProfileComponent implements OnInit {
   public profileImg: File | undefined;
   public fileStatus = new FileUploadStatus();
   public edit: boolean = false;
+  private authenticationService: AuthenticationService = inject(
+    AuthenticationService,
+  );
+  private userService: UserService = inject(UserService);
+  private notificationService: NotificationService =
+    inject(NotificationService);
 
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService,
-    private userService: UserService,
-    private notificationService: NotificationService,
-  ) {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     let user: User = this.authenticationService.getUserFromLocalCache();
