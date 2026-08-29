@@ -5,7 +5,10 @@
     </div>
 
     <div id="user-controls">
+
         <div [hidden]="authenticationService.isLoggedIn()">
+            <!-- <button baseButton type="button" (click)="openLogin()">Login</button> -->
+            <!-- <app-button (click)="openLogin()">Login</app-button> -->
             <button (click)="openLogin()"
                 class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-medium py-1 px-3 rounded-lg transition duration-200 transform hover:scale-105 cursor-pointer"
                 type="button">

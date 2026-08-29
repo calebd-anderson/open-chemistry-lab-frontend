@@ -1,7 +1,7 @@
 import { Component, inject, model } from '@angular/core';
 import { ChemLogo } from '@app/assets/logo.component';
-import { User } from '../../model/user';
-import { AuthenticationService } from '../../service/security/authentication.service';
+import { User } from '@model/user';
+import { AuthenticationService } from '@service/security/authentication.service';
 import { LoginComponent } from '../user-manager/account-form/login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../user-manager/account-form/register/register.component';

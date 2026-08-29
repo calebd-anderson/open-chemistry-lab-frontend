@@ -6,7 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
 } from '@angular/core';
-import { Element } from '../../../model/element.model';
+import { Element } from '@model/element.model';
 
 import { FlaskComponent } from './flask/flask.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';

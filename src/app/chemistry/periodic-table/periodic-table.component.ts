@@ -1,8 +1,8 @@
 import { Component, inject, output, signal, Signal } from '@angular/core';
-import { Element } from '../../../model/element.model';
-import { ElementService } from '../../../service/element.service';
-import { NotificationService } from '../../../service/notification.service';
-import { NotificationType } from '../../../model/enum/notification-type.enum';
+import { Element } from '@model/element.model';
+import { ElementService } from '@service/element.service';
+import { NotificationService } from '@service/notification.service';
+import { NotificationType } from '@model/enum/notification-type.enum';
 import { CommonModule } from '@angular/common';
 
 @Component({

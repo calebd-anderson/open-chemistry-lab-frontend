@@ -1,10 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Quiz } from '../../../model/quiz';
-import { QuizService } from '../../../service/quiz.service';
+import { Quiz } from '@model/quiz';
+import { QuizService } from '@service/quiz.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AuthenticationService } from '../../../service/security/authentication.service';
-import { NotificationType } from '../../../model/enum/notification-type.enum';
-import { NotificationService } from '../../../service/notification.service';
+import { AuthenticationService } from '@service/security/authentication.service';
+import { NotificationType } from '@model/enum/notification-type.enum';
+import { NotificationService } from '@service/notification.service';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
@@ -33,18 +33,16 @@ export class QuizComponent implements OnInit {
     const user = this.authenticationService.getUserFromLocalCache();
     if (!user || !user.userId) {
       return;
-	  }
+    }
 
-    this.quizService
-      .getQuizByUserId(user.userId)
-      .subscribe((data) => {
-        this.quizzes = data;
-        if (this.quizzes.length > 0) {
-          this.random = Math.floor(
-            Math.random() * this.quizzes[0].questionAnswerList.length,
-          );
-        }
-      });
+    this.quizService.getQuizByUserId(user.userId).subscribe((data) => {
+      this.quizzes = data;
+      if (this.quizzes.length > 0) {
+        this.random = Math.floor(
+          Math.random() * this.quizzes[0].questionAnswerList.length,
+        );
+      }
+    });
   }
 
   onSubmit(form: NgForm) {
