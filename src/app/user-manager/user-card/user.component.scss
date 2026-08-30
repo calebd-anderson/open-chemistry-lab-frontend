@@ -1,0 +1,88 @@
+@use "@/tailwind.css";
+
+:host {
+  display: block;
+}
+
+.user-detail-panel {
+  @apply rounded-2xl border border-slate-200 bg-white/95 text-slate-800 shadow-[0_24px_80px_rgba(15,23,42,0.17)];
+  background-image:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(239, 246, 255, 0.96));
+}
+
+.detail-hero {
+  @apply flex items-center gap-4 border-b border-slate-200 px-6 pb-5 pt-5;
+}
+
+.detail-avatar-wrap {
+  @apply overflow-hidden rounded-2xl border border-white bg-slate-100 p-1 shadow-sm ring-4 ring-cyan-50;
+}
+
+.detail-avatar {
+  @apply h-20 w-20 rounded-2xl object-cover;
+}
+
+.detail-summary {
+  @apply flex-1;
+}
+
+.eyebrow {
+  @apply mb-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-600;
+}
+
+.detail-summary h2 {
+  @apply m-0 text-2xl font-semibold tracking-tight text-slate-900;
+}
+
+.username {
+  @apply mt-1 text-sm text-slate-500;
+}
+
+.status-row {
+  @apply mt-3 flex flex-wrap gap-2;
+}
+
+.status-badge {
+  @apply inline-flex items-center rounded-full border px-2.5 py-1 text-[11px] font-semibold uppercase tracking-[0.1em];
+}
+
+.status-badge.active {
+  @apply border-emerald-200 bg-emerald-50 text-emerald-700;
+}
+
+.status-badge.inactive {
+  @apply border-amber-200 bg-amber-50 text-amber-700;
+}
+
+.status-badge.subtle {
+  @apply border-sky-200 bg-sky-50 text-sky-700;
+}
+
+:host ::ng-deep .mat-mdc-dialog-content {
+  @apply p-0;
+}
+
+.detail-list {
+  @apply grid gap-3 p-6;
+}
+
+.detail-item {
+  @apply flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50/80 px-3.5 py-3;
+}
+
+.label {
+  @apply text-xs font-semibold uppercase tracking-[0.18em] text-slate-500;
+}
+
+.value {
+  @apply text-sm font-medium text-slate-800;
+}
+
+:host ::ng-deep .mat-mdc-dialog-actions {
+  @apply flex justify-end gap-3 border-t border-slate-200 bg-slate-50/80 px-6 py-4;
+}
+
+.secondary-action {
+  @apply rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-slate-300 hover:bg-slate-100;
+}

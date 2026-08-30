@@ -1,0 +1,124 @@
+@use "@/tailwind.css";
+
+:host {
+  display: block;
+}
+
+.user-dialog-panel {
+  @apply rounded-2xl border border-slate-200 bg-white/95 text-slate-800 shadow-[0_24px_80px_rgba(15,23,42,0.17)];
+  background-image:
+    radial-gradient(circle at top left, rgba(14, 165, 233, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(239, 246, 255, 0.96));
+}
+
+.dialog-header {
+  @apply flex items-start justify-between gap-4 border-b border-slate-200 px-6 pb-4 pt-5;
+}
+
+.eyebrow {
+  @apply m-0 text-[10px] font-semibold uppercase tracking-[0.22em] text-cyan-600;
+}
+
+.dialog-header h2 {
+  @apply m-0 text-2xl font-semibold tracking-tight text-slate-900;
+}
+
+.header-badge {
+  @apply inline-flex items-center rounded-full border border-cyan-200 bg-cyan-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-700;
+}
+
+.user-form {
+  @apply space-y-5 px-6 py-5;
+}
+
+.field-grid {
+  @apply grid gap-4 md:grid-cols-2;
+}
+
+.field-group {
+  @apply flex flex-col gap-2;
+}
+
+.field-group.full-span {
+  @apply md:col-span-2;
+}
+
+.field-group label,
+.upload-header,
+.check-item label {
+  @apply text-sm font-medium text-slate-700;
+}
+
+.field-group input,
+.field-group select {
+  @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-900 shadow-sm transition-all duration-200 ease-out placeholder:text-slate-400 focus:border-cyan-500 focus:outline-none focus:ring-4 focus:ring-cyan-100;
+}
+
+.field-group input:disabled,
+.field-group select:disabled {
+  @apply cursor-not-allowed border-slate-200 bg-slate-100 text-slate-500;
+}
+
+.upload-card {
+  @apply rounded-2xl border border-slate-200 bg-slate-50/80 p-3;
+}
+
+.upload-header {
+  @apply mb-2 flex items-center justify-between text-xs uppercase tracking-[0.16em] text-slate-500;
+}
+
+.upload-dropzone {
+  @apply relative block overflow-hidden rounded-xl border border-dashed border-cyan-300 bg-gradient-to-r from-cyan-50 to-sky-50 px-4 py-3 transition-all duration-200 ease-out hover:border-cyan-500 hover:shadow-[0_0_0_4px_rgba(14,165,233,0.08)];
+}
+
+.upload-dropzone input {
+  @apply absolute inset-0 h-full w-full cursor-pointer opacity-0;
+}
+
+.upload-label {
+  @apply flex flex-col gap-1;
+}
+
+.upload-label strong {
+  @apply text-sm font-semibold text-slate-800;
+}
+
+.upload-label em {
+  @apply not-italic text-xs text-slate-500;
+}
+
+.checkbox-grid {
+  @apply grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-3 md:grid-cols-2;
+}
+
+.check-item label {
+  @apply flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700;
+}
+
+.check-item input {
+  @apply h-4 w-4 accent-cyan-600;
+}
+
+.check-item small {
+  @apply text-[11px] text-slate-400;
+}
+
+:host ::ng-deep .mat-mdc-dialog-surface {
+  @apply overflow-hidden rounded-2xl border border-slate-200 bg-transparent shadow-none;
+}
+
+:host ::ng-deep .mat-mdc-dialog-content {
+  @apply p-0;
+}
+
+:host ::ng-deep .mat-mdc-dialog-actions {
+  @apply flex items-center justify-end gap-3 border-t border-slate-200 bg-slate-50/80 px-6 py-4;
+}
+
+.primary-action {
+  @apply rounded-xl bg-gradient-to-r from-sky-600 via-cyan-600 to-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_12px_28px_rgba(14,116,144,0.25)] transition-all duration-200 ease-out hover:from-sky-500 hover:via-cyan-500 hover:to-blue-500 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.secondary-action {
+  @apply rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition-all duration-200 ease-out hover:border-slate-300 hover:bg-slate-100;
+}

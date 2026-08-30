@@ -1,99 +1,115 @@
 <!-- modal edit user -->
-<div role="dialog" aria-labelledby="edit user modal" aria-hidden="true">
-  <h2 mat-dialog-title>
-    Edit {{ editUser.firstName }} {{ editUser.lastName }}
-    <small [hidden]="isManager()">(read only)</small>
-  </h2>
+<div class="user-dialog-panel" role="dialog" aria-labelledby="edit user modal" aria-hidden="true">
+  <div class="dialog-header">
+    <div>
+      <p class="eyebrow">Profile settings</p>
+      <h2 mat-dialog-title>
+        Edit {{ editUser.firstName }} {{ editUser.lastName }}
+      </h2>
+    </div>
+    <span class="header-badge" [hidden]="!isManager()">Active</span>
+  </div>
+
   <mat-dialog-content>
-    <form #editUserForm="ngForm">
-      <div>
+    <form #editUserForm="ngForm" class="user-form">
+      <div class="identity-card">
         <img
-          height="120"
-          width="120"
-          src="{{ editUser.profileImgUrl }}"
-          alt="{{ editUser.firstName }}"
+          class="avatar"
+          [src]="editUser.profileImgUrl"
+          [alt]="editUser.firstName"
         />
-        <div>
-          <input
-            id="profileImage"
-            type="file"
-            accept="image/*"
-            [disabled]="!isManager()"
-            name="profileImage"
-            (change)="
-              onProfileImageChange(
-                $any($event.target).files[0].name,
-                $any($event.target).files[0]
-              )
-            "
-          />
-          <label for="profileImage">
-            <span [hidden]="!fileName">{{ fileName }}</span>
-            <span [hidden]="fileName">Profile Picture</span>
+
+        <div class="upload-card compact">
+          <div class="upload-header">
+            <span>Profile Photo</span>
+            <small [hidden]="isManager()">Read only</small>
+          </div>
+
+          <label class="upload-dropzone slim" for="profileImage">
+            <input
+              id="profileImage"
+              type="file"
+              accept="image/*"
+              [disabled]="!isManager()"
+              name="profileImage"
+              (change)="
+                onProfileImageChange(
+                  $any($event.target).files[0].name,
+                  $any($event.target).files[0]
+                )
+              "
+            />
+            <span class="upload-label">
+              <strong>{{ fileName === '?' ? 'Replace image' : fileName }}</strong>
+              <em>PNG, JPG, or WEBP</em>
+            </span>
           </label>
         </div>
       </div>
-      <div>
-        <label for="firstName">First Name</label>
-        <input
-          id="firstName"
-          type="text"
-          name="firstName"
-          [disabled]="!isManager()"
-          required
-          [(ngModel)]="editUser.firstName"
-        />
+
+      <div class="field-grid">
+        <div class="field-group">
+          <label for="firstName">First Name</label>
+          <input
+            id="firstName"
+            type="text"
+            name="firstName"
+            [disabled]="!isManager()"
+            required
+            [(ngModel)]="editUser.firstName"
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="lastName">Last Name</label>
+          <input
+            id="lastName"
+            type="text"
+            name="lastName"
+            [disabled]="!isManager()"
+            required
+            [(ngModel)]="editUser.lastName"
+          />
+        </div>
+
+        <div class="field-group full-span">
+          <label for="username">Username</label>
+          <input
+            id="username"
+            type="text"
+            name="username"
+            [disabled]="!isManager()"
+            required
+            [(ngModel)]="editUser.username"
+          />
+        </div>
+
+        <div class="field-group full-span">
+          <label for="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            [disabled]="!isManager()"
+            required
+            [(ngModel)]="editUser.email"
+          />
+        </div>
+
+        <div class="field-group full-span">
+          <label for="authority">Role <small [hidden]="isAdmin()">(read only)</small></label>
+          <select name="role" [disabled]="!isAdmin()" required [(ngModel)]="editUser.role">
+            <option value="ROLE_USER">USER</option>
+            <option value="ROLE_HR">HR</option>
+            <option value="ROLE_MANAGER">MANAGER</option>
+            <option value="ROLE_ADMIN">ADMIN</option>
+            <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+          </select>
+        </div>
       </div>
-      <div>
-        <label for="lastName">Last Name</label>
-        <input
-          id="lastName"
-          type="text"
-          name="lastName"
-          [disabled]="!isManager()"
-          required
-          [(ngModel)]="editUser.lastName"
-        />
-      </div>
-      <div>
-        <label for="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          name="username"
-          [disabled]="!isManager()"
-          required
-          [(ngModel)]="editUser.username"
-        />
-      </div>
-      <div>
-        <label for="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          [disabled]="!isManager()"
-          required
-          [(ngModel)]="editUser.email"
-        />
-      </div>
-      <div>
-        <label for="authority">Role <small [hidden]="isAdmin()">(read only)</small></label>
-        <select
-          name="role"
-          [disabled]="!isAdmin()"
-          required
-          [(ngModel)]="editUser.role"
-        >
-          <option value="ROLE_USER">USER</option>
-          <option value="ROLE_HR">HR</option>
-          <option value="ROLE_MANAGER">MANAGER</option>
-          <option value="ROLE_ADMIN">ADMIN</option>
-          <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
-        </select>
-      </div>
-      <fieldset>
-        <div>
+
+      <fieldset class="checkbox-grid">
+        <div class="check-item">
           <label for="active">
             <input
               id="active"
@@ -102,10 +118,12 @@
               [disabled]="!isManager()"
               [(ngModel)]="editUser.active"
             />
-            Acitve <small [hidden]="isManager()">(read only)</small>
+            <span>Active</span>
+            <small [hidden]="isManager()">(read only)</small>
           </label>
         </div>
-        <div>
+
+        <div class="check-item">
           <label for="locked">
             <input
               id="locked"
@@ -114,28 +132,24 @@
               [disabled]="!isManager()"
               [(ngModel)]="editUser.notLocked"
             />
-            Unlocked <small [hidden]="isManager()">(read only)</small>
+            <span>Unlocked</span>
+            <small [hidden]="isManager()">(read only)</small>
           </label>
         </div>
       </fieldset>
     </form>
   </mat-dialog-content>
+
   <mat-dialog-actions>
+    <button matButton mat-dialog-close type="button" class="secondary-action">Close</button>
     <button
       type="button"
       (click)="onUpdateUser()"
       [disabled]="!isManager() || editUserForm.invalid"
       matButton="elevated"
+      class="primary-action"
     >
       Save Changes
-    </button>
-    <button
-      matButton
-      mat-dialog-close
-      type="button"
-      id="closeEditUserModalButton"
-    >
-      Close
     </button>
   </mat-dialog-actions>
 </div>

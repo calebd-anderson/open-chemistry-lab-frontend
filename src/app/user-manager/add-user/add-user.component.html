@@ -1,68 +1,72 @@
 <!-- model add user -->
 <div
+  class="user-dialog-panel"
   id="addUserModal"
   role="dialog"
   aria-labelledby="add user model"
   aria-hidden="true"
 >
-  <h2 mat-dialog-title>New User</h2>
+  <div class="dialog-header">
+    <div>
+      <p class="eyebrow">Lab access</p>
+      <h2 mat-dialog-title>New User</h2>
+    </div>
+    <span class="header-badge">Create</span>
+  </div>
+
   <mat-dialog-content>
-    <form #newUserForm="ngForm" (ngSubmit)="onAddNewUser(newUserForm)">
-      <div>
-        <label for="firstName">First Name</label>
-        <input id="firstName" type="text" name="firstName" required ngModel />
-      </div>
-      <div>
-        <label for="lastName">Last Name</label>
-        <input id="lastName" type="text" name="lastName" required ngModel />
-      </div>
-      <div>
-        <label for="username">Username</label>
-        <input id="username" type="text" name="username" required ngModel />
-      </div>
-      <div>
-        <label for="email">Email</label>
-        <input type="email" name="email" required ngModel />
-      </div>
-      @if (isAdmin) {
-        <div>
-          <label for="authority"
-            >Role <small [hidden]="isAdmin">(read only)</small></label
-          >
-          <select
-            id="authority"
-            name="role"
-            [disabled]="!isAdmin"
-            required
-            ngModel="ROLE_USER"
-          >
-            <option value="ROLE_USER">USER</option>
-            <option value="ROLE_HR">HR</option>
-            <option value="ROLE_MANAGER">MANAGER</option>
-            <option value="ROLE_ADMIN">ADMIN</option>
-            <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
-          </select>
+    <form #newUserForm="ngForm" (ngSubmit)="onAddNewUser(newUserForm)" class="user-form">
+      <div class="field-grid">
+        <div class="field-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" name="firstName" required ngModel />
         </div>
-      }
-      @if (!isAdmin) {
-        <div>
-          <label for="authority">Role</label>
+
+        <div class="field-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" name="lastName" required ngModel />
+        </div>
+
+        <div class="field-group full-span">
+          <label for="username">Username</label>
+          <input id="username" type="text" name="username" required ngModel />
+        </div>
+
+        <div class="field-group full-span">
+          <label for="email">Email</label>
+          <input type="email" name="email" required ngModel />
+        </div>
+
+        @if (isAdmin) {
+          <div class="field-group full-span">
+            <label for="authority">Role <small [hidden]="isAdmin">(read only)</small></label>
+            <select id="authority" name="role" [disabled]="!isAdmin" required ngModel="ROLE_USER">
+              <option value="ROLE_USER">USER</option>
+              <option value="ROLE_HR">HR</option>
+              <option value="ROLE_MANAGER">MANAGER</option>
+              <option value="ROLE_ADMIN">ADMIN</option>
+              <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+            </select>
+          </div>
+        }
+
+        @if (!isAdmin) {
+          <div class="field-group full-span">
+            <label for="authority">Role</label>
+            <input id="authority" type="text" name="role" required ngModel="USER" readonly />
+          </div>
+        }
+      </div>
+
+      <div class="upload-card">
+        <div class="upload-header">
+          <span>Profile Picture</span>
+          <small>Optional</small>
+        </div>
+
+        <label class="upload-dropzone" for="new-user-avatar">
           <input
-            id="authority"
-            type="text"
-            name="role"
-            required
-            ngModel="USER"
-            readonly
-          />
-        </div>
-      }
-      <div>
-        <div>
-          <span>Profile Picture </span>
-        </div>
-        <div>
-          <input
+            id="new-user-avatar"
             type="file"
             accept="image/*"
             [disabled]="!isManager"
@@ -74,46 +78,42 @@
               )
             "
           />
-          <label>
-            <span [hidden]="!fileName">{{ fileName }}</span>
-            <span [hidden]="fileName">Choose File</span>
-          </label>
-        </div>
+          <span class="upload-label">
+            <strong>{{ fileName === '?' ? 'Choose File' : fileName }}</strong>
+            <em>PNG, JPG, or WEBP</em>
+          </span>
+        </label>
       </div>
-      <fieldset>
-        <div>
+
+      <fieldset class="checkbox-grid">
+        <div class="check-item">
           <label>
-            <input
-              type="checkbox"
-              name="active"
-              [disabled]="!isManager"
-              ngModel
-            />
-            Acitve <small [hidden]="isManager">(read only)</small>
+            <input type="checkbox" name="active" [disabled]="!isManager" ngModel />
+            <span>Active</span>
+            <small [hidden]="isManager">(read only)</small>
           </label>
         </div>
-        <div>
+
+        <div class="check-item">
           <label>
-            <input
-              type="checkbox"
-              name="notLocked"
-              [disabled]="!isManager"
-              ngModel
-            />
-            Unlocked <small [hidden]="isManager">(read only)</small>
+            <input type="checkbox" name="notLocked" [disabled]="!isManager" ngModel />
+            <span>Unlocked</span>
+            <small [hidden]="isManager">(read only)</small>
           </label>
         </div>
       </fieldset>
+
       <mat-dialog-actions>
+        <button matButton mat-dialog-close type="button" class="secondary-action">Close</button>
         <button
           matButton="elevated"
           type="submit"
           id="new-user-save"
           [disabled]="newUserForm.invalid"
+          class="primary-action"
         >
           Save changes
         </button>
-        <button matButton mat-dialog-close type="button">Close</button>
       </mat-dialog-actions>
     </form>
   </mat-dialog-content>

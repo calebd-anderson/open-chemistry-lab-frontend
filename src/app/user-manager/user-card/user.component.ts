@@ -40,6 +40,7 @@ import { DialogData } from '../edit-user/edit-user.component';
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
+  styleUrl: './user.component.scss',
   // imports: [CommonModule, FormsModule, MatDialogContent],
   imports: [
     MatFormFieldModule,
