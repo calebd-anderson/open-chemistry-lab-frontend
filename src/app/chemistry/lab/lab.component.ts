@@ -163,15 +163,18 @@ export class LabComponent {
   public openConfirmationDialogFail(response: HttpErrorResponse) {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
       disableClose: false,
+      panelClass: 'validation-dialog-panel',
+      width: 'min(92vw, 440px)',
+      autoFocus: false,
     });
 
-    this.dialogRef.componentInstance.wasSuccessful = 'Uh oh!';
+    this.dialogRef.componentInstance.wasSuccessful = 'Almost there!';
     if (response.status == 404) {
       this.dialogRef.componentInstance.confirmMessage =
-        "It doesn't look like that is a valid compound, please try again!";
+        "That combination does not form a valid compound yet. Try a different mix of elements!";
     } else {
       this.dialogRef.componentInstance.confirmMessage =
-        "We're having trouble validating. Please try again.";
+        "The experiment hit a hiccup while validating your reaction. Please try again.";
     }
   }
 
@@ -185,10 +188,13 @@ export class LabComponent {
   private asyncDialog(response: HttpResponse<Reaction>, isLoggedIn: boolean) {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
       disableClose: false,
+      panelClass: 'validation-dialog-panel',
+      width: 'min(92vw, 440px)',
+      autoFocus: false,
     });
     this.dialogRef.componentInstance.discovery = response.body?.title;
     this.dialogRef.componentInstance.wasSuccessful = 'Congratulations!';
-    this.dialogRef.componentInstance.confirmMessage = 'You discovered: ';
+    this.dialogRef.componentInstance.confirmMessage = 'Your experiment produced a new compound.';
 
     if (!isLoggedIn) {
       this.dialogRef.componentInstance.isLoggedIn =

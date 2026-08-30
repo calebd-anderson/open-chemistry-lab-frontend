@@ -1,10 +1,47 @@
-<section class="validation-modal">
-  <h2>Molecule Discovery!</h2>
-  <div class="dialog-content">
-    <p>You've created a <span id="discovery">{{discovery}}</span> molecule.</p>
-    <p>{{confirmMessage}}</p>
+<section class="validation-modal" [class.validation-modal--success]="isSuccess">
+  <div class="validation-modal__halo" aria-hidden="true"></div>
+
+  <header class="validation-modal__header">
+    <div class="validation-modal__icon" aria-hidden="true">
+      {{ isSuccess ? '⚗️' : '🧪' }}
+    </div>
+
+    <div class="validation-modal__heading">
+      <p class="validation-modal__eyebrow">
+        {{ isSuccess ? 'Discovery complete' : 'Experiment update' }}
+      </p>
+      <h2>{{ wasSuccessful }}</h2>
+    </div>
+  </header>
+
+  <div class="validation-modal__content">
+    @if (hasDiscovery) {
+      <p class="validation-modal__lead">{{ confirmMessage }}</p>
+      <div class="validation-modal__result" aria-live="polite">
+        <span class="validation-modal__label">Compound</span>
+        <strong id="discovery">{{ discovery }}</strong>
+      </div>
+    } @else {
+      <p class="validation-modal__lead">{{ confirmMessage }}</p>
+    }
+
+    @if (isLoggedIn && isLoggedIn.trim() !== '' && isLoggedIn.trim() !== '?') {
+      <div class="validation-modal__note">
+        <span class="validation-modal__note-icon" aria-hidden="true">✦</span>
+        <span>{{ isLoggedIn }}</span>
+      </div>
+    }
   </div>
-  <div class="dialog-actions">
-    <app-button title="dismiss validation modal" variant="ghost" size="md" type="button" (clicked)="onNoClick()">Cancel</app-button>
+
+  <div class="validation-modal__actions">
+    <app-button
+      title="close validation modal"
+      variant="secondary"
+      size="md"
+      type="button"
+      (clicked)="onNoClick()"
+    >
+      Keep exploring
+    </app-button>
   </div>
 </section>
