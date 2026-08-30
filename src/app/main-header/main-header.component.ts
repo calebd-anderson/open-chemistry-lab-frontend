@@ -43,24 +43,36 @@ export class MainHeaderComponent {
   }
 
   public openMenu() {
-    const menu = document.getElementById('user-nav-menu');
-    if (menu) {
-      // Close the menu when clicking outside of it
-      const handleClickOutside = (event: MouseEvent) => {
-        const isClickInsideMenu = menu.contains(event.target as Node);
-        const isClickOnProfileImage = (event.target as Element).closest(
-          '.profile-icon',
-        );
-
-        if (!isClickInsideMenu && !isClickOnProfileImage) {
-          menu.classList.remove('active');
-          this.isMenuOpen = false;
-          document.removeEventListener('click', handleClickOutside);
-        }
-      };
-
-      // Toggle the menu
-      menu.classList.toggle('active');
+    if (!this.authenticationService.isLoggedIn()) {
+      return;
     }
+
+    const menu = document.getElementById('user-nav-menu');
+    if (!menu) {
+      return;
+    }
+
+    const shouldOpen = !menu.classList.contains('active');
+    menu.classList.toggle('active', shouldOpen);
+    this.isMenuOpen = shouldOpen;
+
+    if (!shouldOpen) {
+      return;
+    }
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const isClickInsideMenu = menu.contains(event.target as Node);
+      const isClickOnProfileImage = (event.target as Element).closest(
+        '.profile-icon',
+      );
+
+      if (!isClickInsideMenu && !isClickOnProfileImage) {
+        menu.classList.remove('active');
+        this.isMenuOpen = false;
+        document.removeEventListener('click', handleClickOutside);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
   }
 }

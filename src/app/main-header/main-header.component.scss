@@ -1,28 +1,13 @@
 @use "@/tailwind.css";
 
-// Tailwind-based styling for app component with unique chemistry aesthetic
 #main-header {
-  @apply bg-gradient-to-r from-emerald-900 via-teal-800 to-cyan-900 shadow-lg px-3 flex justify-between items-center border-b border-cyan-700;
+  position: relative;
 }
 
-#logo-icon {
-  @apply m-1 h-8 w-8 p-1 rounded-full cursor-pointer bg-gradient-to-br from-cyan-300 to-cyan-100 shadow-md;
-}
-
-header h1 {
-  @apply text-center text-lg font-bold text-cyan-100 tracking-wide;
-}
-
-.login-btn {
-  @apply bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-1 px-3 rounded-lg transition duration-300 transform hover:scale-105 shadow-md cursor-pointer;
-}
-
-#user-controls {
-  @apply flex items-center bg-gradient-to-r from-cyan-800 to-blue-900 p-2 m-2 rounded-xl w-fit h-fit justify-self-end self-center shadow-lg border border-cyan-700;
-}
-
-/* Add a modern pulse animation for profile button when clicked */
 .profile-icon button {
-  @apply flex items-center focus:outline-none;
-  @apply transition-all duration-300 ease-in-out cursor-pointer;
+  transition: transform 0.3s ease;
+}
+
+.profile-icon button:hover {
+  transform: scale(1.03);
 }

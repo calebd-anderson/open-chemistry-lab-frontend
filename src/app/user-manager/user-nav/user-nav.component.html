@@ -1,38 +1,40 @@
-<!-- Navigation menu that only appears when user is logged in -->
-<nav id="user-nav-menu">
-    <div class="menu-heading">
-        <span class="font-semibold text-cyan-100 text-lg">{{ user()?.username }}</span>
-        <span class="text-cyan-100 text-sm">{{ user()?.firstName }}</span>
-    </div>
+@if (authenticationService.isLoggedIn()) {
+  <nav id="user-nav-menu" class="pointer-events-none fixed right-2 z-50 translate-y-5 rounded-xl bg-gradient-to-b from-slate-900 to-gray-900 p-2 px-6 opacity-0 shadow-2xl transition-all duration-300 ease-in-out">
+      <div class="mb-4 flex items-center justify-between">
+          <span class="text-lg font-semibold text-cyan-100">{{ user()?.username }}</span>
+          <span class="text-sm text-cyan-100">{{ user()?.firstName }}</span>
+      </div>
 
-    <hr />
+      <hr class="my-2 w-5/6 border-slate-700" />
 
-    <div class="menu-content">
-        <button (click)="onClickProfile()" type="button" class="user-nav-button">
-            <svg class="w-5 h-5 mr-3 text-cyan-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                    stroke="currentColor" stroke-width="2" />
-                <path d="M12 14C8.13435 14 5 17.1344 5 21H19C19 17.1344 15.8656 14 12 14Z" stroke="currentColor"
-                    stroke-width="2" />
-            </svg>
-            Profile
-        </button>
+      <div class="pb-4">
+          <button (click)="onClickProfile()" type="button" class="user-nav-button">
+              <svg class="mr-3 h-5 w-5 text-cyan-300" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                      d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
+                      stroke="currentColor" stroke-width="2" />
+                  <path d="M12 14C8.13435 14 5 17.1344 5 21H19C19 17.1344 15.8656 14 12 14Z" stroke="currentColor"
+                      stroke-width="2" />
+              </svg>
+              Profile
+          </button>
 
-        <div [hidden]="!authorizationService.isAdmin()" id="admin-menu">
-            <hr />
-            <button id="admin-menu-button" routerLink="/user/management" type="button" class="user-nav-button">
-                <svg admin-icon class="w-5 h5 mr-3 text-cyan-300"></svg>
-                User Management
-            </button>
-        </div>
+          <div [hidden]="!authorizationService.isAdmin()" id="admin-menu">
+              <hr class="my-2 w-5/6 border-slate-700" />
+              <button id="admin-menu-button" routerLink="/user/management" type="button" class="user-nav-button">
+                  <svg admin-icon class="mr-3 h-5 w-5 text-cyan-300"></svg>
+                  User Management
+              </button>
+          </div>
 
-        <hr />
+          <hr class="my-2 w-5/6 border-slate-700" />
 
-        <button id="logout-menu-button" [hidden]="!authenticationService.isLoggedIn()" (click)="onClickLogout()"
-            type="button" class="user-nav-button">
-            <svg logout-icon class="w-5 h-5 mr-3 text-cyan-300"></svg>
-            Logout
-        </button>
-    </div>
-</nav>
+          <button id="logout-menu-button" [hidden]="!authenticationService.isLoggedIn()" (click)="onClickLogout()"
+              type="button" class="user-nav-button">
+              <svg logout-icon class="mr-3 h-5 w-5 text-cyan-300"></svg>
+              Logout
+          </button>
+      </div>
+  </nav>
+}
+

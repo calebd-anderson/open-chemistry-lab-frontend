@@ -30,7 +30,14 @@ export class UserNavComponent {
     // Just let it stay open
   }
 
+  private closeMenu(): void {
+    const menu = document.getElementById('user-nav-menu');
+    menu?.classList.remove('active');
+    this.isMenuOpen = false;
+  }
+
   public onClickLogout(): void {
+    this.closeMenu();
     this.authenticationService.logOut();
     this.user.set(null);
     this.router.navigate(['lab']);
