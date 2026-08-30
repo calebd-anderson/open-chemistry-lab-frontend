@@ -6,28 +6,66 @@
 
 .lab-container {
   min-height: 100vh;
-  padding: 1rem;
-  background: linear-gradient(135deg, #ecfeff 0%, #dbeafe 100%);
+  padding: 1.5rem 1rem 2rem;
+  background:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.18), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(168, 85, 247, 0.14), transparent 30%),
+    linear-gradient(135deg, #020817 0%, #0f172a 32%, #111827 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #e2e8f0;
 }
 
 #lab-header {
-  margin-bottom: 1.5rem;
+  position: relative;
+  margin: 0 auto 1.5rem;
+  max-width: 72rem;
+  padding: 1.5rem 1.25rem 1rem;
   text-align: center;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(12, 74, 110, 0.72));
+  box-shadow: 0 24px 50px rgba(14, 116, 144, 0.18);
+  overflow: hidden;
+}
+
+#lab-header::before {
+  content: '';
+  position: absolute;
+  inset: auto 12% 0 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.9), transparent);
 }
 
 #lab-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
   margin-bottom: 0.5rem;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #164e63;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: clamp(2rem, 4vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, #f8fafc 0%, #bae6fd 30%, #67e8f9 50%, #d8b4fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 24px rgba(34, 211, 238, 0.18);
+}
+
+#lab-title svg {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 18px rgba(34, 211, 238, 0.8));
 }
 
 #lab-subtitle {
-  margin-bottom: 1rem;
-  font-size: 1.125rem;
-  color: #0f766e;
+  margin: 0 auto;
+  max-width: 40rem;
+  font-size: 1.05rem;
+  color: #bae6fd;
+  letter-spacing: 0.02em;
 }
 
 #lab-content {
@@ -42,10 +80,10 @@
   position: relative;
   min-height: 400px;
   overflow: hidden;
-  border: 1px solid #bae6fd;
+  border: 1px solid rgba(125, 211, 252, 0.24);
   border-radius: 1.5rem;
-  background: white;
-  box-shadow: 0 20px 25px -5px rgba(14, 116, 144, 0.1);
+  background: rgba(15, 23, 42, 0.8);
+  box-shadow: 0 20px 35px rgba(15, 23, 42, 0.42);
   padding: 1.5rem;
 }
 
@@ -67,50 +105,58 @@
 
 #instructions {
   margin-bottom: 1rem;
-  border: 1px solid #bfdbfe;
-  border-radius: 0.75rem;
-  background: #eff6ff;
-  padding: 1rem;
+  border: 1px solid rgba(103, 232, 249, 0.28);
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, rgba(14, 116, 144, 0.2), rgba(15, 23, 42, 0.75));
+  padding: 1rem 1.1rem;
   text-align: center;
-  color: #0f172a;
+  color: #dbeafe;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 #tab-container {
   min-height: 400px;
-  border: 1px solid #bae6fd;
+  border: 1px solid rgba(125, 211, 252, 0.22);
   border-radius: 1.5rem;
-  background: white;
-  box-shadow: 0 20px 25px -5px rgba(14, 116, 144, 0.1);
+  background: rgba(15, 23, 42, 0.78);
+  box-shadow: 0 20px 35px rgba(15, 23, 42, 0.38);
   padding: 1rem;
 }
 
 #tab-container .flex {
   margin-bottom: 1rem;
-  border-bottom: 1px solid #bae6fd;
+  border-bottom: 1px solid rgba(125, 211, 252, 0.18);
+  gap: 0.5rem;
 }
 
 #tab-container button {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  padding: 0.5rem 1rem;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  padding: 0.7rem 1rem;
   font-size: 0.875rem;
-  font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
 }
 
 #tab-container button.active {
-  background: #dbeafe;
-  color: #0f172a;
-  border-bottom: 2px solid #0ea5e9;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.22), rgba(59, 130, 246, 0.18));
+  color: #f8fafc;
+  border: 1px solid rgba(125, 211, 252, 0.34);
+  border-bottom: 2px solid rgba(34, 211, 238, 0.85);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 #tab-container button:not(.active) {
-  color: #475569;
+  color: #cbd5e1;
+  background: rgba(15, 23, 42, 0.35);
+  border: 1px solid transparent;
 }
 
 #tab-container button:not(.active):hover {
-  background: #f0f9ff;
-  color: #0f766e;
+  background: rgba(14, 116, 144, 0.15);
+  color: #e0f2fe;
 }
 
 #tab-content {
@@ -120,10 +166,10 @@
 #periodic-table-container {
   position: relative;
   margin-top: 2rem;
-  border: 1px solid #bae6fd;
+  border: 1px solid rgba(125, 211, 252, 0.2);
   border-radius: 1.5rem;
-  background: white;
-  box-shadow: 0 20px 25px -5px rgba(14, 116, 144, 0.1);
+  background: rgba(15, 23, 42, 0.7);
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.3);
   padding: 1rem;
 }
 
@@ -157,6 +203,7 @@
 #info-section {
   position: relative;
   overflow: hidden;
+  color: #e2e8f0;
 }
 
 #info-section::before {
@@ -164,8 +211,8 @@
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(45deg, rgba(135, 206, 250, 0.05) 25%, transparent 25%, transparent 75%, rgba(135, 206, 250, 0.05) 75%),
-    linear-gradient(45deg, rgba(135, 206, 250, 0.05) 25%, transparent 25%, transparent 75%, rgba(135, 206, 250, 0.05) 75%);
+    linear-gradient(45deg, rgba(34, 211, 238, 0.04) 25%, transparent 25%, transparent 75%, rgba(34, 211, 238, 0.04) 75%),
+    linear-gradient(45deg, rgba(34, 211, 238, 0.04) 25%, transparent 25%, transparent 75%, rgba(34, 211, 238, 0.04) 75%);
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px;
   pointer-events: none;
@@ -190,8 +237,17 @@
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(to right, #3b82f6, #1d4ed8);
+  background: linear-gradient(to right, #22d3ee, #818cf8);
   border-radius: 3px;
+}
+
+#info-section .space-y-3 > div,
+#info-section .mt-6,
+#info-section .mt-4 {
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  background: rgba(15, 23, 42, 0.7);
+  color: #e2e8f0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .tab-button {
