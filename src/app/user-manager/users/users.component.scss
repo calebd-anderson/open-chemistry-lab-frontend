@@ -1,17 +1,13 @@
 @use "@/tailwind.css";
 
-section {
-  @apply max-w-7xl mx-auto px-4 py-6;
+:host {
+  display: block;
 }
 
-button {
-  @apply mr-2;
+.users-table tbody tr {
+  transition: background-color 0.2s ease;
 }
 
-tr:hover:not(thead>tr) {
-  @apply bg-gray-50;
-}
-
-table {
-  @apply w-full;
+.users-table tbody tr:hover {
+  background-color: rgb(249 250 251);
 }
