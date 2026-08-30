@@ -22,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
+import { ButtonComponent } from '@/app/component/button/button.component';
 
 interface TableDef {
   id: string;
@@ -37,6 +38,7 @@ interface TableDef {
     MatChipsModule,
     MatTableModule,
     CommonModule,
+    ButtonComponent,
   ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
@@ -153,7 +155,7 @@ export class UsersComponent {
     }
   }
 
-  public onEditUser(event: MouseEvent, editUser: User): void {
+  public onEditUser(event: Event, editUser: User): void {
     event.stopPropagation();
     // this.editUser = edit
     // this.clickButton('openUserEdit');
@@ -168,7 +170,8 @@ export class UsersComponent {
     });
   }
 
-  public onDeleteUser(username: string): void {
+  public onDeleteUser(event: Event, username: string): void {
+    event.stopPropagation();
     this.subs.add(
       this.userService.deleteUser(username).subscribe({
         next: (response: CustomHttpResponse) => {
