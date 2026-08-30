@@ -1,10 +1,14 @@
-<app-main-header [(user)]="this.user" />
+<div class="app-shell">
+  <app-main-header [(user)]="this.user" />
 
-<app-user-nav [(user)]="this.user" />
+  <app-user-nav [(user)]="this.user" />
 
-<app-tabs />
+  <app-tabs />
 
-<!-- dynamic routes -->
-<router-outlet></router-outlet>
+  <main class="app-content">
+    <!-- dynamic routes -->
+    <router-outlet></router-outlet>
+  </main>
 
-<app-footer />
+  <app-footer />
+</div>

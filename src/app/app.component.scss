@@ -1,20 +1,18 @@
-@use "@/tailwind.css";
-
-/* Ensure proper layout with sticky footer */
-body {
-  @apply min-h-screen flex flex-col;
+:host {
+  display: block;
+  min-height: 100vh;
 }
 
-main {
-  @apply flex-grow;
+.app-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Make sure footer is positioned correctly at bottom of viewport when content is short */
-footer {
-  @apply mt-auto;
+.app-content {
+  flex: 1;
 }
 
-/* Add smooth entrance animation */
 @keyframes slideIn {
   from {
     opacity: 0;
