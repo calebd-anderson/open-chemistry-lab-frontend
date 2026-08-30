@@ -5,10 +5,11 @@ import { AuthenticationService } from '@service/security/authentication.service'
 import { LoginComponent } from '../user-manager/account-form/login/login.component';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../user-manager/account-form/register/register.component';
+import { ButtonComponent } from '../component/button/button.component';
 
 @Component({
   selector: 'app-main-header',
-  imports: [ChemLogo],
+  imports: [ChemLogo, ButtonComponent],
   templateUrl: './main-header.component.html',
   styleUrl: './main-header.component.scss',
 })

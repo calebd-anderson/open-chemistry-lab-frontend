@@ -1,0 +1,4 @@
+<button [title]="title() || 'Button'" [attr.aria-label]="title() || 'Button'" [type]="type() || 'button'"
+    [class]="classes" [disabled]="disabled()" (click)="handleClick($event)">
+    <ng-content>{{ title() || 'Button' }}</ng-content>
+</button>
