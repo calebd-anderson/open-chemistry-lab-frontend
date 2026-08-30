@@ -1,4 +1,10 @@
-<button [title]="title()" [attr.aria-label]="title() || 'Button'" [type]="type()"
-    [ngClass]="[classes, variant(), customClass()]" [disabled]="disabled()" (click)="handleClick($event)">
-    <ng-content>{{ title() || 'Button' }}</ng-content>
+<button
+  [title]="title()"
+  [attr.aria-label]="title() || 'Button'"
+  [type]="type()"
+  [ngClass]="[classes, customClass()]"
+  [disabled]="disabled()"
+  (click)="handleClick($event)"
+>
+  <ng-content>{{ title() || 'Button' }}</ng-content>
 </button>

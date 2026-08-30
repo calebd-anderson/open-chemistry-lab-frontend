@@ -17,6 +17,7 @@ import {
 } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
+import { ButtonComponent } from '@/app/component/button/button.component';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatDialogActions,
     MatButtonModule,
     MatDialogModule,
+    ButtonComponent,
   ],
 })
 export class LoginComponent implements OnDestroy {

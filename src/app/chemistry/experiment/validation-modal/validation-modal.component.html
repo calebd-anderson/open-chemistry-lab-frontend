@@ -5,6 +5,6 @@
     <p>{{confirmMessage}}</p>
   </div>
   <div class="dialog-actions">
-    <button (click)="onNoClick()" type="button">Cancel</button>
+    <app-button title="dismiss validation modal" variant="ghost" size="md" type="button" (clicked)="onNoClick()">Cancel</app-button>
   </div>
 </section>

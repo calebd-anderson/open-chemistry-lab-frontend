@@ -27,18 +27,17 @@
         </div>
       </div>
 
-      <button type="submit" [disabled]="loginForm.invalid || showLoading" name="button" class="login-btn">
+      <app-button title="login button" variant="primary" size="md" type="submit" [disabled]="loginForm.invalid || showLoading" customClass="w-full login-btn" (clicked)="onLogin(loginForm)">
         @if (showLoading) {
         <i class="fa fa-spinner fa-spin"></i>
         }
-        &nbsp;&nbsp;
         @if (showLoading) {
         <span>Loading...</span>
         }
         @if (!showLoading) {
         <span>Login</span>
         }
-      </button>
+      </app-button>
     </form>
   </mat-dialog-content>
   <mat-dialog-actions class="flex items-center justify-between">

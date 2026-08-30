@@ -6,11 +6,12 @@ import { AuthenticationService } from '@service/security/authentication.service'
 import { NotificationType } from '@model/enum/notification-type.enum';
 import { NotificationService } from '@service/notification.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { ButtonComponent } from '@/app/component/button/button.component';
 
 @Component({
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
-  imports: [FormsModule],
+  imports: [FormsModule, ButtonComponent],
 })
 export class QuizComponent implements OnInit {
   quizzes: Quiz[] = [];

@@ -15,6 +15,7 @@ import {
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ButtonComponent } from '@/app/component/button/button.component';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +27,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
+    ButtonComponent,
   ],
 })
 export class RegisterComponent implements OnDestroy {

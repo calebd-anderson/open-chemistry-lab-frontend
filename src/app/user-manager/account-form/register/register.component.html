@@ -65,18 +65,17 @@
 
       <!-- register buttons -->
       <div class="mt-3">
-        <button [disabled]="registerForm.form.invalid || showLoading" type="submit" name="button" class="register-btn">
+        <app-button title="register account" variant="primary" size="md" type="submit" [disabled]="registerForm.form.invalid || showLoading" customClass="w-full register-btn" (clicked)="onRegister(registerForm.value)">
           @if (showLoading) {
           <i class="fa fa-spinner fa-spin"></i>
           }
-          &nbsp;&nbsp;
           @if (showLoading) {
           <span>Loading...</span>
           }
           @if (!showLoading) {
           <span>Register</span>
           }
-        </button>
+        </app-button>
       </div>
     </form>
   </mat-dialog-content>

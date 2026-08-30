@@ -36,14 +36,16 @@
       <div class="text-red-600 text-sm mb-2">Please enter an answer.</div>
       }
       <div class="flex justify-center mt-6">
-        <button
+        <app-button
+          title="submit flashcard"
+          variant="secondary"
+          size="lg"
           type="submit"
-          [disabled]="flascardForm.invalid"
-          name="button"
-          class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-semibold py-3 px-8 rounded-lg transition duration-200 transform hover:scale-105 disabled:opacity-50 shadow-lg"
+          [disabled]="!!flascardForm.invalid"
+          (clicked)="createFlashcard(flascardForm.value)"
         >
           <span>Submit</span>
-        </button>
+        </app-button>
       </div>
     </form>
   </div>

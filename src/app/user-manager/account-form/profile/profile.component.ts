@@ -13,12 +13,13 @@ import {
 import { SubSink } from 'subsink';
 import { FileUploadStatus } from '@model/file-upload-status';
 import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@/app/component/button/button.component';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  imports: [FormsModule],
+  imports: [FormsModule, ButtonComponent],
 })
 export class ProfileComponent implements OnInit {
   public user: User = new User();

@@ -7,6 +7,7 @@ import { FlashCardService, Flashcard } from '@app/service/flashcard.service';
 import { NotificationType } from '@app/model/enum/notification-type.enum';
 import { NotificationService } from '@app/service/notification.service';
 import { FormsModule } from '@angular/forms';
+import { ButtonComponent } from '@/app/component/button/button.component';
 
 export interface CreateFlashcardInput extends Omit<Flashcard, 'id'> {
   question: string;
@@ -17,7 +18,7 @@ export interface CreateFlashcardInput extends Omit<Flashcard, 'id'> {
   selector: 'app-flashcard',
   templateUrl: './flashcard.component.html',
   styleUrls: ['./flashcard.component.scss'],
-  imports: [FormsModule],
+  imports: [FormsModule, ButtonComponent],
 })
 export class FlashcardComponent implements OnInit {
   flashcards: Flashcard[] = [];
