@@ -1,43 +1,60 @@
 <div class="max-w-4xl mx-auto p-5">
-  @if (quizzes.length > 0) {
-  <div>
-    <form class="mx-auto w-full md:w-3/4" (ngSubmit)="onSubmit(quizForm)" #quizForm="ngForm">
-      <h1 class="text-center text-xl font-bold">{{quizzes[random]?.reaction?.formula}} Question {{currentQuiz + 1}} of {{quizzes.length}}
-      </h1>
-      <h2 class="text-center"> {{currentQuiz + 1}} of {{quizzes[random]?.questionAnswerList?.length}}</h2>
-      <h3 class="mb-4">{{quizzes[random].questionAnswerList[random]?.question}}</h3>
-      <ul class="space-y-2">
-        @for (qa of quizzes[random]?.questionAnswerList; track $index; let i = $index) {
-        <li class="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition">
-          <label [attr.for]='"option-" + i' class="cursor-pointer w-full">
-            <input type="radio" name="answers" id="option-{{i}}" [disabled]="answerSelected" ngModel
-              [value]="qa.answer" class="mr-2">
-            {{qa.answer}}
-          </label>
-        </li>
-        }
-      </ul>
-      <app-button title="submit quiz" variant="secondary" size="md" type="submit" customClass="mt-4" (clicked)="onSubmit(quizForm)">
-        Submit
-      </app-button>
-    </form>
-  </div>
-  } @else {
-  <h1 class="text-center">
-    First make chemical discoveries.
-  </h1>
-  }
-  <!-- score -->
-  <div class="score mt-6">
-    <a class="toggle-score text-blue-600 hover:text-blue-800 cursor-pointer" (click)="displayScore()">Hide/Show Score</a>
-    @if (score) {
-    <div class="mt-2">
-      Correct Answers: <span class="correctAnswer font-bold text-green-600">{{correctAnswers}}</span> | Incorrect Answers: <span
-        class="incorrectAnswer font-bold text-red-600">{{incorrectAnswers}}</span>
+  @if (quizzes.length > 0 && currentQuestion) {
+    <div>
+      <form class="mx-auto w-full md:w-3/4" (ngSubmit)="onSubmit(quizForm)" #quizForm="ngForm">
+        <h1 class="text-center text-xl font-bold">
+          {{ selectedQuiz?.reaction?.formula }} Question {{ currentQuestionIndex + 1 }} of {{ currentQuestions.length }}
+        </h1>
+        <h3 class="mb-4">{{ currentQuestion.question }}</h3>
+
+        <ul class="space-y-2">
+          @for (qa of currentQuestions; track qa.answer; let i = $index) {
+            <li class="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition">
+              <label [attr.for]="'option-' + i" class="cursor-pointer w-full">
+                <input
+                  type="radio"
+                  name="answers"
+                  id="option-{{ i }}"
+                  [disabled]="answerSelected"
+                  ngModel
+                  [value]="qa.answer"
+                  class="mr-2"
+                />
+                {{ qa.answer }}
+              </label>
+            </li>
+          }
+        </ul>
+
+        <app-button
+          title="submit quiz"
+          variant="secondary"
+          size="md"
+          type="submit"
+          customClass="mt-4"
+          (clicked)="onSubmit(quizForm)"
+        >
+          Submit
+        </app-button>
+      </form>
     </div>
+  } @else {
+    <h1 class="text-center">First make chemical discoveries.</h1>
+  }
+
+  <div class="score mt-6">
+    <a class="toggle-score text-blue-600 hover:text-blue-800 cursor-pointer" (click)="displayScore()">
+      Hide/Show Score
+    </a>
+    @if (score) {
+      <div class="mt-2">
+        Correct Answers: <span class="correctAnswer font-bold text-green-600">{{ correctAnswers }}</span> |
+        Incorrect Answers: <span class="incorrectAnswer font-bold text-red-600">{{ incorrectAnswers }}</span>
+      </div>
     }
   </div>
 </div>
+
 <ng-template #noQuizzes>
   <h1 class="text-center">First discover elements or compounds to play quiz.</h1>
 </ng-template>

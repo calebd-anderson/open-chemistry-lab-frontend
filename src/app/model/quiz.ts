@@ -1,26 +1,26 @@
 export interface Quiz {
   id: string;
-  reaction: Reaction
-  questionAnswerList: [QuestionAnswer]
+  reaction: Reaction;
+  questionAnswerList: QuestionAnswer[];
 }
 
-type Reaction = {
-  formula: string
-  title: string
-  elements: [Element]
-}
+export type Reaction = {
+  formula: string;
+  title: string;
+  elements: Element[];
+};
 
-type Element = {
-  symbol: string
-  atoms: number
-}
+export type Element = {
+  symbol: string;
+  atoms: number;
+};
 
-type QuestionAnswer = {
-  question: string
-  answer: string
-}
+export type QuestionAnswer = {
+  question: string;
+  answer: string;
+};
 
 enum QuizType {
   ELEMENT,
-  COMPOUND
+  COMPOUND,
 }

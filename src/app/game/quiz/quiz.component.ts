@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Quiz } from '@model/quiz';
+import { QuestionAnswer, Quiz } from '@model/quiz';
 import { QuizService } from '@service/quiz.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '@service/security/authentication.service';
@@ -15,14 +15,12 @@ import { ButtonComponent } from '@/app/component/button/button.component';
 })
 export class QuizComponent implements OnInit {
   quizzes: Quiz[] = [];
-  question: string = '?';
-  currentQuiz: number = 0;
-  answer: string | null = null;
-  answerSelected: boolean = false;
-  correctAnswers: number = 0;
-  incorrectAnswers: number = 0;
-  score: boolean = false;
-  random: number = 0;
+  currentQuizIndex = 0;
+  currentQuestionIndex = 0;
+  answerSelected = false;
+  correctAnswers = 0;
+  incorrectAnswers = 0;
+  score = false;
 
   private _snackBar = inject(MatSnackBar);
   private authenticationService = inject(AuthenticationService);
@@ -30,52 +28,79 @@ export class QuizComponent implements OnInit {
 
   constructor(private quizService: QuizService) {}
 
+  get selectedQuiz(): Quiz | undefined {
+    return this.quizzes[this.currentQuizIndex];
+  }
+
+  get currentQuestions(): QuestionAnswer[] {
+    return this.selectedQuiz?.questionAnswerList ?? [];
+  }
+
+  get currentQuestion(): QuestionAnswer | undefined {
+    return this.currentQuestions[this.currentQuestionIndex];
+  }
+
   ngOnInit(): void {
     const user = this.authenticationService.getUserFromLocalCache();
     if (!user || !user.userId) {
       return;
     }
 
-    this.quizService.getQuizByUserId(user.userId).subscribe((data) => {
-      this.quizzes = data;
-      if (this.quizzes.length > 0) {
-        this.random = Math.floor(
-          Math.random() * this.quizzes[0].questionAnswerList.length,
+    this.quizService.getQuizByUserId(user.userId).subscribe({
+      next: (data) => {
+        this.quizzes = data;
+        this.selectRandomQuestion();
+      },
+      error: () => {
+        this.notificationService.notify(
+          NotificationType.ERROR,
+          'Unable to load quiz questions right now.',
         );
-      }
+      },
     });
   }
 
+  private selectRandomQuestion(): void {
+    if (this.quizzes.length === 0) {
+      return;
+    }
+
+    this.currentQuizIndex = Math.floor(Math.random() * this.quizzes.length);
+    const questions = this.currentQuestions;
+    if (questions.length === 0) {
+      this.currentQuestionIndex = 0;
+      return;
+    }
+
+    this.currentQuestionIndex = Math.floor(Math.random() * questions.length);
+  }
+
   onSubmit(form: NgForm) {
+    if (!this.currentQuestion) {
+      return;
+    }
+
+    const selectedAnswer = form.value.answers;
+    const isCorrect = this.currentQuestion.answer === selectedAnswer;
+
     this.answerSelected = true;
 
-    setTimeout(() => {
-      this.currentQuiz++;
-      if (this.quizzes.length > 0) {
-        this.random = Math.floor(
-          Math.random() * this.quizzes[0].questionAnswerList.length,
-        );
-      }
-      this.answerSelected = false;
-      // unselect radio buttons
-      for (let i = 0; i < document.getElementsByName('answers').length; i++) {
-        const ele = document.getElementsByName('answers')[
-          i
-        ] as HTMLInputElement;
-        ele.checked = false;
-      }
-    }, 6000);
-
-    if (
-      this.quizzes[this.random]?.questionAnswerList[this.random].answer ==
-      form.value.answers
-    ) {
+    if (isCorrect) {
       this.correctAnswers++;
-      return true;
     } else {
       this.incorrectAnswers++;
-      return false;
     }
+
+    setTimeout(() => {
+      this.answerSelected = false;
+      form.resetForm();
+      this.selectRandomQuestion();
+
+      const radioButtons = document.getElementsByName('answers');
+      radioButtons.forEach((radio) => {
+        (radio as HTMLInputElement).checked = false;
+      });
+    }, 600);
   }
 
   displayScore() {
