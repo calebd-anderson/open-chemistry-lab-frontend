@@ -1,13 +1,17 @@
 @use "@/tailwind.css";
 
-section {
-  @apply max-w-7xl mx-auto px-4 py-6;
+:host {
+  display: block;
 }
 
-table {
-  @apply w-full;
+.discovery-table {
+  width: 100%;
 }
 
-table, th, td {
-  @apply border;
+.discovery-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.discovery-table tbody tr:hover {
+  background-color: rgb(249 250 251);
 }
