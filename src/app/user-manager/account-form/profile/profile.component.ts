@@ -67,7 +67,6 @@ export class ProfileComponent implements OnInit {
             NotificationType.SUCCESS,
             `${response.firstName} ${response.lastName} updated successfully.`,
           );
-          this.router.navigateByUrl('lab');
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.sendNotification(
