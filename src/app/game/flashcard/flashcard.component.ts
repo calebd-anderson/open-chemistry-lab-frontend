@@ -43,7 +43,9 @@ export class FlashcardComponent implements OnInit {
     const userId = user.userId;
     this.service.getFlashcardsByUserId(userId).subscribe({
       next: (response: Flashcard[]) => {
-        this.flashcards = response.sort((a, b) => a.id! - b.id!);
+        this.flashcards = response
+          .sort((a, b) => (a.id ?? 0) - (b.id ?? 0))
+          .map((flashcard) => ({ ...flashcard, flipped: false }));
       },
       error: (errorResponse: HttpErrorResponse) => {
         if (errorResponse.status === 401) {
@@ -58,16 +60,10 @@ export class FlashcardComponent implements OnInit {
     });
   }
 
-  flipCard(flashcardId: number): void {
-    if (!this.flashcards[flashcardId]) return;
+  flipCard(index: number): void {
+    if (index < 0 || index >= this.flashcards.length) return;
 
-    if (!this.flashcards[flashcardId]['flipped']) {
-      document.getElementById(String(flashcardId))?.classList.add('flip');
-      this.flashcards[flashcardId]['flipped'] = true;
-    } else {
-      document.getElementById(String(flashcardId))?.classList.remove('flip');
-      this.flashcards[flashcardId]['flipped'] = false;
-    }
+    this.flashcards[index].flipped = !this.flashcards[index].flipped;
   }
 
   public createFlashcard(flashcard: CreateFlashcardInput): void {

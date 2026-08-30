@@ -60,13 +60,15 @@
   @if (allCards) {
   <div class="mt-10">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      @for (displayCard of flashcards; track displayCard.id; let i = $index) {
-      <div class="card" id="{{ i }}" (click)="flipCard(i)">
-        <div class="front bg-white border border-emerald-200 rounded-lg shadow p-4 h-24 flex items-center justify-center">
-          {{ displayCard.question }}
-        </div>
-        <div class="back bg-cyan-50 border border-cyan-200 rounded-lg shadow p-4 h-24 flex items-center justify-center">
-          {{ displayCard.answer }}
+      @for (displayCard of flashcards; track displayCard.id ?? displayCard.question + '-' + i; let i = $index) {
+      <div class="flashcard-shell" [class.flipped]="displayCard.flipped" (click)="flipCard(i)">
+        <div class="flashcard-inner">
+          <div class="flashcard-face flashcard-front">
+            {{ displayCard.question }}
+          </div>
+          <div class="flashcard-face flashcard-back">
+            {{ displayCard.answer }}
+          </div>
         </div>
       </div>
       }
