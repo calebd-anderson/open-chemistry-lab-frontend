@@ -1,4 +1,4 @@
-import { Component, inject, model } from '@angular/core';
+import { Component, inject, model, signal } from '@angular/core';
 import { ChemLogo } from '@app/assets/logo.component';
 import { User } from '@model/user';
 import { AuthenticationService } from '@service/security/authentication.service';
@@ -23,7 +23,7 @@ export class MainHeaderComponent {
 
   user = model<User | null>();
   public isMenuOpen: boolean = false;
-  imageUrl: string | null = null;
+  imageUrl = signal<string | null>(null);
 
   openLogin() {
     const dialogRef = this.dialog.open(LoginComponent);
@@ -32,7 +32,7 @@ export class MainHeaderComponent {
         this.user.set(result);
         this.userService.getUserProfileImage(this.user()?.profileImgUrl).subscribe({
           next: (blob: Blob) => {
-            this.imageUrl = URL.createObjectURL(blob);
+            this.imageUrl.set(URL.createObjectURL(blob));
           },
           error: (error) => {
             console.error('Failed to load image', error);
@@ -88,8 +88,8 @@ export class MainHeaderComponent {
   }
 
   ngOnDestroy(): void {
-    if (this.imageUrl) {
-      URL.revokeObjectURL(this.imageUrl);
+    if (this.imageUrl()) {
+      URL.revokeObjectURL(this.imageUrl()!);
     }
   }
 }
