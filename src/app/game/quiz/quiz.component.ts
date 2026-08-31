@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { QuestionAnswer, Quiz } from '@model/quiz';
+import { UserQuiz } from '@model/quiz';
 import { QuizService } from '@service/quiz.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '@service/security/authentication.service';
@@ -14,7 +14,7 @@ import { ButtonComponent } from '@/app/component/button/button.component';
   imports: [FormsModule, ButtonComponent],
 })
 export class QuizComponent implements OnInit {
-  quizzes: Quiz[] = [];
+  quizzes: UserQuiz[] = [];
   currentQuizIndex = 0;
   currentQuestionIndex = 0;
   answerSelected = false;
@@ -28,16 +28,12 @@ export class QuizComponent implements OnInit {
 
   constructor(private quizService: QuizService) {}
 
-  get selectedQuiz(): Quiz | undefined {
+  get selectedQuiz(): UserQuiz | undefined {
     return this.quizzes[this.currentQuizIndex];
   }
 
-  get currentQuestions(): QuestionAnswer[] {
-    return this.selectedQuiz?.questionAnswerList ?? [];
-  }
-
-  get currentQuestion(): QuestionAnswer | undefined {
-    return this.currentQuestions[this.currentQuestionIndex];
+  get currentQuestion(): string | undefined {
+    return this.quizzes[this.currentQuestionIndex]?.question;
   }
 
   ngOnInit(): void {
@@ -49,7 +45,7 @@ export class QuizComponent implements OnInit {
     this.quizService.getQuizByUserId(user.userId).subscribe({
       next: (data) => {
         this.quizzes = data;
-        this.selectRandomQuestion();
+        // this.selectRandomQuestion();
       },
       error: () => {
         this.notificationService.notify(
@@ -66,7 +62,7 @@ export class QuizComponent implements OnInit {
     }
 
     this.currentQuizIndex = Math.floor(Math.random() * this.quizzes.length);
-    const questions = this.currentQuestions;
+    const questions = this.quizzes[this.currentQuizIndex] ? [this.quizzes[this.currentQuizIndex]] : [];
     if (questions.length === 0) {
       this.currentQuestionIndex = 0;
       return;
@@ -81,7 +77,7 @@ export class QuizComponent implements OnInit {
     }
 
     const selectedAnswer = form.value.answers;
-    const isCorrect = this.currentQuestion.answer === selectedAnswer;
+    const isCorrect = this.quizzes[this.currentQuizIndex].answer === selectedAnswer;
 
     this.answerSelected = true;
 

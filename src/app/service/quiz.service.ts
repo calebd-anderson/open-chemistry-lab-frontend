@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
-import { Quiz } from '../model/quiz';
+import { UserQuiz } from '../model/quiz';
 
 @Injectable({ providedIn: 'root' })
 export class QuizService {
@@ -10,16 +10,16 @@ export class QuizService {
 
   constructor(private http: HttpClient) {}
 
-  public getQuiz(): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(`${this.apiServerUrl}/quiz/all`);
+  public getQuiz(): Observable<UserQuiz[]> {
+    return this.http.get<UserQuiz[]>(`${this.apiServerUrl}/quiz/all`);
   }
 
-  public create(quiz: Quiz): Observable<Quiz> {
-    return this.http.put<Quiz>(`${this.apiServerUrl}/quiz/add`, quiz);
+  public create(quiz: UserQuiz): Observable<UserQuiz> {
+    return this.http.put<UserQuiz>(`${this.apiServerUrl}/quiz/add`, quiz);
   }
 
-  public getQuizByUserId(userId: string): Observable<Quiz[]> {
-    return this.http.get<Quiz[]>(
+  public getQuizByUserId(userId: string): Observable<UserQuiz[]> {
+    return this.http.get<UserQuiz[]>(
       `${this.apiServerUrl}/quiz/getbyuserid/${userId}`,
     );
   }

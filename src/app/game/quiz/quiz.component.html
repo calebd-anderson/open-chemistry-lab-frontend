@@ -1,14 +1,14 @@
 <div class="max-w-4xl mx-auto p-5">
-  @if (quizzes.length > 0 && currentQuestion) {
+  @if (quizzes.length) {
     <div>
       <form class="mx-auto w-full md:w-3/4" (ngSubmit)="onSubmit(quizForm)" #quizForm="ngForm">
-        <h1 class="text-center text-xl font-bold">
+        <!-- <h1 class="text-center text-xl font-bold">
           {{ selectedQuiz?.reaction?.formula }} Question {{ currentQuestionIndex + 1 }} of {{ currentQuestions.length }}
-        </h1>
-        <h3 class="mb-4">{{ currentQuestion.question }}</h3>
+        </h1> -->
+        <h3 class="mb-4">{{ currentQuestion }}</h3>
 
         <ul class="space-y-2">
-          @for (qa of currentQuestions; track qa.answer; let i = $index) {
+          @for (qa of quizzes; track qa.id; let i = $index) {
             <li class="p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition">
               <label [attr.for]="'option-' + i" class="cursor-pointer w-full">
                 <input

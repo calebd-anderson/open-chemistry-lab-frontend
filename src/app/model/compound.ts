@@ -10,7 +10,7 @@ export interface Reaction {
 }
 
 export interface UserReaction {
-  userDiscoveredReaction: Reaction;
+  reaction: Reaction;
   userDiscoveredWhen: string
   userLastDiscoveredWhen: string
   userDiscoveredCount: number

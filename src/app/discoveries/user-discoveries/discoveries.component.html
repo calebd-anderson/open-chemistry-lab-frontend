@@ -17,16 +17,16 @@
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-          @for (discovery of userReactions; track discovery?.userDiscoveredReaction?.formula; let i = $index) {
+          @for (discovery of userReactions; track discovery?.reaction?.formula; let i = $index) {
             <tr class="hover:bg-gray-50">
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{discovery?.userDiscoveredReaction?.formula}}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.userDiscoveredReaction?.title}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{discovery?.reaction?.formula}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.reaction?.title}}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.userDiscoveredWhen}}</td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.userDiscoveredCount}}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.userDiscoveredReaction?.firstDiscoveredWhen}}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.userDiscoveredReaction?.firstDiscoveredBy}}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.userDiscoveredReaction?.lastDiscoveredBy}}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.userDiscoveredReaction?.discoveredCount}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.reaction?.firstDiscoveredWhen}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.reaction?.firstDiscoveredBy}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.reaction?.lastDiscoveredBy}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{discovery?.reaction?.discoveredCount}}</td>
             </tr>
           }
         </tbody>

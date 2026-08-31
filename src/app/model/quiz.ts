@@ -1,7 +1,9 @@
-export interface Quiz {
-  id: string;
-  reaction: Reaction;
-  questionAnswerList: QuestionAnswer[];
+export interface UserQuiz {
+    id: string;
+  // questionAnswerList: QuestionAnswer[];
+    userId: string;
+    question: string;
+    answer: string;
 }
 
 export type Reaction = {
@@ -14,13 +16,3 @@ export type Element = {
   symbol: string;
   atoms: number;
 };
-
-export type QuestionAnswer = {
-  question: string;
-  answer: string;
-};
-
-enum QuizType {
-  ELEMENT,
-  COMPOUND,
-}
