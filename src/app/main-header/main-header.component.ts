@@ -6,6 +6,7 @@ import { LoginComponent } from '../user-manager/account-form/login/login.compone
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../user-manager/account-form/register/register.component';
 import { ButtonComponent } from '../component/button/button.component';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-main-header',
@@ -14,19 +15,29 @@ import { ButtonComponent } from '../component/button/button.component';
   styleUrl: './main-header.component.scss',
 })
 export class MainHeaderComponent {
-  user = model<User | null>();
   readonly dialog = inject(MatDialog);
-  public isMenuOpen: boolean = false;
-
   public authenticationService: AuthenticationService = inject(
     AuthenticationService,
   );
+  private userService: UserService = inject(UserService);
+
+  user = model<User | null>();
+  public isMenuOpen: boolean = false;
+  imageUrl: string | null = null;
 
   openLogin() {
     const dialogRef = this.dialog.open(LoginComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result == 'object') {
         this.user.set(result);
+        this.userService.getUserProfileImage(this.user()?.profileImgUrl).subscribe({
+          next: (blob: Blob) => {
+            this.imageUrl = URL.createObjectURL(blob);
+          },
+          error: (error) => {
+            console.error('Failed to load image', error);
+          }
+        });
       } else if (result === 'register') {
         this.openRegister();
       }
@@ -74,5 +85,11 @@ export class MainHeaderComponent {
     };
 
     document.addEventListener('click', handleClickOutside);
+  }
+
+  ngOnDestroy(): void {
+    if (this.imageUrl) {
+      URL.revokeObjectURL(this.imageUrl);
+    }
   }
 }

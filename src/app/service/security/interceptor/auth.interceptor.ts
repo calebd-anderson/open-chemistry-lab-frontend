@@ -17,13 +17,13 @@ export class AuthInterceptor implements HttpInterceptor {
     HttpHandler: HttpHandler,
   ): Observable<HttpEvent<any>> {
     if (
-      httpRequest.url.includes(`${this.authenticationService.host}/user/login`)
+      httpRequest.url.includes(`${this.authenticationService.host}/auth/login`)
     ) {
       return HttpHandler.handle(httpRequest);
     }
     if (
       httpRequest.url.includes(
-        `${this.authenticationService.host}/user/register`,
+        `${this.authenticationService.host}/auth/register`,
       )
     ) {
       return HttpHandler.handle(httpRequest);

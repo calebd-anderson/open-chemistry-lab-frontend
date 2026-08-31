@@ -65,7 +65,7 @@ export class AuthenticationService {
   }
 
   public login(user: User): Observable<HttpResponse<User>> {
-    return this.http.post<User>(`${this.host}/user/login`, user, {
+    return this.http.post<User>(`${this.host}/auth/login`, user, {
       observe: 'response',
     }).pipe(
       tap(response => {
@@ -79,7 +79,7 @@ export class AuthenticationService {
   }
 
   public register(user: UserRegisterDto): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/register`, user);
+    return this.http.post<User>(`${this.host}/auth/register`, user);
   }
 
   public addUserToLocalCache(user: User): void {

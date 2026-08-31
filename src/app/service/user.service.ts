@@ -104,4 +104,12 @@ export class UserService {
     formData.append('isNonLocked', JSON.stringify(user.notLocked));
     return formData;
   }
+
+  public getUserProfileImage(endpoint: string | undefined): Observable<Blob> {
+    if (endpoint) {
+      return this.http.get(endpoint, {
+        responseType: 'blob',
+      });
+    }
+    throw new Error('Endpoint is undefined');}
 }
