@@ -1,16 +1,7 @@
-import {
-  Component,
-  OnInit,
-  WritableSignal,
-  inject,
-  signal,
-} from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
-import { NotificationType } from './model/enum/notification-type.enum';
+import { Component, inject, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { User } from './model/user';
 import { AuthenticationService } from './service/security/authentication.service';
-import { NotificationService } from './service/notification.service';
-import { MatDialog } from '@angular/material/dialog';
 import { TabsComponent } from './component/tabs/tabs.component';
 import { FooterComponent } from './footer/footer.component';
 import { UserNavComponent } from './user-manager/user-nav/user-nav.component';
@@ -28,48 +19,11 @@ import { MainHeaderComponent } from './main-header/main-header.component';
     MainHeaderComponent,
   ],
 })
-export class AppComponent implements OnInit {
-  protected user: WritableSignal<User | null> = signal<User | null>(null);
-
+export class AppComponent {
   public authenticationService: AuthenticationService = inject(
     AuthenticationService,
   );
 
-  private notificationService: NotificationService =
-    inject(NotificationService);
-
-  public isLoggedIn: boolean = this.authenticationService.isLoggedIn();
-
-  readonly dialog = inject(MatDialog);
-  private readonly router = inject(Router);
-
-  ngOnInit(): void {
-    const loginStatus = this.authenticationService.isLoggedIn();
-    if (loginStatus) {
-      this.isLoggedIn = true;
-      let user = this.authenticationService.getUserFromLocalCache();
-      if (user) {
-        this.user.set(user);
-      }
-    }
-  }
-
-  getLoggedIn(newItem: User) {
-    this.user.set(newItem);
-    this.isLoggedIn = true;
-  }
-
-  private sendNotification(
-    notificationType: NotificationType,
-    message: string,
-  ): void {
-    if (message) {
-      this.notificationService.notify(notificationType, message);
-    } else {
-      this.notificationService.notify(
-        notificationType,
-        'An error occured. Please try again.',
-      );
-    }
-  }
+  protected user = signal<User | null>(null);
+  profileImage = signal<string | null>(null);
 }

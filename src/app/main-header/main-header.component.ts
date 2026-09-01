@@ -23,21 +23,45 @@ export class MainHeaderComponent {
 
   user = model<User | null>();
   public isMenuOpen: boolean = false;
-  imageUrl = signal<string | null>(null);
+  profileImage = model<string | null>(null);
+
+  ngOnInit(): void {
+    const loginStatus = this.authenticationService.isLoggedIn();
+    if (loginStatus) {
+      let user = this.authenticationService.getUserFromLocalCache();
+      if (user && !this.user()) {
+        this.user.set(user);
+        if (!this.profileImage()) {
+          this.userService
+            .getUserProfileImage(this.user()?.profileImgUrl)
+            .subscribe({
+              next: (blob: Blob) => {
+                this.profileImage.set(URL.createObjectURL(blob));
+              },
+              error: (error) => {
+                console.error('Failed to load image', error);
+              },
+            });
+        }
+      }
+    }
+  }
 
   openLogin() {
     const dialogRef = this.dialog.open(LoginComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (typeof result == 'object') {
         this.user.set(result);
-        this.userService.getUserProfileImage(this.user()?.profileImgUrl).subscribe({
-          next: (blob: Blob) => {
-            this.imageUrl.set(URL.createObjectURL(blob));
-          },
-          error: (error) => {
-            console.error('Failed to load image', error);
-          }
-        });
+        this.userService
+          .getUserProfileImage(this.user()?.profileImgUrl)
+          .subscribe({
+            next: (blob: Blob) => {
+              this.profileImage.set(URL.createObjectURL(blob));
+            },
+            error: (error) => {
+              console.error('Failed to load image', error);
+            },
+          });
       } else if (result === 'register') {
         this.openRegister();
       }
@@ -88,8 +112,8 @@ export class MainHeaderComponent {
   }
 
   ngOnDestroy(): void {
-    if (this.imageUrl()) {
-      URL.revokeObjectURL(this.imageUrl()!);
+    if (this.profileImage()) {
+      URL.revokeObjectURL(this.profileImage()!);
     }
   }
 }
