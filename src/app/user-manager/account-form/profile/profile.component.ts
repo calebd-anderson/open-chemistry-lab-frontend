@@ -1,6 +1,6 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, Signal, WritableSignal } from '@angular/core';
+import { ROUTER_OUTLET_DATA } from '@angular/router';
 import { User } from '@model/user';
-import { Router } from '@angular/router';
 import { UserService } from '@service/user.service';
 import { AuthenticationService } from '@service/security/authentication.service';
 import { NotificationService } from '@service/notification.service';
@@ -35,7 +35,7 @@ export class ProfileComponent implements OnInit {
   private notificationService: NotificationService =
     inject(NotificationService);
 
-  constructor(private router: Router) {}
+  outletData = inject(ROUTER_OUTLET_DATA) as Signal<{profileImage: WritableSignal<string | null>}>;
 
   ngOnInit(): void {
     const cachedUser = this.authenticationService.getUserFromLocalCache();
@@ -103,7 +103,7 @@ export class ProfileComponent implements OnInit {
       const file = event.target.files[0];
       this.fileName = file.name;
       this.profileImg = file;
-      this.user.profileImgUrl = `${this.user.profileImgUrl}?time=${new Date().getTime()}`;
+      this.outletData().profileImage.set(URL.createObjectURL(file));
     }
   }
 

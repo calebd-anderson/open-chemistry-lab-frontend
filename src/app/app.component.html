@@ -7,7 +7,7 @@
 
   <main class="app-content">
     <!-- dynamic routes -->
-    <router-outlet></router-outlet>
+    <router-outlet [routerOutletData]="{profileImage: profileImage}" />
   </main>
 
   <app-footer />
