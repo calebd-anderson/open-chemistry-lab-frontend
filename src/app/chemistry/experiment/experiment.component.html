@@ -1,11 +1,11 @@
 <section>
-  @if (experimentService.getIsActive()) {
+  <!-- @if (experimentService.getIsActive()) {
   <mat-progress-bar mode="indeterminate" />
-  }
+  } -->
   <div id="experiment-box">
-    <div id="compound-test" [class.active]="elementsInCompound().length > 0">
-      @if (elementsInCompound().length > 0) {
-      <div class="compound">
+    <div id="compound-test" [class.active]="elementsInCompound().length">
+      @if (elementsInCompound().length) {
+      <div class="compound" animate.enter="experiment-enter-animation">
         @for (
         item of elementsInCompound();
         track item.id;
@@ -14,7 +14,7 @@
         <div class="element-in-compound" (click)="removeElementFromCompound(i, item.element)"
           [attr.data-element]="item.element.symbol" [attr.data-index]="i"
           [style.border-color]="item.element.cPKHexColor ? '#' + item.element.cPKHexColor : undefined"
-          [style.box-shadow]="item.element.cPKHexColor ? '0 0 10px #' + item.element.cPKHexColor : undefined">
+          [style.box-shadow]="item.element.cPKHexColor ? '0 0 10px #' + item.element.cPKHexColor : undefined" animate.enter="enter-animation">
           <span class::element-symbol
             [style.color]="item.element.cPKHexColor ? '#' + item.element.cPKHexColor : undefined">{{ item.element.symbol
             }}</span>
@@ -26,14 +26,11 @@
       <div id="validate-btn">
         <app-button title="run experiment button" variant="primary" size="lg" (clicked)="runExperiment.emit()">Run
           Experiment</app-button>
-        <!-- <button (click)="runExperiment.emit()" class="experiment-button" id="run-btn" type="button">
-          Run Experiment
-        </button> -->
         <app-button title="run experiment button" variant="secondary" size="lg" (clicked)="clearExperiment.emit()">Reset
           Experiment</app-button>
       </div>
       } @else {
-      <div class="empty-state">
+      <div class="empty-state" animate.enter="info-enter-animation">
         <svg info-icon></svg>
         <p>
           The experiment is empty. Add elements to begin your chemistry

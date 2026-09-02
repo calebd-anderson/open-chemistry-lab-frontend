@@ -316,3 +316,15 @@ button .svg-icon {
   padding: 0;
   margin: 0;
 }
+
+.fade-enter-animation {
+  animation: slide-fade .75s;
+}
+@keyframes slide-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

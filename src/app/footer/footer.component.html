@@ -4,7 +4,8 @@
     <div class="space-y-3">
       <h3 class="text-white text-lg font-semibold">Catalyst Engine</h3>
       <p class="text-slate-400 text-sm leading-relaxed">
-        An interactive platform for exploring the wonders of chemistry. Create molecules, discover compounds, and learn through hands-on simulation.
+        An interactive platform for exploring the wonders of chemistry. Create molecules, discover compounds, and learn
+        through hands-on simulation.
       </p>
     </div>
 
@@ -13,29 +14,42 @@
       <h3 class="text-white text-lg font-semibold">Explore</h3>
       <ul class="space-y-2">
         <li>
-          <button (click)="goToLab()" class="text-slate-400 hover:text-white text-sm transition-colors">Catalyst Engine (Chemistry Lab)</button>
+          <button (click)="goToLab()" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">Catalyst Engine
+            (Chemistry Lab)</button>
         </li>
         <li>
-          <button (click)="goToDiscoveries()" class="text-slate-400 hover:text-white text-sm transition-colors">My Discoveries</button>
+          <button (click)="goToDiscoveries()" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">My
+            Discoveries</button>
         </li>
         <li>
-          <button (click)="goToGlobalDiscoveries()" class="text-slate-400 hover:text-white text-sm transition-colors">Global Discoveries</button>
+          <button (click)="goToGlobalDiscoveries()"
+            class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">Global Discoveries</button>
         </li>
         <li>
-          <button (click)="goToQuiz()" class="text-slate-400 hover:text-white text-sm transition-colors">Quizzes</button>
+          <button (click)="goToQuiz()"
+            class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">Quizzes</button>
         </li>
         <li>
-          <button (click)="goToFlashcard()" class="text-slate-400 hover:text-white text-sm transition-colors">Flashcards</button>
+          <button (click)="goToFlashcard()"
+            class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">Flashcards</button>
         </li>
       </ul>
     </div>
 
     <!-- Column 3: Legal -->
     <div class="space-y-3">
-      <h3 class="text-white text-lg font-semibold">Legal</h3>
+      <!-- <h3 class="text-white text-lg font-semibold">Legal</h3>
       <ul class="space-y-2">
         <li><a href="#" class="text-slate-400 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
         <li><a href="#" class="text-slate-400 hover:text-white text-sm transition-colors">Terms of Service</a></li>
+      </ul> -->
+      <h3 class="text-white text-lg font-semibold">PubChem API</h3>
+      <ul class="space-y-2">
+        <li><a href="https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest#section=Molecular-Formula"
+            class="text-slate-400 hover:text-white text-sm transition-colors">Learn about the PubChem API</a></li>
+        <li><a href="https://en.wikipedia.org/wiki/Chemical_compound"
+            class="text-slate-400 hover:text-white text-sm transition-colors">Discover the properties of chemical
+            compounds</a></li>
       </ul>
     </div>
   </div>

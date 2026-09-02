@@ -53,3 +53,16 @@
   z-index: 3;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
+
+/* enter-animation for periodic table */
+.fade-enter-animation {
+  animation: slide-fade .75s;
+}
+@keyframes slide-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

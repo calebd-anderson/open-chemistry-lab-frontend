@@ -43,11 +43,11 @@
           [class.active]="activeTab() === 'tips'" (click)="switchTab('tips')">
           Chemistry Tips
         </button>
-
       </div>
+
       <div id="tab-content">
         @if (activeTab() === "tips") {
-        <section id="info-section" class="p-4">
+        <section id="info-section" class="p-4" animate.enter="fade-enter-animation">
           <div class="space-y-3">
             <div class="p-3 bg-blue-50 rounded-lg border border-blue-200 select-none">
               <h3 class="font-semibold text-blue-800">Element Symbols</h3>
@@ -72,8 +72,7 @@
             </div>
           </div>
 
-          <div
-            class="mt-6 p-4 bg-gradient-to-r from-cyan-100 to-blue-100 rounded-xl border border-cyan-200 select-none">
+          <div class="mt-6 p-4 bg-linear-to-r from-cyan-100 to-blue-100 rounded-xl border border-cyan-200 select-none">
             <h3 class="font-bold text-cyan-800 mb-2">Did You Know?</h3>
             <p class="text-sm text-cyan-700">
               Water (H₂O) is made of two hydrogen atoms and one oxygen atom.

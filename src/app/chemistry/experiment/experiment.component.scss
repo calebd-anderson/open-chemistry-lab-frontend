@@ -125,14 +125,6 @@
   flex-wrap: wrap;
 }
 
-.experiment-button {
-
-}
-
-.experiment-button:hover {
-
-}
-
 #clear-btn {
   background: linear-gradient(to right, #ef4444, #dc2626);
   color: white;
@@ -267,7 +259,7 @@ h2 {
 }
 
 /* Animation for element addition */
-.element-in-compound.add {
+.enter-animation {
   animation: addElement 0.5s ease forwards;
 }
 
@@ -286,21 +278,28 @@ h2 {
   }
 }
 
-/* Progress bar styling */
-mat-progress-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 6px;
-  z-index: 30;
+.experiment-enter-animation {
+  animation: fade-in .5s;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-mat-progress-bar::ng-deep .mat-progress-bar-fill {
-  background: linear-gradient(to right, #10b981, #059669);
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+.info-enter-animation {
+  animation: slide-fade 1s;
 }
-
-mat-progress-bar::ng-deep .mat-progress-bar-buffer {
-  background: rgba(16, 185, 129, 0.2);
+@keyframes slide-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
