@@ -1,264 +1,45 @@
 @use "@/tailwind.css";
 
-:host {
-  display: block;
+/* Custom styles for About Page Redesign */
+
+.min-h-screen {
+    @apply antialiased;
 }
 
-.about-page {
-  @apply min-h-screen bg-slate-950 text-slate-100 antialiased;
-  background-image:
-    radial-gradient(circle at top, rgba(45, 212, 191, 0.18), transparent 30%),
-    radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.22), transparent 28%),
-    linear-gradient(180deg, #020817 0%, #0f172a 28%, #111827 100%);
+/* Typography refinement */
+h1, h2, h3 {
+    @apply tracking-tight;
 }
 
-.about-hero {
-  @apply relative isolate border-b border-cyan-500/20;
-  overflow: visible;
-  background: linear-gradient(135deg, rgba(8, 47, 73, 0.96), rgba(15, 23, 42, 0.96));
+/* Smooth transitions for all interactive elements */
+a, button, .transition-all {
+    @apply transition-all duration-300 ease-in-out;
 }
 
-.about-hero__glow {
-  position: absolute;
-  inset: -30% auto auto -12%;
-  width: 32rem;
-  height: 32rem;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(45, 212, 191, 0.28), rgba(45, 212, 191, 0));
-  filter: blur(28px);
-  opacity: 0.9;
+/* Card hover effects */
+.hover\:shadow-md:hover {
+    @apply shadow-md;
 }
 
-.about-hero__content {
-  @apply relative z-10 mx-auto max-w-6xl px-4 py-20 sm:py-24 lg:px-8;
+.hover\:-translate-y-1:hover {
+    @apply -translate-y-1;
 }
 
-.eyebrow {
-  @apply mb-5 inline-flex items-center rounded-full border border-cyan-400/30 bg-cyan-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200;
-}
-
-.eyebrow--dark {
-  @apply border-emerald-500/20 bg-emerald-500/10 text-emerald-200;
-}
-
-.about-hero h1 {
-  @apply max-w-4xl text-4xl font-black tracking-tight sm:text-5xl lg:text-7xl;
-  display: flex;
-  flex-direction: column;
-  gap: 0.08em;
-  line-height: 0.9;
-  overflow: visible;
-  color: #f8fafc;
-}
-
-.headline-base,
-.headline-gradient {
-  display: block;
-  width: fit-content;
-  max-width: 100%;
-  overflow: visible;
-}
-
-.headline-base {
-  color: #f8fafc;
-}
-
-.headline-gradient {
-  background: linear-gradient(135deg, #7dd3fc 0%, #5eead4 35%, #d9f99d 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-  padding-bottom: 0.18em;
-}
-
-.about-hero__lede {
-  @apply mt-10 max-w-2xl text-lg leading-relaxed text-slate-300 sm:text-xl;
-}
-
-.about-hero__actions {
-  @apply mt-8 flex flex-wrap gap-4;
-}
-
-.primary-action,
-.secondary-action,
-.link-stack a,
-.resource-list a {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.primary-action,
-.secondary-action {
-  @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold no-underline;
-}
-
-.primary-action {
-  @apply bg-gradient-to-r from-cyan-400 via-teal-400 to-emerald-400 text-slate-950 shadow-lg shadow-cyan-500/20;
-}
-
-.secondary-action {
-  @apply border border-slate-600 bg-slate-900/50 text-slate-100;
-}
-
-.primary-action:hover,
-.secondary-action:hover,
-.link-stack a:hover,
-.resource-list a:hover {
-  transform: translateY(-2px);
-}
-
-.about-shell {
-  @apply relative z-10 mx-auto max-w-6xl px-4 pb-20 pt-8 lg:px-8;
-}
-
-.mission-panel,
-.feature-card,
-.team-panel {
-  @apply rounded-3xl border border-white/10 bg-slate-900/70 shadow-[0_20px_60px_rgba(15,23,42,0.45)] backdrop-blur-sm;
-}
-
-.mission-panel {
-  @apply p-6 md:p-8 lg:p-10;
-}
-
-.section-heading {
-  @apply mb-8;
-}
-
-.section-heading h2,
-.team-panel h2 {
-  @apply text-3xl font-bold tracking-tight text-white md:text-4xl;
-}
-
-.mission-grid {
-  @apply grid gap-8 lg:grid-cols-[1.4fr_0.9fr];
-}
-
-.mission-copy {
-  @apply space-y-5 text-lg leading-relaxed text-slate-300;
-}
-
-.mission-copy a {
-  @apply font-medium text-cyan-300 underline decoration-cyan-400/50 underline-offset-4;
-}
-
-.mission-stats {
-  @apply grid gap-4;
-}
-
-.stat-card {
-  @apply flex min-h-28 flex-col justify-between rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-slate-800 to-slate-900 p-5 shadow-inner shadow-cyan-950/20;
-}
-
-.stat-card strong {
-  @apply text-lg font-semibold text-white;
-}
-
-.stat-card span {
-  @apply text-sm text-slate-300;
-}
-
-.feature-grid {
-  @apply mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3;
-}
-
-.feature-card {
-  @apply flex h-full flex-col p-6;
-}
-
-.feature-card--highlight {
-  @apply border-cyan-400/25 bg-gradient-to-br from-cyan-500/10 to-slate-900/80;
-}
-
-.feature-icon {
-  @apply mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border;
-}
-
-.feature-icon svg {
-  @apply h-6 w-6 fill-current;
-}
-
-.feature-icon--cyan {
-  @apply border-cyan-300/30 bg-cyan-400/10 text-cyan-200;
-}
-
-.feature-icon--amber {
-  @apply border-amber-300/30 bg-amber-400/10 text-amber-200;
-}
-
-.feature-icon--emerald {
-  @apply border-emerald-300/30 bg-emerald-400/10 text-emerald-200;
-}
-
-.feature-card h3 {
-  @apply mb-3 text-xl font-bold text-white;
-}
-
-.feature-card p {
-  @apply text-base leading-relaxed text-slate-300;
-}
-
-.link-stack {
-  @apply mt-6 flex flex-wrap gap-3;
-}
-
-.link-stack a,
-.resource-list a {
-  @apply text-sm font-medium text-cyan-300 underline decoration-cyan-400/40 underline-offset-4;
-}
-
-.chip-list {
-  @apply mt-4 flex flex-wrap gap-2;
-}
-
-.chip-list span {
-  @apply rounded-full border border-slate-700 bg-slate-800/80 px-3 py-1 text-xs font-medium text-slate-200;
-}
-
-.resource-list {
-  @apply mt-4 space-y-3 pl-0;
-  list-style: none;
-}
-
-.team-panel {
-  @apply mt-8 p-6 md:p-8;
-}
-
-.team-panel__grid {
-  @apply mt-6 grid gap-4 md:grid-cols-2;
-}
-
-.team-panel__card {
-  @apply rounded-2xl border border-white/10 bg-slate-950/60 p-5 text-base leading-relaxed text-slate-300;
-}
-
-.team-panel__card--accent {
-  @apply border-cyan-400/20 bg-gradient-to-br from-cyan-500/10 to-slate-950;
-}
-
-@media (max-width: 640px) {
-  .about-hero__content {
-    @apply py-16;
-  }
-
-  .about-hero h1 {
-    @apply text-3xl;
-  }
-}
-
+/* Custom scrollbar for a premium feel */
 ::-webkit-scrollbar {
-  width: 10px;
+    width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.7);
+    @apply bg-slate-100;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(94, 234, 212, 0.5);
-  border-radius: 9999px;
+    @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(94, 234, 212, 0.75);
+/* Utility for the text-gradient in Hero */
+.text-transparent {
+    -webkit-background-clip: text;
+    background-clip: text;
 }
