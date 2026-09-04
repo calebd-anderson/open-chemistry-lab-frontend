@@ -1,4 +1,4 @@
-import { Component, inject, signal, ViewChild } from '@angular/core';
+import { Component, computed, inject, signal, ViewChild } from '@angular/core';
 import { PeriodicTableComponent } from '../periodic-table/periodic-table.component';
 import { ExperimentComponent } from '../experiment/experiment.component';
 import { Element } from '@app/model/element.model';
@@ -11,7 +11,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ValidationModalComponent } from '../experiment/validation-modal/validation-modal.component';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Reaction } from '@app/model/compound';
-import { tap } from 'rxjs/operators';
+import { ElementRequest } from '@/app/model/element-request.model';
 
 @Component({
   selector: 'app-lab',
@@ -21,19 +21,25 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./lab.component.scss', './lab.component.svg.scss'],
 })
 export class LabComponent {
-  @ViewChild(PeriodicTableComponent) periodicTable!: PeriodicTableComponent;
-
-  elementsInCompound = signal<{element: Element, id: number}[]>([]);
-  atomsInCompound: Map<string, number> = new Map();
-  private nextId = 0;
+  dialogRef: MatDialogRef<ValidationModalComponent> | undefined;
+  public dialog: MatDialog = inject(MatDialog);
   private _snackBar: NotificationService = inject(NotificationService);
+
   public experimentService: ExperimentService = inject(ExperimentService);
   private compoundService: CompoundService = inject(CompoundService);
   private authenticationService: AuthenticationService = inject(
-    AuthenticationService
+    AuthenticationService,
   );
-  dialogRef: MatDialogRef<ValidationModalComponent> | undefined;
-  public dialog: MatDialog = inject(MatDialog);
+
+  // Signal to track elements currently in the compound (experiment) and their unique IDs for rendering
+  elementsInCompound = signal<{ element: Element; id: number }[]>([]);
+  private nextId = 0;
+  // computed signal to track the set of element symbols currently in the experiment, derived from elementsInCompound
+  elementsInExperiment = computed<Set<string>>(() => {
+    return new Set(
+      this.elementsInCompound().map((item) => item.element.symbol),
+    );
+  });
 
   // Collapsible table state
   isTableExpanded = signal(false);
@@ -44,75 +50,56 @@ export class LabComponent {
   // Tab state
   activeTab = signal<'tips' | 'table'>('table');
 
+  // this receives an event from the periodic table component when an element is selected
   public addInteractedElements(element: Element) {
     // Check if adding this element would exceed the limit of 6
     if (this.elementsInCompound().length >= 10) {
       this._snackBar.notify(
         NotificationType.WARNING,
-        'Maximum of 6 elements allowed in experiment. Please remove an element first.'
+        'Maximum of 6 elements allowed in experiment. Please remove an element first.',
       );
       return;
     }
 
-    let tempAtoms = this.atomsInCompound.get(element.symbol);
-    this.elementsInCompound.update((e) => [...e, { element, id: this.nextId++ }]);
-    if (tempAtoms == null) {
-      this.atomsInCompound.set(element.symbol, 1);
-    } else {
-      this.atomsInCompound.set(element.symbol, tempAtoms + 1);
-    }
+    this.elementsInCompound.update((e) => [
+      ...e,
+      { element, id: this.nextId++ },
+    ]);
 
     // Show notification that element was added
     this._snackBar.notify(
       NotificationType.DEFAULT,
-      element.name + ' added to experiment.'
+      element.name + ' added to experiment.',
     );
-
-    // Update the periodic table with the new elements
-    this.updatePeriodicTableElements();
   }
 
-  public getElementsInCompound(): {element: Element, id: number}[] {
+  public getElementsInCompound(): { element: Element; id: number }[] {
     return this.elementsInCompound();
-  }
-
-  public removeElementFromCompound(index: number) {
-    const element = this.elementsInCompound()[index].element;
-    let tempAtoms = this.atomsInCompound.get(element.symbol);
-    this.elementsInCompound.update((elements) => elements.filter((_, i) => i !== index));
-    if (tempAtoms == 1) {
-      this.atomsInCompound.delete(element.symbol);
-      this._snackBar.notify(
-        NotificationType.DEFAULT,
-        element.name + ' removed from experiment.'
-      );
-    } else if (tempAtoms) {
-      this.atomsInCompound.set(element.symbol, tempAtoms - 1);
-      this._snackBar.notify(
-        NotificationType.DEFAULT,
-        element.name + ' removed from experiment.'
-      );
-    }
-
-    // Update the periodic table with the new elements
-    this.updatePeriodicTableElements();
   }
 
   public clearExperiment() {
     this.elementsInCompound.set([]);
-    this.atomsInCompound.clear();
-
-    // Update the periodic table with no elements
-    this.updatePeriodicTableElements();
   }
 
   public validateCompound() {
     this.experimentService.setIsActive(true);
 
-    let elements = [];
+    // the reduced formula form is best represented as a Map<string, number> where the key is the element symbol and the value is the number of atoms
+    let formula = new Map<string, number>();
+    for (let element of this.elementsInCompound()) {
+      if (formula.has(element.element.symbol)) {
+        formula.set(
+          element.element.symbol,
+          formula.get(element.element.symbol)! + 1,
+        );
+      } else {
+        formula.set(element.element.symbol, 1);
+      }
+    }
 
-    // build list of elements
-    for (let [key, value] of this.atomsInCompound.entries()) {
+    // however, the API expects an array of ElementRequest objects, so we need to convert the Map to that format
+    let elements: ElementRequest[] = [];
+    for (let [key, value] of formula.entries()) {
       elements.push({ symbol: key, numberOfAtoms: value });
     }
 
@@ -139,7 +126,7 @@ export class LabComponent {
       } else {
         this._snackBar.notify(
           NotificationType.WARNING,
-          'Unable to save discovery anonymously. Please create an account to save your findings.'
+          'Unable to save discovery anonymously. Please create an account to save your findings.',
         );
         let payload = {
           elements,
@@ -171,16 +158,16 @@ export class LabComponent {
     this.dialogRef.componentInstance.wasSuccessful = 'Almost there!';
     if (response.status == 404) {
       this.dialogRef.componentInstance.confirmMessage =
-        "That combination does not form a valid compound yet. Try a different mix of elements!";
+        'That combination does not form a valid compound yet. Try a different mix of elements!';
     } else {
       this.dialogRef.componentInstance.confirmMessage =
-        "The experiment hit a hiccup while validating your reaction. Please try again.";
+        'The experiment hit a hiccup while validating your reaction. Please try again.';
     }
   }
 
   public openConfirmationDialogSuccess(
     response: HttpResponse<Reaction>,
-    isLoggedIn: boolean
+    isLoggedIn: boolean,
   ) {
     this.dialogRef = this.asyncDialog(response, isLoggedIn);
   }
@@ -194,7 +181,8 @@ export class LabComponent {
     });
     this.dialogRef.componentInstance.discovery = response.body?.title;
     this.dialogRef.componentInstance.wasSuccessful = 'Congratulations!';
-    this.dialogRef.componentInstance.confirmMessage = 'Your experiment produced a new compound.';
+    this.dialogRef.componentInstance.confirmMessage =
+      'Your experiment produced a new compound.';
 
     if (!isLoggedIn) {
       this.dialogRef.componentInstance.isLoggedIn =
@@ -205,23 +193,16 @@ export class LabComponent {
 
   // Toggle the periodic table visibility
   public togglePeriodicTable() {
-    this.isTableExpanded.update(prev => !prev);
+    this.isTableExpanded.update((prev) => !prev);
   }
 
   // Toggle the chemistry tips visibility
   public toggleTips() {
-    this.isTipsExpanded.update(prev => !prev);
+    this.isTipsExpanded.update((prev) => !prev);
   }
 
   // Switch between tabs
   public switchTab(tab: 'tips' | 'table') {
     this.activeTab.set(tab);
-  }
-
-  // Method to update the periodic table with current elements
-  private updatePeriodicTableElements() {
-    if (this.periodicTable) {
-      this.periodicTable.updateElementsInExperiment(this.elementsInCompound().map(item => item.element));
-    }
   }
 }

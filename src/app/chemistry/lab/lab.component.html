@@ -25,9 +25,8 @@
           happens when you run the experiment!
         </p>
       </aside>
-      <app-experiment [elementsInCompound]="elementsInCompound()" [isTableExpanded]="isTableExpanded()"
-        (removeElement)="removeElementFromCompound($event.index)" (runExperiment)="validateCompound()"
-        (clearExperiment)="clearExperiment()" />
+      <app-experiment [(elementsInCompound)]="elementsInCompound" [isTableExpanded]="isTableExpanded()"
+        (runExperiment)="validateCompound()" (clearExperiment)="clearExperiment()" />
     </div>
 
     <!-- Tabbed Interface for Periodic Table and Tips -->
@@ -92,7 +91,7 @@
         } @else {
         <!-- Periodic Table Section -->
         <section id="periodic-table-section">
-          <periodic-table (sendElementMessage)="addInteractedElements($event)" />
+          <periodic-table (sendElementMessage)="addInteractedElements($event)" [elementsInExperiment]="elementsInExperiment()" />
         </section>
         }
       </div>
@@ -101,6 +100,6 @@
 
   <!-- Collapsible Periodic Table Section (for mobile) -->
   <section id="periodic-table-container" [class.hidden]="!isTableExpanded()">
-    <periodic-table class="pt" (sendElementMessage)="addInteractedElements($event)" />
+    <periodic-table class="pt" (sendElementMessage)="addInteractedElements($event)" [elementsInExperiment]="elementsInExperiment()" />
   </section>
 </article>

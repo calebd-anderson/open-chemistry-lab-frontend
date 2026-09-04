@@ -5,6 +5,7 @@ import {
   output,
   ElementRef,
   AfterViewInit,
+  model,
 } from '@angular/core';
 import { Element } from '@model/element.model';
 
@@ -12,11 +13,7 @@ import { FlaskComponent } from './flask/flask.component';
 import { CommonModule } from '@angular/common';
 import { ExperimentService } from '@app/service/experiment.service';
 import { InfoIcon } from '@app/assets/info-icon.component.svg';
-import { ButtonComponent } from "@/app/component/button/button.component";
-
-interface RemoveElement {
-  index: number;
-}
+import { ButtonComponent } from '@/app/component/button/button.component';
 
 @Component({
   selector: 'app-experiment',
@@ -25,10 +22,10 @@ interface RemoveElement {
   styleUrls: ['./experiment.component.scss'],
 })
 export class ExperimentComponent implements AfterViewInit {
-  elementsInCompound = input.required<{ element: Element; id: number }[]>();
+  elementsInCompound = model.required<{ element: Element; id: number }[]>();
   isTableExpanded = input<boolean>(false);
 
-  removeElement = output<RemoveElement>();
+  // removeElement = output<RemoveElement>();
   runExperiment = output<void>();
   clearExperiment = output<void>();
 
@@ -69,7 +66,6 @@ export class ExperimentComponent implements AfterViewInit {
           }
         });
       });
-
       observer.observe(compoundContainer, { childList: true, subtree: true });
     }
   }
@@ -82,10 +78,14 @@ export class ExperimentComponent implements AfterViewInit {
     if (elementToRemove) {
       elementToRemove.classList.add('remove');
       setTimeout(() => {
-        this.removeElement.emit({ index: i });
+        this.elementsInCompound.update((elements) =>
+          elements.filter((_, index) => index !== i),
+        );
       }, 500);
     } else {
-      this.removeElement.emit({ index: i });
+      this.elementsInCompound.update((elements) =>
+        elements.filter((_, index) => index !== i),
+      );
     }
   }
 
