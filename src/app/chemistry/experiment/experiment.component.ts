@@ -21,7 +21,7 @@ import { ButtonComponent } from '@/app/component/button/button.component';
   templateUrl: './experiment.component.html',
   styleUrls: ['./experiment.component.scss'],
 })
-export class ExperimentComponent implements AfterViewInit {
+export class ExperimentComponent {
   elementsInCompound = model.required<{ element: Element; id: number }[]>();
   isTableExpanded = input<boolean>(false);
 
@@ -36,47 +36,10 @@ export class ExperimentComponent implements AfterViewInit {
     this.elementRef = elementRef;
   }
 
-  ngAfterViewInit() {
-    // Add animation classes to elements when they're added
-    const compoundContainer =
-      this.elementRef.nativeElement.querySelector('.compound');
-    if (compoundContainer) {
-      // Observe new elements being added
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.type === 'childList') {
-            mutation.addedNodes.forEach((node) => {
-              if (node.nodeType === 1) {
-                // Check if the node has the class we're looking for
-                const elementNode = node as HTMLElement;
-                if (
-                  elementNode.classList &&
-                  elementNode.classList.contains('element-in-compound')
-                ) {
-                  // Add animation class for new elements
-                  setTimeout(() => {
-                    elementNode.classList.add('add');
-                    setTimeout(() => {
-                      elementNode.classList.remove('add');
-                    }, 500);
-                  }, 10);
-                }
-              }
-            });
-          }
-        });
-      });
-      observer.observe(compoundContainer, { childList: true, subtree: true });
-    }
-  }
-
   public removeElementFromCompound(i: number, element: Element) {
     // Add animation class for removing elements
-    const elementToRemove = this.elementRef.nativeElement.querySelector(
-      `.element-in-compound[data-index="${i}"]`,
-    );
-    if (elementToRemove) {
-      elementToRemove.classList.add('remove');
+
+    if (this.elementsInCompound().length === 1) {
       setTimeout(() => {
         this.elementsInCompound.update((elements) =>
           elements.filter((_, index) => index !== i),

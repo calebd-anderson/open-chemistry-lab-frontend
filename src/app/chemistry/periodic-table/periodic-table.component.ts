@@ -30,8 +30,8 @@ export class PeriodicTableComponent {
 
   public progressSpinner: boolean = false;
 
+  // emits the selected element to the parent component (LabComponent)
   sendElementMessage = output<Element>();
-  elementSelected = output<Element>();
 
   // Track which elements are currently in the experiment
   elementsInExperiment = input<Set<string>>(new Set());

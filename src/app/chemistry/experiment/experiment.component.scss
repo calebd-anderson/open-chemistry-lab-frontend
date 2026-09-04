@@ -236,30 +236,9 @@ h2 {
   transform: scale(0.95);
 }
 
-/* Chemistry-themed color scheme for elements have been moved to dynamic style bindings in the component template */
-
-/* Animation for element removal */
-.element-in-compound.remove {
-  animation: removeElement 0.5s ease forwards;
-}
-
-@keyframes removeElement {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(0);
-    opacity: 0;
-  }
-}
 
 /* Animation for element addition */
-.enter-animation {
+.element-enter-animation {
   animation: addElement 0.5s ease forwards;
 }
 
@@ -290,6 +269,18 @@ h2 {
   }
 }
 
+.compound-leave-animation {
+  animation: fade-out .5s;
+}
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .info-enter-animation {
   animation: slide-fade 1s;
 }
@@ -301,5 +292,25 @@ h2 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Animation for element removal */
+.element-leave-animation {
+  animation: removeElement 0.5s ease forwards;
+}
+
+@keyframes removeElement {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
 }

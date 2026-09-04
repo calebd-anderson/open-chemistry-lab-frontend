@@ -3,40 +3,41 @@
   <mat-progress-bar mode="indeterminate" />
   } -->
   <div id="experiment-box">
-    <div id="compound-test" [class.active]="elementsInCompound().length">
+    <div id="compound-test">
       @if (elementsInCompound().length) {
-      <div class="compound" animate.enter="experiment-enter-animation">
-        @for (
-        item of elementsInCompound();
-        track item.id;
-        let i = $index
-        ) {
-        <div class="element-in-compound" (click)="removeElementFromCompound(i, item.element)"
-          [attr.data-element]="item.element.symbol" [attr.data-index]="i"
-          [style.border-color]="item.element.cPKHexColor ? '#' + item.element.cPKHexColor : undefined"
-          [style.box-shadow]="item.element.cPKHexColor ? '0 0 10px #' + item.element.cPKHexColor : undefined" animate.enter="enter-animation">
-          <span class::element-symbol
-            [style.color]="item.element.cPKHexColor ? '#' + item.element.cPKHexColor : undefined">{{ item.element.symbol
-            }}</span>
-          <span class="element-name">{{ item.element.name }}</span>
+        <div class="compound" animate.leave="compound-leave-animation">
+          @for (
+          item of elementsInCompound();
+          track item.id;
+          let i = $index
+          ) {
+          <div class="element-in-compound" (click)="removeElementFromCompound(i, item.element)"
+            [attr.data-element]="item.element.symbol" [attr.data-index]="i"
+            [style.border-color]="item.element.cPKHexColor ? '#' + item.element.cPKHexColor : undefined"
+            [style.box-shadow]="item.element.cPKHexColor ? '0 0 10px #' + item.element.cPKHexColor : undefined"
+            animate.enter="element-enter-animation" animate.leave="element-leave-animation">
+            <span class::element-symbol
+              [style.color]="item.element.cPKHexColor ? '#' + item.element.cPKHexColor : undefined">{{ item.element.symbol
+              }}</span>
+            <span class="element-name">{{ item.element.name }}</span>
+          </div>
+          }
         </div>
-        }
-      </div>
-      <!-- run experiment buttons -->
-      <div id="validate-btn">
-        <app-button title="run experiment button" variant="primary" size="lg" (clicked)="runExperiment.emit()">Run
-          Experiment</app-button>
-        <app-button title="run experiment button" variant="secondary" size="lg" (clicked)="clearExperiment.emit()">Reset
-          Experiment</app-button>
-      </div>
+        <!-- run experiment buttons -->
+        <div id="validate-btn">
+          <app-button title="run experiment button" variant="primary" size="lg" (clicked)="runExperiment.emit()">Run
+            Experiment</app-button>
+          <app-button title="run experiment button" variant="secondary" size="lg" (clicked)="clearExperiment.emit()">Reset
+            Experiment</app-button>
+        </div>
       } @else {
-      <div class="empty-state" animate.enter="info-enter-animation">
-        <svg info-icon></svg>
-        <p>
-          The experiment is empty. Add elements to begin your chemistry
-          exploration!
-        </p>
-      </div>
+        <div class="empty-state" animate.enter="info-enter-animation">
+          <svg info-icon></svg>
+          <p>
+            The experiment is empty. Add elements to begin your chemistry
+            exploration!
+          </p>
+        </div>
       }
     </div>
     <div id="flask-container">
