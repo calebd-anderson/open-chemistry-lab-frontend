@@ -38,18 +38,9 @@ export class ExperimentComponent {
 
   public removeElementFromCompound(i: number, element: Element) {
     // Add animation class for removing elements
-
-    if (this.elementsInCompound().length === 1) {
-      setTimeout(() => {
-        this.elementsInCompound.update((elements) =>
-          elements.filter((_, index) => index !== i),
-        );
-      }, 500);
-    } else {
-      this.elementsInCompound.update((elements) =>
-        elements.filter((_, index) => index !== i),
-      );
-    }
+    this.elementsInCompound.update((elements) =>
+      elements.filter((_, index) => index !== i),
+    );
   }
 
   // Get the count of each element in the compound

@@ -28,7 +28,6 @@ h2
 
   &:hover
     transform: scale(1.05)
-    z-index: 2
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 
   .element-content
@@ -102,12 +101,6 @@ h2
   background-color: #6c757d
   color: white
 
-// Special styling for elements in experiment
-.element-card.in-experiment
-  transform: scale(1.1)
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.8)
-  border: 2px solid gold
-
 // Responsive adjustments
 @media (max-width: 768px)
   .periodic-table-grid
@@ -161,3 +154,13 @@ h2
   .filter-btn
     padding: 0.3rem 0.6rem
     font-size: 0.7rem
+
+// Special styling for elements in experiment
+.element-card.in-experiment
+  transform: scale(1.1)
+  box-shadow: 0 0 5px 1.25px #1B5299
+  z-index: 1
+
+  &:hover
+    transform: scale(1.15)
+    z-index: 2
