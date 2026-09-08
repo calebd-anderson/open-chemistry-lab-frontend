@@ -18,6 +18,8 @@ import { ValidationModalComponent } from '../experiment/validation-modal/validat
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Reaction } from '@app/model/compound';
 import { ElementRequest } from '@/app/model/element-request.model';
+import { GraphicsModalComponent } from '../experiment/graphics-modal/graphics-modal.component';
+import { ClusterMapResponse } from '@/app/model/clustmapresp.model';
 
 @Component({
   selector: 'app-lab',
@@ -28,6 +30,7 @@ import { ElementRequest } from '@/app/model/element-request.model';
 })
 export class LabComponent implements OnInit {
   dialogRef: MatDialogRef<ValidationModalComponent> | undefined;
+  graphicsDialogRef: MatDialogRef<GraphicsModalComponent> | undefined;
   public dialog: MatDialog = inject(MatDialog);
   private _snackBar: NotificationService = inject(NotificationService);
 
@@ -57,7 +60,7 @@ export class LabComponent implements OnInit {
   activeTab = signal<'tips' | 'table'>('table');
 
   ngOnInit(): void {
-    this.dialog.open(ValidationModalComponent, {
+    this.dialog.open(GraphicsModalComponent, {
       disableClose: false,
       panelClass: 'validation-dialog-panel',
       // width: 'min(92vw, 440px)',
@@ -195,8 +198,8 @@ export class LabComponent implements OnInit {
         };
         // careful of memory leak
         this.compoundService.analyze(payload).subscribe({
-          next: (response: HttpResponse<Reaction>) => {
-            this.openConfirmationDialogSuccess(response, true);
+          next: (response: HttpResponse<ClusterMapResponse>) => {
+            this.openGraphSuccess(response, true);
             this.experimentService.setIsActive(false);
           },
           error: (errorResponse: HttpErrorResponse) => {
@@ -215,8 +218,8 @@ export class LabComponent implements OnInit {
         };
         // careful of memory leak
         this.compoundService.analyze(payload).subscribe({
-          next: (response: HttpResponse<Reaction>) => {
-            this.openConfirmationDialogSuccess(response, false);
+          next: (response: HttpResponse<ClusterMapResponse>) => {
+            this.openGraphSuccess(response, false);
             this.experimentService.setIsActive(false);
           },
           error: (errorResponse: HttpErrorResponse) => {
@@ -252,6 +255,33 @@ export class LabComponent implements OnInit {
   ) {
     this.dialogRef = this.asyncDialog(response, isLoggedIn);
   }
+
+  public openGraphSuccess(
+    response: HttpResponse<ClusterMapResponse>,
+    isLoggedIn: boolean,
+  ) {
+    this.graphicsDialogRef = this.graphDialog(response, isLoggedIn);
+  }
+
+    private graphDialog(response: HttpResponse<ClusterMapResponse>, isLoggedIn: boolean) {
+      this.graphicsDialogRef = this.dialog.open(GraphicsModalComponent, {
+        disableClose: false,
+        panelClass: 'validation-dialog-panel',
+        width: 'min(92vw, 440px)',
+        autoFocus: false,
+      });
+      // this.graphicsDialogRef.componentInstance.discovery = response.body?.title;
+      this.graphicsDialogRef.componentInstance.wasSuccessful = 'Congratulations!';
+      this.graphicsDialogRef.componentInstance.confirmMessage =
+        'Your experiment produced a new compound.';
+      this.graphicsDialogRef.componentInstance.data = response.body
+      
+      if (!isLoggedIn) {
+        this.graphicsDialogRef.componentInstance.isLoggedIn =
+          'Create an account to save your discovery!';
+      }
+      return this.graphicsDialogRef;
+    }
 
   private asyncDialog(response: HttpResponse<Reaction>, isLoggedIn: boolean) {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {

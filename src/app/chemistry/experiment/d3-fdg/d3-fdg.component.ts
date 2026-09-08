@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, input, OnInit } from '@angular/core';
 
 import * as d3 from 'd3';
 
@@ -10,6 +10,8 @@ import * as d3 from 'd3';
 })
 export class D3FdgComponent implements OnInit {
   constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
+
+  data = input();
 
   ngOnInit(): void {
     // Declare the chart dimensions and margins.

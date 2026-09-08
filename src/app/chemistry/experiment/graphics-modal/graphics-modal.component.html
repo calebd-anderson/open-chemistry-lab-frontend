@@ -15,15 +15,15 @@
   </header>
 
   <div class="validation-modal__content">
-    @if (hasDiscovery) {
+    <!-- @if (hasDiscovery) { -->
       <p class="validation-modal__lead">{{ confirmMessage }}</p>
       <div class="validation-modal__result" aria-live="polite">
         <span class="validation-modal__label">Compound</span>
-        <strong id="discovery">{{ discovery }}</strong>
+        <!-- <strong id="discovery">{{ discovery }}</strong> -->
       </div>
-    } @else {
+    <!-- } @else { -->
       <p class="validation-modal__lead">{{ confirmMessage }}</p>
-    }
+    <!-- } -->
 
     @if (isLoggedIn && isLoggedIn.trim() !== '' && isLoggedIn.trim() !== '?') {
       <div class="validation-modal__note">
@@ -31,6 +31,9 @@
         <span>{{ isLoggedIn }}</span>
       </div>
     }
+    <!-- https://d3js.org/d3-force -->
+     <!-- Force Directed Graph -->
+    <d3-fdg [data]="data" />
   </div>
 
   <div class="validation-modal__actions">
