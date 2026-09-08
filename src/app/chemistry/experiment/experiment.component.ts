@@ -25,7 +25,6 @@ export class ExperimentComponent {
   elementsInCompound = model.required<{ element: Element; id: number }[]>();
   isTableExpanded = input<boolean>(false);
 
-  // removeElement = output<RemoveElement>();
   runExperiment = output<void>();
   clearExperiment = output<void>();
   analyzeFormula = output<void>();

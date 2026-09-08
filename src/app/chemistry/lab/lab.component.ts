@@ -1,4 +1,10 @@
-import { Component, computed, inject, signal, ViewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { PeriodicTableComponent } from '../periodic-table/periodic-table.component';
 import { ExperimentComponent } from '../experiment/experiment.component';
 import { Element } from '@app/model/element.model';
@@ -20,7 +26,7 @@ import { ElementRequest } from '@/app/model/element-request.model';
   templateUrl: './lab.component.html',
   styleUrls: ['./lab.component.scss', './lab.component.svg.scss'],
 })
-export class LabComponent {
+export class LabComponent implements OnInit {
   dialogRef: MatDialogRef<ValidationModalComponent> | undefined;
   public dialog: MatDialog = inject(MatDialog);
   private _snackBar: NotificationService = inject(NotificationService);
@@ -49,6 +55,16 @@ export class LabComponent {
 
   // Tab state
   activeTab = signal<'tips' | 'table'>('table');
+
+  ngOnInit(): void {
+    this.dialog.open(ValidationModalComponent, {
+      disableClose: false,
+      panelClass: 'validation-dialog-panel',
+      // width: 'min(92vw, 440px)',
+      // width: '100em',
+      autoFocus: false,
+    });
+  }
 
   // this receives an event from the periodic table component when an element is selected
   public addInteractedElements(element: Element) {
@@ -147,7 +163,7 @@ export class LabComponent {
     }, 2000); // 2 second delay
   }
 
-    public analyzeFormula() {
+  public analyzeFormula() {
     this.experimentService.setIsActive(true);
 
     // the reduced formula form is best represented as a Map<string, number> where the key is the element symbol and the value is the number of atoms
@@ -181,7 +197,6 @@ export class LabComponent {
         this.compoundService.analyze(payload).subscribe({
           next: (response: HttpResponse<Reaction>) => {
             this.openConfirmationDialogSuccess(response, true);
-
             this.experimentService.setIsActive(false);
           },
           error: (errorResponse: HttpErrorResponse) => {

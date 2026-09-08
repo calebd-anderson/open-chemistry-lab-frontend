@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '@/app/component/button/button.component';
+import { D3FdgComponent } from "../d3-fdg/d3-fdg.component";
 
 @Component({
   selector: 'app-validation-modal',
   templateUrl: './validation-modal.component.html',
   styleUrl: './validation-modal.scss',
-  imports: [MatDialogModule, ButtonComponent],
+  imports: [MatDialogModule, ButtonComponent, D3FdgComponent],
 })
 export class ValidationModalComponent {
   constructor(public dialogRef: MatDialogRef<ValidationModalComponent>) {}
