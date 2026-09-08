@@ -16,36 +16,31 @@
 
   <div class="validation-modal__content">
     <!-- @if (hasDiscovery) { -->
-      <p class="validation-modal__lead">{{ confirmMessage }}</p>
-      <div class="validation-modal__result" aria-live="polite">
-        <span class="validation-modal__label">Compound</span>
-        <!-- <strong id="discovery">{{ discovery }}</strong> -->
-      </div>
+    <!-- <p class="validation-modal__lead">{{ confirmMessage }}</p> -->
+    <!-- <div class="validation-modal__result" aria-live="polite"> -->
+      <!-- <span class="validation-modal__label">Compound</span> -->
+      <!-- <strong id="discovery">{{ discovery }}</strong> -->
+    <!-- </div> -->
     <!-- } @else { -->
-      <p class="validation-modal__lead">{{ confirmMessage }}</p>
     <!-- } -->
+        <!-- https://d3js.org/d3-force -->
+    <!-- Force Directed Graph -->
+    @if(this.data()) {
+    <d3-fdg [data]="data()" />
+    } @else {
+    <p>No data.</p>
+    }
 
     @if (isLoggedIn && isLoggedIn.trim() !== '' && isLoggedIn.trim() !== '?') {
-      <div class="validation-modal__note">
-        <span class="validation-modal__note-icon" aria-hidden="true">✦</span>
-        <span>{{ isLoggedIn }}</span>
-      </div>
+    <div class="validation-modal__note">
+      <span class="validation-modal__note-icon" aria-hidden="true">✦</span>
+      <span>{{ isLoggedIn }}</span>
+    </div>
     }
-    <!-- https://d3js.org/d3-force -->
-     <!-- Force Directed Graph -->
-      @if(this.data()) {
-        <d3-fdg [data]="data()" />
-      }
   </div>
 
   <div class="validation-modal__actions">
-    <app-button
-      title="close validation modal"
-      variant="secondary"
-      size="md"
-      type="button"
-      (clicked)="onNoClick()"
-    >
+    <app-button title="close validation modal" variant="secondary" size="md" type="button" (clicked)="onNoClick()">
       Keep exploring
     </app-button>
   </div>

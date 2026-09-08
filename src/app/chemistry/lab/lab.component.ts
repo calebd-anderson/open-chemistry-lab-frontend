@@ -21,7 +21,7 @@ import { ElementRequest } from '@/app/model/element-request.model';
 import { GraphicsModalComponent } from '../experiment/graphics-modal/graphics-modal.component';
 import { ClusterMapResponse } from '@/app/model/clustmapresp.model';
 
-import test_data from '../experiment/d3-fdg/h20_test_ml_graph.json';
+// import test_data from '../experiment/d3-fdg/h20_test_ml_graph.json';
 
 @Component({
   selector: 'app-lab',
@@ -62,14 +62,7 @@ export class LabComponent implements OnInit {
   activeTab = signal<'tips' | 'table'>('table');
 
   ngOnInit(): void {
-    this.openGraphSuccess(test_data as ClusterMapResponse, false);
-    // this.dialog.open(GraphicsModalComponent, {
-    //   disableClose: false,
-    //   panelClass: 'validation-dialog-panel',
-    //   // width: 'min(92vw, 440px)',
-    //   // width: '100em',
-    //   autoFocus: false,
-    // });
+    // this.openGraphSuccess(test_data as ClusterMapResponse, false);
   }
 
   // this receives an event from the periodic table component when an element is selected
@@ -202,7 +195,7 @@ export class LabComponent implements OnInit {
         // careful of memory leak
         this.compoundService.analyze(payload).subscribe({
           next: (response: HttpResponse<ClusterMapResponse>) => {
-            this.openGraphSuccess(test_data as ClusterMapResponse, true);
+            this.openGraphSuccess(response.body as ClusterMapResponse, true);
             this.experimentService.setIsActive(false);
           },
           error: (errorResponse: HttpErrorResponse) => {
