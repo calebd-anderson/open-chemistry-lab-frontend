@@ -28,6 +28,7 @@ export class ExperimentComponent {
   // removeElement = output<RemoveElement>();
   runExperiment = output<void>();
   clearExperiment = output<void>();
+  analyzeFormula = output<void>();
 
   public experimentService: ExperimentService = inject(ExperimentService);
   private elementRef: ElementRef;

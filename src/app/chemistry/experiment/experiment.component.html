@@ -25,10 +25,11 @@
         </div>
         <!-- run experiment buttons -->
         <div id="validate-btn">
-          <app-button title="run experiment button" variant="primary" size="lg" (clicked)="runExperiment.emit()">Run
+          <app-button title="run experiment button" variant="primary" size="md" (clicked)="runExperiment.emit()">Run
             Experiment</app-button>
-          <app-button title="run experiment button" variant="secondary" size="lg" (clicked)="clearExperiment.emit()">Reset
+          <app-button title="run experiment button" variant="secondary" size="md" (clicked)="clearExperiment.emit()">Reset
             Experiment</app-button>
+          <app-button title="run experiment button" variant="secondary" size="md" (clicked)="analyzeFormula.emit()">Analyze With ML</app-button>
         </div>
       } @else {
         <div class="empty-state" animate.enter="info-enter-animation">

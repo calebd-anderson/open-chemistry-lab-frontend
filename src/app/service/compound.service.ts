@@ -22,6 +22,10 @@ export class CompoundService {
     return this.http.post<Reaction>(`${this.host}/compound/validate`, payload, { observe: 'response' });
   }
 
+  public analyze(payload: ValidateCompoundPayload): Observable<HttpResponse<Reaction>> {
+    return this.http.post<Reaction>(`${this.host}/compound/analyze`, payload, { observe: 'response' });
+  }
+
   public getAllDiscoveries(): Observable<Reaction[]> {
     return this.http.get<Reaction[]>(`${this.host}/compound/getAllDiscoveries`);
   }

@@ -147,6 +147,72 @@ export class LabComponent {
     }, 2000); // 2 second delay
   }
 
+    public analyzeFormula() {
+    this.experimentService.setIsActive(true);
+
+    // the reduced formula form is best represented as a Map<string, number> where the key is the element symbol and the value is the number of atoms
+    let formula = new Map<string, number>();
+    for (let element of this.elementsInCompound()) {
+      if (formula.has(element.element.symbol)) {
+        formula.set(
+          element.element.symbol,
+          formula.get(element.element.symbol)! + 1,
+        );
+      } else {
+        formula.set(element.element.symbol, 1);
+      }
+    }
+
+    // however, the API expects an array of ElementRequest objects, so we need to convert the Map to that format
+    let elements: ElementRequest[] = [];
+    for (let [key, value] of formula.entries()) {
+      elements.push({ symbol: key, numberOfAtoms: value });
+    }
+
+    // Add synthetic delay after flask animation starts but before API request
+    setTimeout(() => {
+      // to do: the subscribe method should call back an HTTP error that sends a front-end notification
+      if (this.authenticationService.isLoggedIn()) {
+        let payload = {
+          elements,
+          userId: this.authenticationService.user()?.userId || null,
+        };
+        // careful of memory leak
+        this.compoundService.analyze(payload).subscribe({
+          next: (response: HttpResponse<Reaction>) => {
+            this.openConfirmationDialogSuccess(response, true);
+
+            this.experimentService.setIsActive(false);
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            this.openConfirmationDialogFail(errorResponse);
+            this.experimentService.setIsActive(false);
+          },
+        });
+      } else {
+        this._snackBar.notify(
+          NotificationType.WARNING,
+          'Unable to save discovery anonymously. Please create an account to save your findings.',
+        );
+        let payload = {
+          elements,
+          userId: null,
+        };
+        // careful of memory leak
+        this.compoundService.analyze(payload).subscribe({
+          next: (response: HttpResponse<Reaction>) => {
+            this.openConfirmationDialogSuccess(response, false);
+            this.experimentService.setIsActive(false);
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            this.openConfirmationDialogFail(errorResponse);
+            this.experimentService.setIsActive(false);
+          },
+        });
+      }
+    }, 2000); // 2 second delay
+  }
+
   public openConfirmationDialogFail(response: HttpErrorResponse) {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
       disableClose: false,
