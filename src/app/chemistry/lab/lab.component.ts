@@ -1,10 +1,4 @@
-import {
-  Component,
-  computed,
-  inject,
-  OnInit,
-  signal,
-} from '@angular/core';
+import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { PeriodicTableComponent } from '../periodic-table/periodic-table.component';
 import { ExperimentComponent } from '../experiment/experiment.component';
 import { Element } from '@app/model/element.model';
@@ -118,47 +112,26 @@ export class LabComponent implements OnInit {
       elements.push({ symbol: key, numberOfAtoms: value });
     }
 
-    // Add synthetic delay after flask animation starts but before API request
+    // Add synthetic delay to allow the flask animation to run
     setTimeout(() => {
-      // to do: the subscribe method should call back an HTTP error that sends a front-end notification
-      if (this.authenticationService.isLoggedIn()) {
-        let payload = {
-          elements,
-          userId: this.authenticationService.user()?.userId || null,
-        };
-        // careful of memory leak
-        this.compoundService.validate(payload).subscribe({
-          next: (response: HttpResponse<Reaction>) => {
-            this.openConfirmationDialogSuccess(response, true);
-
-            this.experimentService.setIsActive(false);
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            this.openConfirmationDialogFail(errorResponse);
-            this.experimentService.setIsActive(false);
-          },
-        });
-      } else {
-        this._snackBar.notify(
-          NotificationType.WARNING,
-          'Unable to save discovery anonymously. Please create an account to save your findings.',
-        );
-        let payload = {
-          elements,
-          userId: null,
-        };
-        // careful of memory leak
-        this.compoundService.validate(payload).subscribe({
-          next: (response: HttpResponse<Reaction>) => {
-            this.openConfirmationDialogSuccess(response, false);
-            this.experimentService.setIsActive(false);
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            this.openConfirmationDialogFail(errorResponse);
-            this.experimentService.setIsActive(false);
-          },
-        });
-      }
+      let payload = {
+        elements,
+        userId: this.authenticationService.user()?.userId || null,
+      };
+      // careful of memory leak
+      this.compoundService.validate(payload).subscribe({
+        next: (response: HttpResponse<Reaction>) => {
+          this.openConfirmationDialogSuccess(
+            response,
+            this.authenticationService.isLoggedIn(),
+          );
+          this.experimentService.setIsActive(false);
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          this.openConfirmationDialogFail(errorResponse);
+          this.experimentService.setIsActive(false);
+        },
+      });
     }, 2000); // 2 second delay
   }
 
@@ -184,46 +157,26 @@ export class LabComponent implements OnInit {
       elements.push({ symbol: key, numberOfAtoms: value });
     }
 
-    // Add synthetic delay after flask animation starts but before API request
+    // Add synthetic delay to allow the flask animation to run
     setTimeout(() => {
-      // to do: the subscribe method should call back an HTTP error that sends a front-end notification
-      if (this.authenticationService.isLoggedIn()) {
-        let payload = {
-          elements,
-          userId: this.authenticationService.user()?.userId || null,
-        };
-        // careful of memory leak
-        this.compoundService.analyze(payload).subscribe({
-          next: (response: HttpResponse<ClusterMapResponse>) => {
-            this.openGraphSuccess(response.body as ClusterMapResponse, true);
-            this.experimentService.setIsActive(false);
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            this.openConfirmationDialogFail(errorResponse);
-            this.experimentService.setIsActive(false);
-          },
-        });
-      } else {
-        this._snackBar.notify(
-          NotificationType.WARNING,
-          'Unable to save discovery anonymously. Please create an account to save your findings.',
-        );
-        let payload = {
-          elements,
-          userId: null,
-        };
-        // careful of memory leak
-        this.compoundService.analyze(payload).subscribe({
-          next: (response: HttpResponse<ClusterMapResponse>) => {
-            this.openGraphSuccess(response.body as ClusterMapResponse, false);
-            this.experimentService.setIsActive(false);
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            this.openConfirmationDialogFail(errorResponse);
-            this.experimentService.setIsActive(false);
-          },
-        });
-      }
+      let payload = {
+        elements,
+        userId: this.authenticationService.user()?.userId || null,
+      };
+      // careful of memory leak
+      this.compoundService.analyze(payload).subscribe({
+        next: (response: HttpResponse<ClusterMapResponse>) => {
+          this.openGraphSuccess(
+            response.body as ClusterMapResponse,
+            this.authenticationService.isLoggedIn(),
+          );
+          this.experimentService.setIsActive(false);
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          this.openConfirmationDialogFail(errorResponse);
+          this.experimentService.setIsActive(false);
+        },
+      });
     }, 2000); // 2 second delay
   }
 
@@ -252,35 +205,34 @@ export class LabComponent implements OnInit {
     this.dialogRef = this.asyncDialog(response, isLoggedIn);
   }
 
-  public openGraphSuccess(
-    response: ClusterMapResponse,
-    isLoggedIn: boolean,
-  ) {
+  public openGraphSuccess(response: ClusterMapResponse, isLoggedIn: boolean) {
     this.graphicsDialogRef = this.graphDialog(response, isLoggedIn);
   }
 
-    private graphDialog(response: ClusterMapResponse, isLoggedIn: boolean) {
-      this.graphicsDialogRef = this.dialog.open(GraphicsModalComponent, {
-        disableClose: false,
-        panelClass: 'validation-dialog-panel',
-        // width: 'min(92vw, 440px)',
-        autoFocus: false,
-      });
-      // this.graphicsDialogRef.componentInstance.discovery = response.body?.title;
-      this.graphicsDialogRef.componentInstance.wasSuccessful = 'Congratulations!';
-      this.graphicsDialogRef.componentInstance.confirmMessage =
-        'Your experiment produced a new compound.';
-      if (response) {
-        console.log('setting graphics modal data signal using dialog ref in lab component')
-        this.graphicsDialogRef.componentInstance.data.set(response);
-      }
-      
-      if (!isLoggedIn) {
-        this.graphicsDialogRef.componentInstance.isLoggedIn =
-          'Create an account to save your discovery!';
-      }
-      return this.graphicsDialogRef;
+  private graphDialog(response: ClusterMapResponse, isLoggedIn: boolean) {
+    this.graphicsDialogRef = this.dialog.open(GraphicsModalComponent, {
+      disableClose: false,
+      panelClass: 'validation-dialog-panel',
+      // width: 'min(92vw, 440px)',
+      autoFocus: false,
+    });
+    // this.graphicsDialogRef.componentInstance.discovery = response.body?.title;
+    this.graphicsDialogRef.componentInstance.wasSuccessful = 'Congratulations!';
+    this.graphicsDialogRef.componentInstance.confirmMessage =
+      'Your experiment produced a new compound.';
+    if (response) {
+      console.log(
+        'setting graphics modal data signal using dialog ref in lab component',
+      );
+      this.graphicsDialogRef.componentInstance.data.set(response);
     }
+
+    if (!isLoggedIn) {
+      this.graphicsDialogRef.componentInstance.isLoggedIn =
+        'Create an account to save your discovery!';
+    }
+    return this.graphicsDialogRef;
+  }
 
   private asyncDialog(response: HttpResponse<Reaction>, isLoggedIn: boolean) {
     this.dialogRef = this.dialog.open(ValidationModalComponent, {
