@@ -33,7 +33,9 @@
     }
     <!-- https://d3js.org/d3-force -->
      <!-- Force Directed Graph -->
-    <d3-fdg [data]="data" />
+      @if(this.data()) {
+        <d3-fdg [data]="data()" />
+      }
   </div>
 
   <div class="validation-modal__actions">

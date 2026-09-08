@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal, Signal } from '@angular/core';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '@/app/component/button/button.component';
 import { D3FdgComponent } from "../d3-fdg/d3-fdg.component";
@@ -18,7 +18,7 @@ export class GraphicsModalComponent {
   public wasSuccessful: string = 'Experiment complete';
   public isLoggedIn: string = '';
 
-  public data: ClusterMapResponse | null = { nodes: [], links: [] };
+  public data = signal<ClusterMapResponse>({ nodes: [], links: [] });
 
   public get isSuccess(): boolean {
     return this.wasSuccessful.toLowerCase().includes('congrat') || this.wasSuccessful.toLowerCase().includes('success');
