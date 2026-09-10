@@ -110,7 +110,6 @@
           type="submit"
           [disabled]="registerForm.form.invalid || showLoading"
           customClass="w-full"
-          (clicked)="onRegister(registerForm.value)"
         >
           @if (showLoading) {
             <i class="fa fa-spinner fa-spin"></i>
