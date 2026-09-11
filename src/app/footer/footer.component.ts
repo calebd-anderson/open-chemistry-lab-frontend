@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '@service/security/authentication.service';
 import { NotificationService } from '@service/notification.service';
@@ -7,6 +7,7 @@ import { NotificationType } from '@model/enum/notification-type.enum';
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {

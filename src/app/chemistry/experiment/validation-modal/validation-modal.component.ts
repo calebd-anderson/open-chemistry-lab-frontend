@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '@/app/component/button/button.component';
 
@@ -6,6 +6,7 @@ import { ButtonComponent } from '@/app/component/button/button.component';
   selector: 'app-validation-modal',
   templateUrl: './validation-modal.component.html',
   styleUrl: './validation-modal.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MatDialogModule, ButtonComponent],
 })
 export class ValidationModalComponent {

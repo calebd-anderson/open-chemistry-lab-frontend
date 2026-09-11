@@ -1,4 +1,4 @@
-import { Component, inject, model, signal } from '@angular/core';
+import { Component, inject, model, signal, ChangeDetectionStrategy } from '@angular/core';
 import { ChemLogo } from '@app/assets/logo.component';
 import { User } from '@model/user';
 import { AuthenticationService } from '@service/security/authentication.service';
@@ -12,6 +12,7 @@ import { UserService } from '../service/user.service';
   selector: 'app-main-header',
   imports: [ChemLogo, ButtonComponent],
   templateUrl: './main-header.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './main-header.component.scss',
 })
 export class MainHeaderComponent {

@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
 import { PeriodicTableComponent } from '../periodic-table/periodic-table.component';
 import { ExperimentComponent } from '../experiment/experiment.component';
 import { Element } from '@app/model/element.model';
@@ -22,6 +22,7 @@ import { ClusterMapResponse } from '@/app/model/clustmapresp.model';
   standalone: true,
   imports: [PeriodicTableComponent, ExperimentComponent],
   templateUrl: './lab.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./lab.component.scss', './lab.component.svg.scss'],
 })
 export class LabComponent implements OnInit {

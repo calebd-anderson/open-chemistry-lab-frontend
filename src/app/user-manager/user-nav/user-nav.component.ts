@@ -3,13 +3,14 @@ import { LogoutIcon } from '@/app/user-manager/user-nav/logout.component.svg';
 import { User } from '@/app/model/user';
 import { AuthenticationService } from '@/app/service/security/authentication.service';
 import { AuthorizationService } from '@/app/service/security/authorization.service';
-import { Component, inject, model } from '@angular/core';
+import { Component, inject, model, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-nav',
   imports: [LogoutIcon, AdminIcon, RouterLink],
   templateUrl: './user-nav.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './user-nav.component.scss',
 })
 export class UserNavComponent {

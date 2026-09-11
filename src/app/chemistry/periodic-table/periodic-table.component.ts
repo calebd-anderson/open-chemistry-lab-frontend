@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal, Signal } from '@angular/core';
+import { Component, inject, input, output, signal, Signal, ChangeDetectionStrategy } from '@angular/core';
 import { Element } from '@model/element.model';
 import { ElementService } from '@service/element.service';
 import { CommonModule } from '@angular/common';
@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'periodic-table',
   imports: [CommonModule],
   templateUrl: './periodic-table.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./periodic-table.component.sass', './periodic-table.css'],
 })
 export class PeriodicTableComponent {

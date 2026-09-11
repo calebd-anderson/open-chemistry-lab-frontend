@@ -1,4 +1,4 @@
-import { Component, signal, Signal } from '@angular/core';
+import { Component, signal, Signal, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '@/app/component/button/button.component';
 import { D3FdgComponent } from "../d3-fdg/d3-fdg.component";
@@ -8,6 +8,7 @@ import { ClusterMapResponse } from '@/app/model/clustmapresp.model';
   selector: 'graphics-modal',
   templateUrl: './graphics-modal.component.html',
   styleUrl: './graphics-modal.scss',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MatDialogModule, ButtonComponent, D3FdgComponent],
 })
 export class GraphicsModalComponent {

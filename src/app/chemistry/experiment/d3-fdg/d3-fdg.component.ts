@@ -3,6 +3,7 @@ import {
   ElementRef,
   input,
   OnInit,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import * as d3 from 'd3';
@@ -11,6 +12,7 @@ import * as d3 from 'd3';
   selector: 'd3-fdg',
   imports: [],
   templateUrl: './d3-fdg.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './d3-fdg.component.scss',
 })
 export class D3FdgComponent implements OnInit {

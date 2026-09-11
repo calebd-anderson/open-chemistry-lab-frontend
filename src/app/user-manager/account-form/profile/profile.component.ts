@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Signal, WritableSignal } from '@angular/core';
+import { Component, inject, OnInit, Signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
 import { ROUTER_OUTLET_DATA } from '@angular/router';
 import { User } from '@model/user';
 import { UserService } from '@service/user.service';
@@ -19,6 +19,7 @@ import { ButtonComponent } from '@/app/component/button/button.component';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormsModule, ButtonComponent],
 })
 export class ProfileComponent implements OnInit {

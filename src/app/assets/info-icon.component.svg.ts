@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'svg[info-icon]',
@@ -14,6 +14,7 @@ import { Component, input } from '@angular/core';
       ></path>
     </svg>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   host: {
     '[attr.viewBox]': 'viewBox()',
   },

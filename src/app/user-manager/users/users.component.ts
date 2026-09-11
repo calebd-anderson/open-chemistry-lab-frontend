@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NotificationType } from '@app/model/enum/notification-type.enum';
 import { User } from '@app/model/user';
@@ -41,6 +41,7 @@ interface TableDef {
     ButtonComponent,
   ],
   templateUrl: './users.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './users.component.scss',
 })
 export class UsersComponent {

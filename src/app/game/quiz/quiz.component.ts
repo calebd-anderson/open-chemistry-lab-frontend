@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UserQuiz } from '@model/quiz';
 import { QuizService } from '@service/quiz.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -11,6 +11,7 @@ import { ButtonComponent } from '@/app/component/button/button.component';
 @Component({
   templateUrl: './quiz.component.html',
   styleUrls: ['./quiz.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [FormsModule, ButtonComponent],
 })
 export class QuizComponent implements OnInit {

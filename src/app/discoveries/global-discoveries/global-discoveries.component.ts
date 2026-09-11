@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CompoundService } from '@service/compound.service';
 import { SubSink } from 'subsink';
 import { AuthenticationService } from '@service/security/authentication.service';
@@ -12,6 +12,7 @@ import { AuthorizationService } from '@service/security/authorization.service';
   selector: 'app-global-discoveries',
   imports: [],
   templateUrl: './global-discoveries.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './global-discoveries.component.scss',
 })
 export class GlobalDiscoveriesComponent implements OnInit {

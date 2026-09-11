@@ -16,6 +16,7 @@ import {
   HTTP_INTERCEPTORS,
   provideHttpClient,
   withInterceptorsFromDi,
+  withXhr
 } from '@angular/common/http';
 import { AuthInterceptor } from './service/security/interceptor/auth.interceptor';
 
@@ -31,6 +32,6 @@ export const appConfig: ApplicationConfig = {
     ElementService,
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withXhr(), withInterceptorsFromDi()),
   ],
 };

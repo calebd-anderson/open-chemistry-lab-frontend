@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { CompoundService } from '@service/compound.service';
 import { SubSink } from 'subsink';
 import { AuthenticationService } from '@service/security/authentication.service';
@@ -11,6 +11,7 @@ import { UserReaction } from '@model/compound';
   selector: 'app-discoveries',
   imports: [],
   templateUrl: './discoveries.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './discoveries.component.scss',
 })
 export class DiscoveriesComponent implements OnInit {

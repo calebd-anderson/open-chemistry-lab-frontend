@@ -1,4 +1,4 @@
-import { Component, effect, inject, linkedSignal, OnInit } from '@angular/core';
+import { Component, effect, inject, linkedSignal, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import gsap from 'gsap';
 import { ExperimentService } from '@app/service/experiment.service';
 
@@ -6,6 +6,7 @@ import { ExperimentService } from '@app/service/experiment.service';
   selector: 'app-flask',
   imports: [],
   templateUrl: './flask.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './flask.component.scss',
 })
 export class FlaskComponent implements OnInit {

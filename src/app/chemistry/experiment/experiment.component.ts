@@ -6,6 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
   model,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { Element } from '@model/element.model';
 
@@ -19,6 +20,7 @@ import { ButtonComponent } from '@/app/component/button/button.component';
   selector: 'app-experiment',
   imports: [FlaskComponent, CommonModule, InfoIcon, ButtonComponent],
   templateUrl: './experiment.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./experiment.component.scss'],
 })
 export class ExperimentComponent {

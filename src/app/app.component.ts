@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { User } from './model/user';
 import { AuthenticationService } from './service/security/authentication.service';
@@ -11,6 +11,7 @@ import { MainHeaderComponent } from './main-header/main-header.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
     TabsComponent,
     RouterOutlet,

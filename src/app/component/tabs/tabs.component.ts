@@ -1,4 +1,4 @@
-import { Component, computed, inject, Signal } from '@angular/core';
+import { Component, computed, inject, Signal, ChangeDetectionStrategy } from '@angular/core';
 import { itablink } from '../../model/itablink';
 import { AuthenticationService } from '../../service/security/authentication.service';
 import { AuthorizationService } from '../../service/security/authorization.service';
@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [MatTabNavPanel, MatTabsModule, RouterModule],
 })
 export class TabsComponent {
