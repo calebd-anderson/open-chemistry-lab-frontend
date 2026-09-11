@@ -2,7 +2,7 @@
 The frontend for the [open-chemistry-lab-backend](https://github.com/calebd-anderson/open-chemistry-lab-backend).
 
 ## Environment Setup
-[Node](https://nodejs.org/en/download) v. 24
+[Node](https://nodejs.org/en/download/current) v. 26
 - `nvm`
   - Mac/Linux
 https://github.com/nvm-sh/nvm
@@ -45,10 +45,11 @@ Tailwind CSS is used for responsive layout.
 - [Theming](https://material.angular.dev/guide/theming)
 
 ## Credits
-- [Periodic Table CSS](https://codepen.io/mikegolus/pen/OwrPgB)
 - Animations with [GSAP](https://gsap.com/)
+- Data visualization [D3js](https://d3js.org/)
 
 ## Other periodic table projects
 - https://github.com/tamalchowdhury/periodic-table
 - https://github.com/FlorianFe/Elements
 - https://pubchem.ncbi.nlm.nih.gov/periodic-table
+- [Periodic Table CSS](https://codepen.io/mikegolus/pen/OwrPgB)
