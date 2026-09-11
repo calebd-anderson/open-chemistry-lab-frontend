@@ -13,7 +13,6 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ButtonComponent } from '@/app/component/button/button.component';
 
@@ -25,7 +24,6 @@ import { ButtonComponent } from '@/app/component/button/button.component';
   imports: [
     FormsModule,
     MatDialogContent,
-    MatButtonModule,
     MatDialogModule,
     MatFormFieldModule,
     ButtonComponent,

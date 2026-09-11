@@ -15,8 +15,6 @@ import {
   MatDialog,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
 import { ButtonComponent } from '@/app/component/button/button.component';
 
 @Component({
@@ -25,11 +23,9 @@ import { ButtonComponent } from '@/app/component/button/button.component';
   styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
-    MatFormFieldModule,
     FormsModule,
     MatDialogContent,
     MatDialogActions,
-    MatButtonModule,
     MatDialogModule,
     ButtonComponent,
   ],
