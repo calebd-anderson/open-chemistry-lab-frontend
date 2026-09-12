@@ -5,11 +5,7 @@ import { User } from '@app/model/user';
 import { NotificationService } from '@app/service/notification.service';
 import { AuthenticationService } from '@app/service/security/authentication.service';
 import { UserService } from '@app/service/user.service';
-import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpEventType,
-} from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { SubSink } from 'subsink';
 import { AuthorizationService } from '@app/service/security/authorization.service';
 import { CustomHttpResponse } from '@app/model/custom-http-response';
@@ -85,11 +81,8 @@ export class UsersComponent {
 
   onClickNewUser(): void {
     const dialogRef = this.dialog.open(AddUserComponent);
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result !== undefined) {
-        // this.animal.set(result);
-      }
+    dialogRef.afterClosed().subscribe(() => {
+      this.getUsers(false);
     });
   }
 
@@ -178,7 +171,7 @@ export class UsersComponent {
         next: (response: CustomHttpResponse) => {
           this.notificationService.notify(
             NotificationType.SUCCESS,
-            response.message,
+            `Deleted user: ${username}.`,
           );
           this.getUsers(false);
         },

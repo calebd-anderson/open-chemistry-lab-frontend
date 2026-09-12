@@ -74,10 +74,6 @@ export class EditUserComponent implements OnDestroy {
     this.subs.add(
       this.userService.editUser(formData).subscribe({
         next: (response: User) => {
-          // this.clickButton('closeEditUserModalButton');
-          // this.getUsers(false);
-          // this.fileName = null;
-          // this.profileImg = null;
           this.notificationService.notify(
             NotificationType.SUCCESS,
             `${response.firstName} ${response.lastName} updated successfully.`,

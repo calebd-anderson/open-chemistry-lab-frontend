@@ -62,15 +62,12 @@ export class AddUserComponent implements OnDestroy {
     this.subs.add(
       this.userService.addUser(formData).subscribe({
         next: (response: User) => {
-          // this.clickButton('new-user-close');
-          // this.getUsers(false);
-          // this.fileName = null;
-          // this.profileImg = null;
           userForm.reset();
           this.notificationService.notify(
             NotificationType.SUCCESS,
             `${response.firstName} ${response.lastName} added successfully.`,
           );
+          document.getElementById("close-dialog-button")?.click()
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.notificationService.notify(
