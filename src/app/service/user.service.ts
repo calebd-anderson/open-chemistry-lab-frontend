@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
-  HttpErrorResponse,
   HttpEvent,
-  HttpResponse,
 } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
@@ -28,10 +26,6 @@ export class UserService {
 
   public updateUser(formData: FormData): Observable<User> {
     return this.http.post<User>(`${this.host}/user/update`, formData);
-  }
-
-  public editUser(formData: FormData): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/edit`, formData);
   }
 
   public resetPassword(email: string): Observable<CustomHttpResponse> {

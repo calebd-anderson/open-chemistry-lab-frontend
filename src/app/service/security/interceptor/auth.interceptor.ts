@@ -28,6 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
     ) {
       return HttpHandler.handle(httpRequest);
     }
+    
     this.authenticationService.loadToken();
     const token = this.authenticationService.getToken();
     if (token)

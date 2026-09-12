@@ -54,11 +54,12 @@ export class ProfileComponent implements OnInit {
   }
 
   public onUpdateCurrentUser(user: User): void {
-    const formData = this.userService.createUserFormData(
-      this.currentUsername,
-      user,
+    const formData = this.userService.createEditUserFormData(
+      this.user.userId,
+      this.user,
       this.profileImg,
     );
+
     this.subs.add(
       this.userService.updateUser(formData).subscribe({
         next: (response: User) => {

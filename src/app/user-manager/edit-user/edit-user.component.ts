@@ -46,11 +46,8 @@ export interface DialogData {
 export class EditUserComponent implements OnDestroy {
   private subs = new SubSink();
   public userService: UserService = inject(UserService);
-  private notificationService: NotificationService =
-    inject(NotificationService);
-
-  private authorizationService: AuthorizationService =
-    inject(AuthorizationService);
+  notificationService = inject(NotificationService);
+  authorizationService = inject(AuthorizationService);
 
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   public editUser = this.data.user;
@@ -72,7 +69,7 @@ export class EditUserComponent implements OnDestroy {
       this.profileImg,
     );
     this.subs.add(
-      this.userService.editUser(formData).subscribe({
+      this.userService.updateUser(formData).subscribe({
         next: (response: User) => {
           this.notificationService.notify(
             NotificationType.SUCCESS,
