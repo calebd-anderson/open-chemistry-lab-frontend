@@ -5,6 +5,7 @@ import {
 } from '@angular/common/http';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   inject,
   OnDestroy,
@@ -64,6 +65,8 @@ export class UserComponent implements OnInit, OnDestroy {
   public user: User = {} as User;
   public selectedUser: User = this.data.user;
   public profileImg: File | undefined;
+  public profileImageUrl = '';
+  private profileImageObjectUrl: string | undefined;
 
   public fileStatus = new FileUploadStatus();
 
@@ -71,6 +74,7 @@ export class UserComponent implements OnInit, OnDestroy {
   private authorizationService = inject(AuthorizationService);
   private userService = inject(UserService);
   private notificationService = inject(NotificationService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
 
   public isAdmin = this.authorizationService.isAdmin;
   public isManager = this.authorizationService.isManager;
@@ -81,6 +85,20 @@ export class UserComponent implements OnInit, OnDestroy {
     const cachedUser = this.authenticationService.getUserFromLocalCache();
     if (cachedUser) {
       this.user = cachedUser;
+    }
+
+    if (this.selectedUser.profileImgUrl) {
+      this.subs.add(
+        this.userService
+          .getUserProfileImage(this.selectedUser.profileImgUrl)
+          .subscribe({
+            next: (image: Blob) => {
+              this.profileImageObjectUrl = URL.createObjectURL(image);
+              this.profileImageUrl = this.profileImageObjectUrl;
+              this.changeDetectorRef.markForCheck();
+            },
+          }),
+      );
     }
   }
 
@@ -215,5 +233,8 @@ export class UserComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+    if (this.profileImageObjectUrl) {
+      URL.revokeObjectURL(this.profileImageObjectUrl);
+    }
   }
 }
