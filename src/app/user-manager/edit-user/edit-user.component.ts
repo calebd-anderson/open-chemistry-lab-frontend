@@ -1,7 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ChangeDetectorRef,
   inject,
+  OnInit,
   OnDestroy,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -43,7 +45,7 @@ export interface DialogData {
   styleUrl: './edit-user.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class EditUserComponent implements OnDestroy {
+export class EditUserComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
   public userService: UserService = inject(UserService);
   notificationService = inject(NotificationService);
@@ -53,6 +55,22 @@ export class EditUserComponent implements OnDestroy {
   public editUser = this.data.user;
   public fileName: string = '?';
   public profileImg: File | undefined = undefined;
+  public profileImageUrl = '';
+  private profileImageObjectUrl: string | undefined;
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
+  ngOnInit(): void {
+    if (!this.editUser.profileImgUrl) return;
+
+    this.subs.add(
+      this.userService.getUserProfileImage(this.editUser.profileImgUrl).subscribe({
+        next: (image: Blob) => {
+          this.setProfileImageUrl(URL.createObjectURL(image));
+          this.changeDetectorRef.markForCheck();
+        },
+      }),
+    );
+  }
 
   public isManager = this.authorizationService.isManager;
   public isAdmin = this.authorizationService.isAdmin;
@@ -60,6 +78,16 @@ export class EditUserComponent implements OnDestroy {
   public onProfileImageChange(fileName: string, profileImag: File): void {
     this.fileName = fileName;
     this.profileImg = profileImag;
+    this.setProfileImageUrl(URL.createObjectURL(profileImag));
+  }
+
+  private setProfileImageUrl(imageUrl: string): void {
+    if (this.profileImageObjectUrl) {
+      URL.revokeObjectURL(this.profileImageObjectUrl);
+    }
+
+    this.profileImageObjectUrl = imageUrl;
+    this.profileImageUrl = imageUrl;
   }
 
   public onUpdateUser(): void {
@@ -88,5 +116,8 @@ export class EditUserComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+    if (this.profileImageObjectUrl) {
+      URL.revokeObjectURL(this.profileImageObjectUrl);
+    }
   }
 }
