@@ -61,20 +61,16 @@ export class UserComponent implements OnInit, OnDestroy {
   readonly data = inject<DialogData>(MAT_DIALOG_DATA);
   private titleSubject = new BehaviorSubject<string>('Users');
   public titleAction$ = this.titleSubject.asObservable();
-  public user: User = new User();
+  public user: User = {} as User;
   public selectedUser: User = this.data.user;
   public profileImg: File | undefined;
 
   public fileStatus = new FileUploadStatus();
 
-  private authenticationService: AuthenticationService = inject(
-    AuthenticationService,
-  );
-  private authorizationService: AuthorizationService =
-    inject(AuthorizationService);
-  private userService: UserService = inject(UserService);
-  private notificationService: NotificationService =
-    inject(NotificationService);
+  private authenticationService = inject(AuthenticationService);
+  private authorizationService = inject(AuthorizationService);
+  private userService = inject(UserService);
+  private notificationService = inject(NotificationService);
 
   public isAdmin = this.authorizationService.isAdmin;
   public isManager = this.authorizationService.isManager;
@@ -107,9 +103,6 @@ export class UserComponent implements OnInit, OnDestroy {
       this.userService.updateUser(formData).subscribe({
         next: (response: User) => {
           this.authenticationService.addUserToLocalCache(response);
-          // this.getUsers(false);
-          // this.fileName = null;
-          // this.profileImg = null;
           this.authenticationService.updateUser(response);
           this.notificationService.notify(
             NotificationType.SUCCESS,
@@ -122,7 +115,6 @@ export class UserComponent implements OnInit, OnDestroy {
             errorResponse.error.message,
           );
           this.refreshing = true;
-          // this.profileImg = null;
         },
       }),
     );

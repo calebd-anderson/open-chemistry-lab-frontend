@@ -41,20 +41,17 @@ interface TableDef {
   styleUrl: './users.component.scss',
 })
 export class UsersComponent {
-  public users: User[] | null = [];
-  public user: User = new User();
+  public users: User[] = [];
+  public user: User = {} as User;
   public refreshing: boolean = false;
   readonly dialog = inject(MatDialog);
 
   private subs = new SubSink();
 
-  public authenticationService: AuthenticationService = inject(
-    AuthenticationService,
-  );
-  public authorizationService: AuthorizationService =
-    inject(AuthorizationService);
+  public authenticationService = inject(AuthenticationService);
+  public authorizationService = inject(AuthorizationService);
   public userService: UserService = inject(UserService);
-  public notificationService: NotificationService = inject(NotificationService);
+  public notificationService = inject(NotificationService);
 
   public isManager: boolean = this.authorizationService.isManager();
   public isAdmin: boolean = this.authorizationService.isAdmin();

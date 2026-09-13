@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpEvent,
-} from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
@@ -55,12 +52,12 @@ export class UserService {
     localStorage.setItem('users', JSON.stringify(users));
   }
 
-  public getUsersFromLocalCache(): User[] | null {
+  public getUsersFromLocalCache(): User[] {
     let users = localStorage.getItem('users');
     if (users) {
       return JSON.parse(users);
     }
-    return null;
+    return [];
   }
 
   public createUserFormData(
@@ -95,7 +92,7 @@ export class UserService {
     formData.append('role', user.role);
     if (profileImage) formData.append('profileImg', profileImage);
     formData.append('isActive', JSON.stringify(user.active));
-    formData.append('isNonLocked', JSON.stringify(user.notLocked));
+    formData.append('isNotLocked', JSON.stringify(user.notLocked));
     return formData;
   }
 
@@ -105,5 +102,6 @@ export class UserService {
         responseType: 'blob',
       });
     }
-    throw new Error('Endpoint is undefined');}
+    throw new Error('Endpoint is undefined');
+  }
 }

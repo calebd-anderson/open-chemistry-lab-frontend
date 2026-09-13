@@ -2,11 +2,8 @@
 <div class="user-detail-panel">
   <div class="detail-hero">
     <div class="detail-avatar-wrap">
-      <img
-        class="detail-avatar"
-        [src]="selectedUser.profileImgUrl"
-        [alt]="selectedUser.firstName"
-      />
+      <img title="profile image" class="detail-avatar" [src]="selectedUser.profileImgUrl"
+        [alt]="selectedUser.firstName" />
     </div>
 
     <div class="detail-summary">
@@ -44,10 +41,10 @@
       </div>
 
       @if (selectedUser.lastLoginDate) {
-        <div class="detail-item">
-          <span class="label">Last login</span>
-          <span class="value">{{ selectedUser.lastLoginDate | date: "medium" }}</span>
-        </div>
+      <div class="detail-item">
+        <span class="label">Last login</span>
+        <span class="value">{{ selectedUser.lastLoginDate | date: "medium" }}</span>
+      </div>
       }
 
       <div class="detail-item">

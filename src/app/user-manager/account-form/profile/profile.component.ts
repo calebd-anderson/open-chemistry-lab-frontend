@@ -1,4 +1,11 @@
-import { Component, inject, OnInit, Signal, WritableSignal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  Signal,
+  WritableSignal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { ROUTER_OUTLET_DATA } from '@angular/router';
 import { User } from '@model/user';
 import { UserService } from '@service/user.service';
@@ -23,7 +30,7 @@ import { ButtonComponent } from '@/app/component/button/button.component';
   imports: [FormsModule, ButtonComponent],
 })
 export class ProfileComponent implements OnInit {
-  public user: User = new User();
+  public user: User = {} as User;
   private subs = new SubSink();
   public fileName: string = '?';
   public profileImg: File | undefined;
@@ -36,7 +43,9 @@ export class ProfileComponent implements OnInit {
   private notificationService: NotificationService =
     inject(NotificationService);
 
-  outletData = inject(ROUTER_OUTLET_DATA) as Signal<{profileImage: WritableSignal<string | null>}>;
+  outletData = inject(ROUTER_OUTLET_DATA) as Signal<{
+    profileImage: WritableSignal<string | null>;
+  }>;
 
   ngOnInit(): void {
     const cachedUser = this.authenticationService.getUserFromLocalCache();
