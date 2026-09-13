@@ -1,4 +1,9 @@
-import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NotificationType } from '@app/model/enum/notification-type.enum';
 import { User } from '@app/model/user';
@@ -40,8 +45,9 @@ interface TableDef {
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './users.component.scss',
 })
-export class UsersComponent {
+export class UsersComponent implements OnDestroy {
   public users: User[] = [];
+  public profileImageUrls: Record<string, string> = {};
   public user: User = {} as User;
   public refreshing: boolean = false;
   readonly dialog = inject(MatDialog);
@@ -89,7 +95,9 @@ export class UsersComponent {
       this.userService.getUsers().subscribe({
         next: (response: User[]) => {
           this.userService.addUsersToLocalCache(response);
+          this.revokeProfileImageUrls();
           this.users = response;
+          this.loadProfileImages(response);
           this.refreshing = false;
           if (showNotification) {
             this.notificationService.notify(
@@ -187,7 +195,29 @@ export class UsersComponent {
     return user?.username || '';
   }
 
+  private loadProfileImages(users: User[]): void {
+    for (const user of users) {
+      if (!user.profileImgUrl) continue;
+
+      this.subs.add(
+        this.userService.getUserProfileImage(user.profileImgUrl).subscribe({
+          next: (image: Blob) => {
+            this.profileImageUrls[user.userId] = URL.createObjectURL(image);
+          },
+        }),
+      );
+    }
+  }
+
+  private revokeProfileImageUrls(): void {
+    for (const imageUrl of Object.values(this.profileImageUrls)) {
+      URL.revokeObjectURL(imageUrl);
+    }
+    this.profileImageUrls = {};
+  }
+
   ngOnDestroy(): void {
     this.subs.unsubscribe();
+    this.revokeProfileImageUrls();
   }
 }

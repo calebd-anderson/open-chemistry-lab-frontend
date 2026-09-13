@@ -70,7 +70,7 @@
         @for (appUser of users; track appUser.userId) {
         <tr (click)="onSelectUser(appUser)" class="hover:bg-gray-50 cursor-pointer">
           <td class="px-6 py-4 whitespace-nowrap">
-            <img height="40" width="40" src="{{ appUser?.profileImgUrl }}" alt="profile image"
+            <img height="40" width="40" [src]="profileImageUrls[appUser.userId]" alt="profile image"
               class="rounded-full border-2 border-cyan-500 w-10 h-10 object-cover" />
           </td>
           <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ appUser?.userId }}</td>
