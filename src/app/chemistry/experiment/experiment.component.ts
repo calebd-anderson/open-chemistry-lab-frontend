@@ -6,7 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
   model,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { Element } from '@model/element.model';
 
@@ -15,10 +15,17 @@ import { CommonModule } from '@angular/common';
 import { ExperimentService } from '@app/service/experiment.service';
 import { InfoIcon } from '@app/assets/info-icon.component.svg';
 import { ButtonComponent } from '@/app/component/button/button.component';
+import { AtomComponent } from './atom/atom.component';
 
 @Component({
   selector: 'app-experiment',
-  imports: [FlaskComponent, CommonModule, InfoIcon, ButtonComponent],
+  imports: [
+    FlaskComponent,
+    CommonModule,
+    InfoIcon,
+    ButtonComponent,
+    AtomComponent,
+  ],
   templateUrl: './experiment.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./experiment.component.scss'],
@@ -38,10 +45,9 @@ export class ExperimentComponent {
     this.elementRef = elementRef;
   }
 
-  public removeElementFromCompound(i: number, element: Element) {
-    // Add animation class for removing elements
+  removeAtomFromExperiment(param: any) {
     this.elementsInCompound.update((elements) =>
-      elements.filter((_, index) => index !== i),
+      elements.filter((_, index) => index !== param.i),
     );
   }
 

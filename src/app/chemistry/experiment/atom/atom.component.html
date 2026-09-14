@@ -1,0 +1,11 @@
+<div class="element-in-compound" (click)="removeElementFromCompound(index(), atom().element)"
+    [attr.data-element]="atom().element.symbol" [attr.data-index]="index()"
+    [style.border-color]="atom().element.cPKHexColor ? '#' + atom().element.cPKHexColor : undefined"
+    [style.box-shadow]="atom().element.cPKHexColor ? '0 0 10px #' + atom().element.cPKHexColor : undefined"
+    animate.enter="element-enter-animation">
+    <span class::element-symbol
+        [style.color]="atom().element.cPKHexColor ? '#' + atom().element.cPKHexColor : undefined">{{
+        atom().element.symbol
+        }}</span>
+    <span class="element-name">{{ atom().element.name }}</span>
+</div>
