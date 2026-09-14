@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { ButtonComponent } from '@/app/component/button/button.component';
-import { D3FdgComponent } from '../experiment/d3-fdg/d3-fdg.component';
+import { D3FdgComponent } from './d3-fdg/d3-fdg.component';
 import { ClusterMapResponse } from '@/app/model/clustmapresp.model';
 
 @Component({

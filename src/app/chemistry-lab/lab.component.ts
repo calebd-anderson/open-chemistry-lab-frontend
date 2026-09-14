@@ -6,7 +6,7 @@ import {
   signal,
   ChangeDetectionStrategy,
 } from '@angular/core';
-import { PeriodicTableComponent } from '../periodic-table/periodic-table.component';
+import { PeriodicTableComponent } from './periodic-table/periodic-table.component';
 import { ExperimentComponent } from './experiment/experiment.component';
 import { Element } from '@app/model/element.model';
 import { NotificationType } from '@app/model/enum/notification-type.enum';
@@ -15,7 +15,7 @@ import { ExperimentService } from '@app/service/experiment.service';
 import { CompoundService } from '@app/service/compound.service';
 import { AuthenticationService } from '@app/service/security/authentication.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ValidationModalComponent } from './experiment/validation-modal/validation-modal.component';
+import { ValidationModalComponent } from './validation-modal/validation-modal.component';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Reaction } from '@app/model/compound';
 import { ElementRequest } from '@/app/model/element-request.model';

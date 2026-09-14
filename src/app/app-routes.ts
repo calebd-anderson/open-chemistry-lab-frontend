@@ -7,7 +7,7 @@ import { ProfileComponent } from '@/app/user-manager/account-form/profile/profil
 import { AboutComponent } from '@/app/about/about.component';
 import { DiscoveriesComponent } from './discoveries/user-discoveries/discoveries.component';
 import { GlobalDiscoveriesComponent } from './discoveries/global-discoveries/global-discoveries.component';
-import { LabComponent } from './chemistry/lab/lab.component';
+import { LabComponent } from './chemistry-lab/lab.component';
 import { UsersComponent } from '@/app/user-manager/users/users.component';
 
 export const routes: Routes = [
