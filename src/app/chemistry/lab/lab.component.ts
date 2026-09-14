@@ -1,4 +1,11 @@
-import { Component, computed, inject, OnInit, signal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { PeriodicTableComponent } from '../periodic-table/periodic-table.component';
 import { ExperimentComponent } from './experiment/experiment.component';
 import { Element } from '@app/model/element.model';
@@ -12,7 +19,7 @@ import { ValidationModalComponent } from './experiment/validation-modal/validati
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Reaction } from '@app/model/compound';
 import { ElementRequest } from '@/app/model/element-request.model';
-import { GraphicsModalComponent } from './experiment/graphics-modal/graphics-modal.component';
+import { GraphicsModalComponent } from './graphics-modal/graphics-modal.component';
 import { ClusterMapResponse } from '@/app/model/clustmapresp.model';
 
 // import test_data from '../experiment/d3-fdg/h20_test_ml_graph.json';
