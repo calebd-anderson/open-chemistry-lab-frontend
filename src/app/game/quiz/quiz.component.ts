@@ -1,7 +1,6 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UserQuiz } from '@model/quiz';
 import { QuizService } from '@service/quiz.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '@service/security/authentication.service';
 import { NotificationType } from '@model/enum/notification-type.enum';
 import { NotificationService } from '@service/notification.service';
@@ -23,7 +22,6 @@ export class QuizComponent implements OnInit {
   incorrectAnswers = 0;
   score = false;
 
-  private _snackBar = inject(MatSnackBar);
   private authenticationService = inject(AuthenticationService);
   private notificationService = inject(NotificationService);
 

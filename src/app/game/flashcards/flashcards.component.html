@@ -21,7 +21,7 @@
       }
       <div class="flex justify-center mt-6">
         <app-button title="submit flashcard" variant="secondary" size="lg" type="submit"
-          [disabled]="!!flascardForm.invalid" (clicked)="createFlashcard(flascardForm.value)">
+          [disabled]="!!flascardForm.invalid">
           <span>Submit</span>
         </app-button>
       </div>
@@ -41,7 +41,7 @@
     <div class="mt-10">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         @for (displayCard of flashcards; track displayCard.id ?? displayCard.question + '-' + i; let i = $index) {
-        <app-flashcard [flashcard]="displayCard" />
+        <app-flashcard [flashcard]="displayCard" (deleteEvent)="onDelete($event)" />
         }
       </div>
     </div>

@@ -5,24 +5,30 @@ import { HttpClient } from '@angular/common/http';
 import { Flashcard } from '../model/flashcard.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FlashCardService {
-
   private host = environment.apiUrl;
 
-  constructor(private http: HttpClient) { }
-
-  public createFlashcard(flashcard: Flashcard): Observable<Flashcard> {
-    return this.http.post<Flashcard>(`${this.host}/flashcards/add`, flashcard);
-  }
+  constructor(private http: HttpClient) {}
 
   public getAllFlashcard(): Observable<Flashcard[]> {
     return this.http.get<Flashcard[]>(`${this.host}/flashcards/all`);
   }
 
-  public getFlashcardsByUserId(userId: string): Observable<Flashcard[]> {
-    return this.http.get<Flashcard[]>(`${this.host}/flashcards/userflashcards/${userId}`);
+  public createFlashcard(flashcard: Flashcard): Observable<Flashcard> {
+    return this.http.post<Flashcard>(`${this.host}/flashcards/add`, flashcard);
   }
 
+  public getFlashcardsByUserId(userId: string): Observable<Flashcard[]> {
+    return this.http.get<Flashcard[]>(
+      `${this.host}/flashcards/userflashcards/${userId}`,
+    );
+  }
+
+  public deleteUserFlashcard(question: string) {
+    return this.http.delete(`${this.host}/flashcards/delete`, {
+      params: { question: question },
+    });
+  }
 }

@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
   inject,
@@ -47,8 +47,7 @@ export class FlashcardsComponent implements OnInit {
       return;
     }
 
-    const userId = user.userId;
-    this.service.getFlashcardsByUserId(userId).subscribe({
+    this.service.getFlashcardsByUserId(user.userId).subscribe({
       next: (response: Flashcard[]) => {
         this.flashcards = response
           .sort((a, b) => (a.id ?? 0) - (b.id ?? 0))
@@ -77,9 +76,7 @@ export class FlashcardsComponent implements OnInit {
       return;
     }
 
-    const userId = user.userId;
-
-    flashcard.userId = userId;
+    flashcard.userId = user.userId;
 
     this.service.createFlashcard(flashcard).subscribe({
       next: () => {
@@ -102,5 +99,11 @@ export class FlashcardsComponent implements OnInit {
 
   displayCards(): void {
     this.allCards = !this.allCards;
+  }
+
+  onDelete(question: string): void {
+    this.flashcards = this.flashcards.filter(
+      (flashcard) => flashcard.question !== question,
+    );
   }
 }
