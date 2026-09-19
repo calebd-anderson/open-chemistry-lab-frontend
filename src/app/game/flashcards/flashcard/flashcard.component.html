@@ -1,0 +1,10 @@
+<div class="flashcard-shell" [class.flipped]="flashcard().flipped" (click)="flipCard()">
+    <div class="flashcard-inner">
+        <div class="flashcard-face flashcard-front">
+            {{ flashcard().question }}
+        </div>
+        <div class="flashcard-face flashcard-back">
+            {{ flashcard().answer }}
+        </div>
+    </div>
+</div>

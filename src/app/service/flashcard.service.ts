@@ -2,17 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-
-export interface Flashcard {
-  id?: number;
-  term: string;
-  question: string;
-  answer: string;
-  userId?: string;
-  flipped?: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
+import { Flashcard } from '../model/flashcard.model';
 
 @Injectable({
   providedIn: 'root'

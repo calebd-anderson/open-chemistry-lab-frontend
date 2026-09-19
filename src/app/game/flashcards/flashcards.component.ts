@@ -1,13 +1,19 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '@app/service/security/authentication.service';
-import { FlashCardService, Flashcard } from '@app/service/flashcard.service';
+import { FlashCardService } from '@app/service/flashcard.service';
 import { NotificationType } from '@app/model/enum/notification-type.enum';
 import { NotificationService } from '@app/service/notification.service';
 import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@/app/component/button/button.component';
+import { FlashcardComponent } from './flashcard/flashcard.component';
+import { Flashcard } from '@/app/model/flashcard.model';
 
 export interface CreateFlashcardInput extends Omit<Flashcard, 'id'> {
   question: string;
@@ -15,13 +21,13 @@ export interface CreateFlashcardInput extends Omit<Flashcard, 'id'> {
 }
 
 @Component({
-  selector: 'app-flashcard',
-  templateUrl: './flashcard.component.html',
-  styleUrls: ['./flashcard.component.scss'],
+  selector: 'app-flashcards',
+  templateUrl: './flashcards.component.html',
+  styleUrls: ['./flashcards.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [FormsModule, ButtonComponent],
+  imports: [FormsModule, ButtonComponent, FlashcardComponent],
 })
-export class FlashcardComponent implements OnInit {
+export class FlashcardsComponent implements OnInit {
   flashcards: Flashcard[] = [];
   allCards: boolean = false;
 
@@ -59,12 +65,6 @@ export class FlashcardComponent implements OnInit {
         }
       },
     });
-  }
-
-  flipCard(index: number): void {
-    if (index < 0 || index >= this.flashcards.length) return;
-
-    this.flashcards[index].flipped = !this.flashcards[index].flipped;
   }
 
   public createFlashcard(flashcard: CreateFlashcardInput): void {

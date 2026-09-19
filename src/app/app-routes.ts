@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { AuthenticationGuard } from './service/security/guard/authentication.guard';
 import { QuizComponent } from './game/quiz/quiz.component';
-import { FlashcardComponent } from './game/flashcard/flashcard.component';
+import { FlashcardsComponent } from './game/flashcards/flashcards.component';
 import { AuthorizationGuard } from '@service/security/guard/authorization.guard';
 import { ProfileComponent } from '@/app/user-manager/account-form/profile/profile.component';
 import { AboutComponent } from '@/app/about/about.component';
@@ -40,7 +40,7 @@ export const routes: Routes = [
   },
   {
     path: 'flashcard',
-    component: FlashcardComponent,
+    component: FlashcardsComponent,
     canActivate: [AuthenticationGuard],
   },
   { path: '', redirectTo: 'about', pathMatch: 'full' },

@@ -1,5 +1,5 @@
-<!-- create flashcard -->
 <div class="max-w-6xl mx-auto px-4 py-8">
+  <!-- create flashcard -->
   <h1 class="text-center text-3xl font-bold text-emerald-800 mb-8">Create Flashcards</h1>
   <div class="flex justify-center">
     <form #flascardForm="ngForm" (ngSubmit)="createFlashcard(flascardForm.value)" class="w-full max-w-md">
@@ -27,30 +27,24 @@
       </div>
     </form>
   </div>
-  @if(flashcards.length > 0) {
-  <div class="mt-8 flex justify-center">
-    <a (click)="displayCards()" class="ml-2 text-emerald-600 hover:text-emerald-800 cursor-pointer underline">
-      Hide/See My Flash Card(s)
-    </a>
-  </div>
-  }
-  <!-- list -->
-  @if (allCards) {
-  <div class="mt-10">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      @for (displayCard of flashcards; track displayCard.id ?? displayCard.question + '-' + i; let i = $index) {
-      <div class="flashcard-shell" [class.flipped]="displayCard.flipped" (click)="flipCard(i)">
-        <div class="flashcard-inner">
-          <div class="flashcard-face flashcard-front">
-            {{ displayCard.question }}
-          </div>
-          <div class="flashcard-face flashcard-back">
-            {{ displayCard.answer }}
-          </div>
-        </div>
-      </div>
-      }
+  <div>
+    <!-- display flashcards -->
+    @if(flashcards.length > 0) {
+    <div class="mt-8 flex justify-center">
+      <a (click)="displayCards()" class="ml-2 text-emerald-600 hover:text-emerald-800 cursor-pointer underline">
+        Hide/See My Flash Card(s)
+      </a>
     </div>
+    }
+    <!-- list -->
+    @if (allCards) {
+    <div class="mt-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        @for (displayCard of flashcards; track displayCard.id ?? displayCard.question + '-' + i; let i = $index) {
+        <app-flashcard [flashcard]="displayCard" />
+        }
+      </div>
+    </div>
+    }
   </div>
-  }
 </div>
