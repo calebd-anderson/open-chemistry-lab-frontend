@@ -67,7 +67,7 @@ export class AddUserComponent implements OnDestroy {
             NotificationType.SUCCESS,
             `${response.firstName} ${response.lastName} added successfully.`,
           );
-          document.getElementById("close-dialog-button")?.click()
+          document.getElementById('close-dialog-button')?.click();
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.notificationService.notify(
