@@ -14,26 +14,26 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   public getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.host}/user/list`);
+    return this.http.get<User[]>(`${this.host}/users`);
   }
 
   public addUser(formData: FormData): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/add`, formData);
+    return this.http.post<User>(`${this.host}/users`, formData);
   }
 
   public updateUser(formData: FormData): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/update`, formData);
+    return this.http.post<User>(`${this.host}/users/update`, formData);
   }
 
   public resetPassword(email: string): Observable<CustomHttpResponse> {
     return this.http.get<CustomHttpResponse>(
-      `${this.host}/user/resetpassword/${email}`,
+      `${this.host}/users/resetpassword/${email}`,
     );
   }
 
   public updateProfileImage(formData: FormData): Observable<HttpEvent<User>> {
     return this.http.post<User>(
-      `${this.host}/user/updateprofileimg`,
+      `${this.host}/users/updateprofileimg`,
       formData,
       {
         reportProgress: true,
@@ -44,7 +44,7 @@ export class UserService {
 
   public deleteUser(username: string): Observable<CustomHttpResponse> {
     return this.http.delete<CustomHttpResponse>(
-      `${this.host}/user/delete/${username}`,
+      `${this.host}/users/${username}`,
     );
   }
 
