@@ -16,7 +16,12 @@ import { CompoundService } from '@app/service/compound.service';
 import { AuthenticationService } from '@app/service/security/authentication.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ValidationModalComponent } from './validation-modal/validation-modal.component';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpResponse,
+  HttpContext,
+} from '@angular/common/http';
+import { SKIP_ERROR_NOTIFICATION } from '@app/service/interceptor/error.context';
 import { Reaction } from '@app/model/compound';
 import { ElementRequest } from '@/app/model/element-request.model';
 import { GraphicsModalComponent } from './graphics-modal/graphics-modal.component';
@@ -127,7 +132,7 @@ export class LabComponent implements OnInit {
         userId: this.authenticationService.user()?.userId || null,
       };
       // careful of memory leak
-      this.compoundService.validate(payload).subscribe({
+      this.compoundService.validate(payload, new HttpContext().set(SKIP_ERROR_NOTIFICATION, true)).subscribe({
         next: (response: HttpResponse<Reaction>) => {
           this.openConfirmationDialogSuccess(
             response,
@@ -172,7 +177,7 @@ export class LabComponent implements OnInit {
         userId: this.authenticationService.user()?.userId || null,
       };
       // careful of memory leak
-      this.compoundService.analyze(payload).subscribe({
+      this.compoundService.analyze(payload, new HttpContext().set(SKIP_ERROR_NOTIFICATION, true)).subscribe({
         next: (response: HttpResponse<ClusterMapResponse>) => {
           this.openGraphSuccess(
             response.body as ClusterMapResponse,

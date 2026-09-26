@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpContext, HttpResponse } from '@angular/common/http';
 import { Reaction, UserReaction } from '../model/compound';
 import { environment } from '../../environments/environment';
 import { ClusterMapResponse } from '../model/clustmapresp.model';
@@ -19,12 +19,18 @@ export class CompoundService {
 
   constructor(private http: HttpClient) { }
 
-  public validate(payload: ValidateCompoundPayload): Observable<HttpResponse<Reaction>> {
-    return this.http.post<Reaction>(`${this.host}/compound/validate`, payload, { observe: 'response' });
+  public validate(payload: ValidateCompoundPayload, context?: HttpContext): Observable<HttpResponse<Reaction>> {
+    return this.http.post<Reaction>(`${this.host}/compound/validate`, payload, {
+      observe: 'response',
+      context: context || new HttpContext()
+    });
   }
 
-  public analyze(payload: ValidateCompoundPayload): Observable<HttpResponse<ClusterMapResponse>> {
-    return this.http.post<ClusterMapResponse>(`${this.host}/compound/analyze`, payload, { observe: 'response' });
+  public analyze(payload: ValidateCompoundPayload, context?: HttpContext): Observable<HttpResponse<ClusterMapResponse>> {
+    return this.http.post<ClusterMapResponse>(`${this.host}/compound/analyze`, payload, {
+      observe: 'response',
+      context: context || new HttpContext()
+    });
   }
 
   public getAllDiscoveries(): Observable<Reaction[]> {

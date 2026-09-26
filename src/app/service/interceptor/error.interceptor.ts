@@ -11,6 +11,7 @@ import { catchError } from 'rxjs/operators';
 import { NotificationService } from '../notification.service';
 import { ProblemDetails } from '../../model/problem-details.model';
 import { NotificationType } from '../../model/enum/notification-type.enum';
+import { SKIP_ERROR_NOTIFICATION } from './error.context';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
@@ -22,6 +23,10 @@ export class ErrorInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
+        if (request.context.get(SKIP_ERROR_NOTIFICATION)) {
+          return throwError(() => error);
+        }
+
         if (error.error && typeof error.error === 'object' && 'title' in error.error) {
           const problem = error.error as ProblemDetails;
           this.notificationService.showProblemDetails(problem);
