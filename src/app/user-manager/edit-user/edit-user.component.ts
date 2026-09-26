@@ -105,10 +105,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
           );
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this.notificationService.notify(
-            NotificationType.ERROR,
-            errorResponse.error.message,
-          );
+          // Error handled by interceptor
         },
       }),
     );

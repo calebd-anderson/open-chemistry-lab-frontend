@@ -70,10 +70,7 @@ export class AddUserComponent implements OnDestroy {
           document.getElementById('close-dialog-button')?.click();
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this.notificationService.notify(
-            NotificationType.ERROR,
-            errorResponse.error.message,
-          );
+          // Error handled by interceptor
         },
       }),
     );

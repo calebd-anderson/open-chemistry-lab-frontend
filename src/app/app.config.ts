@@ -19,6 +19,7 @@ import {
   withXhr
 } from '@angular/common/http';
 import { AuthInterceptor } from './service/security/interceptor/auth.interceptor';
+import { ErrorInterceptor } from './service/interceptor/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,6 +33,7 @@ export const appConfig: ApplicationConfig = {
     ElementService,
     UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     provideHttpClient(withXhr(), withInterceptorsFromDi()),
   ],
 };

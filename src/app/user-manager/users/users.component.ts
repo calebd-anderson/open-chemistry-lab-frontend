@@ -108,10 +108,6 @@ export class UsersComponent implements OnDestroy {
         },
         error: (errorResponse: HttpErrorResponse) => {
           this.refreshing = false;
-          this.notificationService.notify(
-            NotificationType.ERROR,
-            errorResponse.error.message,
-          );
         },
       }),
     );
@@ -181,10 +177,7 @@ export class UsersComponent implements OnDestroy {
           this.getUsers(false);
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this.notificationService.notify(
-            NotificationType.ERROR,
-            errorResponse.error.message,
-          );
+          // Error handled by interceptor
         },
       }),
     );

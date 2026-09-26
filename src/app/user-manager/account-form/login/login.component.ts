@@ -69,10 +69,6 @@ export class LoginComponent implements OnDestroy {
           this.showLoading = false;
         },
         error: (errorResponse: HttpErrorResponse) => {
-          this.sendNotification(
-            NotificationType.ERROR,
-            errorResponse.error.message,
-          );
           this.showLoading = false;
         },
       }),
