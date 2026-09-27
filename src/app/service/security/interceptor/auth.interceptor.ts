@@ -16,25 +16,18 @@ export class AuthInterceptor implements HttpInterceptor {
     httpRequest: HttpRequest<any>,
     HttpHandler: HttpHandler,
   ): Observable<HttpEvent<any>> {
-    if (
-      httpRequest.url.includes(`${this.authenticationService.host}/auth/login`)
-    ) {
+    // Only add the token if the request is for our API origin
+    if (!httpRequest.url.startsWith(this.authenticationService.host)) {
       return HttpHandler.handle(httpRequest);
     }
-    if (
-      httpRequest.url.includes(
-        `${this.authenticationService.host}/auth/register`,
-      )
-    ) {
-      return HttpHandler.handle(httpRequest);
-    }
-    
+
     this.authenticationService.loadToken();
     const token = this.authenticationService.getToken();
-    if (token)
+    if (token) {
       return HttpHandler.handle(
         httpRequest.clone({ setHeaders: { Authorization: `Bearer ${token}` } }),
       );
-    return HttpHandler.handle(httpRequest.clone());
+    }
+    return HttpHandler.handle(httpRequest);
   }
 }
