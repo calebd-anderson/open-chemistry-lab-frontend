@@ -10,7 +10,7 @@ export class ElementService {
   private readonly CACHE_NAME = 'elements-cache';
 
   public async getElements(): Promise<Element[]> {
-    const request = new Request(`${this.host}/elements/list`);
+    const request = new Request(`${this.host}/elements`);
     let elements: Element[] = [];
 
     const cache = await caches.open(this.CACHE_NAME);
