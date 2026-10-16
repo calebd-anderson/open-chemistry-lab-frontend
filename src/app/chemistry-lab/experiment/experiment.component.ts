@@ -4,7 +4,6 @@ import {
   input,
   output,
   ElementRef,
-  AfterViewInit,
   model,
   ChangeDetectionStrategy,
 } from '@angular/core';

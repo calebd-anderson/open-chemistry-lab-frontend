@@ -75,10 +75,10 @@ export class LabComponent implements OnInit {
   // this receives an event from the periodic table component when an element is selected
   public addInteractedElements(element: Element) {
     // Check if adding this element would exceed the limit of 6
-    if (this.elementsInCompound().length >= 10) {
+    if (this.elementsInCompound().length >= 3) {
       this._snackBar.notify(
         NotificationType.WARNING,
-        'Maximum of 6 elements allowed in experiment. Please remove an element first.',
+        'Maximum of 3 atoms.',
       );
       return;
     }
