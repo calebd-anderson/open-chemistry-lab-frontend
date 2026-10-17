@@ -45,6 +45,16 @@
   padding: 0.3rem 0.5rem 0.75rem;
 }
 
+.experiment-state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .compound {
   position: relative;
   display: flex;
@@ -84,6 +94,9 @@
 }
 
 .empty-state {
+  position: absolute;
+  inset: 0;
+  margin: auto;
   display: flex;
   max-width: 22rem;
   flex-direction: column;
@@ -113,8 +126,12 @@
   animation: codex-enter 500ms ease both;
 }
 
-.compound-leave-animation {
+.info-leave-animation {
   animation: codex-exit 300ms ease both;
+}
+
+.button-leave-animation {
+  animation: codex-exit 350ms ease both;
 }
 
 .element-leave-animation {
@@ -124,19 +141,16 @@
 @keyframes codex-enter {
   from {
     opacity: 0;
-    transform: translateY(0.5rem);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
 @keyframes codex-exit {
   to {
     opacity: 0;
-    transform: translateY(-0.3rem);
   }
 }
 
@@ -174,7 +188,8 @@
 @media (prefers-reduced-motion: reduce) {
   .experiment-enter-animation,
   .info-enter-animation,
-  .compound-leave-animation,
+  .info-leave-animation,
+  .button-leave-animation,
   .element-leave-animation {
     animation: none;
   }
