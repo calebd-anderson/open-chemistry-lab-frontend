@@ -1,9 +1,10 @@
 svg {
   width: auto;
-  height: 300px;
-  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(2px 4px 3px rgba(67, 50, 31, 0.22));
 }
 
 .bubble {
-  filter: drop-shadow(3px 5px 2px rgb(0, 68, 255));
+  filter: drop-shadow(0 1px 1px rgba(55, 102, 106, 0.38));
 }

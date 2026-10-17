@@ -1,230 +1,181 @@
-// Chemistry-themed experiment component styling
-.compound {
-  border-radius: 16px;
-  padding: 1.5rem;
-  background: linear-gradient(
-    145deg,
-    rgba(15, 23, 42, 0.96),
-    rgba(15, 118, 110, 0.28)
-  );
-  box-shadow:
-    0 8px 25px rgba(2, 6, 23, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  margin: 1rem auto;
-  min-height: 140px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgba(125, 211, 252, 0.28);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-.compound::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.1) 25%,
-      transparent 25%,
-      transparent 75%,
-      rgba(255, 255, 255, 0.1) 75%
-    ),
-    linear-gradient(
-      45deg,
-      rgba(255, 255, 255, 0.1) 25%,
-      transparent 25%,
-      transparent 75%,
-      rgba(255, 255, 255, 0.1) 75%
-    );
-  background-size: 20px 20px;
-  background-position:
-    0 0,
-    10px 10px;
-  pointer-events: none;
-}
-
-#validate-btn {
-  margin: 2rem 0;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
-
-#clear-btn {
-  background: linear-gradient(to right, #ef4444, #dc2626);
-  color: white;
-}
-
-#run-btn {
-  background: linear-gradient(to right, #10b981, #059669);
-  color: white;
-}
-
-#compound-test {
-  grid-column: 1/3;
-  z-index: 20;
+:host {
+  display: block;
 }
 
 #experiment-box {
   position: relative;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  background: linear-gradient(145deg, #e6f7ff, #b3e0ff);
-  border-radius: 20px;
-  padding: 2rem;
+  display: flex;
+  min-height: 27rem;
+  align-items: stretch;
+  margin: 0.6rem 0.25rem 0.35rem;
+  padding: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(191, 160, 104, 0.82);
+  border-radius: 0.65rem;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(49, 65, 76, 0.62), transparent 55%),
+    linear-gradient(rgba(157, 177, 167, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(157, 177, 167, 0.055) 1px, transparent 1px),
+    linear-gradient(145deg, #1b252c 0%, #111920 58%, #0b1117 100%);
+  background-size: auto, 18px 18px, 18px 18px, auto;
   box-shadow:
-    0 12px 30px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  height: 32rem;
-  margin: 1.5rem;
-  border: 1px solid #93d9ff;
-  z-index: 5;
+    inset 0 0 0 4px rgba(216, 188, 133, 0.13),
+    inset 0 0 0 5px rgba(9, 13, 17, 0.84),
+    inset 0 0 24px rgba(0, 0, 0, 0.52),
+    0 4px 12px rgba(54, 39, 24, 0.22);
 }
 
-h2 {
-  margin: 1rem 0;
-  color: #0c4a6e;
-  text-align: center;
-  font-size: 1.8rem;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+#experiment-box::before {
+  position: absolute;
+  inset: 0.48rem;
+  border: 1px solid rgba(186, 151, 91, 0.55);
+  border-radius: 0.35rem;
+  content: "";
+  pointer-events: none;
+}
+
+#compound-test {
   position: relative;
-  z-index: 3;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem 0.5rem 0.75rem;
+}
+
+.compound {
+  position: relative;
+  display: flex;
+  min-height: 8rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: 0.35rem auto 0;
+  padding: 0.6rem;
+}
+
+#validate-btn {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.15rem 0 0;
 }
 
 #flask-container {
   position: absolute;
-  bottom: -20px;
-  right: 0;
-  width: 45%;
-  height: auto;
-  z-index: 10;
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.3));
+  right: 0.35rem;
+  bottom: -1rem;
+  z-index: 1;
+  width: min(36%, 12rem);
+  height: 68%;
+  opacity: 0.93;
+  pointer-events: none;
 }
 
 #flask {
+  display: block;
   width: 100%;
-  height: auto;
-  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.2));
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(2px 4px 3px rgba(55, 49, 36, 0.2));
 }
 
 .empty-state {
   display: flex;
+  max-width: 22rem;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 2rem;
+  justify-content: center;
+  padding: 1.5rem 1rem 3.5rem;
+  color: #e2d8bf;
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  line-height: 1.4;
   text-align: center;
-  color: #4b5563;
-  font-size: 1.1rem;
-  opacity: 0.8;
+}
+
+.empty-state p {
+  margin: 0;
 }
 
 .empty-state svg {
-  height: 40px;
-  width: 40px;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  fill: #3b82f6;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 0.8rem;
+  fill: #91b9b0;
+  filter: drop-shadow(0 0 8px rgba(99, 195, 221, 0.36));
 }
 
-.toggle-table-btn {
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  z-index: 30;
-  background-color: #3b82f6;
-  color: white;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow:
-    0 6px 12px rgba(0, 0, 0, 0.15),
-    0 1px 3px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 2px solid white;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  background: linear-gradient(145deg, #3b82f6, #1d4ed8);
-}
-
-.toggle-table-btn:hover {
-  background-color: #1d4ed8;
-  transform: scale(1.1) rotate(90deg);
-  box-shadow:
-    0 8px 16px rgba(0, 0, 0, 0.2),
-    0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.toggle-table-btn:active {
-  transform: scale(0.95);
-}
-
-.experiment-enter-animation {
-  animation: fade-in 0.5s;
-}
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.experiment-enter-animation,
+.info-enter-animation {
+  animation: codex-enter 500ms ease both;
 }
 
 .compound-leave-animation {
-  animation: fade-out 0.5s;
-}
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
+  animation: codex-exit 300ms ease both;
 }
 
-.info-enter-animation {
-  animation: slide-fade 1s;
+.element-leave-animation {
+  animation: remove-element 350ms ease forwards;
 }
-@keyframes slide-fade {
+
+@keyframes codex-enter {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(0.5rem);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-
-/* Animation for element removal */
-.element-leave-animation {
-  animation: removeElement 0.5s ease forwards;
+@keyframes codex-exit {
+  to {
+    opacity: 0;
+    transform: translateY(-0.3rem);
+  }
 }
 
-@keyframes removeElement {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  50% {
-    transform: scale(1.2);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(0);
+@keyframes remove-element {
+  to {
     opacity: 0;
+    transform: scale(0.75);
+  }
+}
+
+@media (max-width: 520px) {
+  #experiment-box {
+    min-height: 25rem;
+    margin: 0.35rem 0.1rem 0.2rem;
+    padding: 0.65rem 0.45rem;
+  }
+
+  #compound-test {
+    padding-inline: 0.2rem;
+  }
+
+  #flask-container {
+    right: -0.25rem;
+    bottom: -0.7rem;
+    width: 34%;
+    height: 58%;
+  }
+
+  #validate-btn {
+    gap: 0.45rem;
+    margin-right: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experiment-enter-animation,
+  .info-enter-animation,
+  .compound-leave-animation,
+  .element-leave-animation {
+    animation: none;
   }
 }

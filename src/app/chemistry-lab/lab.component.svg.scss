@@ -1,36 +1,13 @@
-/* SVG Styles for Chemistry Toggle Button */
-.toggle-icon {
-  stroke: #3b82f6; /* cyan-600 */
-  fill: none;
-  stroke-width: 2;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-  transition: all 0.3s ease;
+.codex-mark {
+  transition: transform 220ms ease;
 }
 
-.bg-circle {
-  stroke: #3b82f6; /* cyan-600 */
-  stroke-width: 2;
-  fill: rgba(59, 130, 246, 0.1); /* cyan-600 with transparency */
+#lab-title:hover .codex-mark {
+  transform: rotate(12deg);
 }
 
-.arrow-path {
-  stroke: #1d4ed8; /* blue-700 */
-  stroke-width: 2.5;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-}
-
-.center-circle {
-  fill: #1d4ed8; /* blue-700 */
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-}
-
-.atom-dot {
-  fill: #3b82f6; /* cyan-600 */
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
-}
-
-.bond-line {
-  stroke: #3b82f6; /* cyan-600 */
-  stroke-width: 2;
-  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+@media (prefers-reduced-motion: reduce) {
+  .codex-mark {
+    transition: none;
+  }
 }
