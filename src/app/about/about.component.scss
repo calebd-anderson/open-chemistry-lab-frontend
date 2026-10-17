@@ -1,45 +1,519 @@
-@use "@/tailwind.css";
-
-/* Custom styles for About Page Redesign */
-
-.min-h-screen {
-    @apply antialiased;
+:host {
+  display: block;
+  color: #1a202c;
+  font-family: "EB Garamond", Georgia, serif;
 }
 
-/* Typography refinement */
-h1, h2, h3 {
-    @apply tracking-tight;
+.about-page {
+  --paper: #fdfcf0;
+  --ink: #1a202c;
+  --copper: #b87333;
+  --slate: #4a5568;
+  --rule: rgba(112, 77, 42, 0.3);
+
+  padding: clamp(1rem, 4vw, 3.5rem) clamp(0.75rem, 3vw, 2.5rem);
 }
 
-/* Smooth transitions for all interactive elements */
-a, button, .transition-all {
-    @apply transition-all duration-300 ease-in-out;
+.about-sheet {
+  position: relative;
+  width: min(100%, 76rem);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 4.5rem) clamp(1.25rem, 7vw, 6.5rem) 1.25rem;
+  overflow: hidden;
+  border: 1px solid rgba(108, 72, 36, 0.42);
+  background:
+    linear-gradient(rgba(253, 252, 240, 0.94), rgba(253, 252, 240, 0.94)),
+    repeating-linear-gradient(0deg, transparent 0 31px, rgba(74, 85, 104, 0.1) 31px 32px);
+  box-shadow:
+    0 1.5rem 4rem rgba(54, 37, 20, 0.18),
+    inset 0 0 0 5px rgba(184, 115, 51, 0.08);
 }
 
-/* Card hover effects */
-.hover\:shadow-md:hover {
-    @apply shadow-md;
+.about-sheet::before,
+.about-sheet::after {
+  position: absolute;
+  z-index: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-color: var(--copper);
+  border-style: solid;
+  content: "";
+  pointer-events: none;
 }
 
-.hover\:-translate-y-1:hover {
-    @apply -translate-y-1;
+.about-sheet::before {
+  top: 0.65rem;
+  left: 0.65rem;
+  border-width: 1px 0 0 1px;
 }
 
-/* Custom scrollbar for a premium feel */
-::-webkit-scrollbar {
-    width: 8px;
+.about-sheet::after {
+  right: 0.65rem;
+  bottom: 0.65rem;
+  border-width: 0 1px 1px 0;
 }
 
-::-webkit-scrollbar-track {
-    @apply bg-slate-100;
+.about-hero {
+  position: relative;
+  display: grid;
+  min-height: 32rem;
+  grid-template-columns: minmax(0, 1.1fr) minmax(16rem, 0.9fr);
+  align-items: center;
+  gap: 2rem;
+  padding: 0.5rem 0 4.5rem;
 }
 
-::-webkit-scrollbar-thumb {
-    @apply bg-slate-300 rounded-full hover:bg-slate-400 transition-colors;
+.hero-copy {
+  position: relative;
+  z-index: 1;
 }
 
-/* Utility for the text-gradient in Hero */
-.text-transparent {
-    -webkit-background-clip: text;
-    background-clip: text;
+.eyebrow,
+.section-label,
+.section-number,
+.hero-foot,
+.molecule-study figcaption,
+.repository-links,
+.technology-list,
+.resource-list,
+.team-list,
+.folio-footer {
+  font-family: "Space Mono", "Courier New", monospace;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--copper);
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.hero-copy > .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero-copy > .eyebrow span + span::before {
+  margin-right: 0.8rem;
+  color: rgba(74, 85, 104, 0.65);
+  content: "/";
+}
+
+.about-hero h1 {
+  margin: 0 0 1.25rem -0.07em;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-size: clamp(3.6rem, 9.5vw, 7.8rem);
+  font-weight: 400;
+  letter-spacing: -0.09em;
+  line-height: 0.99;
+}
+
+.about-hero h1 em {
+  color: var(--copper);
+  font-weight: 400;
+}
+
+.hero-intro {
+  max-width: 29rem;
+  margin: 1.75rem 0 0;
+  color: var(--slate);
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  line-height: 1.45;
+}
+
+.molecule-study {
+  position: relative;
+  width: min(100%, 24rem);
+  justify-self: end;
+  margin: 0.5rem 0 0;
+  padding: 1rem 0.25rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.molecule-study::before {
+  position: absolute;
+  top: -0.22rem;
+  left: 1.1rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--copper);
+  content: "";
+}
+
+.molecule-study svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.molecule-bonds {
+  fill: none;
+  stroke: rgba(74, 85, 104, 0.62);
+  stroke-width: 1.5;
+}
+
+.molecule-atoms circle {
+  fill: var(--paper);
+  stroke: var(--copper);
+  stroke-width: 1.5;
+}
+
+.molecule-atoms circle:nth-child(3),
+.molecule-atoms circle:nth-child(5) {
+  fill: #f0dfc6;
+}
+
+.molecule-labels {
+  fill: var(--ink);
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: 11px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.molecule-study figcaption {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.25rem 0.85rem;
+  color: var(--slate);
+  font-size: 0.57rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.molecule-study figcaption span {
+  color: var(--copper);
+}
+
+.hero-foot {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--rule);
+  color: var(--slate);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-rule {
+  display: grid;
+  grid-template-columns: minmax(8rem, 0.34fr) minmax(0, 1.66fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  padding: clamp(2.6rem, 6vw, 5rem) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.section-marker {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding-top: 0.32rem;
+}
+
+.section-number {
+  color: var(--copper);
+  font-size: 0.66rem;
+}
+
+.section-label {
+  color: var(--slate);
+  font-size: 0.57rem;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.mission-copy {
+  max-width: 48rem;
+}
+
+.mission h2,
+.architecture h2,
+.reference-block h2,
+.team h2 {
+  margin: 0;
+  font-family: "Libre Baskerville", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.055em;
+}
+
+.mission h2 {
+  margin-top: 1rem;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 1.2;
+}
+
+.mission-copy > p:not(.eyebrow),
+.architecture > p:not(.eyebrow) {
+  max-width: 43rem;
+  color: var(--slate);
+  font-size: clamp(1.12rem, 1.6vw, 1.32rem);
+  line-height: 1.65;
+}
+
+.mission-copy > p:not(.eyebrow):first-of-type {
+  margin-top: 1.5rem;
+}
+
+.mission a {
+  color: #8b4d20;
+  text-decoration-color: rgba(184, 115, 51, 0.6);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.mission a:hover {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
+}
+
+.mission a:focus-visible,
+.repository-links a:focus-visible,
+.resource-list a:focus-visible {
+  outline: 2px solid var(--copper);
+  outline-offset: 4px;
+}
+
+.research-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.architecture h2,
+.reference-block h2 {
+  margin-top: 0.8rem;
+  font-size: clamp(1.6rem, 2.8vw, 2.25rem);
+  line-height: 1.25;
+}
+
+.architecture > p:not(.eyebrow) {
+  margin: 1rem 0 1.5rem;
+  font-size: 1.18rem;
+}
+
+.repository-links {
+  border-top: 1px solid var(--rule);
+}
+
+.repository-links a,
+.resource-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.repository-links a {
+  padding: 0.8rem 0.1rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.67rem;
+}
+
+.repository-links a span:last-child,
+.resource-list a span {
+  color: var(--copper);
+  transition: transform 180ms ease;
+}
+
+.repository-links a:hover span:last-child,
+.resource-list a:hover span {
+  transform: translate(2px, -2px);
+}
+
+.reference-column {
+  border-left: 1px solid var(--rule);
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.reference-block + .reference-block {
+  margin-top: 2rem;
+  padding-top: 1.8rem;
+  border-top: 1px solid var(--rule);
+}
+
+.technology-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.technology-list li {
+  margin: 0 0.45rem 0.45rem 0;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid rgba(112, 77, 42, 0.32);
+  color: var(--slate);
+  font-size: 0.6rem;
+  line-height: 1.3;
+}
+
+.technology-list li:first-child {
+  border-color: var(--copper);
+  color: #8b4d20;
+}
+
+.resource-list {
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.resource-list li {
+  border-bottom: 1px solid var(--rule);
+}
+
+.resource-list a {
+  padding: 0.7rem 0.1rem;
+  color: var(--slate);
+  font-size: 0.61rem;
+}
+
+.team-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.team h2 {
+  margin-top: 0.8rem;
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+}
+
+.team-heading > p:last-child {
+  margin: 0.75rem 0 0;
+  color: var(--slate);
+  font-size: 1.15rem;
+}
+
+.team-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.team-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  padding: 0.9rem 0;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink);
+  font-family: "EB Garamond", Georgia, serif;
+  font-size: 1.2rem;
+}
+
+.team-list li span:first-child {
+  color: var(--copper);
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: 0.58rem;
+}
+
+.folio-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 0 0.25rem;
+  border-top: 1px solid var(--rule);
+  color: var(--slate);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.folio-footer span:last-child span {
+  margin-left: 0.35rem;
+  color: var(--copper);
+  font-size: 0.5rem;
+}
+
+@media (max-width: 760px) {
+  .about-hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-bottom: 4.25rem;
+  }
+
+  .molecule-study {
+    width: min(100%, 21rem);
+    justify-self: center;
+  }
+
+  .section-rule {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+
+  .research-content,
+  .team-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .reference-column {
+    padding-left: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-page {
+    padding: 0.65rem;
+  }
+
+  .about-sheet {
+    padding: 2rem 1.15rem 1rem;
+  }
+
+  .about-sheet::before,
+  .about-sheet::after {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .about-hero h1 {
+    font-size: clamp(3.45rem, 17vw, 5rem);
+  }
+
+  .hero-foot,
+  .folio-footer {
+    font-size: 0.49rem;
+  }
+
+  .hero-foot {
+    align-items: flex-start;
+  }
+
+  .team-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }
