@@ -1,5 +1,5 @@
 :root {
-  --codex-vellum: #fdfcf0;
+  --codex-vellum: #ead7b2;
   --codex-obsidian: #1a202c;
   --codex-copper: #b87333;
   --codex-slate: #4a5568;
@@ -10,12 +10,17 @@ body {
   min-height: 100vh;
   background-color: var(--codex-vellum);
   background-image:
-    radial-gradient(ellipse at 12% 4%, rgba(184, 115, 51, 0.075), transparent 34rem),
-    radial-gradient(ellipse at 92% 44%, rgba(26, 32, 44, 0.035), transparent 42rem),
-    linear-gradient(to right, rgba(74, 85, 104, 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(74, 85, 104, 0.045) 1px, transparent 1px);
-  background-size: auto, auto, 48px 48px, 48px 48px;
-  background-position: center top, right center, -1px -1px, -1px -1px;
+    radial-gradient(ellipse at 8% 18%, rgba(116, 66, 29, 0.18), transparent 20rem),
+    radial-gradient(ellipse at 88% 11%, rgba(161, 98, 40, 0.16), transparent 24rem),
+    radial-gradient(ellipse at 76% 76%, rgba(126, 77, 35, 0.12), transparent 30rem),
+    radial-gradient(ellipse at 18% 88%, rgba(255, 244, 211, 0.54), transparent 36rem),
+    radial-gradient(rgba(99, 67, 36, 0.13) 0.55px, transparent 0.85px),
+    repeating-linear-gradient(93deg, rgba(106, 72, 40, 0.025) 0 1px, transparent 1px 5px),
+    linear-gradient(90deg, rgba(92, 57, 29, 0.15), transparent 4%, transparent 96%, rgba(92, 57, 29, 0.14)),
+    linear-gradient(180deg, rgba(92, 57, 29, 0.1), transparent 5%, transparent 95%, rgba(92, 57, 29, 0.1));
+  background-size: auto, auto, auto, auto, 9px 11px, auto, auto, auto;
+  background-position: center top, right top, right bottom, left bottom, 1px 2px, center, center, center;
+  background-attachment: fixed;
 }
 
 td {
