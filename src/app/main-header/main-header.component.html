@@ -1,5 +1,5 @@
 <header id="main-header">
-    <div class="flex cursor-pointer items-center">
+    <div class="logo">
         <svg logo-icon id="logo-icon"
             class="m-1 h-8 w-8 rounded-full bg-linear-to-br from-cyan-300 to-cyan-100 p-1 shadow-md"></svg>
         Catalyst Engine
@@ -10,7 +10,7 @@
     @if (authenticationService.isLoggedIn()) {
     <app-user-nav [(user)]="user" />
     }
-    
+
     <div id="user-controls">
         <div [hidden]="authenticationService.isLoggedIn()">
             <app-button title="login button" variant="secondary" size="md" (clicked)="openLogin()">

@@ -3,6 +3,13 @@
 #main-header {
   display: flex;
   justify-content: space-between;
+  padding: .5rem;
+  border-bottom: solid #082b33 2px;
+}
+
+.logo {
+  display: flex;
+  cursor: pointer;
   align-items: center;
 }
 

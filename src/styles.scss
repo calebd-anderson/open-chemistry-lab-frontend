@@ -1,7 +1,21 @@
-// :root {
-// }
+:root {
+  --codex-vellum: #fdfcf0;
+  --codex-obsidian: #1a202c;
+  --codex-copper: #b87333;
+  --codex-slate: #4a5568;
+  --codex-mist: #e2e8f0;
+}
 
 body {
+  min-height: 100vh;
+  background-color: var(--codex-vellum);
+  background-image:
+    radial-gradient(ellipse at 12% 4%, rgba(184, 115, 51, 0.075), transparent 34rem),
+    radial-gradient(ellipse at 92% 44%, rgba(26, 32, 44, 0.035), transparent 42rem),
+    linear-gradient(to right, rgba(74, 85, 104, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(74, 85, 104, 0.045) 1px, transparent 1px);
+  background-size: auto, auto, 48px 48px, 48px 48px;
+  background-position: center top, right center, -1px -1px, -1px -1px;
 }
 
 td {
