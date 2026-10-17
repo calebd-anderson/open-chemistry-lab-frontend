@@ -1,0 +1,28 @@
+.main-nav {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.main-nav__link {
+  padding: 0.55rem 0.85rem;
+  color: #b7d9df;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease;
+}
+
+.main-nav__link:hover {
+  color: #fff;
+  background: rgb(255 255 255 / 8%);
+}
+
+.main-nav__link--active {
+  color: #082b33;
+  background: #67e8f9;
+  font-weight: 600;
+}

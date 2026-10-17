@@ -1,10 +1,17 @@
-<header id="main-header" class="flex items-center justify-between border-b border-cyan-700 bg-linear-to-r from-emerald-900 via-teal-800 to-cyan-900 px-3 shadow-lg">
+<header id="main-header">
     <div class="flex cursor-pointer items-center">
-        <svg logo-icon id="logo-icon" class="m-1 h-8 w-8 rounded-full bg-linear-to-br from-cyan-300 to-cyan-100 p-1 shadow-md"></svg>
-        <h1 class="ml-2 text-lg font-bold tracking-wide text-cyan-100">Catalyst Engine</h1>
+        <svg logo-icon id="logo-icon"
+            class="m-1 h-8 w-8 rounded-full bg-linear-to-br from-cyan-300 to-cyan-100 p-1 shadow-md"></svg>
+        Catalyst Engine
     </div>
 
-    <div id="user-controls" class="m-2 flex items-center justify-self-end self-center rounded-xl border border-cyan-700 bg-linear-to-r from-cyan-800 to-blue-900 p-2 shadow-lg">
+    <app-tabs />
+
+    @if (authenticationService.isLoggedIn()) {
+    <app-user-nav [(user)]="user" />
+    }
+    
+    <div id="user-controls">
         <div [hidden]="authenticationService.isLoggedIn()">
             <app-button title="login button" variant="secondary" size="md" (clicked)="openLogin()">
                 Login
@@ -12,14 +19,10 @@
         </div>
 
         <div class="profile-icon" [hidden]="!authenticationService.isLoggedIn()">
-            <button (click)="openMenu()" type="button" class="flex cursor-pointer items-center focus:outline-none transition-all duration-300 ease-in-out">
-                <img
-                    height="32"
-                    width="32"
-                    [src]="profileImage()"
-                    class="h-8 w-8 rounded-full border-2 border-cyan-500 object-cover"
-                    alt="profile image"
-                />
+            <button (click)="openMenu()" type="button"
+                class="flex cursor-pointer items-center focus:outline-none transition-all duration-300 ease-in-out">
+                <img height="32" width="32" [src]="profileImage()"
+                    class="h-8 w-8 rounded-full border-2 border-cyan-500 object-cover" alt="profile image" />
             </button>
         </div>
     </div>

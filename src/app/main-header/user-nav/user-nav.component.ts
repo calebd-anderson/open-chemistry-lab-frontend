@@ -1,9 +1,14 @@
-import { AdminIcon } from '@/app/user-manager/user-nav/admin.component.svg';
-import { LogoutIcon } from '@/app/user-manager/user-nav/logout.component.svg';
+import { AdminIcon } from '@/app/main-header/user-nav/admin.component.svg';
+import { LogoutIcon } from '@/app/main-header/user-nav/logout.component.svg';
 import { User } from '@/app/model/user';
 import { AuthenticationService } from '@/app/service/security/authentication.service';
 import { AuthorizationService } from '@/app/service/security/authorization.service';
-import { Component, inject, model, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  model,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({

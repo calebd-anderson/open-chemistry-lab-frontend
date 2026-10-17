@@ -1,4 +1,9 @@
-import { Component, inject, model, signal, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  inject,
+  model,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { ChemLogo } from '@app/assets/logo.component';
 import { User } from '@model/user';
 import { AuthenticationService } from '@service/security/authentication.service';
@@ -7,10 +12,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../user-manager/account-form/register/register.component';
 import { ButtonComponent } from '../component/button/button.component';
 import { UserService } from '../service/user.service';
+import { TabsComponent } from './tabs/tabs.component';
+import { UserNavComponent } from './user-nav/user-nav.component';
 
 @Component({
   selector: 'app-main-header',
-  imports: [ChemLogo, ButtonComponent],
+  imports: [ChemLogo, ButtonComponent, UserNavComponent, TabsComponent],
   templateUrl: './main-header.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './main-header.component.scss',

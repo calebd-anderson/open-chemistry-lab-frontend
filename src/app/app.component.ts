@@ -2,9 +2,7 @@ import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/cor
 import { RouterOutlet } from '@angular/router';
 import { User } from './model/user';
 import { AuthenticationService } from './service/security/authentication.service';
-import { TabsComponent } from './component/tabs/tabs.component';
 import { FooterComponent } from './footer/footer.component';
-import { UserNavComponent } from './user-manager/user-nav/user-nav.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
 
 @Component({
@@ -13,10 +11,8 @@ import { MainHeaderComponent } from './main-header/main-header.component';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [
-    TabsComponent,
     RouterOutlet,
     FooterComponent,
-    UserNavComponent,
     MainHeaderComponent,
   ],
 })

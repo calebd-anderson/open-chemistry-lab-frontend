@@ -1,0 +1,12 @@
+<nav class="main-nav" aria-label="Main navigation">
+  @for (link of tabLinks(); track link.path) {
+    <a
+      class="main-nav__link"
+      [routerLink]="link.path"
+      routerLinkActive="main-nav__link--active"
+      ariaCurrentWhenActive="page"
+    >
+      {{ link.label }}
+    </a>
+  }
+</nav>

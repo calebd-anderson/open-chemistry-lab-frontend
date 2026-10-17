@@ -1,25 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
-// @use "@angular/material" as mat;
-
-// @import "https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css";
-
-// Customize the entire app. Change :root to your selector if you want to scope the styles.
 // :root {
-//   @include mat.theme(
-//     (color: mat.$blue-palette, typography: Roboto, density: 0),
-//     // $overrides: (surface: #091324, on-surface: #fff)
-//   );
 // }
 
-// body {
-//   background: var(--mat-sys-surface);
-//   color: var(--mat-sys-on-surface);
-// }
-
-// .mat-typography h3 {
-//   font-size: large;
-//   font-weight: 700;
-// }
+body {
+}
 
 td {
   cursor: pointer;

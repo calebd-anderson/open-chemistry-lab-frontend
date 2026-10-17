@@ -1,7 +1,13 @@
 @use "@/tailwind.css";
 
 #main-header {
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#user-controls {
+  // @apply m-2 flex items-center justify-self-end self-center rounded-xl border border-cyan-700 bg-linear-to-r from-cyan-800 to-blue-900 p-2 shadow-lg;
 }
 
 .profile-icon button {

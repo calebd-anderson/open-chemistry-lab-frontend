@@ -2,14 +2,14 @@ import { Component, computed, inject, Signal, ChangeDetectionStrategy } from '@a
 import { itablink } from '../../model/itablink';
 import { AuthenticationService } from '../../service/security/authentication.service';
 import { AuthorizationService } from '../../service/security/authorization.service';
-import { MatTabNavPanel, MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [MatTabNavPanel, MatTabsModule, RouterModule],
+  imports: [RouterModule],
+  styleUrl: './tab.component.scss',
 })
 export class TabsComponent {
   readonly authenticationService = inject(AuthenticationService);

@@ -1,9 +1,9 @@
 @use "@/tailwind.css";
 
 .lab-container {
-  @apply bg-gradient-to-br from-cyan-50 to-blue-100 min-h-screen p-4;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #e2e8f0;
+  // @apply bg-gradient-to-br from-cyan-50 to-blue-100 min-h-screen p-4;
+  // font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  // color: #e2e8f0;
 }
 
 #lab-header {
@@ -54,9 +54,9 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background:
-    radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 20%),
-    radial-gradient(circle at 90% 80%, rgba(34, 197, 194, 0.05) 0%, transparent 20%);
+  // background:
+  //   radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 20%),
+  //   radial-gradient(circle at 90% 80%, rgba(34, 197, 194, 0.05) 0%, transparent 20%);
   pointer-events: none;
   z-index: 0;
 }
@@ -74,7 +74,7 @@
   left: 0;
   right: 0;
   height: 2px;
-  background: linear-gradient(to right, transparent, #3b82f6, transparent);
+  // background: linear-gradient(to right, transparent, #3b82f6, transparent);
 }
 
 #instructions {
@@ -269,7 +269,7 @@ button .svg-icon {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(to right, #22d3ee, #818cf8);
+  // background: linear-gradient(to right, #22d3ee, #818cf8);
   border-radius: 3px;
 }
 
@@ -286,11 +286,11 @@ button .svg-icon {
   left: 0;
   right: 0;
   bottom: 0;
-  background:
-    linear-gradient(45deg, rgba(135, 206, 250, 0.05) 25%, transparent 25%, transparent 75%, rgba(135, 206, 250, 0.05) 75%),
-    linear-gradient(45deg, rgba(135, 206, 250, 0.05) 25%, transparent 25%, transparent 75%, rgba(135, 206, 250, 0.05) 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px;
+  // background:
+  //   linear-gradient(45deg, rgba(135, 206, 250, 0.05) 25%, transparent 25%, transparent 75%, rgba(135, 206, 250, 0.05) 75%),
+  //   linear-gradient(45deg, rgba(135, 206, 250, 0.05) 25%, transparent 25%, transparent 75%, rgba(135, 206, 250, 0.05) 75%);
+  // background-size: 20px 20px;
+  // background-position: 0 0, 10px 10px;
   pointer-events: none;
   z-index: 0;
 }
