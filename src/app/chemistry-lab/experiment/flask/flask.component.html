@@ -1,4 +1,12 @@
-<svg id="svg-flask" viewBox="8 140 188 169" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Glass chemistry flask with a blue-green solution">
+<svg
+    id="svg-flask"
+    [class.is-processing]="isActive()"
+    [attr.aria-busy]="isActive()"
+    viewBox="8 140 188 169"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    [attr.aria-label]="isActive() ? 'Flask bubbling while the experiment is processing' : 'Glass chemistry flask with a blue-green solution'"
+>
     <defs>
         <linearGradient id="glass-fill" x1="0" x2="1" y1="0" y2="0">
             <stop offset="0" stop-color="#d7f6e6" stop-opacity=".08"/>
@@ -11,6 +19,12 @@
             <stop offset="0" stop-color="#a3f2dc" stop-opacity=".54"/>
             <stop offset=".14" stop-color="#55c9c3" stop-opacity=".64"/>
             <stop offset="1" stop-color="#1c6370" stop-opacity=".88"/>
+        </linearGradient>
+        <linearGradient id="solution-glow-fill" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#e4fff7" stop-opacity=".95"/>
+            <stop offset=".32" stop-color="#62ffe0" stop-opacity=".68"/>
+            <stop offset=".72" stop-color="#36d9cb" stop-opacity=".2"/>
+            <stop offset="1" stop-color="#57e6d0" stop-opacity=".03"/>
         </linearGradient>
         <linearGradient id="glass-edge" x1="0" x2="1" y1="0" y2="0">
             <stop offset="0" stop-color="#ebfff2" stop-opacity=".82"/>
@@ -26,9 +40,10 @@
     <ellipse cx="102" cy="172" rx="13" ry="3.1" fill="#142b32" fill-opacity=".7" stroke="#e5fff0" stroke-opacity=".85" stroke-width="1.5"/>
     <g class="solution" clip-path="url(#flask-interior)">
         <path class="solution-liquid" d="M25 310c22-5 40 3 61 0 20-3 38-4 59 0 15 3 27 1 40-2v120H25z" fill="url(#solution-fill)"/>
+        <path class="solution-glow" d="M25 310c22-5 40 3 61 0 20-3 38-4 59 0 15 3 27 1 40-2v120H25z" fill="url(#solution-glow-fill)" opacity="0"/>
         <path class="solution-surface" d="M27 310c22-5 40 3 59 0 20-3 38-4 59 0 15 3 27 1 40-2" fill="none" stroke="#c5fff0" stroke-opacity=".82" stroke-width="1.6"/>
     </g>
-    <g class="escaping-bubbles" aria-hidden="true"/>
+    <g class="added-bubbles" aria-hidden="true"/>
     <path d="M43 276c8-12 29-20 46-28 5-3 7-7 7-13v-53M161 278c-8-12-27-20-42-27-5-3-7-7-7-13v-51" fill="none" stroke="url(#glass-edge)" stroke-width="3.1" stroke-linecap="round"/>
     <path d="M53 291c22 5 76 5 98 0" fill="none" stroke="#e3fff0" stroke-opacity=".47" stroke-width="1.6" stroke-linecap="round"/>
 </svg>

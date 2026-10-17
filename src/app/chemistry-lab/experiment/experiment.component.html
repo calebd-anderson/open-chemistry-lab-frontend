@@ -19,12 +19,15 @@
         <!-- run experiment buttons -->
         <div id="validate-btn" animate.leave="button-leave-animation">
           <app-button title="Run experiment" variant="primary" size="md" customClass="lab-action lab-action--run"
+            [disabled]="experimentService.isActive()"
             (clicked)="runExperiment.emit()">Run
             Experiment</app-button>
           <app-button title="Analyze with machine learning" variant="primary" size="md"
             customClass="lab-action lab-action--analyze"
+            [disabled]="experimentService.isActive()"
             (clicked)="analyzeFormula.emit()">Analyze With ML</app-button>
           <app-button title="Reset experiment" variant="secondary" size="md" customClass="lab-action lab-action--reset"
+            [disabled]="experimentService.isActive()"
             (clicked)="clearExperiment.emit()">Reset
             Experiment</app-button>
         </div>
@@ -52,6 +55,7 @@
         id="flask"
         [atomCount]="elementsInCompound().length"
         [maxAtoms]="maxAtoms"
+        [isActive]="experimentService.isActive()"
       />
     </div>
   </div>

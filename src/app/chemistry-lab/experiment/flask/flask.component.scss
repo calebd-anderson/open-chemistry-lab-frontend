@@ -4,3 +4,27 @@ svg {
   height: 100%;
   overflow: visible;
 }
+
+#svg-flask {
+  transform-box: view-box;
+  transform-origin: 50% 88%;
+}
+
+.added-bubbles {
+  overflow: visible;
+}
+
+.bubble-shell {
+  fill: rgba(160, 255, 239, 0.12);
+  stroke: rgba(230, 255, 250, 0.86);
+  stroke-width: 0.9;
+  filter: drop-shadow(0 0 1.5px rgba(132, 255, 235, 0.55));
+}
+
+.bubble-highlight {
+  fill: rgba(255, 255, 255, 0.95);
+}
+
+.bubble-glint {
+  fill: rgba(230, 255, 250, 0.62);
+}

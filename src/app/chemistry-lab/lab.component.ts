@@ -30,6 +30,8 @@ import { ClusterMapResponse } from '@/app/model/clustmapresp.model';
 
 // import test_data from '../experiment/d3-fdg/h20_test_ml_graph.json';
 
+const MINIMUM_PROCESSING_ANIMATION_MS = 2500;
+
 @Component({
   selector: 'app-lab',
   standalone: true,
@@ -105,6 +107,7 @@ export class LabComponent implements OnInit {
 
   public validateCompound() {
     this.experimentService.setIsActive(true);
+    const animationStartedAt = Date.now();
 
     // the reduced formula form is best represented as a Map<string, number> where the key is the element symbol and the value is the number of atoms
     let formula = new Map<string, number>();
@@ -125,31 +128,32 @@ export class LabComponent implements OnInit {
       elements.push({ symbol: key, numberOfAtoms: value });
     }
 
-    // Add synthetic delay to allow the flask animation to run
-    setTimeout(() => {
-      let payload = {
-        elements,
-        userId: this.authenticationService.user()?.userId || null,
-      };
-      // careful of memory leak
-      this.compoundService.validate(payload, new HttpContext().set(SKIP_ERROR_NOTIFICATION, true)).subscribe({
-        next: (response: HttpResponse<Reaction>) => {
+    const payload = {
+      elements,
+      userId: this.authenticationService.user()?.userId || null,
+    };
+    this.compoundService.validate(payload, new HttpContext().set(SKIP_ERROR_NOTIFICATION, true)).subscribe({
+      next: (response: HttpResponse<Reaction>) => {
+        this.completeAfterMinimumAnimation(animationStartedAt, () => {
           this.openConfirmationDialogSuccess(
             response,
             this.authenticationService.isLoggedIn(),
           );
           this.experimentService.setIsActive(false);
-        },
-        error: (errorResponse: HttpErrorResponse) => {
+        });
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.completeAfterMinimumAnimation(animationStartedAt, () => {
           this.openConfirmationDialogFail(errorResponse);
           this.experimentService.setIsActive(false);
-        },
-      });
-    }, 2000); // 2 second delay
+        });
+      },
+    });
   }
 
   public analyzeFormula() {
     this.experimentService.setIsActive(true);
+    const animationStartedAt = Date.now();
 
     // the reduced formula form is best represented as a Map<string, number> where the key is the element symbol and the value is the number of atoms
     let formula = new Map<string, number>();
@@ -170,27 +174,36 @@ export class LabComponent implements OnInit {
       elements.push({ symbol: key, numberOfAtoms: value });
     }
 
-    // Add synthetic delay to allow the flask animation to run
-    setTimeout(() => {
-      let payload = {
-        elements,
-        userId: this.authenticationService.user()?.userId || null,
-      };
-      // careful of memory leak
-      this.compoundService.analyze(payload, new HttpContext().set(SKIP_ERROR_NOTIFICATION, true)).subscribe({
-        next: (response: HttpResponse<ClusterMapResponse>) => {
+    const payload = {
+      elements,
+      userId: this.authenticationService.user()?.userId || null,
+    };
+    this.compoundService.analyze(payload, new HttpContext().set(SKIP_ERROR_NOTIFICATION, true)).subscribe({
+      next: (response: HttpResponse<ClusterMapResponse>) => {
+        this.completeAfterMinimumAnimation(animationStartedAt, () => {
           this.openGraphSuccess(
             response.body as ClusterMapResponse,
             this.authenticationService.isLoggedIn(),
           );
           this.experimentService.setIsActive(false);
-        },
-        error: (errorResponse: HttpErrorResponse) => {
+        });
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.completeAfterMinimumAnimation(animationStartedAt, () => {
           this.openConfirmationDialogFail(errorResponse);
           this.experimentService.setIsActive(false);
-        },
-      });
-    }, 2000); // 2 second delay
+        });
+      },
+    });
+  }
+
+  private completeAfterMinimumAnimation(startedAt: number, callback: () => void): void {
+    const remaining = MINIMUM_PROCESSING_ANIMATION_MS - (Date.now() - startedAt);
+    if (remaining > 0) {
+      setTimeout(callback, remaining);
+    } else {
+      callback();
+    }
   }
 
   public openConfirmationDialogFail(response: HttpErrorResponse) {
