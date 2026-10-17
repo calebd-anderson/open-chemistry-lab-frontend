@@ -15,6 +15,7 @@ import { ExperimentService } from '@app/service/experiment.service';
 import { InfoIcon } from '@app/assets/info-icon.component.svg';
 import { ButtonComponent } from '@/app/component/button/button.component';
 import { AtomComponent } from './atom/atom.component';
+import { MAX_EXPERIMENT_ATOMS } from './experiment.constants';
 
 @Component({
   selector: 'app-experiment',
@@ -30,6 +31,7 @@ import { AtomComponent } from './atom/atom.component';
   styleUrls: ['./experiment.component.scss'],
 })
 export class ExperimentComponent {
+  readonly maxAtoms = MAX_EXPERIMENT_ATOMS;
   elementsInCompound = model.required<{ element: Element; id: number }[]>();
   isTableExpanded = input<boolean>(false);
 

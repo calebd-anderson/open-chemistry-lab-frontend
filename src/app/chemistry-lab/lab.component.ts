@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { PeriodicTableComponent } from './periodic-table/periodic-table.component';
 import { ExperimentComponent } from './experiment/experiment.component';
+import { MAX_EXPERIMENT_ATOMS } from './experiment/experiment.constants';
 import { Element } from '@app/model/element.model';
 import { NotificationType } from '@app/model/enum/notification-type.enum';
 import { NotificationService } from '@app/service/notification.service';
@@ -74,11 +75,10 @@ export class LabComponent implements OnInit {
 
   // this receives an event from the periodic table component when an element is selected
   public addInteractedElements(element: Element) {
-    // Check if adding this element would exceed the limit of 6
-    if (this.elementsInCompound().length >= 3) {
+    if (this.elementsInCompound().length >= MAX_EXPERIMENT_ATOMS) {
       this._snackBar.notify(
         NotificationType.WARNING,
-        'Maximum of 3 atoms.',
+        `Maximum of ${MAX_EXPERIMENT_ATOMS} atoms.`,
       );
       return;
     }

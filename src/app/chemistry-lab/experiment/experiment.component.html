@@ -43,8 +43,16 @@
       </div>
       }
     </div>
+    <div class="workbench" aria-hidden="true">
+      <div class="workbench-surface"></div>
+      <div class="workbench-front"></div>
+    </div>
     <div id="flask-container">
-      <app-flask id="flask" />
+      <app-flask
+        id="flask"
+        [atomCount]="elementsInCompound().length"
+        [maxAtoms]="maxAtoms"
+      />
     </div>
   </div>
 </section>
