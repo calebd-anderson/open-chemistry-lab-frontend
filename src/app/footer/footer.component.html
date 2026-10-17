@@ -1,61 +1,44 @@
-<footer class="bg-slate-950 border-t border-slate-800 py-6 px-4 mt-auto">
-  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-    <!-- Column 1: About -->
-    <div class="space-y-3">
-      <h3 class="text-white text-lg font-semibold">Catalyst Engine</h3>
-      <p class="text-slate-400 text-sm leading-relaxed">
+<footer class="codex-footer">
+  <div class="codex-footer__body">
+    <section class="codex-footer__about" aria-labelledby="footer-about-title">
+      <p class="codex-footer__eyebrow">A living scientific manuscript</p>
+      <h2 id="footer-about-title" class="codex-footer__title">Catalyst Engine</h2>
+      <p class="codex-footer__description">
         An interactive platform for exploring the wonders of chemistry. Create molecules, discover compounds, and learn
         through hands-on simulation.
       </p>
-    </div>
+    </section>
 
-    <!-- Column 2: Explore -->
-    <div class="space-y-3">
-      <h3 class="text-white text-lg font-semibold">Explore</h3>
-      <ul class="space-y-2">
+    <nav class="codex-footer__links" aria-labelledby="footer-explore-title">
+      <h2 id="footer-explore-title" class="codex-footer__heading">Explore the codex</h2>
+      <ul>
+        <li><button type="button" (click)="goToLab()">Chemistry lab</button></li>
+        <li><button type="button" (click)="goToDiscoveries()">My discoveries</button></li>
+        <li><button type="button" (click)="goToGlobalDiscoveries()">Global discoveries</button></li>
+        <li><button type="button" (click)="goToQuiz()">Quizzes</button></li>
+        <li><button type="button" (click)="goToFlashcard()">Flashcards</button></li>
+      </ul>
+    </nav>
+
+    <nav class="codex-footer__links codex-footer__references" aria-labelledby="footer-reference-title">
+      <h2 id="footer-reference-title" class="codex-footer__heading">Reference volumes</h2>
+      <ul>
         <li>
-          <button (click)="goToLab()" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">Catalyst Engine
-            (Chemistry Lab)</button>
+          <a href="https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest#section=Molecular-Formula">
+            PubChem API documentation
+          </a>
         </li>
         <li>
-          <button (click)="goToDiscoveries()" class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">My
-            Discoveries</button>
-        </li>
-        <li>
-          <button (click)="goToGlobalDiscoveries()"
-            class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">Global Discoveries</button>
-        </li>
-        <li>
-          <button (click)="goToQuiz()"
-            class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">Quizzes</button>
-        </li>
-        <li>
-          <button (click)="goToFlashcard()"
-            class="text-slate-400 hover:text-white text-sm transition-colors cursor-pointer">Flashcards</button>
+          <a href="https://en.wikipedia.org/wiki/Chemical_compound">
+            Chemical compound properties
+          </a>
         </li>
       </ul>
-    </div>
-
-    <!-- Column 3: Legal -->
-    <div class="space-y-3">
-      <!-- <h3 class="text-white text-lg font-semibold">Legal</h3>
-      <ul class="space-y-2">
-        <li><a href="#" class="text-slate-400 hover:text-white text-sm transition-colors">Privacy Policy</a></li>
-        <li><a href="#" class="text-slate-400 hover:text-white text-sm transition-colors">Terms of Service</a></li>
-      </ul> -->
-      <h3 class="text-white text-lg font-semibold">PubChem API</h3>
-      <ul class="space-y-2">
-        <li><a href="https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest#section=Molecular-Formula"
-            class="text-slate-400 hover:text-white text-sm transition-colors">Learn about the PubChem API</a></li>
-        <li><a href="https://en.wikipedia.org/wiki/Chemical_compound"
-            class="text-slate-400 hover:text-white text-sm transition-colors">Discover the properties of chemical
-            compounds</a></li>
-      </ul>
-    </div>
+    </nav>
   </div>
 
-  <!-- Bottom Row -->
-  <div class="max-w-7xl mx-auto border-t border-slate-800 mt-8 pt-5 text-center text-slate-50">
-    <p class="copyright">&copy; 2026 Catalyst Engine. All rights reserved.</p>
+  <div class="codex-footer__colophon">
+    <span>Vol. I <span aria-hidden="true">·</span> The chemistry lab</span>
+    <p>&copy; 2026 Catalyst Engine. All rights reserved.</p>
   </div>
 </footer>

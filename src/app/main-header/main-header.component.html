@@ -1,29 +1,46 @@
 <header id="main-header">
-    <div class="logo">
-        <svg logo-icon id="logo-icon"
-            class="m-1 h-8 w-8 rounded-full bg-linear-to-br from-cyan-300 to-cyan-100 p-1 shadow-md"></svg>
-        Catalyst Engine
+  <div class="brand">
+    <svg logo-icon id="logo-icon" class="brand__mark" aria-hidden="true"></svg>
+    <div class="brand__wordmark">
+      <span class="brand__name">Catalyst Engine</span>
+      <span class="brand__edition">The Alchemist’s Codex</span>
     </div>
+  </div>
 
-    <app-tabs />
+  <app-tabs />
 
-    @if (authenticationService.isLoggedIn()) {
+  @if (authenticationService.isLoggedIn()) {
     <app-user-nav [(user)]="user" />
-    }
+  }
 
-    <div id="user-controls">
-        <div [hidden]="authenticationService.isLoggedIn()">
-            <app-button title="login button" variant="secondary" size="md" (clicked)="openLogin()">
-                Login
-            </app-button>
-        </div>
-
-        <div class="profile-icon" [hidden]="!authenticationService.isLoggedIn()">
-            <button (click)="openMenu()" type="button"
-                class="flex cursor-pointer items-center focus:outline-none transition-all duration-300 ease-in-out">
-                <img height="32" width="32" [src]="profileImage()"
-                    class="h-8 w-8 rounded-full border-2 border-cyan-500 object-cover" alt="profile image" />
-            </button>
-        </div>
+  <div id="user-controls">
+    <div [hidden]="authenticationService.isLoggedIn()">
+      <app-button
+        title="login button"
+        variant="secondary"
+        size="md"
+        customClass="codex-header-login"
+        (clicked)="openLogin()"
+      >
+        Login
+      </app-button>
     </div>
+
+    <div class="profile-icon" [hidden]="!authenticationService.isLoggedIn()">
+      <button
+        (click)="openMenu()"
+        type="button"
+        aria-label="Open profile menu"
+        class="profile-icon__button"
+      >
+        <img
+          height="32"
+          width="32"
+          [src]="profileImage()"
+          class="profile-icon__image"
+          alt="Profile image"
+        />
+      </button>
+    </div>
+  </div>
 </header>

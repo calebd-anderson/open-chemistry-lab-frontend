@@ -66,6 +66,30 @@
   @apply bg-red-600 text-white shadow-[0_12px_28px_rgba(220,38,38,0.25)] hover:bg-red-500;
 }
 
+.app-button.codex-header-login {
+  border-color: #8b4f20;
+  border-radius: 0.2rem;
+  background: linear-gradient(180deg, #c98a4c, #a45f2a);
+  color: #fffaf0;
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 2px 0 #75421e, 0 4px 8px rgba(63, 43, 24, 0.16);
+
+  &:hover:not(:disabled) {
+    border-color: #75421e;
+    background: linear-gradient(180deg, #d09658, #ad672f);
+    box-shadow: 0 3px 0 #75421e, 0 6px 11px rgba(63, 43, 24, 0.2);
+  }
+
+  &:focus-visible {
+    box-shadow:
+      0 0 0 3px rgba(184, 115, 51, 0.25),
+      0 2px 0 #75421e;
+  }
+}
+
 .app-button.lab-action {
   position: relative;
   min-height: 2.55rem;

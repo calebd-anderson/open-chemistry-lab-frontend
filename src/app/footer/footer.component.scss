@@ -1,30 +1,188 @@
-@use "@/tailwind.css";
+:host {
+  display: block;
+  margin-top: auto;
+}
 
-footer {
-  @apply bg-slate-950 border-t border-slate-800 px-4 py-6 mt-auto;
+.codex-footer {
+  position: relative;
   margin-top: 2rem;
+  padding: 2.25rem clamp(1rem, 4vw, 3.5rem) 1rem;
+  border-top: 1px solid rgb(184 115 51 / 72%);
+  color: var(--codex-obsidian, #1a202c);
+  background:
+    radial-gradient(ellipse at 50% 100%, rgb(255 249 225 / 68%), transparent 60%),
+    repeating-linear-gradient(90deg, transparent 0 8px, rgb(92 57 29 / 2%) 9px, transparent 10px),
+    linear-gradient(180deg, rgb(234 215 178 / 94%), rgb(253 252 240 / 97%));
+  box-shadow:
+    0 -1px 0 rgb(255 252 233 / 85%),
+    0 -7px 20px rgb(55 38 22 / 9%);
 }
 
-h3 {
-  @apply text-white text-lg font-semibold;
+.codex-footer__body {
+  display: grid;
+  max-width: 78rem;
+  grid-template-columns: minmax(15rem, 1.45fr) minmax(10rem, 0.8fr) minmax(13rem, 1fr);
+  gap: clamp(1.75rem, 4vw, 4rem);
+  margin: 0 auto;
 }
 
-p {
-  @apply text-slate-400 text-sm leading-relaxed;
+.codex-footer__about,
+.codex-footer__links {
+  min-width: 0;
 }
 
-ul {
-  @apply space-y-2;
+.codex-footer__about {
+  padding-right: clamp(0.5rem, 2vw, 2rem);
+  border-right: 1px solid rgb(184 115 51 / 36%);
 }
 
-li {
-  @apply text-sm;
+.codex-footer__eyebrow {
+  margin: 0 0 0.55rem;
+  color: var(--codex-copper, #b87333);
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: 0.61rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
 }
 
-button, a {
-  @apply text-slate-400 hover:text-white transition-colors;
+.codex-footer__title {
+  margin: 0 0 0.65rem;
+  color: var(--codex-obsidian, #1a202c);
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  font-size: 1.28rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
 }
 
-.copyright {
-  @apply text-slate-500 text-xs;
+.codex-footer__description {
+  max-width: 32rem;
+  margin: 0;
+  color: var(--codex-slate, #4a5568);
+  font-family: "EB Garamond", Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
+.codex-footer__heading {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.8rem;
+  color: var(--codex-obsidian, #1a202c);
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  font-size: 0.93rem;
+  font-weight: 700;
+}
+
+.codex-footer__heading::after {
+  height: 1px;
+  flex: 1;
+  background: rgb(184 115 51 / 48%);
+  content: "";
+}
+
+.codex-footer__links ul {
+  display: grid;
+  gap: 0.44rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.codex-footer__links li {
+  line-height: 1.35;
+}
+
+.codex-footer__links button,
+.codex-footer__links a {
+  position: relative;
+  display: inline;
+  padding: 0;
+  border: 0;
+  color: var(--codex-slate, #4a5568);
+  background: none;
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 160ms ease;
+}
+
+.codex-footer__links button:hover,
+.codex-footer__links a:hover {
+  color: #8b4f20;
+  text-decoration: underline;
+  text-decoration-color: rgb(184 115 51 / 60%);
+  text-underline-offset: 0.2em;
+}
+
+.codex-footer__links button:focus-visible,
+.codex-footer__links a:focus-visible {
+  border-radius: 1px;
+  outline: 2px solid var(--codex-copper, #b87333);
+  outline-offset: 3px;
+}
+
+.codex-footer__colophon {
+  display: flex;
+  max-width: 78rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.8rem auto 0;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgb(74 85 104 / 26%);
+  color: var(--codex-slate, #4a5568);
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: 0.61rem;
+  letter-spacing: 0.04em;
+}
+
+.codex-footer__colophon p {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .codex-footer__body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .codex-footer__about {
+    grid-column: 1 / -1;
+    padding: 0 0 1.25rem;
+    border-right: 0;
+    border-bottom: 1px solid rgb(184 115 51 / 36%);
+  }
+}
+
+@media (max-width: 480px) {
+  .codex-footer {
+    padding-inline: 1rem;
+  }
+
+  .codex-footer__body {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .codex-footer__about {
+    grid-column: auto;
+  }
+
+  .codex-footer__colophon {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .codex-footer__links button,
+  .codex-footer__links a {
+    transition: none;
+  }
 }

@@ -1,35 +1,114 @@
-@use "@/tailwind.css";
+:host {
+  position: absolute;
+  top: calc(100% - 0.15rem);
+  right: 0.5rem;
+  z-index: 20;
+}
 
 #user-nav-menu {
   width: 18rem;
-  right: 0.5rem;
+  padding: 0.8rem;
+  border: 1px solid rgb(184 115 51 / 68%);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgb(255 252 232 / 95%), transparent 62%),
+    linear-gradient(145deg, #fdfcf0, #ead7b2);
   box-shadow:
-    0 0 15px rgba(34, 211, 238, 0.3),
-    0 0 30px rgba(34, 211, 238, 0.1);
+    0 12px 30px rgb(50 35 20 / 20%),
+    inset 0 0 0 3px rgb(255 255 255 / 38%);
   opacity: 0;
-  transform: translateY(0.75rem);
   pointer-events: none;
+  transform: translateY(0.65rem);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
 }
 
 #user-nav-menu.active {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
-  animation: slideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  transform: translateY(0);
+}
+
+.user-nav__identity {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.25rem 0.45rem 0.5rem;
+}
+
+.user-nav__username {
+  overflow: hidden;
+  color: var(--codex-obsidian, #1a202c);
+  font-family: "Libre Baskerville", Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-nav__name {
+  overflow: hidden;
+  color: var(--codex-slate, #4a5568);
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: 0.65rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user-nav__divider {
+  height: 1px;
+  margin: 0.5rem 0.35rem;
+  border: 0;
+  background: rgb(184 115 51 / 38%);
+}
+
+.user-nav__actions {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.35rem 0;
 }
 
 .user-nav-button {
-  @apply m-1 flex w-full items-center rounded-lg border border-slate-700 bg-gradient-to-r from-slate-800 to-gray-800 px-4 py-3 text-left text-cyan-100 shadow-sm transition-all duration-200 ease-out hover:scale-[1.02] hover:border-cyan-500 hover:from-slate-700 hover:to-gray-700;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid transparent;
+  color: var(--codex-obsidian, #1a202c);
+  background: transparent;
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: 0.76rem;
+  text-align: left;
   cursor: pointer;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease;
 }
 
 .user-nav-button:hover {
-  box-shadow: 0 12px 24px rgba(14, 116, 144, 0.12);
+  border-color: rgb(184 115 51 / 50%);
+  background: rgb(184 115 51 / 9%);
+  color: #804718;
 }
 
-@keyframes slideIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
+.user-nav-button:focus-visible {
+  outline: 2px solid var(--codex-copper, #b87333);
+  outline-offset: 2px;
+}
+
+.user-nav-button__icon {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+  color: var(--codex-copper, #b87333);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #user-nav-menu,
+  .user-nav-button {
+    transition: none;
   }
 }

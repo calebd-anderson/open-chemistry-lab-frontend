@@ -17,30 +17,27 @@
   min-height: 3.5rem;
   flex: 1;
   place-items: center;
-  text-align: center;
   padding: 0.65rem clamp(0.4rem, 1.2vw, 1rem);
-  color: #9bcbd0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  color: var(--codex-slate, #4a5568);
+  font-family: "Space Mono", "Courier New", monospace;
+  font-size: clamp(0.66rem, 0.85vw, 0.78rem);
   letter-spacing: 0.015em;
+  text-align: center;
   text-decoration: none;
   white-space: nowrap;
-  transition:
-    color 180ms ease,
-    text-shadow 180ms ease;
+  transition: color 180ms ease;
 }
 
 .main-nav__link::after {
   position: absolute;
-  right: 12%;
-  bottom: 0;
-  left: 12%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #52e4e9 18%, #9affff 50%, #52e4e9 82%, transparent);
-  box-shadow: 0 0 9px rgb(82 228 233 / 75%);
+  right: 14%;
+  bottom: 0.22rem;
+  left: 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--codex-copper, #b87333), transparent);
   content: "";
   opacity: 0;
-  transform: scaleX(0.55);
+  transform: scaleX(0.6);
   transition:
     opacity 180ms ease,
     transform 180ms ease;
@@ -48,17 +45,16 @@
 
 .main-nav__link::before {
   position: absolute;
-  bottom: -2px;
+  bottom: 0.02rem;
   left: 50%;
-  width: 5px;
-  height: 5px;
-  border: 1px solid #7bf5f2;
+  width: 0.3rem;
+  height: 0.3rem;
+  border: 1px solid var(--codex-copper, #b87333);
   border-radius: 50%;
-  background: #12333a;
-  box-shadow: 0 0 8px rgb(82 228 233 / 85%);
+  background: var(--codex-vellum, #ead7b2);
   content: "";
   opacity: 0;
-  transform: translateX(-50%) scale(0.5);
+  transform: translateX(-50%) scale(0.65);
   transition:
     opacity 180ms ease,
     transform 180ms ease;
@@ -66,8 +62,7 @@
 
 .main-nav__link:hover,
 .main-nav__link--active {
-  color: #c6ffff;
-  text-shadow: 0 0 12px rgb(102 238 239 / 45%);
+  color: var(--codex-obsidian, #1a202c);
 }
 
 .main-nav__link:hover::after,
@@ -78,11 +73,17 @@
 }
 
 .main-nav__link--active {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .main-nav__link--active::before {
   transform: translateX(-50%) scale(1);
+}
+
+.main-nav__link:focus-visible {
+  border-radius: 1px;
+  outline: 2px solid var(--codex-copper, #b87333);
+  outline-offset: -3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -107,5 +108,6 @@
     flex: 1 0 auto;
     min-height: 3rem;
     padding-inline: 0.8rem;
+    font-size: 0.7rem;
   }
 }
