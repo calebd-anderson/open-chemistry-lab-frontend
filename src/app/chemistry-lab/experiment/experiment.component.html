@@ -17,11 +17,14 @@
       </div>
       <!-- run experiment buttons -->
       <div id="validate-btn">
-        <app-button title="run experiment button" variant="primary" size="md" (clicked)="runExperiment.emit()">Run
+        <app-button title="Run experiment" variant="primary" size="md" customClass="lab-action lab-action--run"
+          (clicked)="runExperiment.emit()">Run
           Experiment</app-button>
-        <app-button title="run experiment button" variant="primary" size="md"
+        <app-button title="Analyze with machine learning" variant="primary" size="md"
+          customClass="lab-action lab-action--analyze"
           (clicked)="analyzeFormula.emit()">Analyze With ML</app-button>
-        <app-button title="run experiment button" variant="secondary" size="md" (clicked)="clearExperiment.emit()">Reset
+        <app-button title="Reset experiment" variant="secondary" size="md" customClass="lab-action lab-action--reset"
+          (clicked)="clearExperiment.emit()">Reset
           Experiment</app-button>
       </div>
       } @else {
