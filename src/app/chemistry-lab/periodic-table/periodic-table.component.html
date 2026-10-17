@@ -1,27 +1,46 @@
 <div class="periodic-table-container" animate.enter="fade-enter-animation">
-  <!-- Loading spinner -->
   @if (progressSpinner) {
-  <div class="spinner-container">
-    <!-- pt loading spinner -->
-  </div>
+  <div class="spinner-container"></div>
   } @else {
-  <!-- Periodic table grid -->
-  <div class="periodic-table-grid" [ngClass]="{ 'loading': progressSpinner }" aria-label="Periodic table of elements">
+  <header class="table-heading">
+    <span class="table-kicker">FIELD GUIDE · PLATE 01</span>
+    <h2>Periodic table of elements</h2>
+    <p>Select an element to add it to your experiment.</p>
+  </header>
 
-    <!-- Grid items for elements -->
-    @for (element of elements(); track element.atomicNumber) {
-    <div class="element-card {{ element.groupBlock }}" [class.in-experiment]="isElementInExperiment(element.symbol)"
-      [style.grid-row]="getGridPosition(element.atomicNumber).row"
-      [style.grid-column]="getGridPosition(element.atomicNumber).col" (click)="selectElement(element)" tabindex="0"
-      [attr.aria-lib-label]="'Element ' + element.name + ' with atomic number ' + element.atomicNumber">
-      <div class="element-content">
-        <span class="atomic-number">{{ element.atomicNumber }}</span>
-        <span class="symbol">{{ element.symbol }}</span>
-        <span class="name">{{ element.name }}</span>
-        <span class="atomic-mass">{{ element.atomicMass }}</span>
+  <div class="table-scroll" role="region" aria-label="Scrollable periodic table" tabindex="0">
+    <div class="periodic-table-grid" role="group" aria-label="Periodic table of elements">
+      @for (element of elements(); track element.atomicNumber) {
+      <div class="element-card" [ngClass]="getElementClass(element.groupBlock)"
+        [class.in-experiment]="isElementInExperiment(element.symbol)"
+        [style.grid-row]="getGridPosition(element.atomicNumber).row"
+        [style.grid-column]="getGridPosition(element.atomicNumber).col" (click)="selectElement(element)" tabindex="0"
+        role="button" (keydown.enter)="selectElement(element)"
+        (keydown.space)="selectElement(element); $event.preventDefault()"
+        [attr.aria-label]="'Element ' + element.name + ', atomic number ' + element.atomicNumber"
+        [attr.title]="element.name + ' (' + element.symbol + ')'">
+        <div class="element-content">
+          <span class="atomic-number">{{ element.atomicNumber }}</span>
+          <span class="symbol">{{ element.symbol }}</span>
+          <span class="name">{{ element.name }}</span>
+          <span class="atomic-mass">{{ element.atomicMass }}</span>
+        </div>
       </div>
+      }
     </div>
-    }
   </div>
+
+  <ul class="element-legend" aria-label="Element categories">
+    <li><span class="legend-swatch alkali-metal"></span>Alkali metal</li>
+    <li><span class="legend-swatch alkaline-earth-metal"></span>Alkaline earth</li>
+    <li><span class="legend-swatch transition-metal"></span>Transition metal</li>
+    <li><span class="legend-swatch post-transition-metal"></span>Post-transition</li>
+    <li><span class="legend-swatch metalloid"></span>Metalloid</li>
+    <li><span class="legend-swatch nonmetal"></span>Nonmetal</li>
+    <li><span class="legend-swatch halogen"></span>Halogen</li>
+    <li><span class="legend-swatch noble-gas"></span>Noble gas</li>
+    <li><span class="legend-swatch lanthanide"></span>Lanthanide</li>
+    <li><span class="legend-swatch actinide"></span>Actinide</li>
+  </ul>
   }
 </div>

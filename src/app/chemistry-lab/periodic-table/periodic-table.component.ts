@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
   imports: [CommonModule],
   templateUrl: './periodic-table.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
-  styleUrls: ['./periodic-table.component.sass', './periodic-table.css'],
+  styleUrls: ['./periodic-table.component.sass'],
 })
 export class PeriodicTableComponent {
   elementService = inject(ElementService);
@@ -63,26 +63,29 @@ export class PeriodicTableComponent {
 
   // Get the CSS class for element styling based on group block
   getElementClass(groupBlock: string): string {
-    switch (groupBlock) {
-      case 'Alkali metal':
+    switch (groupBlock.trim().toLowerCase().replace(/[_\s]+/g, '-')) {
+      case 'alkali-metal':
         return 'alkali-metal';
-      case 'Alkaline earth metal':
+      case 'alkaline-earth-metal':
         return 'alkaline-earth-metal';
-      case 'Transition metal':
+      case 'transition-metal':
         return 'transition-metal';
-      case 'Post-transition metal':
+      case 'post-transition-metal':
         return 'post-transition-metal';
-      case 'Metalloid':
+      case 'metalloid':
         return 'metalloid';
-      case 'Nonmetal':
+      case 'nonmetal':
+      case 'other-nonmetal':
         return 'nonmetal';
-      case 'Halogen':
+      case 'halogen':
         return 'halogen';
-      case 'Noble gas':
+      case 'noble-gas':
         return 'noble-gas';
-      case 'Lanthanide':
+      case 'lanthanide':
+      case 'lanthanoid':
         return 'lanthanide';
-      case 'Actinide':
+      case 'actinide':
+      case 'actinoid':
         return 'actinide';
       default:
         return 'unknown';
