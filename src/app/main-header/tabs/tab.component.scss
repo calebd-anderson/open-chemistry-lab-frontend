@@ -5,32 +5,107 @@
 }
 
 .main-nav {
-  margin: 0 1rem;
-  width: 100%;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .main-nav__link {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 3.5rem;
   flex: 1;
+  place-items: center;
   text-align: center;
-  padding: 0.55rem 0.85rem;
-  color: #b7d9df;
-  border-radius: 0.5rem;
+  padding: 0.65rem clamp(0.4rem, 1.2vw, 1rem);
+  color: #9bcbd0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.8rem, 1vw, 0.95rem);
+  letter-spacing: 0.015em;
   text-decoration: none;
   white-space: nowrap;
   transition:
-    color 160ms ease,
-    background-color 160ms ease;
+    color 180ms ease,
+    text-shadow 180ms ease;
 }
 
-.main-nav__link:hover {
-  color: #fff;
-  background: rgb(255 255 255 / 8%);
+.main-nav__link::after {
+  position: absolute;
+  right: 12%;
+  bottom: 0;
+  left: 12%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #52e4e9 18%, #9affff 50%, #52e4e9 82%, transparent);
+  box-shadow: 0 0 9px rgb(82 228 233 / 75%);
+  content: "";
+  opacity: 0;
+  transform: scaleX(0.55);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.main-nav__link::before {
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #7bf5f2;
+  border-radius: 50%;
+  background: #12333a;
+  box-shadow: 0 0 8px rgb(82 228 233 / 85%);
+  content: "";
+  opacity: 0;
+  transform: translateX(-50%) scale(0.5);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.main-nav__link:hover,
+.main-nav__link--active {
+  color: #c6ffff;
+  text-shadow: 0 0 12px rgb(102 238 239 / 45%);
+}
+
+.main-nav__link:hover::after,
+.main-nav__link--active::after,
+.main-nav__link--active::before {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 .main-nav__link--active {
-  color: #082b33;
-  background: #67e8f9;
   font-weight: 600;
+}
+
+.main-nav__link--active::before {
+  transform: translateX(-50%) scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main-nav__link,
+  .main-nav__link::before,
+  .main-nav__link::after {
+    transition: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .main-nav {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .main-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .main-nav__link {
+    flex: 1 0 auto;
+    min-height: 3rem;
+    padding-inline: 0.8rem;
+  }
 }

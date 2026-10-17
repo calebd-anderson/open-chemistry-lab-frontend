@@ -2,15 +2,32 @@
 
 #main-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: .5rem;
-  border-bottom: solid #082b33 2px;
+  gap: clamp(0.75rem, 2vw, 2rem);
+  padding: 0.35rem clamp(0.75rem, 1.5vw, 1.5rem);
+  border-bottom: 2px solid #0d3339;
+  background-color: #071c20;
+  background-image:
+    radial-gradient(ellipse at 15% 0%, rgb(39 108 108 / 24%), transparent 36%),
+    radial-gradient(ellipse at 83% 120%, rgb(22 76 77 / 24%), transparent 42%),
+    repeating-linear-gradient(174deg, transparent 0 11px, rgb(154 213 203 / 2%) 12px, transparent 13px),
+    linear-gradient(180deg, #0c292d 0%, #07191d 100%);
+  box-shadow: 0 5px 16px rgb(20 37 32 / 26%);
+  margin-bottom: 1.5rem;
 }
 
 .logo {
   display: flex;
+  flex: 0 0 auto;
   cursor: pointer;
   align-items: center;
+  color: #9bd6d7;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  text-shadow: 0 0 12px rgb(92 204 206 / 20%);
 }
 
 #user-controls {
@@ -23,4 +40,17 @@
 
 .profile-icon button:hover {
   transform: scale(1.03);
+}
+
+@media (max-width: 760px) {
+  #main-header {
+    flex-wrap: wrap;
+    gap: 0 0.75rem;
+    padding-bottom: 0;
+  }
+
+  app-tabs {
+    order: 3;
+    flex: 0 0 100%;
+  }
 }
