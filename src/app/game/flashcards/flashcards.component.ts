@@ -1,10 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
+  DestroyRef,
   inject,
   OnInit,
   ChangeDetectionStrategy,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '@app/service/security/authentication.service';
 import { FlashCardService } from '@app/service/flashcard.service';
@@ -14,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { ButtonComponent } from '@/app/component/button/button.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { Flashcard } from '@/app/model/flashcard.model';
+import { EMPTY, Observable } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 export interface CreateFlashcardInput extends Omit<Flashcard, 'id'> {
   question: string;
@@ -35,68 +39,105 @@ export class FlashcardsComponent implements OnInit {
   private authenticationService = inject(AuthenticationService);
   private router = inject(Router);
   private service = inject(FlashCardService);
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
     this.loadFlashcards();
   }
 
   loadFlashcards(): void {
-    this.authenticationService.getCurrentUser().subscribe({
-      next: (user) => {
-        this.service.getFlashcardsByUserId(user.userId).subscribe({
-          next: (response: Flashcard[]) => {
-            this.flashcards = response
-              .sort((a, b) => (a.id ?? 0) - (b.id ?? 0))
-              .map((flashcard) => ({ ...flashcard, flipped: false }));
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            if (errorResponse.status === 401) {
-              this.router.navigateByUrl('/lab');
-            } else {
-              this.notificationService.notify(
-                NotificationType.ERROR,
-                'Failed to load flashcards. Please try again.',
-              );
-            }
-          },
-        });
-      },
-      error: () => this.router.navigateByUrl('/lab'),
-    });
+    this.authenticationService
+      .getCurrentUser()
+      .pipe(
+        switchMap((user) =>
+          this.getFlashcardsForUser(user.userId).pipe(
+            catchError((error: HttpErrorResponse) => {
+              this.handleFlashcardLoadError(error);
+              return EMPTY;
+            }),
+          ),
+        ),
+        catchError(() => {
+          this.router.navigateByUrl('/lab');
+          return EMPTY;
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((flashcards) => {
+        this.flashcards = flashcards;
+      });
   }
 
   public createFlashcard(flashcard: CreateFlashcardInput): void {
-    this.authenticationService.getCurrentUser().subscribe({
-      next: (user) => {
-        flashcard.userId = user.userId;
-        this.service.createFlashcard(flashcard).subscribe({
-          next: () => {
-            this.loadFlashcards();
-            this.notificationService.notify(
-              NotificationType.SUCCESS,
-              'Flashcard created successfully!',
-            );
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            const errorMessage =
-              errorResponse.error?.message ||
-              (errorResponse.status === 401
-                ? 'Not authorized. Please login.'
-                : 'Failed to create flashcard.');
+    this.authenticationService
+      .getCurrentUser()
+      .pipe(
+        switchMap((user) =>
+          this.service
+            .createFlashcard({ ...flashcard, userId: user.userId })
+            .pipe(
+              tap(() =>
+                this.notificationService.notify(
+                  NotificationType.SUCCESS,
+                  'Flashcard created successfully!',
+                ),
+              ),
+              catchError((errorResponse: HttpErrorResponse) => {
+                const errorMessage =
+                  errorResponse.error?.message ||
+                  (errorResponse.status === 401
+                    ? 'Not authorized. Please login.'
+                    : 'Failed to create flashcard.');
 
-            this.notificationService.notify(
-              NotificationType.ERROR,
-              errorMessage,
-            );
-          },
-        });
-      },
-      error: () =>
-        this.notificationService.notify(
-          NotificationType.ERROR,
-          'You must be logged in to create flashcards.',
+                this.notificationService.notify(
+                  NotificationType.ERROR,
+                  errorMessage,
+                );
+                return EMPTY;
+              }),
+              switchMap(() =>
+                this.getFlashcardsForUser(user.userId).pipe(
+                  catchError((error: HttpErrorResponse) => {
+                    this.handleFlashcardLoadError(error);
+                    return EMPTY;
+                  }),
+                ),
+              ),
+            ),
         ),
-    });
+        catchError(() => {
+          this.notificationService.notify(
+            NotificationType.ERROR,
+            'You must be logged in to create flashcards.',
+          );
+          return EMPTY;
+        }),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((flashcards) => {
+        this.flashcards = flashcards;
+      });
+  }
+
+  private getFlashcardsForUser(userId: string): Observable<Flashcard[]> {
+    return this.service.getFlashcardsByUserId(userId).pipe(
+      map((response) =>
+        [...response]
+          .sort((a, b) => (a.id ?? 0) - (b.id ?? 0))
+          .map((flashcard) => ({ ...flashcard, flipped: false })),
+      ),
+    );
+  }
+
+  private handleFlashcardLoadError(error: HttpErrorResponse): void {
+    if (error.status === 401) {
+      this.router.navigateByUrl('/lab');
+    } else {
+      this.notificationService.notify(
+        NotificationType.ERROR,
+        'Failed to load flashcards. Please try again.',
+      );
+    }
   }
 
   displayCards(): void {
