@@ -55,7 +55,6 @@ export class LoginComponent implements OnDestroy {
           const user: User | null = response.body;
           if (token && user) {
             this.authenticationService.saveToken(token);
-            this.authenticationService.addUserToLocalCache(user);
           } else {
             throw new Error();
           }

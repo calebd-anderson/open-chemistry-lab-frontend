@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { CompoundService } from '@service/compound.service';
 import { SubSink } from 'subsink';
 import { AuthenticationService } from '@service/security/authentication.service';
@@ -14,7 +14,7 @@ import { UserReaction } from '@model/compound';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrl: './discoveries.component.scss',
 })
-export class DiscoveriesComponent implements OnInit {
+export class DiscoveriesComponent implements OnInit, OnDestroy {
   readonly compoundService = inject(CompoundService);
   readonly authenticationService = inject(AuthenticationService);
   readonly _snackBar = inject(NotificationService);
@@ -27,31 +27,37 @@ export class DiscoveriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loading = true;
-    const user = this.authenticationService.getUserFromLocalCache();
+    this.subs.add(
+      this.authenticationService.getCurrentUser().subscribe({
+        next: (user) => {
+          this.subs.add(
+            this.compoundService.getUserDiscoveries(user.userId).subscribe({
+              next: (response: UserReaction[]) => {
+                this.userReactions = response;
+                this.loading = false;
+              },
+              error: (errorResponse: HttpErrorResponse) => {
+                this._snackBar.notify(
+                  NotificationType.ERROR,
+                  'Failed to get user discoveries.',
+                );
+                this.loading = false;
+              },
+            }),
+          );
+        },
+        error: (errorResponse: HttpErrorResponse) => {
+          this.loading = false;
+          this._snackBar.notify(
+            NotificationType.WARNING,
+            'You must be logged in to see your discoveries.',
+          );
+        },
+      }),
+    );
+  }
 
-    if (user && user.userId) {
-      const userId = user.userId;
-      this.subs.add(
-        this.compoundService.getUserDiscoveries(userId).subscribe({
-          next: (response: UserReaction[]) => {
-            this.userReactions = response;
-            this.loading = false;
-          },
-          error: (errorResponse: HttpErrorResponse) => {
-            this._snackBar.notify(
-              NotificationType.ERROR,
-              'Failed to get user discoveries.',
-            );
-            this.loading = false;
-          },
-        }),
-      );
-    } else {
-      this.loading = false;
-      this._snackBar.notify(
-        NotificationType.WARNING,
-        'You must be logged in to see your discoveries.',
-      );
-    }
+  ngOnDestroy(): void {
+    this.subs.unsubscribe();
   }
 }

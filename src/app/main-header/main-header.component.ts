@@ -36,22 +36,30 @@ export class MainHeaderComponent {
   ngOnInit(): void {
     const loginStatus = this.authenticationService.isLoggedIn();
     if (loginStatus) {
-      let user = this.authenticationService.getUserFromLocalCache();
-      if (user && !this.user()) {
-        this.user.set(user);
-        if (!this.profileImage()) {
-          this.userService
-            .getUserProfileImage(this.user()?.profileImgUrl)
-            .subscribe({
-              next: (blob: Blob) => {
-                this.profileImage.set(URL.createObjectURL(blob));
-              },
-              error: (error) => {
-                console.error('Failed to load image', error);
-              },
-            });
-        }
-      }
+      this.authenticationService.getCurrentUser().subscribe({
+        next: (user) => {
+          if (this.user()) return;
+          this.user.set(user);
+          this.loadProfileImage();
+        },
+        error: (error) =>
+          console.error('Failed to load the current user', error),
+      });
+    }
+  }
+
+  private loadProfileImage(): void {
+    if (!this.profileImage()) {
+      this.userService
+        .getUserProfileImage(this.user()?.profileImgUrl)
+        .subscribe({
+          next: (blob: Blob) => {
+            this.profileImage.set(URL.createObjectURL(blob));
+          },
+          error: (error) => {
+            console.error('Failed to load image', error);
+          },
+        });
     }
   }
 

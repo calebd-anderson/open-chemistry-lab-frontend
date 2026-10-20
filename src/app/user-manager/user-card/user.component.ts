@@ -82,10 +82,16 @@ export class UserComponent implements OnInit, OnDestroy {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const cachedUser = this.authenticationService.getUserFromLocalCache();
-    if (cachedUser) {
-      this.user = cachedUser;
-    }
+    this.subs.add(
+      this.authenticationService.getCurrentUser().subscribe({
+        next: (user) => {
+          this.user = user;
+          this.changeDetectorRef.markForCheck();
+        },
+        error: (error) =>
+          console.error('Failed to load the current user', error),
+      }),
+    );
 
     if (this.selectedUser.profileImgUrl) {
       this.subs.add(
@@ -120,7 +126,6 @@ export class UserComponent implements OnInit, OnDestroy {
     this.subs.add(
       this.userService.updateUser(formData).subscribe({
         next: (response: User) => {
-          this.authenticationService.addUserToLocalCache(response);
           this.authenticationService.updateUser(response);
           this.notificationService.notify(
             NotificationType.SUCCESS,
@@ -227,8 +232,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public get currentUsername(): string {
-    const user = this.authenticationService.getUserFromLocalCache();
-    return user?.username || '';
+    return this.authenticationService.user()?.username || '';
   }
 
   ngOnDestroy(): void {

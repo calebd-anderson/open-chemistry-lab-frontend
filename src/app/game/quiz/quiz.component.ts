@@ -36,22 +36,26 @@ export class QuizComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const user = this.authenticationService.getUserFromLocalCache();
-    if (!user || !user.userId) {
-      return;
-    }
-
-    this.quizService.getQuizByUserId(user.userId).subscribe({
-      next: (data) => {
-        this.quizzes = data;
-        // this.selectRandomQuestion();
+    this.authenticationService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.quizService.getQuizByUserId(user.userId).subscribe({
+          next: (data) => {
+            this.quizzes = data;
+            // this.selectRandomQuestion();
+          },
+          error: () => {
+            this.notificationService.notify(
+              NotificationType.ERROR,
+              'Unable to load quiz questions right now.',
+            );
+          },
+        });
       },
-      error: () => {
+      error: () =>
         this.notificationService.notify(
           NotificationType.ERROR,
-          'Unable to load quiz questions right now.',
-        );
-      },
+          'Unable to load the current user.',
+        ),
     });
   }
 

@@ -48,18 +48,6 @@ export class UserService {
     );
   }
 
-  public addUsersToLocalCache(users: User[]): void {
-    localStorage.setItem('users', JSON.stringify(users));
-  }
-
-  public getUsersFromLocalCache(): User[] {
-    let users = localStorage.getItem('users');
-    if (users) {
-      return JSON.parse(users);
-    }
-    return [];
-  }
-
   public createUserFormData(
     loggedInUsername: string,
     user: User,

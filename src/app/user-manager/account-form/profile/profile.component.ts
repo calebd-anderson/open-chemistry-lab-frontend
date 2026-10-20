@@ -48,10 +48,13 @@ export class ProfileComponent implements OnInit {
   }>;
 
   ngOnInit(): void {
-    const cachedUser = this.authenticationService.getUserFromLocalCache();
-    if (cachedUser) {
-      this.user = cachedUser;
-    }
+    this.subs.add(
+      this.authenticationService.getCurrentUser().subscribe({
+        next: (user) => (this.user = user),
+        error: (error) =>
+          console.error('Failed to load the current user', error),
+      }),
+    );
   }
 
   public onClickEdit(): void {
@@ -59,7 +62,7 @@ export class ProfileComponent implements OnInit {
   }
 
   public get currentUsername(): string {
-    return this.authenticationService.getUserFromLocalCache()?.username || '';
+    return this.authenticationService.user()?.username || '';
   }
 
   public onUpdateCurrentUser(user: User): void {
@@ -72,7 +75,6 @@ export class ProfileComponent implements OnInit {
     this.subs.add(
       this.userService.updateUser(formData).subscribe({
         next: (response: User) => {
-          this.authenticationService.addUserToLocalCache(response);
           this.authenticationService.updateUser(response);
           this.sendNotification(
             NotificationType.SUCCESS,

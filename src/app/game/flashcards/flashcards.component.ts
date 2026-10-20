@@ -41,59 +41,61 @@ export class FlashcardsComponent implements OnInit {
   }
 
   loadFlashcards(): void {
-    const user = this.authenticationService.getUserFromLocalCache();
-    if (!user || !user.userId) {
-      this.router.navigateByUrl('/lab');
-      return;
-    }
-
-    this.service.getFlashcardsByUserId(user.userId).subscribe({
-      next: (response: Flashcard[]) => {
-        this.flashcards = response
-          .sort((a, b) => (a.id ?? 0) - (b.id ?? 0))
-          .map((flashcard) => ({ ...flashcard, flipped: false }));
+    this.authenticationService.getCurrentUser().subscribe({
+      next: (user) => {
+        this.service.getFlashcardsByUserId(user.userId).subscribe({
+          next: (response: Flashcard[]) => {
+            this.flashcards = response
+              .sort((a, b) => (a.id ?? 0) - (b.id ?? 0))
+              .map((flashcard) => ({ ...flashcard, flipped: false }));
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.status === 401) {
+              this.router.navigateByUrl('/lab');
+            } else {
+              this.notificationService.notify(
+                NotificationType.ERROR,
+                'Failed to load flashcards. Please try again.',
+              );
+            }
+          },
+        });
       },
-      error: (errorResponse: HttpErrorResponse) => {
-        if (errorResponse.status === 401) {
-          this.router.navigateByUrl('/lab');
-        } else {
-          this.notificationService.notify(
-            NotificationType.ERROR,
-            'Failed to load flashcards. Please try again.',
-          );
-        }
-      },
+      error: () => this.router.navigateByUrl('/lab'),
     });
   }
 
   public createFlashcard(flashcard: CreateFlashcardInput): void {
-    const user = this.authenticationService.getUserFromLocalCache();
-    if (!user || !user.userId) {
-      this.notificationService.notify(
-        NotificationType.ERROR,
-        'You must be logged in to create flashcards.',
-      );
-      return;
-    }
+    this.authenticationService.getCurrentUser().subscribe({
+      next: (user) => {
+        flashcard.userId = user.userId;
+        this.service.createFlashcard(flashcard).subscribe({
+          next: () => {
+            this.loadFlashcards();
+            this.notificationService.notify(
+              NotificationType.SUCCESS,
+              'Flashcard created successfully!',
+            );
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            const errorMessage =
+              errorResponse.error?.message ||
+              (errorResponse.status === 401
+                ? 'Not authorized. Please login.'
+                : 'Failed to create flashcard.');
 
-    flashcard.userId = user.userId;
-
-    this.service.createFlashcard(flashcard).subscribe({
-      next: () => {
-        this.loadFlashcards();
+            this.notificationService.notify(
+              NotificationType.ERROR,
+              errorMessage,
+            );
+          },
+        });
+      },
+      error: () =>
         this.notificationService.notify(
-          NotificationType.SUCCESS,
-          'Flashcard created successfully!',
-        );
-      },
-      error: (errorResponse: HttpErrorResponse) => {
-        const errorMessage =
-          errorResponse.error?.message || errorResponse.status === 401
-            ? 'Not authorized. Please login.'
-            : 'Failed to create flashcard.';
-
-        this.notificationService.notify(NotificationType.ERROR, errorMessage);
-      },
+          NotificationType.ERROR,
+          'You must be logged in to create flashcards.',
+        ),
     });
   }
 

@@ -47,6 +47,7 @@ interface TableDef {
 })
 export class UsersComponent implements OnDestroy {
   public users: User[] = [];
+  private allUsers: User[] = [];
   public profileImageUrls: Record<string, string> = {};
   public user: User = {} as User;
   public refreshing: boolean = false;
@@ -75,11 +76,16 @@ export class UsersComponent implements OnDestroy {
   columnsToDisplay: string[] = this.tableDef.map((data) => data.id);
 
   ngOnInit(): void {
-    const cachedUser = this.authenticationService.getUserFromLocalCache();
-    if (cachedUser) {
-      this.user = cachedUser;
-    }
-    this.getUsers(true);
+    this.subs.add(
+      this.authenticationService.getCurrentUser().subscribe({
+        next: (user) => {
+          this.user = user;
+          this.getUsers(true);
+        },
+        error: (error) =>
+          console.error('Failed to load the current user', error),
+      }),
+    );
   }
 
   onClickNewUser(): void {
@@ -94,8 +100,8 @@ export class UsersComponent implements OnDestroy {
     this.subs.add(
       this.userService.getUsers().subscribe({
         next: (response: User[]) => {
-          this.userService.addUsersToLocalCache(response);
           this.revokeProfileImageUrls();
+          this.allUsers = response;
           this.users = response;
           this.loadProfileImages(response);
           this.refreshing = false;
@@ -129,24 +135,19 @@ export class UsersComponent implements OnDestroy {
 
   public searchUsers(searchTerm: string): void {
     const results: User[] = [];
-    const users = this.userService.getUsersFromLocalCache();
-    if (users)
-      for (const user of users) {
-        if (
-          user.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) !==
-            -1 ||
-          user.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) !==
-            -1 ||
-          user.username.toLowerCase().indexOf(searchTerm.toLowerCase()) !==
-            -1 ||
-          user.userId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
-        ) {
-          results.push(user);
-        }
+    for (const user of this.allUsers) {
+      if (
+        user.firstName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+        user.lastName.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+        user.username.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1 ||
+        user.userId.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1
+      ) {
+        results.push(user);
       }
+    }
     this.users = results;
     if (results.length === 0 || !searchTerm) {
-      this.users = this.userService.getUsersFromLocalCache();
+      this.users = this.allUsers;
     }
   }
 
@@ -184,8 +185,7 @@ export class UsersComponent implements OnDestroy {
   }
 
   public get currentUsername(): string {
-    const user = this.authenticationService.getUserFromLocalCache();
-    return user?.username || '';
+    return this.user.username || '';
   }
 
   private loadProfileImages(users: User[]): void {
