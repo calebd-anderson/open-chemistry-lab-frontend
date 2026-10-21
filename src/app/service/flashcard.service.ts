@@ -20,9 +20,9 @@ export class FlashCardService {
     return this.http.post<Flashcard>(`${this.host}/flashcards/add`, flashcard);
   }
 
-  public getFlashcardsByUserId(userId: string): Observable<Flashcard[]> {
+  public getUserFlashcards(): Observable<Flashcard[]> {
     return this.http.get<Flashcard[]>(
-      `${this.host}/flashcards/userflashcards/${userId}`,
+      `${this.host}/flashcards`,
     );
   }
 

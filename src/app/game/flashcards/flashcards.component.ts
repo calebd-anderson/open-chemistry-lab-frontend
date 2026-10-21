@@ -46,19 +46,10 @@ export class FlashcardsComponent implements OnInit {
   }
 
   loadFlashcards(): void {
-    this.authenticationService
-      .getCurrentUser()
+    this.getFlashcardsForUser()
       .pipe(
-        switchMap((user) =>
-          this.getFlashcardsForUser(user.userId).pipe(
-            catchError((error: HttpErrorResponse) => {
-              this.handleFlashcardLoadError(error);
-              return EMPTY;
-            }),
-          ),
-        ),
-        catchError(() => {
-          this.router.navigateByUrl('/lab');
+        catchError((error: HttpErrorResponse) => {
+          this.handleFlashcardLoadError(error);
           return EMPTY;
         }),
         takeUntilDestroyed(this.destroyRef),
@@ -96,7 +87,7 @@ export class FlashcardsComponent implements OnInit {
                 return EMPTY;
               }),
               switchMap(() =>
-                this.getFlashcardsForUser(user.userId).pipe(
+                this.getFlashcardsForUser().pipe(
                   catchError((error: HttpErrorResponse) => {
                     this.handleFlashcardLoadError(error);
                     return EMPTY;
@@ -119,8 +110,8 @@ export class FlashcardsComponent implements OnInit {
       });
   }
 
-  private getFlashcardsForUser(userId: string): Observable<Flashcard[]> {
-    return this.service.getFlashcardsByUserId(userId).pipe(
+  private getFlashcardsForUser(): Observable<Flashcard[]> {
+    return this.service.getUserFlashcards().pipe(
       map((response) =>
         [...response]
           .sort((a, b) => (a.id ?? 0) - (b.id ?? 0))
