@@ -24,11 +24,9 @@ export class AuthenticationService {
 
   private jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient) {
-    this.initializeAuth();
-  }
+  constructor(private http: HttpClient) {}
 
-  private initializeAuth(): void {
+  public initializeAuth(): void {
     this.loadToken();
     if (this.token) {
       try {
