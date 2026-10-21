@@ -5,11 +5,11 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from '../../model/user';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UserRegisterDto } from '../../model/user-register-dto';
-import { tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -26,31 +26,36 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  public initializeAuth(): void {
-    this.loadToken();
-    if (this.token) {
-      try {
-        const decoded = this.jwtHelper.decodeToken(this.token);
-        if (decoded && decoded.sub && !this.jwtHelper.isTokenExpired(this.token)) {
-          this.getCurrentUser().subscribe({
-            error: (error) => {
-              if (
-                error instanceof HttpErrorResponse &&
-                error.status === 401
-              ) {
-                this.logOut();
-              }
-              console.error('Failed to load the current user', error);
-            },
-          });
-        } else {
-          this.logOut();
-        }
-      } catch (e) {
+public initializeAuth(): Observable<void> {
+  this.loadToken();
+
+  if (!this.token) {
+    return of(void 0);
+  }
+
+  try {
+    const decoded = this.jwtHelper.decodeToken(this.token);
+    if (!decoded?.sub || this.jwtHelper.isTokenExpired(this.token)) {
+      this.logOut();
+      return of(void 0);
+    }
+  } catch (error) {
+    this.logOut();
+    console.error('Failed to validate the saved token', error);
+    return of(void 0);
+  }
+
+  return this.getCurrentUser().pipe(
+    map(() => void 0),
+    catchError((error: unknown) => {
+      if (error instanceof HttpErrorResponse && error.status === 401) {
         this.logOut();
       }
-    }
-  }
+      console.error('Failed to load the current user', error);
+      return of(void 0);
+    }),
+  );
+}
 
   public loadToken(): void {
     this.token = localStorage.getItem('token');
