@@ -6,28 +6,24 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthenticationService } from '../authentication.service';
+import { environment } from '@/environments/environment';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) {}
-
   intercept(
-    httpRequest: HttpRequest<any>,
-    HttpHandler: HttpHandler,
-  ): Observable<HttpEvent<any>> {
-    // Only add the token if the request is for our API origin
-    if (!httpRequest.url.startsWith(this.authenticationService.host)) {
-      return HttpHandler.handle(httpRequest);
+    request: HttpRequest<unknown>,
+    next: HttpHandler,
+  ): Observable<HttpEvent<unknown>> {
+    const token = localStorage.getItem('token');
+
+    if (!request.url.startsWith(environment.apiUrl) || !token) {
+      return next.handle(request);
     }
 
-    this.authenticationService.loadToken();
-    const token = this.authenticationService.getToken();
-    if (token) {
-      return HttpHandler.handle(
-        httpRequest.clone({ setHeaders: { Authorization: `Bearer ${token}` } }),
-      );
-    }
-    return HttpHandler.handle(httpRequest);
+    return next.handle(
+      request.clone({
+        setHeaders: { Authorization: `Bearer ${token}` },
+      }),
+    );
   }
 }
