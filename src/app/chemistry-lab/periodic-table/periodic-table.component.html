@@ -1,6 +1,6 @@
 <div class="periodic-table-container" animate.enter="fade-enter-animation">
-  @if (progressSpinner) {
-  <div class="spinner-container"></div>
+  @if (elements.isLoading()) {
+  <div class="spinner-container">Loading ...</div>
   } @else {
   <header class="table-heading">
     <span class="table-kicker">FIELD GUIDE · PLATE 01</span>
@@ -10,7 +10,7 @@
 
   <div class="table-scroll" role="region" aria-label="Scrollable periodic table" tabindex="0">
     <div class="periodic-table-grid" role="group" aria-label="Periodic table of elements">
-      @for (element of elements(); track element.atomicNumber) {
+      @for (element of sortedElements(); track element.atomicNumber) {
       <div class="element-card" [ngClass]="getElementClass(element.groupBlock)"
         [class.in-experiment]="isElementInExperiment(element.symbol)"
         [style.grid-row]="getGridPosition(element.atomicNumber).row"

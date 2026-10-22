@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal, Signal, ChangeDetectionStrategy } from '@angular/core';
+import { Component, inject, input, output, signal, ChangeDetectionStrategy, resource, computed } from '@angular/core';
 import { Element } from '@model/element.model';
 import { ElementService } from '@service/element.service';
 import { CommonModule } from '@angular/common';
@@ -13,7 +13,18 @@ import { CommonModule } from '@angular/common';
 export class PeriodicTableComponent {
   elementService = inject(ElementService);
 
-  elements = signal<Element[]>([]);
+  elements = resource({
+    loader: () => this.elementService.getElements()
+  });
+
+  // Sort elements by atomic number
+  sortedElements = computed(() => {
+    if (!this.elements.hasValue()) return [];
+    const sorted = [...this.elements.value()].sort(
+      (a, b) => a.atomicNumber - b.atomicNumber,
+    );
+    return sorted;
+  });
 
   // Group blocks for CSS grid organization
   groupBlocks = [
@@ -29,8 +40,6 @@ export class PeriodicTableComponent {
     'Actinide',
   ];
 
-  public progressSpinner: boolean = false;
-
   // emits the selected element to the parent component (LabComponent)
   sendElementMessage = output<Element>();
 
@@ -42,15 +51,6 @@ export class PeriodicTableComponent {
 
   // Current filter state
   currentFilter = signal<string>('all');
-
-  async ngOnInit() {
-    try {
-      const allElements = await this.elementService.getElements();
-      this.elements.set(allElements);
-    } catch (error) {
-      console.error('Error loading elements:', error);
-    }
-  }
 
   public selectElement(element: Element) {
     this.sendElementMessage.emit(element);
@@ -139,13 +139,5 @@ export class PeriodicTableComponent {
     }
 
     return { row: 0, col: 0 };
-  }
-
-  // Sort elements by atomic number
-  public sortElements() {
-    const sorted = [...this.elements()].sort(
-      (a, b) => a.atomicNumber - b.atomicNumber,
-    );
-    this.elements.set(sorted);
   }
 }
