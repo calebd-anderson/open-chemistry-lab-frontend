@@ -116,12 +116,4 @@
       </div>
     </section>
   </div>
-
-  <section id="periodic-table-container" [class.hidden]="!isTableExpanded()">
-    <periodic-table
-      class="pt"
-      (sendElementMessage)="addInteractedElements($event)"
-      [elementsInExperiment]="elementsInExperiment()"
-    />
-  </section>
 </article>
